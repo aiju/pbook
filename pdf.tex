@@ -2,6 +2,8 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
+\usepackage{amsbsy}
+\usepackage{mathrsfs}
 \usepackage{tikz}
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \DeclareFontFamily{U}{wncy}{}
@@ -11,6 +13,8 @@
 
 \newcommand\im{\mathrm{i}}
 \newcommand\D[1]{\mathrm{d}{#1}}
+\newcommand\pfrac[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand\Dfrac[2]{\frac{\D{#1}}{\D{#2}}}
 \setlength\parindent{0mm}
 \setlength\parskip{12pt}
 \newenvironment{question}{
@@ -28,5 +32,6 @@
 \newcommand\result[1]{\par{\bf Result.} #1\par}
 \newcommand\hint[1]{\par{\bf Hint.} #1\par}
 \newcommand\solution[1]{\par{\bf Solution.} #1\par}
+\newcommand\theorem[1]{\par{\bf Theorem.} #1\par}
 
 \input{content}

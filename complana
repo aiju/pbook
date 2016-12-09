@@ -1,0 +1,414 @@
+\section{Complex Analysis}
+\subsection{Basics}
+Complex analysis is concerned with complex functions, i.e.\ functions $f(z)$ of a complex variable $z$ and that evaluate to a complex number.
+These functions can effectively be considered as pairs of real functions on the plane, i.e.\ $f_1(x,y)$ and $f_2(x, y)$ with $f(x+\im y) = f_1(x,y) + \im f_2(x,y)$.
+\begin{question}
+Determine $f_1$ and $f_2$ for\\
+(a) $f(z) = z^3$\\
+(b) $f(z) = e^z$
+\result{
+(a) $f_1(x,y) = x^3 - 3xy^2, f_2(x,y) = x^2 y - y^3$\\
+(b) $f_1(x,y) = e^x \cos y, f_2(x, y) = e^x \sin y$
+}
+\solution{
+(a) 
+$$(x+\im y)^3 = (x^3 - 3 x y^2) + \im (x^2 y - y^3)$$
+(b)
+$$e^{x+\im y} = e^x (\cos y + \im \sin y)$$
+}
+\end{question}
+
+Although we could apply the methods of real analysis to $f_1$ and $f_2$ and consider derivatives $\partial f_1/\partial x$, etc., this approach would be rather crude as we have just seen that $f_1$ and $f_2$ can be rather complicated, even for simple functions such as $z^3$.
+It seems more natural to consider $f$ as a function of $z$, rather than $x$ and $y$.
+Ideally we would like to have a derivative like
+$$\pfrac{f}{z} = 3 z^2$$
+(for $f(z)=z^3$).
+But of course $z$ is complex, so it's not obvious what this notation means.
+
+We can define $\partial f/\partial x$ rather easily, i.e.\
+$$\pfrac{f}{x} = \pfrac{f_1}{x} + \im \pfrac{f_2}{x}.$$
+Now the trick is to realise that, formally, we can do a linear transformation $(x,y) \to (z,z^*)$ with $z=x+\im y$ and $z^* = x-\im y$.
+\begin{question}
+Apply the chain rule to define $\partial f/\partial z$ and $\partial f/\partial z^*$.
+\hint{Derive a relationship $x=x(z,z^*)$ and $y=y(z,z^*)$.}
+\solution{
+The relationship between $x,y$ and $z,z^*$ is
+$$x = \frac{z + z^*}{2}, y = \frac{z - z^*}{2\im}.$$
+Applying the chain rule to $f = f(x(z,z^*),y(z,z^*))$ we get
+$$\pfrac{f}{z} = \pfrac{f}{x} \pfrac{x}{z} + \pfrac{f}{y} \pfrac{y}{z} = \frac{1}{2} \left(\pfrac{f}{x} - \im \pfrac{f}{y}\right)$$
+$$\pfrac{f}{z^*} = \pfrac{f}{x} \pfrac{x}{z^*} + \pfrac{f}{y} \pfrac{y}{z^*} = \frac{1}{2} \left(\pfrac{f}{x} + \im \pfrac{f}{y}\right)$$
+}
+\end{question}
+
+\begin{question}
+Apply the definitions from the last question to $f(z)=z^3$.
+\solution{
+$$\pfrac{f}{z} = \frac{1}{2} \left(\pfrac{(x+\im y)^3}{x} - \im \pfrac{(x+\im y)^3}{y}\right) = \frac{1}{2} \left(3 (x+\im y)^2 - \im 3 (x+\im y)^2 \im\right) = 3 z^2$$
+$$\pfrac{f}{z^*} = \frac{1}{2} \left(\pfrac{(x+\im y)^3}{x} + \im \pfrac{(x+\im y)^3}{y}\right) = \frac{1}{2} \left(3 (x+\im y)^2 + \im 3 (x+\im y)^2 \im\right) = 0$$
+}
+\end{question}
+
+With this definition you can show the seemingly trivial relations
+$$\pfrac{z}{z} = 1, \pfrac{z^*}{z^*} = 1, \pfrac{z}{z^*} = 0, \pfrac{z^*}{z} = 0.$$
+The trick is now to realise that these relations imply that, as far as differentiation is concerned, $z$ and $z^*$ can be treated as independent variables (they are of course anything but independent).
+We can thus calculate the derivatives $\partial f/\partial z$ and $\partial f/\partial z^*$ in the ``normal'' way, using the ordinary rules of calculus.
+
+A particularly common case is $f = f(z)$, i.e.\ $f$ does not ``depend'' on $z^*$.
+By this we mean $\partial f/\partial z^* = 0$, i.e.\
+$$\pfrac{f}{x} = -\im \pfrac{f}{y}.$$
+We call functions like this ``analytic''.
+
+\begin{question}
+Show that for an analytic function $f(z)$ we can also define the derivative using
+$$\pfrac{f}{z} = \lim_{\delta \to 0} \frac{f(z+\delta) - f(z)}{\delta},$$
+where $\delta$ is complex and the limit can follow any path in the complex plane.
+\hint{Write $\delta = \delta_1 + \im \delta_2$ and use $f$ as a function of $x$ and $y$.}
+\solution{
+$$f(z+\delta) = f(x+\delta_1, y + \delta_2) = f(x,y) + \pfrac{f}{x} \delta_1 + \pfrac{f}{y} \delta_2 + O(\delta^2)$$
+Now note that
+$$\pfrac{f}{z} = \frac{1}{2} \left(\pfrac{f}{x} - \im \pfrac{f}{y}\right) = \pfrac{f}{x} = -\im \pfrac{f}{y}$$
+and so
+$$f(z+\delta) = f(z) + \pfrac{f}{z} \left(\delta_1 + \im \delta_2) + O(\delta^2).$$
+The result follows from solving for $\partial f/\partial z$.
+}
+\end{question}
+\begin{question} (optional)
+Show that the result from the last question is false for $f(z) = x = (z + z^*)/2$.
+\hint{Is the limit even well-defined for complex $\delta$?}
+\solution{
+If $\delta$ is real then the limit is 1.
+If $\delta$ is imaginary then the limit is 0.
+}
+\end{question}
+\subsection{Complex integration}
+In real integration we have a function $f(x)$ that we can integrate from $a$ to $b$, i.e.\
+$$\int_a^b f(x) \D{x}.$$
+In complex integration we need to specify a contour in the complex plane.
+The contour can either be an open contour going from $a$ to $b$ or a closed contour going in a loop.
+We write
+$$\int_\gamma f(z) \D{z}$$
+where $\gamma$ is the contour.
+In applications contours are usually defined geometrically but for our purposes it will be useful to consider $\gamma$ a function of a real argument going from 0 to 1.
+We can then define, by substituting $z=\gamma(t)$,
+$$\int_\gamma f(z) \D{z} = \int_0^1 f(\gamma(t)) \gamma'(t) \D{t}.$$
+\begin{question}
+Consider a ``family'' of contours $\gamma_\alpha(t)$ where $\alpha$ varies continuously from 0 to 1.
+Fix the endpoints, i.e.\ $\gamma_\alpha(0)$ and $\gamma_\alpha(1)$ should be independent of $\alpha$.
+Show that for an analytic function $f(z)$ the integral
+$$\int_{\gamma_\alpha} f(z) \D{z}$$
+is independent of $\alpha$, assuming $f(z)$ is defined everywhere on all contours.
+\hint{Take derivatives with respect to $\alpha$.}
+\solution{
+$$\pfrac{}{\alpha} \int_{\gamma_\alpha} f(z) \D{z} = \int_0^1 \left(f'(\gamma_\alpha(t)) \pfrac{\gamma_\alpha(t)}{\alpha} \gamma_\alpha'(t) + f(\gamma_\alpha(t)) \pfrac{\gamma_\alpha'(t)}{\alpha}\right) \D{t}$$
+Now integrate the second term by parts
+$$=\int_0^1 \left(f'(\gamma_\alpha(t)) \pfrac{\gamma_\alpha(t)}{\alpha} \gamma_\alpha'(t) - f'(\gamma_\alpha(t)) \gamma_\alpha'(t) \pfrac{\gamma_\alpha(t)}{\alpha}\right) \D{t} + \left[f(\gamma_\alpha(t)) \pfrac{\gamma_\alpha(t)}{\alpha}\right]_0^1 = 0$$
+Note that the second term vanishes because $\partial \gamma_\alpha(t)/\partial \alpha = 0$ for $t=0,1$, by assumption.
+}
+\end{question}
+\begin{question}
+What happens to the conclusion of the last question if $f(z)$ has a pole (i.e.\ $|f(z)|\to \infty$) at some point $z=\gamma_\alpha(t)$?
+\solution{The integral will likely not exist for that value $\alpha$, splitting the $\alpha$ range into two. The integral will still be constant in each range but there is no guarantee it will give the same answer across them.}
+\end{question}
+
+We can rephrase the conclusion from the question as
+\theorem{Contour integrals $\int_\gamma f(z) \D{z}$ of analytic functions are invariant under deformations of the contour, as long as $f(z)$ is always defined on the contour.}
+
+\begin{question}
+Assume that $\gamma$ is a loop, i.e.\ $\gamma(0) = \gamma(1)$.
+If $f(z)$ is defined everywhere in the region enclosed by the loop, what is the value of
+$\int_\gamma f(z) \D{z}?$
+\hint{Deform the loop.}
+\solution{Contracting the loop to a point we conclude
+$$\int_\gamma f(z) \D{z} = 0.$$}
+\end{question}
+
+\begin{question}
+If $f(z)$ is defined everywhere on the complex plane, what property of $\gamma$ determines the value of $\int_\gamma f(z) \D{z}$?
+\hint{Consider two curves $\gamma_1$ and $\gamma_2$ with the same endpoints.}
+\hint{Construct a new curve $\eta$ by traversing $\gamma_1$ forwards and $\gamma_2$ backwards.}
+\solution{
+Construct $\eta$ as suggested in the hint.
+$\eta$ is now a loop and so its integral is zero.
+But you should be able to show that
+$$\int_\eta f(z) \D{z} = \int_{\gamma_1} f(z) \D{z} - \int_{\gamma_2} f(z) \D{z}$$
+and hence the integrals over $\gamma_1$ and $\gamma_2$ are identical.
+The integral depends only on the endpoints.
+}
+\end{question}
+
+The last question suggests the obvious notation
+$$\int_a^b f(z) \D{z}$$
+for the integral of a complex function $f(z)$.
+Note that this notation is only valid if $f(z)$ is defined \emph{everywhere}!
+Analytic functions that are defined everywhere are sometimes called \emph{holomorphic}.
+\begin{question}
+Generalise the notion of an ``anti-derivative'' $F(z)$ from real analysis into the complex plane.
+You can assume $f(z)$ to be holomorphic.
+\hint{Express $F(z)$ as an integral.}
+\solution{Pick any point $z_0$. Define
+$$F(z) = \int_{z_0}^z f(z) \D{z}.$$
+You can show
+$$\int_a^b f(z) \D{z} = F(b) - F(a)$$
+by playing the same contour concatenation games as in the last question.
+To determine the derivative of $F(z)$ attach a tiny ``stub'' contour $\gamma(t) = z + \delta t$ going from $z$ to $z+\delta$.
+$$F(z+\delta) = F(z) + \int_z^{z+\delta} f(z) \D{z} = F(z) + \int_0^1 f(z + \delta t) \delta \D{t} = F(z) + f(z) \delta + O(\delta^2)$$
+Hence
+$$F'(z) = \lim_{\delta \to 0} \frac{F(z+\delta) - F(z)}{\delta} = f(z).$$
+}
+\end{question}
+
+We now want to consider analytic functions $f(z)$ that are defined ``almost'' everywhere, i.e.\ that have some number of poles.
+The fancy term for this is \emph{meromorphic}.
+Things get considerably more interesting as loops can now evaluate to non-zero values and different contours will now, in general, give different results.
+Let's start with the simplest possible example.
+
+\begin{question}
+Consider $f(z) = 1/z$ and an arbitrary loop $\gamma$.
+By reducing contours to some (not necessarily finite) number of ``prototype'' contours, find all possible values of $\oint_\gamma f(z) \D{z}$ (the funny integral sign just emphasizes that $\gamma$ is a loop).
+\hint{You can still deform contours, as long as you never cross the pole. Geometrically, think about what differentiates different contours that can \emph{not} be deformed into each other. Can you define some number that characterises the different classes of curve?}
+\solution{
+Define the ``winding number'' $n$ as the number of times the curve winds around the origin (counterclockwise counts as $+1$ and clockwise counts as $-1$).
+Curves of equal winding number can be deformed into each other.
+The curve $\gamma(t) = e^{2 \pi \im n t}$ has winding number $n$ and so we can use it to determine the values for all curves of that winding number.
+The possible values for the integral are thus
+$$\oint_\gamma \frac{1}{z} \D{z} = \int_0^1 \frac{1}{\gamma(t)} \gamma'(t) \D{t} = \int_0^1 \frac{1}{e^{2\pi \im n t}} 2 \pi \im n e^{2 \pi \im n t} \D{t} = 2 \pi \im n,$$
+where $n$ is any integer.
+}
+\end{question}
+
+\begin{question}
+What about $f(z) = 1/z^m$ for $m>1$?
+\solution{
+Nothing about the geometry changes. Let $n$ be again the winding number.
+$$\oint_\gamma \frac{1}{z^m} \D{z} = \int_0^1 \frac{1}{\gamma^m(t)} \gamma'(t) \D{t} = \int_0^1 \frac{1}{e^{2\pi \im n m t}} 2 \pi \im n e^{2 \pi \im n t} \D{t} = \left[\frac{e^{2\pi \im n (1-m) t}}{2\pi \im n (1-m)} 2 \pi \im n\right]_0^1 = 0.$$
+}
+
+\end{question}
+
+For some arbitrary meromorphic function $f(z)$ we hope that we can subtract off different terms of the form $a/(z-z_0)^m$ until only a holomorphic function remains.
+We call $m$ the \emph{multiplicity} of the pole and poles with $m=1$ are called \emph{simple} poles.
+You will show that this works in the following questions.
+
+\begin{question}
+Consider a function of the form $f(z) = h(z) + a_0/(z-z_0) + a_1/(z-z_1) + \dots$ where $h(z)$ is holomorphic.
+Suppose that you know $f(z)$ and $z_n$, but not $a_n$.
+Can you ``deconstruct'' $f(z)$ by finding some expression to extract $a_n$?
+\result{
+$$a_n = \lim_{z \to z_n} (z - z_n) f(z).$$
+}
+\end{question}
+
+\begin{question}
+Consider a function of the form $f(z) = h(z) + a_1/z + a_2/z^2 + a_3/z^3 + \dots$.
+Assume that the sequence has a finite number of terms.
+Can you determine $a_n$ in this case?
+\solution{
+Consider
+$$\lim_{z \to 0} z^n f(z)$$
+for different values of $n$.
+The limit will diverge for all $n$ less than the highest term $m$ in the series.
+It will be equal to $a_m$ however.
+Now that we have $a_m$ we can define
+$$f_m(z) = f(z) - \frac{a_m}{z^m}.$$
+The highest term in $f_m(z)$ will be less than $m$.
+Rinse and repeat until only $h(z)$ remains.
+}
+\end{question}
+
+\begin{question} (optional)
+Generalise the result from the previous two questions to functions with an arbitrary number of poles of arbitrary multiplicity.
+By finding a procedure to determine the coefficients of the poles, show that the coefficients are uniquely defined.
+\end{question}
+
+\begin{question}
+Consider an arbitrary meromorphic function $f(z)$.
+Determine a formula for $\oint_\gamma f(z) \D{z}.$
+\hint{Decompose $f(z)$ along the lines of $h(z) + a_0/(z-z_0)^{m_0} + a_1/(z-z_1)^{m_1} + \dots$ and use the linearity of the integral.}
+\solution{
+We can ignore $h(z)$ and all non-simple poles since
+$$\oint_\gamma h(z) \D{z} = 0, \qquad \oint_\gamma \frac{1}{z^m} \D{z} = 0\quad (m > 1).$$
+Using the result $\oint_\gamma \D{z}/z = 2\pi \im n$ we can write
+$$\oint_\gamma f(z) \D{z} = \sum_i 2 \pi \im n_i a_i,$$
+where the sum is over all simple poles and $n_i$ is the winding number around $z_i$.
+}
+
+Define the \emph{residue} $\operatorname{Res}$ of $z_0$ as the coefficient of $1/(z-z_0)$ in the expansion of $f(z)$.
+The result can then be stated as
+$$\oint f(z) \D{z} = 2 \pi \im \sum \operatorname{Res},$$
+where the sum is over all the poles encircled by $\gamma$.
+Poles that are encircled multiple times count multiple times and poles that are encircled in a clockwise manner count negatively.
+\end{question}
+\subsection{Applications of contour integration}
+We saw in the last section that we can determine complex loop integrals using the formula 
+$$\oint f(z) \D{z} = 2 \pi \im \sum \operatorname{Res}.$$
+It is hard to overstate the usefulness of this formula and we will now discuss some examples.
+\begin{question}
+(Cauchy integration formula)
+Let $f(z)$ be a \emph{holo}morphic function.
+Express $f(z_0)$ as a loop integral (around $z_0$) of some function $g(z)$.
+\hint{For the loop integral to be non-zero, what does $g(z)$ need to have at $z=z_0$?}
+\solution{
+Use $g(z) = f(z) / (z - z_0)$ (note the simple pole at $z=z_0$ of residue $f(z_0)$).
+Let $\gamma$ wind around $z_0$ once, counterclockwise.
+The magic formula then gives
+$$\oint_\gamma g(z) \D{z} = 2 \pi \im f(z_0)$$
+or
+$$f(z_0) = \frac{1}{2\pi \im} \oint \frac{f(z) \D{z}}{z - z_0}.$$
+}
+\end{question}
+
+As fun as it is to manipulate complex functions, in physics most functions of interest are functions of a real variable.
+The real power of the formula thus comes from applying it to real integrals.
+Consider some real integral
+$$\int_{-\infty}^\infty f(x) \D{x}$$
+with $f(z)$ meromorphic in the complex plane.
+To convert this into a complex loop integral we need to ``close the contour''.
+The idea is to stop at some limit $\pm a$ and to then close the contour in either half of the complex plane:
+
+\begin{center}
+\begin{tikzpicture}
+\draw [->] (-4,0) -- (4,0) node[right] {$\operatorname{Re} z$};
+\draw [->] (0,0) -- (0,4) node[right] {$\operatorname{Im} z$};
+\draw [thick] (-3,0) -- (3,0);
+\draw [thick,->] (3,0) arc (0:90:3);
+\draw [thick] (0,3) arc(90:180:3);
+\draw (1,1) node {$\times$};
+\draw (-1,2) node {$\times$};
+\draw (2,-0.5) node {$\times$};
+\end{tikzpicture}
+\end{center}
+
+In this case the contour now encloses two poles and the loop integral is $2\pi \im$ times the sum of their residues (note that poles are conventionally marked by $\times$).
+We hope that by going $a \to \infty$ the integral will be equal to the real integral.
+The question naturally arises which half of the complex plane to close the contour in.
+\begin{question}
+Calculate
+$$\int_{-\infty}^\infty \frac{e^{\im z t}}{z - \im} \D{z}$$
+for different real values of $t$.
+\hint{Under what circumstances will the contribution of the half-circle go to zero as the radius go to infinity?}
+\result{$2\pi \im e^{-t}$ for $t>0$ and 0 for $t<0$.}
+\solution{
+If $t>0$ we must close the curve in the upper half plane.
+The circle will have large imaginary values and so $e^{\im z t} = e^{-|z t|}$ will be negligible.
+Hence for $t>0$ we must enclose the pole and the answer is $2\pi \im e^{-t}$.
+For $t<0$ large imaginary values correspond to $e^{|z t|}$ and the circle contribution would be infinite.
+We must hence close in the lower plane, encircling no poles and getting $0$.
+}
+\end{question}
+
+\begin{question}
+(optional, requires Fourier transform)
+Consider a mass on a damped spring, driven by a force $f(t)$, i.e.
+$$m \ddot x(t) + \gamma \dot x(t) + k x(t) = f(t)$$
+where $m, \gamma, k > 0$.
+Assume the spring to be underdamped, i.e.\ $\gamma^2 < 4km$.
+Take $f(t) = \delta(t)$.
+Fourier transform the equation to find an equation for $\hat x$.
+Do the inverse transform using contour integration to find $x(t)$.
+\result{$\Theta(t) 2 e^{-\gamma t/(2m)} \sin(\sqrt{k/m - \gamma^2/(4m ^2)} t)/\sqrt{4km - \gamma^2}$.}
+\solution{
+The Fourier transform gives
+$$-m \omega^2 \hat x + \im \gamma \omega \hat x + k \hat x = 1$$
+which we can solve
+$$\hat x = \frac{1}{-m \omega^2 + \im \gamma \omega + k}.$$
+The poles are at
+$$\omega_{1,2} = \frac{\im \gamma \pm \sqrt{4 km - \gamma^2}}{2m}.$$
+With this we have
+$$\hat x = \frac{1}{-m (\omega - \omega_1) (\omega - \omega_2)}$$
+and the residue at $\omega_{1,2}$ is thus $\pm 1/(m (\omega_1 - \omega_2)) = \pm 1/\sqrt{4 km - \gamma^2}$.
+For the inverse transform we use the same arguments as in the last question.
+For $t>0$ we cloes in the upper half plane and we get
+$$x(t) = \int \frac{e^{\im \omega t} \D{\omega}}{-2\pi m (\omega - \omega_1)(\omega - \omega_2)} = 2\pi \im \frac{e^{\im \omega_1 t} - e^{\im \omega_2 t}}{2 \pi \sqrt{4 km - \gamma^2}} = \frac{2 e^{-\gamma t/(2m)} \sin(\sqrt{k/m - \gamma^2/4m^2} t)}{\sqrt{4km - \gamma^2}}$$
+For $t<0$ we get $x(t) = 0$.
+}
+\end{question}
+
+Note that in the last question, the poles ended up in the upper half plane because $\gamma > 0$.
+This leads to the result that $x(t) = 0$ for $t<0$, i.e.\ that the system is causal.
+While the laws of mechanics are time-reversal invariant, thermodynamics is not and it enters here through $\gamma$, enforcing the arrow of time.
+
+If the system was undamped we would have to impose causality as an additional axiom.
+
+\subsection{The Laplace transform}
+(This section requires the Fourier transform)
+
+We have worked with the Fourier transform so far, but there is an alternative that mathematicians and engineers often prefer.
+In particular, the Fourier transform is awkward with functions that are only non-zero for $t>0$.
+Yet causality means that real-life systems always obey this!
+
+Recall that to calculate the Fourier transform of $\Theta(t)$ we added a regulariser $e^{-\varepsilon t}$.
+For an arbitrary function $f(t)$ (assuming $f(t) = 0$ for $t<0$) we can write
+$$\hat f(\omega) = \int_0^\infty f(t) e^{-\varepsilon t - \im \omega t} \D{t}.$$
+The idea behind the Laplace transform is to consider this integral a function of a complex variable $s=\varepsilon + \im \omega$, i.e.\ we define
+$$\tilde f(s) = \int_0^\infty f(t) e^{-st} \D{t}.$$
+We write $\tilde f = \mathscr{L}[f]$.
+Mathematicians are happy now because this integral converges without any need to pull regularisers out of our sleeves, at least for some values of $s$ (they still yap on about regions of convergence).
+Engineers are happy because they don't have to worry about weird $\varepsilon \to 0$ formul\ae{}.
+\begin{question}
+Calculate the Laplace transform of\\
+(a) a constant $c$,\\
+(b) a complex exponential $e^{s_0 t}$,\\
+(c) $f(t) = \delta(t-t_0)$,\\
+(d) $f(t) = t$.\\
+\result{(a) $c/s$,\\
+(b) $1/(s - s_0)$,\\
+(c) $e^{-s t_0}$,\\
+(d) $1/s^2$.
+}
+\end{question}
+\begin{question}
+Find the formula for the inverse Laplace transform.
+\hint{As $\tilde f(s)$ is now a function of a complex variable, the result should be a complex integral.}
+\hint{Consider $e^{s_0 t} \to 1/(s-s_0)$. How could you reverse this?}
+\hint{Use $\oint_\gamma \tilde f(s) g(s) \D{s}$ for some function $g(s)$ and some contour $\gamma$ ($\gamma$ will depend on $f(s)$).}
+\solution{
+We want a contribution $e^{s_0 t}$ from each pole $1/(s-s_0)$.
+This strongly suggests a contour integral, i.e.\
+$$f(t) = \frac{1}{2\pi \im} \oint_\gamma \tilde f(s) e^{s t} \D{s},$$
+where $\gamma$ is a countour encircling all poles of $f(t)$.
+A dodgy way to prove the formula is along the lines of
+$$\frac{1}{2\pi \im} \oint \D{s} \int_0^\infty \D{t'} f(t') e^{s (t - t')} = \frac{1}{2\pi \im} \oint \D{t'} \frac{f(t')}{t' - t} = f(t).$$
+}
+\end{question}
+
+If you want some integral to obey
+$$\int f(t) g(t) \D{t} = f(t_0)$$
+then we know that you can choose either $t$ to be real and use $g(t) = \delta(t - t_0)$, or you can choose it to be complex and use $g(t) = 1/(t - t_0)$.
+From the formul\ae{} for the inverse transform we see that the Fourier transform corresponds to the former and the Laplace transform to the latter (you can also see this from the transform of $e^{\im \omega t}$).
+
+\begin{question}
+Prove the following properties of $\mathscr{L}$.\\
+(a) $\mathscr{L}$ is linear.\\
+(b) $\mathscr{L}[f'(t)] = s \tilde f(s) - f(0).\\
+(c) $\mathscr{L}\left[\int_0^t f(\tau) \D{\tau}\right] = \frac{1}{s} \tilde f(s)$.\\
+(d) $\mathscr{L}[f g] = \tilde f * \tilde g$.\\
+(e) $\mathscr{L}[f * g] = \tilde f \tilde g$.
+\solution{
+(b) $$\int f'(t) e^{-st} \D{t} = \left[f(t) e^{-st}\right]_0^\infty - \int f(t) (-s) e^{-st} \D{t} = -f(0) + s \tilde f(s)$$
+(c) $$\int \int_0^t f(\tau) \D{\tau} e^{-st} \D{t} = \left[-\frac{1}{s} \int_0^t f(\tau) \D{\tau} e^{-st}\right]_0^\infty - \int f(t) \left(-\frac{1}{s}\right) e^{-st} \D{t} = \frac{1}{s} \tilde f(s)$$\\
+(d) [dodgy] $$\tilde f * \tilde g = \int f(t) g(t') e^{-s' t-(s-s') t'} \D{t} \D{t'} \D{s} = \int f(t) g'(t) \frac{e^{-s t'} \D{t} \D{t'}}{t - t'} = \int f(t) g(t) e^{-s t} \D{t}$$\\
+(e) [dodgy] $$\int f(t') g(t-t') e^{- s t} \D{t'} \D{t} = \int f(t') g(t-t') e^{-s(t-t') - st'} \D{t'} \D{t}$$
+Substitute $u=t-t'$ to get
+$$= \left(\int f(t') e^{-s t'} \D{t'}\right) \left(\int g(u) e^{-su} \D{u}\right) = \tilde f \tilde g$$
+}
+\end{question}
+
+\begin{question}
+(a) Assume that $f(t)$ is bounded, i.e. $|f(t)| < c$ for some constant $c$.
+What can you say about the poles of $\tilde f(s)$?\\
+(b) What if $f(t)$ reaches a limiting value for $t \to \infty$?\\
+(c) Can you relate the limit to a property of $\tilde f(s)$?
+\hint{Think about what a pole in some location will effect after an inverse transform.}
+\solution{(a) If $f(t)$ is bounded then there are no poles in the right-hand plane, as they would lead to exponentially increasing terms.
+
+(b) If $f(t)$ approaches a finite value, then there can't be any infinitely oscillating terms either, i.e.\ no poles on the imaginary axis.
+The exception is a simple pole at the origin.
+
+(c) As $t\to \infty$ all poles corresponding to terms in the left-hand plane will die away.
+Remember that a pole at the origin is related to a constant term.
+If there is no pole at the origin then $f(t)$ will tend to 0.
+If there is a pole at the origin $f(t)$ will tend to its residue.
+Hence
+$$\lim_{t \to \infty} f(t) = \lim_{s \to 0} s \tilde f(s).$$
+}
+\end{question}
