@@ -379,7 +379,7 @@ From the formul\ae{} for the inverse transform we see that the Fourier transform
 \begin{question}
 Prove the following properties of $\mathscr{L}$.\\
 (a) $\mathscr{L}$ is linear.\\
-(b) $\mathscr{L}[f'(t)] = s \tilde f(s) - f(0).\\
+(b) $\mathscr{L}[f'(t)] = s \tilde f(s) - f(0)$.\\
 (c) $\mathscr{L}\left[\int_0^t f(\tau) \D{\tau}\right] = \frac{1}{s} \tilde f(s)$.\\
 (d) $\mathscr{L}[f g] = \tilde f * \tilde g$.\\
 (e) $\mathscr{L}[f * g] = \tilde f \tilde g$.
@@ -399,11 +399,9 @@ What can you say about the poles of $\tilde f(s)$?\\
 (b) What if $f(t)$ reaches a limiting value for $t \to \infty$?\\
 (c) Can you relate the limit to a property of $\tilde f(s)$?
 \hint{Think about what a pole in some location will effect after an inverse transform.}
-\solution{(a) If $f(t)$ is bounded then there are no poles in the right-hand plane, as they would lead to exponentially increasing terms.
-
+\solution{(a) If $f(t)$ is bounded then there are no poles in the right-hand plane, as they would lead to exponentially increasing terms.\\
 (b) If $f(t)$ approaches a finite value, then there can't be any infinitely oscillating terms either, i.e.\ no poles on the imaginary axis.
-The exception is a simple pole at the origin.
-
+The exception is a simple pole at the origin.\\
 (c) As $t\to \infty$ all poles corresponding to terms in the left-hand plane will die away.
 Remember that a pole at the origin is related to a constant term.
 If there is no pole at the origin then $f(t)$ will tend to 0.

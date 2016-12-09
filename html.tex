@@ -2,6 +2,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
+\usepackage{mathrsfs}
 \def\pgfsysdriver{pgfsys-tex4ht.def}
 \usepackage{tikz}
 
@@ -23,6 +24,12 @@
 	{\bf Definition.}
 }{
 	\HCode{</div>}
+\par
+}
+\newcommand\theorem[1]{
+\par
+	{\bf Theorem.}
+	#1
 \par
 }
 \newcommand\result[1]{
