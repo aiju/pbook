@@ -1,0 +1,477 @@
+\section{Fourier Transform}
+\subsection{Definition}
+The goal of the Fourier transform is to decompose an arbitrary function $f(t)$ into complex exponentials $e^{\im \omega t}$.
+We define the Fourier transform $\hat f(\nu)$ by the expression
+$$f(t) = \int_{-\infty}^\infty \hat f(\nu) e^{2\pi \im \nu t} \D{\nu}.$$
+Note that this definition uses physical frequencies $\nu$.
+Most of the time we want to use angular frequencies instead.
+\begin{question}
+Rewrite the expression using $\omega = 2 \pi \nu$ instead of $\nu$.
+\result{$$f(t) = \int_{-\infty}^\infty \hat f(\omega) e^{\im \omega t} \frac{\D{\omega}}{2\pi}.$$}
+\end{question}
+
+Even without deriving an explicit expression for $\hat f$ we can already make some conclusions about its properties.
+
+\begin{question}
+Assume that $\hat f(\omega)$ is uniquely defined.
+Given that\\
+(a) $f(t)$ is real,\\
+(b) $f(t)$ is even ($f(t)=f(-t)$),\\
+(c) $f(t)$ is odd ($f(t)=-f(-t)$),\\
+what is the corresponding condition on $\hat f(\omega)$?
+\result{(a) $\hat f(-\omega) = (f(\omega))^*$\\
+(b) $\hat f$ is even.\\
+(c) $\hat f$ is odd.}
+\solution{(a) Set $f(t) = (f(t))^* \Rightarrow$
+$$\int_{-\infty}^\infty \hat f(\omega) e^{\im \omega t} \frac{\D{\omega}}{2\pi} = \int_{-\infty}^\infty \hat f(\omega)^* e^{-\im \omega t} \frac{\D{\omega}}{2\pi} = \int_{-\infty}^\infty \hat f(-\omega)^* e^{\im \omega t} \frac{\D{\omega}}{2\pi}.$$
+Since we assumed that $\hat f(\omega)$ is unique, we must have $\hat f(\omega) = (\hat f(-\omega))^*$.
+Note that the substitution $\omega \to -\omega$ doesn't change the sign of the integrand (why?).
+(b) and (c) follow the same strategy.}
+\end{question}
+
+Now to derive an expression for $\hat f(\omega)$. We want to extract the coefficient corresponding to $e^{\im \omega t}$ from
+$$f(t) = \int \hat f(\omega) e^{\im \omega t} \frac{\D{\omega}}{2\pi}$$
+(all integrals will be from $-\infty$ to $\infty$ unless otherwise indicated).
+We can cancel $e^{\im \omega t}$ at $\omega=\omega_0$ by multiplying by $e^{-\im \omega_0 t}$.
+If $\omega\ne\omega_0$ we get an oscillatory term.
+If we now integrate over all $t$, we should get a contribution from the constant term at $\omega=\omega_0$ and no contribution from the oscillatory terms at $\omega \ne \omega_0$:
+$$\int f(t) e^{-\im \omega_0 t} \D{t} = \int \int \hat f(\omega) e^{\im (\omega-\omega_0) t} \frac{\D{\omega}}{2\pi} \D{t} \sim \hat f(\omega_0)$$
+
+To make a more precise statement we should evaluate
+$$\int e^{\im \omega t} \D{t},$$
+an integral that seems rather pathological at first glance.
+After all, it is clearly infinite for $\omega=0$ and oscillatory for $\omega\ne 0$.
+To assign it a sensible value we use a trick called \emph{regularisation}.
+We multiply the integrand by some function $f_\varepsilon(t)$ with $f_\varepsilon(t) \to 0$ at $t \to \pm \infty$.
+We then let $\varepsilon\to 0$ in the end and hope to recover some sensible result.
+
+\begin{question}
+Use the result
+$$\int e^{-t^2} \D{t} = \sqrt{\pi}$$
+to calculate the integral (with $\varepsilon > 0$)
+$$\int e^{\im \omega t - \varepsilon t^2} \D{t}.$$
+Plot the result against $\omega$ for different values of $\varepsilon$.
+\hint{Complete the square in the exponent, i.e. write it as $\square (t - \square)^2 + \square$.}
+\result{$\sqrt{\pi/\varepsilon}~e^{-\omega^2/(4 \varepsilon)}$}
+\solution{
+$$\int e^{\im \omega t - \varepsilon t^2} \D{t} = \int \exp\left(- \varepsilon \left(t - \frac{\im \omega}{2 \varepsilon}\right)^2 - \frac{\omega^2}{4 \varepsilon}\right) \D{t}$$
+Substitute $u = (t - \im \omega/(2 \varepsilon))/\sqrt{\varepsilon}$
+$$= \frac{1}{\sqrt{\varepsilon}}~e^{-\omega^2/(4 \varepsilon)} \int e^{-u^2} \D{u} = \sqrt{\frac{\pi}{\varepsilon}}~e^{-\omega^2/(4 \varepsilon)}$$
+}
+\end{question}
+
+\begin{question}(optional)
+Repeat the previous question with
+$$\int e^{\im \omega t - \varepsilon |t|} \D{t}.$$
+\hint{Split the range into two to get rid of the absolute value.}
+\result{$2\varepsilon/(\omega^2 + \varepsilon^2)$}
+\solution{
+$$\int e^{\im \omega t - \varepsilon |t|} \D{t} = \int_{-\infty}^0 e^{\im \omega t + \varepsilon t} \D{t} + \int_0^\infty e^{\im \omega t - \varepsilon t} \D{t} = \frac{1}{\im \omega + \varepsilon} - \frac{1}{\im \omega - \varepsilon} = \frac{2 \varepsilon}{\omega^2 + \varepsilon^2}$$}
+\end{question}
+
+From the plots you can see that the integral becomes increasingly sharply peaked around 0 as $\varepsilon \to 0$.
+Writing the integral as $I_\varepsilon(\omega)$ we thus have the following property
+$$\int \hat f(\omega) I_\varepsilon(\omega) \D{\omega} \approx \hat f(0) \int I_\varepsilon(\omega) \D{\omega}$$
+If the area remains finite as $\varepsilon \to 0$, this holds exactly in the limit.
+Remember that the $\delta$-function is defined by
+$$\int \hat f(\omega) \delta(\omega) \D{\omega} = \hat f(0).$$
+Hence, $I_\varepsilon(\omega)$ approaches a constant times the $\delta$-function as $\varepsilon \to 0$.
+
+\begin{question}
+Integrate the results from the last two questions over $\omega$ to find the constant.
+\result{$2\pi$.}
+\hint{To do the second integral remember that $\arctan'(x) = 1/(x^2 + 1)$.}
+\solution{
+1. Substitute $u = \omega/\sqrt{4 \varepsilon}$.
+$$\int \sqrt{\frac{\pi}{\varepsilon}} e^{-\omega^2/(4\varepsilon)} \D{\omega} = \sqrt{\frac{\pi}{\varepsilon}} \sqrt{4 \pi \varepsilon} = 2 \pi.$$}
+2. Substitute $u = \omega/\varepsilon$.
+$$\int \frac{2\varepsilon}{\omega^2 + \varepsilon^2} \D{\omega} = \int \frac{2}{\varepsilon} \frac{1}{(\omega/\varepsilon)^2 + 1} \D{\omega} = 2 \int \frac{1}{u^2 + 1} \D{u} = 2 \left[\arctan(u)\right]_{-\infty}^\infty = 2 \left(\frac{\pi}{2} - \frac{-\pi}{2}\right) = 2\pi.$$
+\end{question}
+
+\begin{question}
+Using the result from the last question, show that
+$$\int e^{\im \omega t} \D{t} = \lim_{\varepsilon \to 0} I_\varepsilon(\omega) = 2 \pi \delta(\omega)$$
+and that
+$$\int f(t) e^{-\im \omega t} \D{t} = \hat f(\omega).$$
+\solution{
+$$\lim_{\varepsilon \to 0} \int \hat f(\omega) I_\varepsilon(\omega) \D{\omega} = 2 \pi f(0)$$
+By the definition of the $\delta$-function, the first results follows.
+$$\int f(t) e^{-\omega t} \D{t} = \int \int \hat f(\omega') e^{\im (\omega' - \omega) t} \frac{\D{\omega'}}{2\pi} \D{t} = \int \hat f(\omega') \left(\int e^{\im (\omega' - \omega) t} \D{t}\right) \frac{\D{\omega'}}{2\pi}$$
+$$= \int \hat f(\omega') 2 \pi \delta(\omega' - \omega) \frac{\D{\omega'}}{2\pi} = \hat f(\omega)$$
+}
+\end{question}
+
+We can summarise the results obtained so far in the following definition
+\begin{definition}
+The Fourier transform $\hat f(\omega)$ or $\mathcal{F}[f]$ of a function $f(t)$ is defined as
+$$\hat f(\omega) = \int f(t) e^{-\im \omega t} \D{t}.$$
+The inverse Fourier transform $f(t)$ or $\mathcal{F}^{-1}[\hat f]$ of a function $\hat f(\omega)$ is defined as
+$$f(t) = \int \hat f(\omega) e^{\im \omega t} \frac{\D{\omega}}{2\pi}.$$
+\end{definition}
+
+Note that there are several different conventions in common use.
+We have already seen that we can describe it in terms of $\nu=\omega/(2\pi)$.
+Many authors define the signs of the exponential the other way around.
+Mathematicians in particular are also not fond of the asymmetric placement of $2\pi$ and prefer to put a factor of $1/\sqrt{2\pi}$ in both definitions instead.
+
+\begin{question}
+Prove the following.\\
+(a) Both $\mathcal{F}$ and $\mathcal{F}^{-1}$ are linear, i.e. $\mathcal{F}(\lambda f + \mu g) = \lambda \hat f + \mu \hat g$.\\
+(b) $\mathcal{F}$ and $\mathcal{F}^{-1}$ are inverses of each other.\\
+(c) $\mathcal{F}[\mathcal{F}[f]](t) = 2\pi f(-t)$.\\
+(d) $\hat f(0)$ is the total area under the curve of $f(t)$.\\
+(e) $\mathcal{F}[f(\alpha t)] = \frac{1}{\alpha} \hat f(\omega/\alpha)$.\\
+(f) $\mathcal{F}[f'(t)] = \im \omega \hat f(\omega)$.\\
+(g) $\mathcal{F}[t f(t)] = \im \hat f'(\omega)$.\\
+(h) $\mathcal{F}[\int_0^t f(\tau) \D{\tau}] = \frac{1}{\im \omega} \hat f(\omega) + {\rm const} \times \delta(\omega)$ (harder: show that the constant is $\pi \int \operatorname{sgn}(t) f(t) \D{t}$).\\
+\hint{(f)(g)(h) Try integrating by parts.}
+\end{question}
+\begin{question}(optional)
+Include constants $a$ and $b$ to generalise the definition to account for the different conventions listed above.
+Make sure your inverse transform is actually the inverse of the transform.
+Find $a, b$ for all conventions listed above.
+\solution{
+$$\hat f(\omega) = \int f(t) e^{\im a \omega t}~b~\D{t}$$
+To find the inverse,
+$$\int \int f(t) e^{\im a \omega t} \D{t} e^{-\im a \omega t'} \D{\omega} = \int f(t) \frac{2\pi}{|a|} \delta(t - t') \D{t} = \frac{2\pi}{|a|} f(t')$$
+and hence
+$$f(t) = \int \hat f(\omega) e^{\im a \omega t}~\frac{|a|}{2 \pi b}~\D{\omega}.$$
+Our convention corresponds to $a=1, b=1$. The inverted sign convention is $a=-1, b=1$.
+The mathematicians' convention is $a = \pm 1, b = 1/\sqrt{2\pi}$.
+The $\nu$ convention is $a = 2\pi, b = 1$.
+}
+\end{question}
+
+\subsection{Examples and the convolutional theorem}
+
+\begin{question}
+Find the Fourier transform of\\
+(a) a constant $c$,\\
+(b) a complex exponential $e^{\im \omega_0 t}$,\\
+(c) $\cos(\omega_0 t)$ and $\sin(\omega_0 t)$,\\
+(d) a $\delta$-function $\delta(t - t_0)$,\\
+(e) the ``top-hat'' function defined by $T(t) = 1$ for $|t| < a$ and $T(t) = 0$ otherwise,\\
+(f) the function defined by $f(t) = e^{-s t}$ for $t > 0$ and $f(t) = 0$ otherwise ($s > 0$),\\
+(g) a Gaussian $e^{-t^2/(2\sigma^2)}/\sqrt{2\pi \sigma^2}$.
+
+Sketch plots of the functions and their Fourier transforms, if possible.
+\result{(a) $2\pi c \delta(\omega)$,\\
+(b) $2 \pi \delta(\omega - \omega_0)$,\\
+(c) $\pi (\delta(\omega - \omega_0) + \delta(\omega + \omega_0))$ and $-\pi \im (\delta(\omega - \omega_0) - \delta(\omega + \omega_0))$,\\
+(d) $e^{-\im \omega t_0}$,\\
+(e) $2 \sin(\omega a)/\omega$,\\
+(f) $1/(s + \im \omega)$,\\
+(g) $e^{-\omega^2 \sigma^2/2}$.
+}
+\end{question}
+
+The single most important theorem about the Fourier transform is the convolution theorem.
+It relates the Fourier transform of a product to a combination of Fourier transforms.
+
+\begin{question}
+For two functions, find an expression for $\mathcal{F}[f g]$ that involves a single integral with no complex exponentials.
+\hint{Write $\mathcal{F}[f g]$ as an integral and then substitute the inverse transform for $f(t)$ and $g(t)$.}
+\hint{Try to make use of $\int e^{\im \omega t} \D{t} = 2\pi \delta(\omega)$.}
+\result{
+$$\int \hat f(\omega') \hat g(\omega - \omega') \frac{\D{\omega'}}{2\pi}$$}
+\solution{
+$$\int f(t) g(t) e^{-\im \omega t} = \int \hat f(\omega_1) \hat g(\omega_2) e^{-\im (\omega_1 + \omega_2 - \omega) t} \frac{\D{\omega_1} \D{\omega_2} \D{t}}{(2\pi)^2}$$
+$$= \int \hat f(\omega_1) \hat g(\omega_2) \delta(\omega_1 + \omega_2 - \omega) \frac{\D{\omega_1} \D{\omega_2}}{2\pi}
+= \int \hat f(\omega_1) \hat g(\omega - \omega_1) \frac{\D{\omega_1}}{2\pi}$$
+}
+\end{question}
+
+With the definition
+$$(f * g)(t) = \int f(t') g(t - t') \D{t},$$
+called the \emph{convolution} of $f$ and $g$, the convolutional theorem can be concisely stated as
+$$\mathcal{F}[f g] = \frac{\hat f * \hat g}{2\pi}, \qquad \mathcal{F}[f * g] = \hat f \hat g.$$
+
+\begin{question}
+Use the results from the last question and the convolutional theorem to find the Fourier transform of\\
+\begin{tikzpicture}
+\draw (-4,1) node{(a)};
+\draw [->] (-4,0) -- (4,0) node[right] {$t$};
+\draw [->] (0,0) -- (0,2) node[right] {$f(t)$};
+\draw [thick] (0,0) -- (2,0) -- (2,1) -- (3,1) -- (3,0) -- (4,0);
+\draw [thick] (0,0) -- (-2,0) -- (-2,1) -- (-3,1) -- (-3,0) -- (-4,0);
+\draw (-.1,1) -- (.1,1) node[right] {$1$};
+\draw (2.5,.1) -- (2.5,-.1) node[below] {$b$};
+\draw (-2.5,.1) -- (-2.5,-.1) node[below] {$b$};
+\draw [<->] (2,-.7) -- (2.5,-.7) node[below] {$a$} -- (3,-.7);
+\draw [<->] (-2,-.7) -- (-2.5,-.7) node[below] {$a$} -- (-3,-.7);
+
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\draw (-4,1) node{(b)};
+\draw [->] (-4,0) -- (4,0) node[right] {$t$};
+\draw [->] (0,0) -- (0,2) node[right] {$f(t)$};
+\draw [thick] (-4,0) -- (-1,0) -- (0,1) -- (1,0) -- (4,0);
+\draw (-.1,1) -- (.1,1) node[right] {$1$};
+\draw (1,.1) -- (1,-.1) node[below] {$1$};
+\draw (-1,.1) -- (-1,-.1) node[below] {$-1$};
+\end{tikzpicture}
+
+(c)
+$f(t) = \cos t$ for $|t| < \pi$ and $f(t) = 0$ otherwise.
+
+\result{(a) $4 \sin(a \omega/2) \cos(b \omega) / \omega$.\\
+(b) $4 \sin^2(\omega/2)/\omega^2$.\\
+(c) $\sin(\pi \omega) ~ 2 \omega/(1-\omega^2)$.
+}
+\end{question}
+
+A theorem that can be proved by similar methods is Parseval's theorem.
+
+\begin{question}
+Show that
+$$\int |f(t)|^2 \D{t} = \int |f(\omega)|^2 \frac{\D{\omega}}{2\pi}.$$
+\hint{Remember $|f(t)|^2 = f(t) (f(t))^*$.}
+\solution{
+$$\int |f(t)|^2 \D{t} = \int f(\omega_1) (f(\omega_2))^* e^{\im (\omega_1 - \omega_2) t} \frac{\D{\omega_1} \D{\omega_2}}{(2\pi)^2} = \int f(\omega_1) (f(\omega_2))^* \delta(\omega_1 - \omega_2) \frac{\D{\omega_1}}{2\pi}$$
+$$= \int |f(\omega_1)|^2 \frac{\D{\omega_1}}{2\pi}$$
+}
+\end{question}
+\subsection{Periodic functions and the Fourier series}
+
+\begin{question}
+Write down an identity of the form $f(t) * g(t) = f(t)$ (with fixed $g(t)$), obeyed if and only if $f(t)$ is periodic with period $T$.
+Use the convolutional theorem to draw a conclusion about $\hat f(\omega)$.
+\hint{$g(t)$ is not uniquely defined, but a displaced $\delta$-function works.}
+\solution{
+Take $g(t) = \delta(t - T)$. Then $\hat f \hat g = \hat f$ or
+$$\hat f(\omega) (e^{-\im \omega T} - 1) = 0.$$
+$e^{-\im \omega T} - 1$ is zero iff $\omega$ is a multiple of $2\pi/T$.
+Hence $\hat f(\omega)$ is zero, unless $\omega$ is a multiple of $2\pi/T$.
+}
+\end{question}
+
+For a periodic function $f(t)$ we can thus write
+$$\hat f(\omega) = \frac{1}{2\pi} \sum_{n=-\infty}^{\infty} f_n~\delta\left(\omega  - 2\pi n/T\right),$$
+where $f_n$ is known as the Fourier series of $f(t)$ (the factor of $1/(2\pi)$ is conventional).
+Note that $f_n$ has the same units as $f(t)$.
+
+\begin{question}
+Derive an equation for $f_n$ in terms of $f(t)$.
+\hint{Find a function $\hat g$ with the property that $\hat g(0) = 1$ and $\hat g(2\pi n/T) = 0$ for $n \ne 0$. Consider $(\hat f * \hat g)(2 \pi n/T)$.}
+\hint{$\sin$ works\dots almost. How could you fix $\sin 0 = 0$?}
+\hint{Try $\sin(x)/x$.}
+\result{$f_n = \frac{1}{T} \int_0^T f(t) e^{-2 \pi \im n t/T} \D{t}$}
+\solution{Choose $\hat g(\omega) = \sin(\omega T/2)/(\pi \omega T)$.
+Note that $f_n = (\hat f * \hat g)(2\pi n/T)$ and $g(t)$ is a top hat of height $1/(2\pi T)$.
+Now apply the convolutional theorem
+$$\hat f * \hat g = 2\pi \int f(t) g(t) e^{-\im \omega t} \D{t} = \frac{1}{T} \int_{-T/2}^{T/2} f(t) e^{-\im \omega t} \D{t}$$
+The result follows from shifting the integration range by $T/2$ (allowed, since $f(t)$ is periodic) and setting $\omega = 2 \pi n/T$.
+}
+\end{question}
+
+\begin{question}
+Derive an equation for $f(t)$ in terms of $f_n$.
+\result{
+$$f(t) = \sum_{n=-\infty}^{\infty} f_n e^{2 \pi \im n T}$$
+}
+\end{question}
+
+\begin{question}
+Calculate the Fourier series of (all periodic with period $T$)\\
+(a) a square wave, i.e.\ $f(t) = -1$ for $-T/2<t<0$ and $f(t)=1$ for $0<t<T/2$.\\
+(b) a sawtooth wave, i.e.\ $f(t) = 2t/T$ for $-T/2<t<T/2$.\\
+\result{(a) $f_n = 2\im/(\pi n)$, if $n$ is odd, and 0 otherwise.\\
+(b) $f_n = \im (-1)^n/(\pi n)$, if $n \ne 0$, and $f_0 = 0$.}
+\solution{
+(a)
+$$f_n = \frac{1}{T} \int_0^{T/2} (e^{-2\pi \im n t/T} - e^{2\pi \im n t/T}) \D{t} = \frac{1}{T} \left[\frac{e^{-2\pi \im n t/T} + e^{2\pi \im n t/T}}{-2 \pi \im n/T}\right]_0^{T/2} = \frac{\im ((-1)^n - 1)}{\pi n} $$
+(b)
+$f_0 = 0$ trivially. If $n \ne 0$,
+$$f_n = \frac{1}{T} \int_{-T/2}^{T/2} \frac{2t}{T} e^{-2\pi \im n t/T} \D{t} = \frac{1}{T} \left(\left[\frac{2t}{T} \frac{e^{-2\pi \im n t/T}}{-2\pi \im n/T}\right]^{T/2}_{T/2} - \int_{-T/2}^{T/2} \frac{2}{T} \frac{e^{-2\pi i n t/T}}{-2\pi \im n/T} \D{t}\right)$$
+$$= \frac{1}{T} \left(\frac{2 (-1)^n}{-2\pi \im n/T} - \frac{2}{T} \frac{(-1)^n - (-1)^n}{(-2\pi \im n/T)^2}\right) = \frac{\im (-1)^n}{n\pi}$$
+}
+\end{question}
+
+\begin{question}
+Find an equivalent of $\int e^{\im \omega t} \D{t} = 2 \pi \delta(\omega)$ for Fourier series.
+Express your answer using the Kronecker delta, defined by $\delta_{i,j} = 1$ if $i=j$, else 0.
+\hint{Replace the infinite integration range with a more appropriate one and substitute $\omega=2\pi n/T$.}
+\result{ $\int_0^T e^{2\pi \im n t/T} \D{t} = T \delta_{n,0}$.}
+\solution{
+Consider $\int_0^T e^{2\pi \im n t/T} \D{t}$.
+If $n=0$, then the result is $T$.
+If $n\ne 0$, then the result is $0$.
+Hence the result.
+}
+\end{question}
+
+\begin{question}
+Find an equivalent of Parseval's theorem for periodic functions.
+\hint{Use the equation for $f(t)$ in terms of $f_n$.}
+\result{$\frac{1}{T} \int_0^T |f(t)|^2 \D{t} = \sum_{n=-\infty}^\infty |f_n|^2$.}
+\solution{
+$$\int_0^T |f(t)|^2 \D{t} = \int_0^T \sum_{n=-\infty}^\infty \sum_{m=-\infty}^\infty f_n f_m^* e^{2\pi \im (n-m) t/T} \D{t} = T \sum_{n=-\infty}^\infty \sum_{m=-\infty}^\infty f_n f_m^* \delta_{n,m} = T \sum_{n=-\infty}^\infty |f_n|^2$$
+}
+\end{question}
+
+\begin{question}
+Calculate
+$$\sum_{n=1}^\infty \frac{1}{n^2}.$$
+\hint{Use Parseval's theorem.}
+\hint{Use one of the examples from above for $f(t)$.}
+\result{$\pi^2/6$.}
+\solution{
+The sawtooth function from above has $f_n = \im (-1)^n/(\pi n)$ and so Parseval's theorem states that
+$$\sum_{n \ne 0} \frac{1}{\pi^2 n^2} = \sum_{n\ne 0} |f_n|^2 = \frac{1}{T} \int_{-T/2}^{T/2} \left(\frac{2 t}{T}\right)^2 \D{t} = \frac{1}{T} \left[\frac{4 t^3}{3 T^2}\right]_{-T/2}^{T/2} = \frac{1}{3}$$
+Summing over just positive $n$ gives $1/2$ of this value, i.e.
+$$\sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}.$$
+}
+\end{question}
+
+\subsection{Sampling}
+Sampling replaces the function $f(t)$ with a sequence of samples $f(0), f(T), f(2T), \dots$ taken at the sampling rate $1/T$.
+We can describe sampling by multiplying $f(t)$ with a \emph{Dirac comb} $\Sh_T(t)$, defined by
+$$\Sh_T(t) = \sum_{n=-\infty}^\infty \delta(t - n T).$$
+\begin{question}
+Find the Fourier transform of $\Sh_T(t)$.
+\hint{$\Sh_T(t)$ is periodic.}
+\result{$\hat \Sh_T(\omega) = (2\pi/T) \Sh_{2\pi/T}(\omega)$.}
+\solution{$$\Sh_{T,n}(\omega) = \frac{2 \pi}{T} \int_{-T/2}^{T/2} \delta(t) e^{-2 \pi n t/T} \D{t} = \frac{2 \pi}{T}$$
+$$\hat \Sh_T(\omega) = \sum_{n=-\infty}^\infty \frac{2 \pi}{T} \delta\left(\omega - \frac{2 \pi n}{T}\right)$$}
+\end{question}
+
+\begin{question}
+Calculate the Fourier transform of the sampled version of $f(t)$, i.e.\ $f(t) \Sh_T(t)$.
+Describe the result in words.
+\solution{
+$$\frac{2\pi}{T} \hat f * \Sh_{2\pi/T}(\omega) = \frac{2\pi}{T} \sum_{n=-\infty}^\infty \hat f\left(\omega - \frac{2 \pi n}{T}\right)$$
+$\hat f$ is shifted by multiples of $2\pi/T$ and all the shifted copies are added together.
+}
+\end{question}
+
+The shifted copies are called \emph{aliases}.
+Note that, e.g., $e^{\im \omega t}$ and $e^{\im (\omega + 2\pi/T) t}$ are indistinguishable after sampling.
+
+\begin{question}
+(Shannon sampling theorem)
+Assume $f(t)$ is real.
+Show that if $f(t)$ is band-limited at frequency $\omega_b$, i.e. if $\hat f(\omega) = 0$ for $|\omega| > \omega_b$, then sampling is reversible, given some limit on $\omega_b$.
+Find the maximum value of $\omega_b$.
+\solution{
+We need to ensure that none of the aliases fall into the spectrum of $\hat f$.
+$f(t)$ is real and so if the highest frequency is $\omega_b$, then the lowest is $-\omega_b$.
+The highest component $\omega_b$ shifted down by $2\pi/T$ has to be less than the lowest component $-\omega_b$.
+Hence $\omega_b < \pi/T$.
+Defining $\omega_T = 2\pi/T$ we note that $\omega_T > 2 \omega_b$, i.e.\ the sampling frequency must be twice the highest frequency of interest.
+}
+\end{question}
+
+\subsection{Regularisation}
+We already met regularisation when calculating the integral $\int e^{\im \omega t} \D{t}$.
+The same technique can also be used to give meaning to otherwise meaningless Fourier transforms.
+\begin{question}
+Calculate the Fourier transform of the Heaviside step function $\Theta(t) = 1$ for $t>0$ and $\Theta(t) = 0$ otherwise.
+\hint{Add $e^{-\varepsilon t}$.}
+\result{$-\im/(\omega - \im \varepsilon)$.}
+\solution{
+We already calculated the Fourier transform of $\Theta(t) e^{-\varepsilon t}$ and got $1/(\varepsilon+\im \omega)$.
+}
+\end{question}
+
+We can take the limit $\varepsilon \to 0$, but we have to be very careful in doing so.
+We would like integrals of the form $\int \hat \Theta(\omega) f(\omega) \D{\omega}$ to give the right answers.
+The problem is that $\int \D{\omega}/\omega$ is ill-defined around 0.
+
+\begin{question}
+Let's attempt to give meaning to the integral by considering
+$$\int_{-1}^{-a} \frac{\D{\omega}}{\omega} + \int_b^1 \frac{\D{\omega}}{\omega}.$$
+We should presumably be able to take $a,b\to 0$ independently of each other.
+Show that this doesn't work.
+\solution{
+$$\int_{-1}^{-a} \frac{\D{\omega}}{\omega} + \int_b^1 \frac{\D{\omega}}{\omega}. = -\ln a + \ln b = \ln(b/a)$$
+Hence the answer can be anything, depending on the ratio $b/a$.
+}
+\end{question}
+
+One way out of this conundrum is the \emph{Cauchy principal value}.
+For a function $f(\omega)$ with a pole at 0 we define
+$$\mathcal{P} \int f(\omega) \D{\omega} = \lim_{a\to 0} \left(\int^{-a} f(\omega) \D{\omega} + \int_a f(\omega) \D{\omega}\right).$$
+We also define $\mathcal{P} f(\omega)$ to be a ``tagged'' version of $f(\omega)$; here the $\mathcal{P}$ takes effect as soon as the expression is used as part of an integral.
+\begin{question}
+(optional, requires contour integration) Show that $\mathcal{P}$ corresponds to counting the poles on the contour with factor $\pm \pi \im$, as opposed to $\pm 2 \pi \im$.
+\end{question}
+
+\begin{question}
+Calculate
+$$\lim_{\varepsilon\to 0+} \frac{1}{\omega-\im \varepsilon}$$
+\result{$\mathcal{P}(1/\omega) + \im \pi \delta(\omega)$.}
+\solution{
+Multiply both sides of the fraction by $\omega+\im \varepsilon$:
+$$\frac{1}{\omega-\im \varepsilon} = \frac{\omega+\im \varepsilon}{\omega^2 + \varepsilon^2} = \frac{\omega}{\omega^2 + \varepsilon^2} + \frac{\im \varepsilon}{\omega^2 + \varepsilon^2}$$
+The second term goes to $\im \pi \delta(\omega)$ (as was shown above).
+For the first term consider
+$$\int f(\omega) \frac{\omega \D{\omega}}{\omega^2 + \varepsilon^2}.$$
+If $f(\omega)$ has no pole at 0, then the integral is well defined as $\varepsilon \to 0$.
+For $a \gg \varepsilon$, it corresponds to integrating $f(\omega)/\omega$ to $-a$ and from $a$, plus some piece proportional to $a/\varepsilon^2$.
+Clearly as $a \to 0$ the integral goes to
+$$\mathcal{P} \int f(\omega) \frac{\D{\omega}}{\omega}$$
+(a rigorous proof can be given with contour integration).
+}
+\end{question}
+
+Using this identity we can show that
+$$\hat \Theta(\omega) = \mathcal{P} \frac{-\im}{\omega} + \pi \delta(\omega).$$
+
+\subsection{Linear response theory}
+Often we are in a situation where a system $\mathcal{S}$ will take an input $f(t)$ and produce a response $g(t) = \mathcal{S}[f(t)]$.
+For instance, $f(t)$ might be the input to an electronic amplifier and $g(t)$ is its output, or $f(t)$ might be the force applied to a spring and $g(t)$ is its displacement.
+In this situation there are two common assumptions about the system:
+\begin{itemize}
+\item $\mathcal{S}$ is linear: $\mathcal{S}[\lambda f + \mu g] = \lambda \mathcal{S}[f] + \mu \mathcal{S}[g]$.
+\item $\mathcal{S}$ is time-invariant, meaning that a delay in the input always leads to just a delay in the output, with no other changes, i.e.\ $\mathcal{S}[f(t+\tau)](t) = \mathcal{S}[f(t)](t+\tau)$.
+\end{itemize}
+These two assumptions are, of course, approximations, but they are often very good approximations, especially for small inputs.
+\begin{question}
+Show that $g(t) = f(t) * h(t)$, where $h(t)$ depends only on $\mathcal{S}$. What does this imply about $\hat g$?
+\hint{Write $f(t)$ as a convolution of $f(t)$ with another function.}
+\hint{Use $\delta(t)$.}
+\solution{
+$$\mathcal{S}[f](t) = \mathcal{S}\left[\int f(t') \delta(t-t') \D{t'}\right](t) = \int f(t') \mathcal{S}\left[\delta(t-t')\right](t) \D{t'} = \int f(t') \mathcal{S}\left[\delta(t)\right](t-t') \D{t'}$$
+Hence $h = \mathcal{S}[\delta]$.
+$h$ is usually called the impulse response.
+Applying the convolutional theorem we find that $\hat f = \hat g \hat h$.
+$\hat h$ is called the transfer function.
+}
+\end{question}
+
+Often we also want our system to be causal, i.e.\ the output at $t$ only depends on the input from $t$ and earlier.
+\begin{question}
+What condition does this impose on $h(t)$?
+\result{$h(t) = 0$ for $t<0$.}
+\end{question}
+
+The equation $\hat f = \hat g \hat h$ suggests that we can implement \emph{filters} that select specific frequencies.
+Of course we would ideally like our filters to have perfect ``brick-wall'' responses, i.e.\ $\hat h = 0$ or $\hat h = 1$ for different values of $\omega$.
+
+\begin{question}
+What's the problem with perfect brick-wall response filters?
+Consider $\hat h(\omega) = 1$ for $|\omega| < \omega_c$ and $0$ otherwise.
+\hint{Calculate $h(t)$.}
+\solution{
+$$h(t) = \int_{-\omega_c}^{\omega_c} e^{\im \omega t} \frac{\D{\omega}}{2\pi} = \frac{\sin(\omega_c t)}{\pi t}$$
+Note that $h(t) \ne 0$ for arbitrarily large $t$.
+Even including arbitrarily large delays on the output, the system will not be causal.
+}
+\end{question}
+
+\begin{question}
+(optional, Kramers-Kr\"onig relations)
+Write $\hat h = \hat h_1 + \im \hat h_2$ with real $\hat h_1, \hat h_2$.
+Derive a condition on $\hat h_{1,2}$ for the system to be causal.
+\hint{Write $h(t) = h(t) k(t)$.}
+\result{
+$$\hat h_1(\omega) = \mathcal{P} \int \frac{\hat h_2(\omega')}{\omega - \omega'} \frac{\D{\omega'}}{\pi}, \qquad \hat h_2(\omega) = -\mathcal{P} \int \frac{\hat h_1(\omega')}{\omega - \omega'} \frac{\D{\omega'}}{\pi}.$$
+}
+\solution{
+Use $k(t) = \Theta(t)$.
+Remember $\hat \Theta = \mathcal{P} (-\im/\omega) + \pi \delta(\omega)$.
+$$\hat h_1 + \im \hat h_2 = \hat h = \frac{1}{2\pi} \hat h * \left(\mathcal{P} \frac{-\im}{\omega} + \pi \delta(\omega)\right) = \mathcal{P} \int \frac{-\im \hat h_1(\omega') + \hat h_2(\omega')}{\omega - \omega'} \frac{\D{\omega'}}{2\pi} + \frac{1}{2} (\hat h_1(\omega) + \im \hat h_2(\omega))$$
+Taking real and imaginary parts gives the two conditions.
+}
+\end{question}
