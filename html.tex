@@ -1,0 +1,53 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\def\pgfsysdriver{pgfsys-tex4ht.def}
+\usepackage{tikz}
+
+\newcommand\im{\mathrm{i}}
+\newcommand\D[1]{\mathrm{d}{#1}}
+\setlength\parindent{0mm}
+\setlength\parskip{12pt}
+\newenvironment{question}{
+\par
+	\HCode{<div style='margin-left: 1cm; border-left: 1pt solid black'>}
+	{\bf Question.}
+}{
+	\HCode{</div>}
+\par
+}
+\newenvironment{definition}{
+\par
+	\HCode{<div style='margin-left: 1cm; border-left: 1pt solid black'>}
+	{\bf Definition.}
+}{
+	\HCode{</div>}
+\par
+}
+\newcommand\result[1]{
+	\par
+	{\bf Result.}
+	\HCode{<span><button onclick="show(event)">show</button><span style='display:none' id='hidden'>}
+	#1
+	\HCode{</span></span>}
+	\par
+}
+\newcommand\hint[1]{
+	\par
+	{\bf Hint.}
+	\HCode{<span><button onclick="show(event)">show</button><span style='display:none' id='hidden'>}
+	#1
+	\HCode{</span></span>}
+	\par
+}
+\newcommand\solution[1]{
+	\par
+	{\bf Solution.}
+	\HCode{<span><button onclick="show(event)">show</button><span style='display:none' id='hidden'>}
+	#1
+	\HCode{</span></span>}
+	\par
+}
+
+\input{content}

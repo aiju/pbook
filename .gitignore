@@ -1,0 +1,12 @@
+*.html
+*.svg
+*.dvi
+*.idv
+*.log
+*.lg
+*.tmp
+*.xref
+*.4ct
+*.4tc
+*.css
+*.aux
