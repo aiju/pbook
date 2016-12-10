@@ -640,7 +640,7 @@ Find the radius of convergence $C(x)$ of the Taylor series as a function of $x$ 
 Consider the analytic continuation $f(z)$.
 It has poles at $\pm \im$.
 We know that for a meromorphic function the radius of convergence is given by the distance to the poles, i.e.\
-$$f(z) = \operatorname{min}(|z+\im|, |z-\im|).$$
+$$C(z) = \operatorname{min}(|z+\im|, |z-\im|).$$
 But this applies equally well to $z$ on the real axis and so
 $$C(x) = |x\pm\im| = \sqrt{x^2 + 1}.$$
 }
