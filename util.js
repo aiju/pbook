@@ -1,9 +1,9 @@
 function show(e){
-	if(e.srcElement.innerHTML == "show"){
-		e.srcElement.nextSibling.className = 'hidden-vis';
-		e.srcElement.innerHTML = 'hide';
+	if(e.target.innerHTML == "show"){
+		e.target.nextSibling.className = 'hidden-vis';
+		e.target.innerHTML = 'hide';
 	}else{
-		e.srcElement.nextSibling.className = 'hidden';
-		e.srcElement.innerHTML = 'show';
+		e.target.nextSibling.className = 'hidden';
+		e.target.innerHTML = 'show';
 	}
 }
