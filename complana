@@ -56,7 +56,7 @@ We can thus calculate the derivatives $\partial f/\partial z$ and $\partial f/\p
 A particularly common case is $f = f(z)$, i.e.\ $f$ does not ``depend'' on $z^*$.
 By this we mean $\partial f/\partial z^* = 0$, i.e.\
 $$\pfrac{f}{x} = -\im \pfrac{f}{y}.$$
-We call functions like this ``analytic''.
+We call functions like this ``analytic'' (you may be familiar with the term ``analytic'' from real analysis. We will later see a connection but for now you can treat the two definitions as unrelated).
 
 \begin{question}
 Show that for an analytic function $f(z)$ we can also define the derivative using
@@ -88,9 +88,17 @@ The contour can either be an open contour going from $a$ to $b$ or a closed cont
 We write
 $$\int_\gamma f(z) \D{z}$$
 where $\gamma$ is the contour.
-In applications contours are usually defined geometrically but for our purposes it will be useful to consider $\gamma$ a function of a real argument going from 0 to 1.
+In applications contours are usually defined geometrically but for our purposes it will be useful to consider $\gamma$ a function of a real argument going from 0 to 1 (any other range works as well, obviously).
 We can then define, by substituting $z=\gamma(t)$,
 $$\int_\gamma f(z) \D{z} = \int_0^1 f(\gamma(t)) \gamma'(t) \D{t}.$$
+\begin{question}
+(a) How does the integral $\int_\gamma f(z) \D{z}$ change if the contour is reversed?\\
+(b) Create a contour $\gamma$ by ``concatenating'' two contours $\gamma_1$ and $\gamma_2$. How does the integral of $\gamma$ relate to the integrals of the other two?
+\result{
+(a) The integral picks up a minus sign.\\
+(b) The integral is $\int_{\gamma_1} f(z) \D{z} + \int_{\gamma_2} f(z) \D{z}$.
+}
+\end{question}
 \begin{question}
 Consider a ``family'' of contours $\gamma_\alpha(t)$ where $\alpha$ varies continuously from 0 to 1.
 Fix the endpoints, i.e.\ $\gamma_\alpha(0)$ and $\gamma_\alpha(1)$ should be independent of $\alpha$.
@@ -98,8 +106,9 @@ Show that for an analytic function $f(z)$ the integral
 $$\int_{\gamma_\alpha} f(z) \D{z}$$
 is independent of $\alpha$, assuming $f(z)$ is defined everywhere on all contours.
 \hint{Take derivatives with respect to $\alpha$.}
+\hint{Also integrate by parts.}
 \solution{
-$$\pfrac{}{\alpha} \int_{\gamma_\alpha} f(z) \D{z} = \int_0^1 \left(f'(\gamma_\alpha(t)) \pfrac{\gamma_\alpha(t)}{\alpha} \gamma_\alpha'(t) + f(\gamma_\alpha(t)) \pfrac{\gamma_\alpha'(t)}{\alpha}\right) \D{t}$$
+$$\pfrac{}{\alpha} \int_{\gamma_\alpha} f(z) \D{z} = \pfrac{}{\alpha} \int_0^1 f(\gamma_\alpha(t)) \gamma_\alpha'(t) \D{t} = \int_0^1 \left(f'(\gamma_\alpha(t)) \pfrac{\gamma_\alpha(t)}{\alpha} \gamma_\alpha'(t) + f(\gamma_\alpha(t)) \pfrac{\gamma_\alpha'(t)}{\alpha}\right) \D{t}$$
 Now integrate the second term by parts
 $$=\int_0^1 \left(f'(\gamma_\alpha(t)) \pfrac{\gamma_\alpha(t)}{\alpha} \gamma_\alpha'(t) - f'(\gamma_\alpha(t)) \gamma_\alpha'(t) \pfrac{\gamma_\alpha(t)}{\alpha}\right) \D{t} + \left[f(\gamma_\alpha(t)) \pfrac{\gamma_\alpha(t)}{\alpha}\right]_0^1 = 0$$
 Note that the second term vanishes because $\partial \gamma_\alpha(t)/\partial \alpha = 0$ for $t=0,1$, by assumption.
@@ -129,7 +138,7 @@ If $f(z)$ is defined everywhere on the complex plane, what property of $\gamma$ 
 \solution{
 Construct $\eta$ as suggested in the hint.
 $\eta$ is now a loop and so its integral is zero.
-But you should be able to show that
+But from a previous question we have
 $$\int_\eta f(z) \D{z} = \int_{\gamma_1} f(z) \D{z} - \int_{\gamma_2} f(z) \D{z}$$
 and hence the integrals over $\gamma_1$ and $\gamma_2$ are identical.
 The integral depends only on the endpoints.
@@ -159,6 +168,7 @@ $$F'(z) = \lim_{\delta \to 0} \frac{F(z+\delta) - F(z)}{\delta} = f(z).$$
 
 We now want to consider analytic functions $f(z)$ that are defined ``almost'' everywhere, i.e.\ that have some number of poles.
 The fancy term for this is \emph{meromorphic}.
+Note that they can have an infinite number of poles, but they have to be well separated, i.e.\ there is no continuous line of poles somewhere.
 Things get considerably more interesting as loops can now evaluate to non-zero values and different contours will now, in general, give different results.
 Let's start with the simplest possible example.
 
@@ -166,6 +176,7 @@ Let's start with the simplest possible example.
 Consider $f(z) = 1/z$ and an arbitrary loop $\gamma$.
 By reducing contours to some (not necessarily finite) number of ``prototype'' contours, find all possible values of $\oint_\gamma f(z) \D{z}$ (the funny integral sign just emphasizes that $\gamma$ is a loop).
 \hint{You can still deform contours, as long as you never cross the pole. Geometrically, think about what differentiates different contours that can \emph{not} be deformed into each other. Can you define some number that characterises the different classes of curve?}
+\result{$2 \pi \im n$ for all integers $n$.}
 \solution{
 Define the ``winding number'' $n$ as the number of times the curve winds around the origin (counterclockwise counts as $+1$ and clockwise counts as $-1$).
 Curves of equal winding number can be deformed into each other.
@@ -190,7 +201,7 @@ We call $m$ the \emph{multiplicity} of the pole and poles with $m=1$ are called 
 You will show that this works in the following questions.
 
 \begin{question}
-Consider a function of the form $f(z) = h(z) + a_0/(z-z_0) + a_1/(z-z_1) + \dots$ where $h(z)$ is holomorphic.
+Consider a function of the form $f(z) = h(z) + a_0/(z-z_0) + a_1/(z-z_1) + \dots$ where $h(z)$ is holomorphic and all $z_i$ are distinct.
 Suppose that you know $f(z)$ and $z_n$, but not $a_n$.
 Can you ``deconstruct'' $f(z)$ by finding some expression to extract $a_n$?
 \result{
@@ -216,7 +227,7 @@ Rinse and repeat until only $h(z)$ remains.
 \end{question}
 
 \begin{question} (optional)
-Generalise the result from the previous two questions to functions with an arbitrary number of poles of arbitrary multiplicity.
+Generalise the result from the previous two questions to functions with an arbitrary number of poles of arbitrary (but finite) multiplicity.
 By finding a procedure to determine the coefficients of the poles, show that the coefficients are uniquely defined.
 \end{question}
 
@@ -255,6 +266,10 @@ $$\oint_\gamma g(z) \D{z} = 2 \pi \im f(z_0)$$
 or
 $$f(z_0) = \frac{1}{2\pi \im} \oint \frac{f(z) \D{z}}{z - z_0}.$$
 }
+\end{question}
+\begin{question}
+Under what circumstances does the Cauchy integration formula apply to meromorphic functions?
+\solution{As long as the contour includes no poles the proof is unchanged.}
 \end{question}
 
 As fun as it is to manipulate complex functions, in physics most functions of interest are functions of a real variable.
@@ -297,6 +312,39 @@ We must hence close in the lower plane, encircling no poles and getting $0$.
 \end{question}
 
 \begin{question}
+Consider
+$$\int_\gamma \frac{\D{z}}{z^2}$$
+with $\gamma$ a half-circle in the complex plane (as the curve above, without the part on the real axis).
+Evaluate the integral and show that it goes to zero as $a \to \infty$.
+\solution{
+Use $\gamma(t) = a e^{\pi \im t}$. The integral then is
+$$\int_0^1 \frac{1}{a^2 (e^{\pi \im t})^2} \pi \im e^{\pi \im t} \D{t} = \frac{\pi \im}{a^2} \left[\frac{e^{-\pi \im t}}{-\pi \im}\right]_0^1 = \frac{2}{a^2} \to 0.$$
+}
+\end{question}
+
+\begin{question}
+(optional)
+Consider
+$$\int_\gamma \frac{e^{\im z t}}{z - \im} \D{z}$$
+with the same half-circle.
+Write down an expression for the integral and make some rough approximations to show that it vanishes for $t>0$ but not $t<0$.
+\hint{If you have a term of the form $e^{-\alpha \sin \beta}$, expand around appropriate values of $\beta$.}
+\solution{
+Use $\gamma(u) = a e^{\pi \im u}$. The integral then is
+$$\int_0^1 \frac{e^{\im a t e^{\pi \im u}}}{a e^{\pi \im u} - \im} a \pi \im e^{\pi \im u} \D{u} = \pi \im \int_0^1 \frac{e^{\im a t \cos(\pi u)} e^{- a t \sin(\pi u)}}{1 - \im a^{-1} e^{-\pi \im u}} \D{u}.$$
+We can readily ignore the denominator as $a \gg 1$.
+The $e^{\im a t \cos(\pi u)}$ bit will give an oscillating contribution that we can replace with 1.
+To evaluate the $e^{- a t \sin(\pi u)}$ contribution, consider first $t<0$.
+The $u \approx 0,1$ contributions will be most relevant.
+The contribution at $1$ will be twice the contribution at 0 and so
+$$\approx 2 \pi \im \int_0^\infty e^{-a t \pi u} \D{u} = \frac{2 \pi \im}{a \pi t} \to 0.$$
+For $t < 0$ the most significant contribution is around $u \approx 1/2$, where $\sin(\pi u) \approx 1 - (\pi (u - 1/2))^2/2$.
+Substituting $w=u-1/2$ we get
+$$\approx \pi \im e^{-a t} \int_{-\infty}^\infty e^{a t\pi^2 w^2/2} \D{w} = \pi \im e^{- a t} \sqrt{\frac{2}{- \pi a t}} \to \infty.$$
+}
+\end{question}
+
+\begin{question}
 (optional, requires Fourier transform)
 Consider a mass on a damped spring, driven by a force $f(t)$, i.e.
 $$m \ddot x(t) + \gamma \dot x(t) + k x(t) = f(t)$$
@@ -328,6 +376,74 @@ This leads to the result that $x(t) = 0$ for $t<0$, i.e.\ that the system is cau
 While the laws of mechanics are time-reversal invariant, thermodynamics is not and it enters here through $\gamma$, enforcing the arrow of time.
 
 If the system was undamped we would have to impose causality as an additional axiom.
+
+\begin{question}
+(optional)
+Consider the function $1/(e^{2\pi \im z} - 1)$.
+Find the poles and their residues.
+Use the function to evaluate the sum
+$$\sum_{n=1}^\infty \frac{1}{n^2 + \varepsilon^2}.$$
+Expand your answer around $\varepsilon=0$ and try to recover the $\varepsilon=0$ case that we previously found using Fourier analysis.
+\hint{Expand the sum to all integers.}
+\hint{Use a contour integral with an infinitely large contour, then deform the contour (which is a bit mindboggling and not at all rigorous).}
+\hint{Use $\oint_\gamma 1/((e^{2\pi \im z} - 1) (z^2 + \varepsilon^2)) \D{z}$.}
+\result{$(\pi \coth(\pi \varepsilon) - 1/\varepsilon)/(2 \varepsilon)$.}
+\solution{
+The poles are at all integer values of $z$ and have residue $1/(2\pi \im)$.
+We have
+$$\sum_{n=-\infty}^\infty \frac{1}{n^2 + \varepsilon^2} = \oint_\gamma \frac{1}{e^{2\pi \im z} - 1} \frac{\D{z}}{z^2 + \varepsilon^2}$$
+for a contour that encircles all the poles on the real axis (but not the poles at $\pm \im \varepsilon$).
+\begin{center}
+\begin{tikzpicture}
+\draw [->] (-3.5,0) -- (3.5,0) node[right] {$\operatorname{Re} z$};
+\draw [->] (0,-2) -- (0,2) node[right] {$\operatorname{Im} z$};
+\draw [thick,-<] (-3.5,0.5) -- (-0.5,0.5);
+\draw [thick] (-0.5,0.5) -- (3.5,0.5);
+\draw [thick,-<] (3.5,-0.5) -- (-0.5,-0.5);
+\draw [thick] (-0.5,-0.5) -- (-3.5,-0.5);
+\draw (0,0) node {$\times$};
+\draw (1,0) node {$\times$};
+\draw (2,0) node {$\times$};
+\draw (3,0) node {$\times$};
+\draw (-1,0) node {$\times$};
+\draw (-2,0) node {$\times$};
+\draw (-3,0) node {$\times$};
+\draw (0,1) node{$\times$};
+\draw (0,-1) node{$\times$};
+\end{tikzpicture}
+\end{center}
+Now deform the contour to enclose the $\pm \im \varepsilon$ poles instead.
+The poles are now encircled clockwise.
+The integral is thus
+$$= (-2 \pi \im) \frac{1}{e^{-2\pi \varepsilon} - 1} \frac{1}{2 \im \varepsilon} + (-2\pi \im) \frac{1}{e^{2\pi \varepsilon} - 1} \frac{1}{-2\im \varepsilon} = \frac{\pi}{\varepsilon} \frac{e^{-2\pi \varepsilon} - e^{2 \pi \varepsilon}}{(e^{2\pi \varepsilon} - 1)(e^{-2\pi \varepsilon} - 1)}$$
+$$= \frac{\pi}{\varepsilon} \frac{-2 \sinh(2 \pi \varepsilon)}{e^{\pi \varepsilon} \sinh(\pi \varepsilon) e^{-\pi \varepsilon} (-\sinh(\pi \varepsilon))} = \frac{\pi}{\varepsilon} \frac{\sinh(\pi \varepsilon) \cosh(\pi \varepsilon)}{\sinh^2(\pi \varepsilon)} = \frac{\pi \coth(\pi \varepsilon)}{\varepsilon}$$
+To recover the original sum we need to subtract the $n=0$ case and divide by two to remove negative values of $n$, i.e.
+$$\sum_{n=1}^\infty \frac{1}{n^2 + \varepsilon^2} = \frac{\pi \coth(\pi \varepsilon) - 1/\varepsilon}{2\varepsilon}.$$
+Expanding around 0 we get
+$$\frac{\pi}{2 \varepsilon} \frac{\cosh(\pi \varepsilon)}{\sinh(\pi \varepsilon)} - \frac{1}{2\varepsilon^2} = \frac{\pi}{2 \varepsilon} \frac{1 + (\pi \varepsilon)^2/2 + O(\varepsilon^4)}{\pi \varepsilon (1 + (\pi \varepsilon)^2/3! + O(\varepsilon^4))} - \frac{1}{2\varepsilon^2}$$
+$$= \frac{1}{2\varepsilon^2} \left(1 + \frac{(\pi \varepsilon)^2}{2} - \frac{(\pi \varepsilon)^2}{6} + O(\varepsilon^4) - 1\right) = \frac{\pi^2}{6} + O(\varepsilon^2)$$
+}
+\end{question}
+\begin{question}
+(optional)
+Using the formula for the sum of $1/(n^2+\varepsilon^2)$ from the last question, find the sum over $1/n^4$ and (if you are really bored) $1/n^6$.
+\hint{Try a Taylor expansion.}
+\result{$\pi^4/90$ and $\pi^6/945$.}
+\solution{
+From expanding
+$$\frac{1}{n^2 + \varepsilon^2} = \frac{1}{n^2} \frac{1}{1 + \varepsilon^2/n^2} = \frac{1}{n^2} - \frac{1}{n^4} \varepsilon^2 + \frac{1}{n^6} \varepsilon^4 + O(\varepsilon^6)$$
+we see that the sums over $1/n^4$ and $1/n^6$ correspond to the $\varepsilon^2$ and $\varepsilon^4$ terms, respectively.
+Define $z=\pi \varepsilon$ and expand
+$$z \coth(z) = \frac{1+z^2/2+z^4/4!+z^6/6!+O(z^6)}{1+z^2/3!+z^4/5!+z^6/7!+O(z^6)}$$
+$$= \left(1+\frac{z^2}{2}+\frac{z^4}{4!}+\frac{z^6}{6!}+O(z^8)\right)\left(1-\frac{z^2}{3!}+\frac{z^4}{3! 3!}-\frac{z^4}{5!}-\frac{z^6}{3! 3! 3!}+\frac{2z^6}{3! 5!}-\frac{z^6}{7!}+O(z^8)\right)$$
+$$= \left(1+\frac{z^2}{2}+\frac{z^4}{24}+\frac{z^6}{720}+O(z^8)\right)\left(1-\frac{z^2}{6}+\frac{7z^4}{360}-\frac{31 z^6}{15120}+O(z^8)\right)$$
+$$= 1 + z^2 \left(\frac{1}{2} - \frac{1}{6}\right) + z^4 \left(\frac{1}{24} + \frac{7}{360} - \frac{1}{2 \times 6}\right) + z^6 \left(\frac{1}{720} - \frac{31}{15120} + \frac{7}{2 \times 360} - \frac{1}{6 \times 24}\right)+O(z^8)$$
+$$= 1 + \frac{z^2}{3} - \frac{z^4}{45} + \frac{2 z^6}{945} + O(z^8)$$
+(you could have just looked this expansion up, but where's the fun in that?).
+From this we conclude
+$$\sum_{n=1}^\infty \frac{1}{n^2 + \varepsilon^2} = \frac{\pi^2}{6} - \frac{\pi^4}{90} \varepsilon^2 + \frac{\pi^6}{945} \varepsilon^4 + O(\varepsilon^6).$$
+}
+\end{question}
 
 \subsection{The Laplace transform}
 (This section requires the Fourier transform)
@@ -408,5 +524,124 @@ If there is no pole at the origin then $f(t)$ will tend to 0.
 If there is a pole at the origin $f(t)$ will tend to its residue.
 Hence
 $$\lim_{t \to \infty} f(t) = \lim_{s \to 0} s \tilde f(s).$$
+}
+\end{question}
+\subsection{The Taylor series and analytic continuation}
+This section will be a bit unusual in that even we will actually consider questions of convergence for once (but don't worry, we won't do it very rigorously). As a brief warm up:
+
+\begin{question}
+Find the area on which the geometric series
+$$\sum_{n=0}^\infty z^n$$
+converges.
+\hint{Find a formula for the sum of the first $m$ terms and let $m \to \infty$.}
+\solution{
+If $z=1$ the sum diverges, otherwise the first $m$ terms sum to
+$$\frac{1 - z^{m+1}}{1 - z}.$$
+If $|z|<1$ then $z^{m+1} \to 0$ and the sum converges.
+If $|z|=1$ then $|z^{m+1}| = 1$ and the sum oscillates.
+If $|z|>1$ then $|z^{m+1}| \to \infty$ and the sum diverges.
+}
+\end{question}
+
+The Taylor series for a complex (analytic) function is defined in exactly the same way as it is for a real function
+$$\sum_{n=0}^\infty \frac{f^{(n)}(z_0)}{n!} (z - z_0)^n$$
+(where $f^{(n)}$ is $\partial^n f/\partial z^n$).
+For a real function we have to assume that this series converges (and in fact it does not for some differentiable functions).
+For a complex function things are considerably more interesting.
+\begin{question}
+Use the Cauchy integral formula
+$$f(z_0) = \frac{1}{2\pi \im} \oint \frac{f(z) \D{z}}{z - z_0}$$
+to derive a formula for $f^{(n)}(z_0)$.
+\result{
+$$f^{(n)}(z_0) = \frac{n!}{2\pi \im} \oint \frac{f(z) \D{z}}{(z - z_0)^{n+1}}$$
+}
+\end{question}
+\begin{question}
+For a holomorphic function $f(z)$, show that the Taylor series converges to $f(z)$ for all $z$.
+\solution{
+$$\sum_{n=0}^\infty \frac{f^{(n)}(z_0)}{n!} (z - z_0)^n = \frac{1}{2\pi \im} \oint \frac{\D{z_1} f(z_1)}{z_1 - z_0} \sum_{n=0}^\infty \left(\frac{z - z_0}{z_1-z_0}\right)^n$$
+If $|z-z_0|<|z_1-z_0|$ then the geometric series converges.
+Since $z_1$ is arbitrary the series converges for all $z$.
+Furthermore, the result is
+$$= \frac{1}{2\pi \im} \oint \frac{\D{z_1} f(z_1)}{z_1 - z_0} \frac{1}{1 - (z - z_0)/(z_1 - z_0)} = \frac{1}{2\pi \im} \oint \frac{\D{z_1} f(z_1)}{z_1 - z_0} \frac{z_1 - z_0}{z_1 - z} = f(z).$$
+}
+\end{question}
+\begin{question}
+$f(z)$ and $g(z)$ are two holomorphic functions that are equal throughout an area (an ``open set'').
+Show that they are equal throughout the entire complex plane.
+\hint{Consider $f(z) - g(z)$.}
+\hint{Use the Taylor series.}
+\solution{
+$h(z) = f(z) - g(z)$ is zero in said area.
+Pick a point $z_0$ within the area.
+Since we have $h^{(n)}(z_0) = 0$ the Taylor series is $h(z) = 0$.
+But we just showed that the Taylor series converge on the entire complex plane.
+Hence $h(z) = 0$ everywhere and thus $f(z) = g(z)$.
+}
+\end{question}
+
+\begin{question}
+For a meromorphic function $f(z)$ the Taylor series around $z_0$ does not converge everywhere.
+Find the area on which it converges (assume it's a circle and don't worry about figuring out whether it converges on the boundary).
+\hint{Think very carefully about the proof for the holomorphic case. Where does it break down?}
+\solution{
+Just like in the case of a holomorphic function we have $|z-z_0|<|z_1 - z_0|$.
+But now $|z_1 - z_0|$ can not be made arbitrarily large as the contour (on which $z_1$ lies) must not enclose any poles.
+Hence the maximum value for $|z_1 - z_0|$ is the distance $d$ from $z_0$ to the nearest pole.
+We thus have that the series converges for
+$$|z - z_0| < d.$$
+Since we assumed the area is a circle and the series can not converge on the pole at distance $d$, the area of convergence can not be any larger than this.
+}
+\end{question}
+
+\begin{question}
+(optional, hard)
+To justify the circle assumption from the last question, consider a power series
+$$\sum_{n=0}^\infty \alpha_n (z - z_0)^n.$$
+Show that if it converges for some $z_1$, then it converges for all $|z - z_0| < |z_1 - z_0|$.
+\hint{Use $|\sum x| \le \sum |x|$ and find a bound to show that the absolute value of the series is smaller than some geometric series.}
+\hint{$|\alpha_n (z_1 - z_0)^n|$ is bounded.}
+\solution{
+Since it converges for $z_1$ we must have $|\alpha_n| |z_1 - z_0|^n \le \beta$ for some $\beta$ (or else the sum would be infinite).
+We can use these to bound the series as
+$$\left|\sum_{n=0}^\infty \alpha_n (z - z_0)^n\right| \le \sum_{n=0}^\infty |\alpha_n| |z - z_0|^n \le \beta \sum_{n=0}^\infty \left|\frac{z - z_0}{z_1 - z_0}\right|^n$$
+Once we again we have a geometric series that converges if $|z-z_0| < |z_1 - z_0|$.
+Hence the power series is finite for all such $z$.
+}
+\end{question}
+
+\begin{question}
+Suppose you have a real function $f(x)$ that is ``real-analytic'', i.e.\ the Taylor series around every $x_0$ converges to $f(x)$ in some interval around $x_0$.
+Show there is a unique meromorphic function $g(z)$ with the property that $g(x) = f(x)$ for all real numbers $x$ (in developing $g$ you can assume that things are ``well-behaved''; the idea is more important than the details of the proof).
+\hint{You can take a Taylor series and replace $x$ with $z$.}
+\solution{
+Take a point $x_0$ on the real axis.
+The Taylor series converges for some real number $x_1$ and hence, taken as a power series in a complex variable $z$, it converges at least in the circle of radius $|x_1 - x_0|$.
+Now pick a point $z_0$ in the circle and expand around $z_0$.
+If we assume that the power series converges for some point on the edge (as it would, if the function we're developing is indeed meromorphic), then the circle of convergence of the new power series contains some points not in the original circle.
+By repeating this procedure we cover the entire complex plane, with the exception of the poles.
+Since all the series ultimately trace back to values of $f(x)$, the result is unique.
+}
+\end{question}
+\begin{question}
+(optional)
+Show that two \emph{mero}morphic functions that are equal in some area (that is ``simply-connected'', i.e.\ without holes, and that contains no poles) are equal in the entire complex plane.
+\solution{Play the same Taylor series games as in the last question.}
+\end{question}
+
+The meromorphic function $g$ that extends $f(x)$ into the complex plane is called its \emph{analytic continuation}.
+Analytic continuation is a useful tool because it justifies applying complex analysis technique to functions defined originally in terms of real variables.
+
+\begin{question}
+Consider the real function $f(x) = 1/(x^2+1)$.
+Find the radius of convergence $C(x)$ of the Taylor series as a function of $x$ (i.e.\ $C(x)$ so that the Taylor series converges on the interval $(x-C(x), x+C(x))$).
+\result{$\sqrt{x^2 + 1}$.}
+\solution{
+Consider the analytic continuation $f(z)$.
+It has poles at $\pm \im$.
+We know that for a meromorphic function the radius of convergence is given by the distance to the poles, i.e.\
+$$f(z) = \operatorname{min}(|z+\im|, |z-\im|).$$
+But this applies equally well to $z$ on the real axis and so
+$$C(x) = |x\pm\im| = \sqrt{x^2 + 1}.$$
 }
 \end{question}
