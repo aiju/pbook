@@ -11,20 +11,18 @@
 \setlength\parindent{0mm}
 \setlength\parskip{12pt}
 \newenvironment{question}{
-\par
+\EndP
 	\HCode{<div style='margin-left: 1cm; border-left: 1pt solid black'>}
 	{\bf Question.}
 }{
 	\HCode{</div>}
-\par
 }
 \newenvironment{definition}{
-\par
+\EndP
 	\HCode{<div style='margin-left: 1cm; border-left: 1pt solid black'>}
 	{\bf Definition.}
 }{
 	\HCode{</div>}
-\par
 }
 \newcommand\theorem[1]{
 \par
@@ -32,29 +30,16 @@
 	#1
 \par
 }
-\newcommand\result[1]{
-	\par
-	{\bf Result.}
-	\HCode{<span><button onclick="show(event)">show</button><span style='display:none' id='hidden'>}
-	#1
-	\HCode{</span></span>}
-	\par
+\newcommand\hidden[2]{
+	\EndP
+	\HCode{<div>}
+	{\bf #1.}
+	\HCode{<button onclick="show(event)">show</button><div style='display:none' id='hidden'>}
+	#2
+	\HCode{</div></div>}
 }
-\newcommand\hint[1]{
-	\par
-	{\bf Hint.}
-	\HCode{<span><button onclick="show(event)">show</button><span style='display:none' id='hidden'>}
-	#1
-	\HCode{</span></span>}
-	\par
-}
-\newcommand\solution[1]{
-	\par
-	{\bf Solution.}
-	\HCode{<span><button onclick="show(event)">show</button><span style='display:none' id='hidden'>}
-	#1
-	\HCode{</span></span>}
-	\par
-}
+\newcommand\result[1]{\hidden{Result}{#1}}
+\newcommand\hint[1]{\hidden{Hint}{#1}}
+\newcommand\solution[1]{\hidden{Solution}{#1}}
 
 \input{content}
