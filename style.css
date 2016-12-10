@@ -1,0 +1,37 @@
+.question {
+	margin-left: 1cm;
+	border-left: 1pt solid black;
+	padding-left: 0.2cm;
+}
+
+.hidden, .hidden-vis {
+	margin-left: 0.5cm;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+@media print{
+	.showhide {
+		display: none;
+	}
+}
+
+@media screen {
+	.hidden {
+		display: none;
+	}
+}
+
+@media screen{
+	body {
+		background-color: #777777;
+	}
+
+	.page {
+		background-color: white;
+		max-width: 25cm;
+		margin: 0px auto;
+		padding: 5px;
+		border: 5px solid #55AAAA;
+	}
+}

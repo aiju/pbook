@@ -8,5 +8,5 @@
 *.xref
 *.4ct
 *.4tc
-*.css
+index.css
 *.aux

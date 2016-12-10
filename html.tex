@@ -3,6 +3,7 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{mathrsfs}
+\usepackage{hyperref}
 \def\pgfsysdriver{pgfsys-tex4ht.def}
 \usepackage{tikz}
 
@@ -12,17 +13,19 @@
 \setlength\parskip{12pt}
 \newenvironment{question}{
 \EndP
-	\HCode{<div style='margin-left: 1cm; border-left: 1pt solid black'>}
+	\HCode{<div class='question'>}
 	{\bf Question.}
 }{
 	\HCode{</div>}
+\par
 }
 \newenvironment{definition}{
 \EndP
-	\HCode{<div style='margin-left: 1cm; border-left: 1pt solid black'>}
+	\HCode{<div class='question'>}
 	{\bf Definition.}
 }{
 	\HCode{</div>}
+\par
 }
 \newcommand\theorem[1]{
 \par
@@ -34,7 +37,7 @@
 	\EndP
 	\HCode{<div>}
 	{\bf #1.}
-	\HCode{<button onclick="show(event)">show</button><div style='display:none' id='hidden'>}
+	\HCode{<button class='showhide' onclick="show(event)">show</button><div class='hidden'>}
 	#2
 	\HCode{</div></div>}
 }
