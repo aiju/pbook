@@ -312,6 +312,19 @@ We must hence close in the lower plane, encircling no poles and getting $0$.
 \end{question}
 
 \begin{question}
+(requires linear response theory)
+Consider a system of transfer function $\hat h$. Assume that the system is causal. Write down the expression for $h(t)$ and think about how you would convert it into a contour integral.
+What does causality imply about the location of poles of $\hat h$ as a function of complex $\omega$?
+\hint{Think about in which side you should close the contour.}
+\solution{
+$$h(t) = \oint_\gamma \hat h(\omega) e^{\im \omega t} \frac{\D{\omega}}{2\pi}$$
+Use a half-circle contour as above.
+For the contribution to vanish we need to close the contour in the lower-half plane for $t<0$.
+But we want $h(t) = 0$ for $t<0$ and hence there can be no poles in the lower-half plane.
+}
+\end{question}
+
+\begin{question}
 Consider
 $$\int_\gamma \frac{\D{z}}{z^2}$$
 with $\gamma$ a half-circle in the complex plane (as the curve above, without the part on the real axis).
@@ -370,12 +383,6 @@ $$x(t) = \int \frac{e^{\im \omega t} \D{\omega}}{-2\pi m (\omega - \omega_1)(\om
 For $t<0$ we get $x(t) = 0$.
 }
 \end{question}
-
-Note that in the last question, the poles ended up in the upper half plane because $\gamma > 0$.
-This leads to the result that $x(t) = 0$ for $t<0$, i.e.\ that the system is causal.
-While the laws of mechanics are time-reversal invariant, thermodynamics is not and it enters here through $\gamma$, enforcing the arrow of time.
-
-If the system was undamped we would have to impose causality as an additional axiom.
 
 \begin{question}
 (optional)

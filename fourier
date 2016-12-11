@@ -35,7 +35,7 @@ $$f(t) = \int \hat f(\omega) e^{\im \omega t} \frac{\D{\omega}}{2\pi}$$
 We can cancel $e^{\im \omega t}$ at $\omega=\omega_0$ by multiplying by $e^{-\im \omega_0 t}$.
 If $\omega\ne\omega_0$ we get an oscillatory term.
 If we now integrate over all $t$, we should get a contribution from the constant term at $\omega=\omega_0$ and no contribution from the oscillatory terms at $\omega \ne \omega_0$:
-$$\int f(t) e^{-\im \omega_0 t} \D{t} = \int \int \hat f(\omega) e^{\im (\omega-\omega_0) t} \frac{\D{\omega}}{2\pi} \D{t} \sim \hat f(\omega_0)$$
+$$\int f(t) e^{-\im \omega_0 t} \D{t} = \iint \hat f(\omega) e^{\im (\omega-\omega_0) t} \frac{\D{\omega}}{2\pi} \D{t} \sim \hat f(\omega_0)$$
 
 To make a more precise statement we should evaluate
 $$\int e^{\im \omega t} \D{t},$$
@@ -97,7 +97,7 @@ $$\int f(t) e^{-\im \omega t} \D{t} = \hat f(\omega).$$
 \solution{
 $$\lim_{\varepsilon \to 0} \int \hat f(\omega) I_\varepsilon(\omega) \D{\omega} = 2 \pi f(0)$$
 By the definition of the $\delta$-function, the first results follows.
-$$\int f(t) e^{-\omega t} \D{t} = \int \int \hat f(\omega') e^{\im (\omega' - \omega) t} \frac{\D{\omega'}}{2\pi} \D{t} = \int \hat f(\omega') \left(\int e^{\im (\omega' - \omega) t} \D{t}\right) \frac{\D{\omega'}}{2\pi}$$
+$$\int f(t) e^{-\omega t} \D{t} = \iint \hat f(\omega') e^{\im (\omega' - \omega) t} \frac{\D{\omega'}}{2\pi} \D{t} = \int \hat f(\omega') \left(\int e^{\im (\omega' - \omega) t} \D{t}\right) \frac{\D{\omega'}}{2\pi}$$
 $$= \int \hat f(\omega') 2 \pi \delta(\omega' - \omega) \frac{\D{\omega'}}{2\pi} = \hat f(\omega)$$
 }
 \end{question}
@@ -124,7 +124,7 @@ Prove the following.\\
 (e) $\mathcal{F}[f(\alpha t)] = \frac{1}{\alpha} \hat f(\omega/\alpha)$.\\
 (f) $\mathcal{F}[f'(t)] = \im \omega \hat f(\omega)$.\\
 (g) $\mathcal{F}[t f(t)] = \im \hat f'(\omega)$.\\
-(h) $\mathcal{F}[\int_0^t f(\tau) \D{\tau}] = \frac{1}{\im \omega} \hat f(\omega) + {\rm const} \times \delta(\omega)$ (harder: show that the constant is $\pi \int \operatorname{sgn}(t) f(t) \D{t}$).\\
+(h) $\mathcal{F}[\int_{-\infty}^t f(\tau) \D{\tau}] = \frac{1}{\im \omega} \hat f(\omega)$ (assuming that $\int f(\tau) \D{\tau}$ vanishes).
 \hint{(f)(g)(h) Try integrating by parts.}
 \end{question}
 \begin{question}(optional)
@@ -134,7 +134,7 @@ Find $a, b$ for all conventions listed above.
 \solution{
 $$\hat f(\omega) = \int f(t) e^{\im a \omega t}~b~\D{t}$$
 To find the inverse,
-$$\int \int f(t) e^{\im a \omega t} \D{t} e^{-\im a \omega t'} \D{\omega} = \int f(t) \frac{2\pi}{|a|} \delta(t - t') \D{t} = \frac{2\pi}{|a|} f(t')$$
+$$\iint f(t) e^{\im a \omega t} \D{t} e^{-\im a \omega t'} \D{\omega} = \int f(t) \frac{2\pi}{|a|} \delta(t - t') \D{t} = \frac{2\pi}{|a|} f(t')$$
 and hence
 $$f(t) = \int \hat f(\omega) e^{\im a \omega t}~\frac{|a|}{2 \pi b}~\D{\omega}.$$
 Our convention corresponds to $a=1, b=1$. The inverted sign convention is $a=-1, b=1$.
@@ -183,12 +183,44 @@ $$= \int \hat f(\omega_1) \hat g(\omega_2) \delta(\omega_1 + \omega_2 - \omega) 
 \end{question}
 
 With the definition
-$$(f * g)(t) = \int f(t') g(t - t') \D{t},$$
+$$(f * g)(t) = \int f(t') g(t - t') \D{t'},$$
 called the \emph{convolution} of $f$ and $g$, the convolutional theorem can be concisely stated as
 $$\mathcal{F}[f g] = \frac{\hat f * \hat g}{2\pi}, \qquad \mathcal{F}[f * g] = \hat f \hat g.$$
 
 \begin{question}
-Use the results from the last question and the convolutional theorem to find the Fourier transform of
+How does $f * g$ relate to $g * f$?
+\solution{They are identical, as can be seen by substituting $u = t - t'$ in the integral.}
+\end{question}
+
+\begin{question}
+How does the area under $f * g$ relate to the areas under $f$ and $g$? (Here, area means $\int f(t) \D{t}$.)
+\solution{
+It's just the product of the two areas, as follows from
+$$\int (f * g)(t) \D{t} = \iint f(t') g(t - t') \D{t'} \D{t} = \int f(t') \left(\int g(t - t') \D{t}\right) \D{t'}$$
+Note that the integral over all times is unaffected by a delay by $t'$ and so we get
+$$= \left(\int f(t) \D{t}\right) \left(\int g(t) \D{t}\right)$$
+}
+\end{question}
+
+\begin{question}
+What does the convolution mean geometrically? Take $f(t)$ and $g(t)$ to be real. Think about it in general terms, but also consider the special case where $g(t)$ is narrow around $t=0$, always $\ge 0$ and has unit area (e.g.\ a narrow Gaussian).
+\solution{1. Flip one function over (substitute $t \to -t$) and shift it along the time axis. The value of the convolution at $t$ is the amount of overlap between the two functions at when the functions are shifted by $t$ relative to each other (Wikipedia has some nice animations of this).\\
+2. In the special case, the effect can be considered as blurring out $f(t)$ according to $g(t)$ (a Gaussian for $g(t)$ corresponds to Gaussian blur).
+}
+\end{question}
+
+\begin{question}
+Find a solution $g(t)$ to $f(t) = f(t) * g(t)$ for arbitrary $f(t)$.
+\solution{
+It's clear that $g(t)$ must have unit area.
+From the answer to the last question, it is also clear that $g(t)$ must be narrow around $t=0$.
+In fact, it needs be as narrow as possible.
+This is, of course, an informal definition of the $\delta$-function and indeed you can show easily that $f(t) = f(t) * \delta(t)$.
+}
+\end{question}
+
+\begin{question}
+Use the Fourier transforms calculated previously and the convolutional theorem to find the Fourier transform of
 
 \begin{tikzpicture}
 \draw (-4,1) node{(a)};
@@ -220,11 +252,15 @@ $f(t) = \cos t$ for $|t| < \pi$ and $f(t) = 0$ otherwise.
 (b) $4 \sin^2(\omega/2)/\omega^2$.\\
 (c) $\sin(\pi \omega) ~ 2 \omega/(1-\omega^2)$.
 }
+\solution{(a) Convolve a top-hat with $\delta(t-b) + \delta(t+b)$.\\
+(b) Convolve a top-hat with itself.\\
+(c) Multiply $\cos t$ with a top-hat.}
 \end{question}
 
-A theorem that can be proved by similar methods is Parseval's theorem.
+Using the same methods as we used to prove the convolution theorem we can also prove Parseval's theorem:
 
 \begin{question}
+(Parseval's theorem)
 Show that
 $$\int |f(t)|^2 \D{t} = \int |f(\omega)|^2 \frac{\D{\omega}}{2\pi}.$$
 \hint{Remember $|f(t)|^2 = f(t) (f(t))^*$.}
@@ -233,6 +269,12 @@ $$\int |f(t)|^2 \D{t} = \int f(\omega_1) (f(\omega_2))^* e^{\im (\omega_1 - \ome
 $$= \int |f(\omega_1)|^2 \frac{\D{\omega_1}}{2\pi}$$
 }
 \end{question}
+
+If $f(t)$ is some amplitude, then $|f(t)|^2$ is power and $\int |f(t)|^2 \D{t}$ is the energy contained in the signal.
+Parseval's theorem justifies assigning an amount $|\hat f(\omega)|^2$ of energy to the frequency range near $\omega$, since the integral over all frequencies yields the same total amount of energy (remember that physical frequencies correspond to $\D{\nu} = \D{\omega}/(2\pi)$).
+
+But beware, $|\hat f(\omega)|^2$ is \emph{energy} per unit frequency and \emph{not power} per unit frequency (``spectral power density'').
+For a periodic signal $|\hat f(\omega)|^2$ is infinite at certain frequencies, as the \emph{total} energy, power integrated over all of time, is infinite!
 \subsection{Periodic functions and the Fourier series}
 
 \begin{question}
@@ -244,13 +286,21 @@ Take $g(t) = \delta(t - T)$. Then $\hat f \hat g = \hat f$ or
 $$\hat f(\omega) (e^{-\im \omega T} - 1) = 0.$$
 $e^{-\im \omega T} - 1$ is zero iff $\omega$ is a multiple of $2\pi/T$.
 Hence $\hat f(\omega)$ is zero, unless $\omega$ is a multiple of $2\pi/T$.
+This is only possible if $\hat f$ is a series of $\delta$-functions, spaced at intervals $2\pi/T$.
 }
 \end{question}
 
 For a periodic function $f(t)$ we can thus write
-$$\hat f(\omega) = \frac{1}{2\pi} \sum_{n=-\infty}^{\infty} f_n~\delta\left(\omega  - 2\pi n/T\right),$$
-where $f_n$ is known as the Fourier series of $f(t)$ (the factor of $1/(2\pi)$ is conventional).
+$$\hat f(\omega) = 2\pi \sum_{n=-\infty}^{\infty} f_n~\delta\left(\omega  - \frac{2\pi n}{T}\right),$$
+where $f_n$ is known as the Fourier series of $f(t)$ (see the next question for the origins of the factor of $2\pi$).
 Note that $f_n$ has the same units as $f(t)$.
+
+\begin{question}
+(optional) Write $\hat f$ in terms of physical frequencies $\nu = \omega/(2\pi)$.
+\result{
+$$\hat f = \sum_{n=-\infty}^\infty f_n~\delta\left(\nu - \frac{n}{T}\right)$$
+}
+\end{question}
 
 \begin{question}
 Derive an equation for $f_n$ in terms of $f(t)$.
@@ -304,10 +354,13 @@ Hence the result.
 
 \begin{question}
 Find an equivalent of Parseval's theorem for periodic functions.
+What can you conclude about the physical meaning of $|f_n|^2$?
 \hint{Use the equation for $f(t)$ in terms of $f_n$.}
 \result{$\frac{1}{T} \int_0^T |f(t)|^2 \D{t} = \sum_{n=-\infty}^\infty |f_n|^2$.}
 \solution{
 $$\int_0^T |f(t)|^2 \D{t} = \int_0^T \sum_{n=-\infty}^\infty \sum_{m=-\infty}^\infty f_n f_m^* e^{2\pi \im (n-m) t/T} \D{t} = T \sum_{n=-\infty}^\infty \sum_{m=-\infty}^\infty f_n f_m^* \delta_{n,m} = T \sum_{n=-\infty}^\infty |f_n|^2$$
+Note that the left-hand side is now the time-averaged power.
+Since the right-hand sum is just a sum, we can interpret $|f_n|^2$ as the \emph{power} contributed by frequency $2\pi n/T$.
 }
 \end{question}
 
@@ -419,6 +472,18 @@ $$\mathcal{P} \int f(\omega) \frac{\D{\omega}}{\omega}$$
 Using this identity we can show that
 $$\hat \Theta(\omega) = \mathcal{P} \frac{-\im}{\omega} + \pi \delta(\omega).$$
 
+\begin{question}
+Show that for arbitrary $f(t)$
+$$\mathcal{F}\left(\int_{-\infty}^t f(\tau) \D{\tau}\right) = \mathcal{P} \frac{1}{\im \omega} \hat f(\omega) + \pi \delta(\omega) \int_{-\infty}^\infty f(\tau) \D{\tau}.$$
+\hint{Use the convolutional theorem.}
+\solution{
+$$\int_{-\infty}^t f(\tau) \D{\tau} = \int f(\tau) \Theta(t-\tau) \D{\tau} = f * \Theta$$
+and hence the Fourier transform is
+$$\hat f \hat \Theta = \mathcal{P} \frac{1}{\im \omega} \hat f(\omega) + \pi \delta(\omega) \hat f(\omega).$$
+In the last term we can replace $\hat f(\omega)$ with $\hat f(0) = \int f(\tau) \D{\tau}$.
+}
+\end{question}
+
 \subsection{Linear response theory}
 Often we are in a situation where a system $\mathcal{S}$ will take an input $f(t)$ and produce a response $g(t) = \mathcal{S}[f(t)]$.
 For instance, $f(t)$ might be the input to an electronic amplifier and $g(t)$ is its output, or $f(t)$ might be the force applied to a spring and $g(t)$ is its displacement.
@@ -462,17 +527,93 @@ Even including arbitrarily large delays on the output, the system will not be ca
 \end{question}
 
 \begin{question}
-(optional, Kramers-Kr\"onig relations)
+Consider a spring driven by a force $F(t)$ and with an observed displacement $x(t)$.
+Rather than the usual Hooke's law of mechanics ($F = k x$) assume only that the spring's response is linear and time-invariant.
+Define the impulse response $h(t)$ by $x(t) = F(t) * h(t)$ as above.
+Find an expression for the total energy dissipated by the system, expressed as an integral in Fourier space.
+
+(Side note: Can you know that, given the assumptions above, that the energy is not stored in the spring?)
+
+Write the transfer function $\hat h(\omega)$ as $\hat h_1(\omega) + \im \hat h_2(\omega)$ where $\hat h_1(\omega)$ and $\hat h_2(\omega)$ are real.
+What does the result tell you about the meaning of $\hat h_1$ and $\hat h_2$?
+\hint{Power going into the spring is $-F(t) \dot x(t)$.}
+\hint{Once you get the integral, consider carefully what happens when you substitute $\omega \to -\omega$. Think about how $\hat h_1$ and $\hat h_2$ change when you do this.}
+\result{ $\int \omega \hat h_2(\omega) |\hat F(\omega)|^2 \D{\omega}/(2\pi).$$ }
+\solution{
+Power is force times velocity, i.e.\ $F(t) \dot x(t)$.
+To get power going \emph{into} the system we should add a minus sign and consider $-F(t) \dot x(t)$ (i.e.\ it's positive if $F(t)$ goes against the direction of motion).
+The total power integrated over all time must be the total power dissipated -- it can't be stored in the spring because it would be infinite for a periodic signal.
+It could also be beamed through the quantum vacuum to the spring's home planet, but we will count that as ``dissipated'' power since we can't get it back out again (the connection between dissipation and radiation is less of a joke than I'm making it sound).
+
+Substituting Fourier expressions we get
+$$-F(t) \dot x(t) = -\int \hat F(\omega) \im \omega' \hat x(\omega') e^{\im (\omega + \omega') t} \frac{\D{\omega} \D{\omega'}}{(2\pi)^2}.$$
+Integrating over all $t$ the usual thing happens, $e^{\im (\omega+\omega') t}$ becomes $2\pi \delta(\omega+\omega')$ and we can replace $\omega' = -\omega$, i.e.
+$$-\int F(t) \dot x(t) \D{t} = -\int \im \omega \hat F(-\omega) \hat x(\omega) \frac{\D{\omega}}{2\pi}.$$
+Now use $\hat F^*(\omega) = \hat F(-\omega)$ and $\hat x(\omega) = \hat h(\omega) \hat F(\omega)$ to get
+$$ = -\int \im \omega \hat h^*(\omega) |\hat F(\omega)|^2 \frac{\D{\omega}}{2\pi}.$$
+Since $\hat h(\omega) = \hat h_1(\omega) + \im \hat h_2(\omega)$ we can write
+$$ = -\int \im \omega \hat h_1(\omega) |\hat F(\omega)|^2 \frac{\D{\omega}}{2\pi} - \int \omega \hat h_2(\omega) |\hat F(\omega)|^2 \frac{D{\omega}}{2\pi}.$$
+From $\hat h^*(\omega) = \hat h(-\omega)$ it follows that $\hat h_1$ is even and $\hat h_2$ is odd. Hence the first integral disappears and we get
+$$= -\int \omega \hat h_2(\omega) |\hat F(\omega)|^2 \frac{\D{\omega}}{2\pi}.$$
+Hence $-\hat h_2(\omega)$ is related to the amount of dissipation that occurs at frequency $\omega$.
+}
+\end{question}
+
+\begin{question}
+(optional)
+Continue with the spring from the last question.
+Determine the mean-square amplitude ($x^2$ averaged over all time) for a periodic driving force.
+\result{$\sum_{n} |F_n|^2 |\hat h(2\pi n/T)|^2$.}
+\solution{
+The Fourier transform of $x^2$ is $\hat x * \hat x/(2\pi)$, i.e.
+$$\int \hat F(\omega') \hat F(\omega - \omega') \hat h(\omega') \hat h(\omega - \omega') \frac{\D{\omega'}}{2\pi}$$
+Substituting the Fourier series $F_n$ we get
+$$= 2\pi \sum_{n,m} \int F_n F_m \hat h(\omega') \hat h(\omega - \omega') \delta(\omega - 2 \pi n/T) \delta(\omega - \omega' - 2\pi m/T) \D{\omega'}$$
+$$= 2\pi \sum_{n,m} F_n F_m \hat h(2\pi n/T) \hat h(2\pi m/T) \delta(\omega - 2\pi (n+m)/T).$$
+The time average corresponds to the coefficient of $2\pi \delta(\omega)$, which means we can set $m=-n$ and get
+$$\sum_{n} |F_n|^2 |\hat h(2\pi n/T)|^2$$
+(remember that $F(t)$ and $h(t)$ are real and so $F_{-n} = F_n^*$ and $\hat h(-\omega) = \hat h^*(\omega)$).
+}
+\end{question}
+
+\begin{question}
+Consider now a specific system with the equation of motion
+$$m \ddot x + \gamma \dot x + k x = F(t)$$
+($m, \gamma, k > 0$).
+Find an expression for the transfer function $\hat h(t)$ and its components $\hat h_1$ and $\hat h_2$ and plot $\hat h_1$ and $\hat h_2$.
+\hint{Take the Fourier transform of the equation and remember what happens to derivatives.}
+\solution{
+Derivatives become factors of $\im \omega$ and hence the Fourier transformed equation is
+$$(-m \omega^2 + \im \gamma \omega + k) \hat x = \hat F(t)$$
+and we have
+$$\hat h = \frac{1}{-m\omega^2 + \im \gamma \omega + k}.$$
+To find $\hat h_1$ and $\hat h_2$ use the usual trick of multiplying both sides of the fraction by the complex conjugate, i.e.\ $-m \omega^2 - \im \gamma \omega + k$.
+$$\hat h_1 = \frac{-m \omega^2 + k}{(-m \omega^2 + k)^2 + \gamma^2 \omega^2}, \qquad \hat h_2 = -\frac{\gamma \omega}{(-m \omega^2 + k)^2 + \gamma^2 \omega^2}.$$
+Note that $\hat h_2$ is always negative for $\gamma > 0$, as we would expect from a system that can only store and dissipate power, not generate it.
+}
+\end{question}
+
+\begin{question}
+(optional, Kramers-Kronig relations)
 Write $\hat h = \hat h_1 + \im \hat h_2$ with real $\hat h_1, \hat h_2$.
 Derive a condition on $\hat h_{1,2}$ for the system to be causal.
-\hint{Write $h(t) = h(t) k(t)$.}
+\hint{Write $h(t) = h(t) k(t)$ with a function $k(t)$.}
 \result{
 $$\hat h_1(\omega) = \mathcal{P} \int \frac{\hat h_2(\omega')}{\omega - \omega'} \frac{\D{\omega'}}{\pi}, \qquad \hat h_2(\omega) = -\mathcal{P} \int \frac{\hat h_1(\omega')}{\omega - \omega'} \frac{\D{\omega'}}{\pi}.$$
 }
 \solution{
-Use $k(t) = \Theta(t)$.
-Remember $\hat \Theta = \mathcal{P} (-\im/\omega) + \pi \delta(\omega)$.
+Use $h(t) = h(t) \Theta(t)$.
+Remember that $\hat \Theta = \mathcal{P} (-\im/\omega) + \pi \delta(\omega)$.
 $$\hat h_1 + \im \hat h_2 = \hat h = \frac{1}{2\pi} \hat h * \left(\mathcal{P} \frac{-\im}{\omega} + \pi \delta(\omega)\right) = \mathcal{P} \int \frac{-\im \hat h_1(\omega') + \hat h_2(\omega')}{\omega - \omega'} \frac{\D{\omega'}}{2\pi} + \frac{1}{2} (\hat h_1(\omega) + \im \hat h_2(\omega))$$
 Taking real and imaginary parts gives the two conditions.
+}
+\end{question}
+
+\begin{question}
+(optional)
+Apply the Kramers-Kronig relation for $\hat h_1$ in terms of $\hat h_2$ to the spring with equations of motion $m \ddot x + kx = F(t)$ (note $\gamma=0$).
+Why does it fail?
+\solution{The spring without damping is not causal! Since it's invariant under time reversal, for every solution that is causal there is one that is zero for $t>0$ and non-zero for $t<0$. To make a causal frictionless spring we would have to specify $\gamma>0$ and let $\gamma \to 0$ in which case we would have
+$$\hat h = \mathcal{P} \frac{1}{-m\omega^2 + k} - \im \pi \delta(-m \omega^2 + k).$$
 }
 \end{question}
