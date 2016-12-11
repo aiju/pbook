@@ -552,7 +552,7 @@ $$-\int F(t) \dot x(t) \D{t} = -\int \im \omega \hat F(-\omega) \hat x(\omega) \
 Now use $\hat F^*(\omega) = \hat F(-\omega)$ and $\hat x(\omega) = \hat h(\omega) \hat F(\omega)$ to get
 $$ = -\int \im \omega \hat h^*(\omega) |\hat F(\omega)|^2 \frac{\D{\omega}}{2\pi}.$$
 Since $\hat h(\omega) = \hat h_1(\omega) + \im \hat h_2(\omega)$ we can write
-$$ = -\int \im \omega \hat h_1(\omega) |\hat F(\omega)|^2 \frac{\D{\omega}}{2\pi} - \int \omega \hat h_2(\omega) |\hat F(\omega)|^2 \frac{D{\omega}}{2\pi}.$$
+$$ = -\int \im \omega \hat h_1(\omega) |\hat F(\omega)|^2 \frac{\D{\omega}}{2\pi} - \int \omega \hat h_2(\omega) |\hat F(\omega)|^2 \frac{\D{\omega}}{2\pi}.$$
 From $\hat h^*(\omega) = \hat h(-\omega)$ it follows that $\hat h_1$ is even and $\hat h_2$ is odd. Hence the first integral disappears and we get
 $$= -\int \omega \hat h_2(\omega) |\hat F(\omega)|^2 \frac{\D{\omega}}{2\pi}.$$
 Hence $-\hat h_2(\omega)$ is related to the amount of dissipation that occurs at frequency $\omega$.

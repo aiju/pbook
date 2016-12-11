@@ -50,7 +50,7 @@ $$\pfrac{f}{z^*} = \frac{1}{2} \left(\pfrac{(x+\im y)^3}{x} + \im \pfrac{(x+\im 
 
 With this definition you can show the seemingly trivial relations
 $$\pfrac{z}{z} = 1, \pfrac{z^*}{z^*} = 1, \pfrac{z}{z^*} = 0, \pfrac{z^*}{z} = 0.$$
-The trick is now to realise that these relations imply that, as far as differentiation is concerned, $z$ and $z^*$ can be treated as independent variables (they are of course anything but independent).
+These relations imply that, as far as differentiation is concerned, $z$ and $z^*$ can be treated as independent variables (the key word is ``treated as''; they are of course anything but independent).
 We can thus calculate the derivatives $\partial f/\partial z$ and $\partial f/\partial z^*$ in the ``normal'' way, using the ordinary rules of calculus.
 
 A particularly common case is $f = f(z)$, i.e.\ $f$ does not ``depend'' on $z^*$.
@@ -241,13 +241,13 @@ $$\oint_\gamma h(z) \D{z} = 0, \qquad \oint_\gamma \frac{1}{z^m} \D{z} = 0\quad 
 Using the result $\oint_\gamma \D{z}/z = 2\pi \im n$ we can write
 $$\oint_\gamma f(z) \D{z} = \sum_i 2 \pi \im n_i a_i,$$
 where the sum is over all simple poles and $n_i$ is the winding number around $z_i$.
-}
 
 Define the \emph{residue} $\operatorname{Res}$ of $z_0$ as the coefficient of $1/(z-z_0)$ in the expansion of $f(z)$.
 The result can then be stated as
 $$\oint f(z) \D{z} = 2 \pi \im \sum \operatorname{Res},$$
 where the sum is over all the poles encircled by $\gamma$.
 Poles that are encircled multiple times count multiple times and poles that are encircled in a clockwise manner count negatively.
+}
 \end{question}
 \subsection{Applications of contour integration}
 We saw in the last section that we can determine complex loop integrals using the formula 
