@@ -68,7 +68,7 @@ $$f(z+\delta) = f(x+\delta_1, y + \delta_2) = f(x,y) + \pfrac{f}{x} \delta_1 + \
 Now note that
 $$\pfrac{f}{z} = \frac{1}{2} \left(\pfrac{f}{x} - \im \pfrac{f}{y}\right) = \pfrac{f}{x} = -\im \pfrac{f}{y}$$
 and so
-$$f(z+\delta) = f(z) + \pfrac{f}{z} \left(\delta_1 + \im \delta_2) + O(\delta^2).$$
+$$f(z+\delta) = f(z) + \pfrac{f}{z} (\delta_1 + \im \delta_2) + O(\delta^2).$$
 The result follows from solving for $\partial f/\partial z$.
 }
 \end{question}

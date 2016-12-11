@@ -538,7 +538,7 @@ Write the transfer function $\hat h(\omega)$ as $\hat h_1(\omega) + \im \hat h_2
 What does the result tell you about the meaning of $\hat h_1$ and $\hat h_2$?
 \hint{Power going into the spring is $-F(t) \dot x(t)$.}
 \hint{Once you get the integral, consider carefully what happens when you substitute $\omega \to -\omega$. Think about how $\hat h_1$ and $\hat h_2$ change when you do this.}
-\result{ $\int \omega \hat h_2(\omega) |\hat F(\omega)|^2 \D{\omega}/(2\pi).$$ }
+\result{ $\int \omega \hat h_2(\omega) |\hat F(\omega)|^2 \D{\omega}/(2\pi).$ }
 \solution{
 Power is force times velocity, i.e.\ $F(t) \dot x(t)$.
 To get power going \emph{into} the system we should add a minus sign and consider $-F(t) \dot x(t)$ (i.e.\ it's positive if $F(t)$ goes against the direction of motion).
