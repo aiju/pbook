@@ -416,6 +416,141 @@ Defining $\omega_T = 2\pi/T$ we note that $\omega_T > 2 \omega_b$, i.e.\ the sam
 }
 \end{question}
 
+\subsection{Lattices and multidimensional Fourier transforms}
+Consider a simple 1D chain of atoms, located at $\dots, -2a, -a, 0, a, 2a, \dots$.
+This is the 1D equivalent of a crystal.
+\begin{question}
+Suppose that the atoms are all slightly displaced, each by a different amount $d_i$.
+Define a function $d(x)$.
+What can you say about the Fourier transform $\hat d(k)$ (we use $k$ instead of $\omega$ for spatial Fourier transforms)?
+\solution{
+Write $d(x) = d_{x/a} \Sh_a(x)$.
+The Fourier transform is
+$$\hat d(k) = \int d_{x/a} \Sh_a{x} e^{-\im kx} \D{x} = \sum_{n=-\infty}^\infty d_n e^{-\im akn}.$$
+Note how similar this is to the inverse Fourier transform for a Fourier series.
+In particular, $\hat d(k)$ is periodic with period $2\pi/a$.
+}
+\end{question}
+
+Fourier transforms such as $\hat d$ are said to be defined in ``$k$-space'' (also called ``reciprocal space'').
+The result from the last question suggests splitting up $k$-space into regions of size $2\pi/a$.
+It turns out to be most natural to put $0$ in the middle of a region and so the boundaries are at $\dots, -3\pi/a, -\pi/a, \pi/a, 3\pi/a, \dots$.
+The region from $-\pi/a$ and $\pi/a$ is particularly important and it's called the \emph{first Brillouin zone} (the second Brillouin zone is the disjointed region from $-3\pi/a$ to $-\pi/a$ and from $\pi/a$ to $3\pi/a$ and higher Brillouin zones are defined similarly).
+
+\begin{question}
+(optional, Bloch's theorem)
+We are interested in (e.g., electromagnetic) waves in our 1D crystal.
+We will ignore time dependence for now and write our waves as functions $\psi(x)$.
+The waves interact with the crystal via some crystal property $V(x)$ that is periodic.
+Assume that they obey an equation such as
+$$\psi''(x) + \alpha V(x) \psi(x) = 0$$
+Take the Fourier transform of this equation.
+Show that for a given value of $-\pi/a < q < \pi/a$, the result is a set of linear equations.
+Assume that for each $q$ there is a solution $\phi$ satisfying $\phi(q) = 1$.
+To simplify things you may assume $\phi$ to be unique (which often is not true in practice).
+Using $\phi$, find the solution $\hat \psi(k)$ that obeys $\hat \psi(k) = 2\pi \delta(k - q)$ for $-\pi/a < k < \pi/a$.
+Write the result as a convolution to find the corresponding $\psi(x)$.
+What can you conclude about the general solution $\psi(x)$?
+\solution{
+The Fourier transformed equation is
+$$-k^2 \hat \psi(k) + \frac{\alpha}{2\pi} \hat V(k) * \hat \psi(k) = 0,$$
+but $V(x)$ is periodic and so $\hat V(k)$ is a series of $\delta$-functions spaced $2\pi/a$.
+Hence
+$$-k^2 \hat \psi(k) + \alpha \int \sum_{n=-\infty}^\infty V_n \delta(k' - 2\pi n/a) \hat \psi(k - k') \D{k'} = 0,$$
+$$-k^2 \hat \psi(k) + \alpha \sum_{n=-\infty}^\infty V_n \hat \psi(k - 2\pi n/a) = 0.$$
+Define $\psi_n = \hat \psi(q - 2\pi n/a)$ (note, $\psi_n = \psi_n(q)$).
+By substituting $k = q + 2\pi m/a$ we get a set of equations
+$$-(q+2\pi m/a)^2 \psi_m + \alpha \sum_{n=-\infty}^\infty V_n \psi_{n+m} = 0.$$
+If we now assume that $\phi_n$ obeys this equation and that $\phi_0 = 1$, then we conclude that, since the equation is linear, the general solution for $\psi_n $ can be written as $\phi_n \psi_0$.
+This implies
+$$\hat \psi(q + 2\pi n/a) = \phi_n(q) \hat \psi(q).$$
+If we now assume that $\hat \psi(k) = 2\pi \delta(k - q)$ then this equation tells us that
+$$\hat \psi(k) = \frac{1}{2\pi} \left(2\pi \sum_{n=-\infty}^\infty \phi_n(q) \delta(k - 2\pi n/a)\right) * 2\pi \delta(k - q).$$
+If we now define the periodic function $f_q(x)$ by the inverse Fourier transform of the first term, i.e.\
+$$f_q(x) = \sum_{n=-\infty}^\infty \phi_n(q) e^{\im 2\pi n x/a}$$
+and the convolutional theorem now lets us conclude that
+$$\psi(x) = f_q(x) e^{\im q x}$$
+with $f_q(x)$ periodic in $a$.
+Since we can write the general $\hat \psi(q)$ as $\int \delta(q - q') a(q') \D{q}$ the general solution $\psi(x)$ is an integral
+$$\int f_q(x) a(q) e^{\im q x} \D{q}.$$
+}
+\end{question}
+
+Of course real crystals exist in three dimensions. Can we extend our approach to 3D?
+We obviously need to generalise the Fourier transform to multiple dimensional functions $f(x,y,z)$ first.
+\begin{question}
+Define $f_1(k_x, y, z)$ as the Fourier transform in $x$, treating $y$ and $z$ as constant.
+Starting from $f_1$, define $f_2$ and finally $\hat f$ by transforming the $y$ and $z$ axis in the same way.
+Does the result depend on the order in which we do these Fourier transforms?
+Write $\hat f$ as $\hat f(\vec k)$ using vector notation.
+\solution{
+Repeatedly applying the definition we have
+$$f_1(k_x, y, z) = \int \D{x} f(x, y, z) e^{-\im k_x x},$$
+$$f_2(k_x, k_y, z) = \iint \D{y} \D{x} f(x, y, z) e^{-\im k_x x} e^{-\im k_y y},$$
+$$\hat f(k_x, k_y, k_z) = \iiint \D{z} \D{y} \D{x} f(x, y, z) e^{-\im k_x x} e^{-\im k_y y} e^{-\im k_z z}$$
+$$= \iiint \D{z} \D{y} \D{x} f(x, y, z) e^{-\im (k_x x + k_y y + k_z z)}.$$
+Because $e^a e^b = e^b e^a$ the result is independent of the order of the Fourier transforms.
+We can recognize $k_x x + k_y y + k_z z$ as the scalar product $\vec k \cdot \vec r$ and write
+$$\hat f(\vec k) = \int \D{^3 \vec r}~f(\vec r) e^{-\im \vec k \cdot \vec r}.$$
+Note the similarity to the 1D definition.
+}
+\end{question}
+
+To generalise the notion of a chain into 3D, we define a lattice as atoms placed at positions 
+$$\vec r_{i,j,k} = i \vec a_1 + j \vec a_2 + k \vec a_3$$
+with three linearly independent vectors $\vec a_i$ and three integers $i, j, k$.
+
+\begin{question}
+Consider some property $d_{i,j,k}$ defined at each atom.
+Define the Fourier transform $\vec d(\vec k)$.
+What property does it have?
+You can assume that there are three vectors $\vec b_i$ obeying $\vec a_i \cdot \vec b_j = 2\pi\delta_{i,j}$.
+\solution{
+$$\vec d(\vec k) = \sum_{i=-\infty}^\infty \sum_{j=-\infty}^{\infty} \sum_{k=-\infty}^\infty d_{i,j,k} e^{-\im \vec r_{i,j,k} \cdot \vec k}$$
+Note that $\vec d(\vec k)$ is invariant under shifts by the $\vec b_i$ since
+$$\vec d(\vec k + \vec b_n) = \sum_{i_1,i_2,i_3} e^{-\im \vec r_{i_1,i_2,i_3} \cdot \vec k} d_{i,j,k} e^{-\im (i_1 \vec a_1 \cdot \vec b_n + i_2 \vec a_2 \cdot \vec b_n + i_3 \vec a_3 \cdot \vec b_n)} = \sum_{i,j,k} d_{i,j,k} e^{-\im \vec r_{i,j,k} \cdot \vec k} e^{-2\pi \im i_n},$$
+but $i_n$ is an integer and so $e^{-2\pi \im i_n} = 1$.
+This result is equally true for arbitrary vectors $i \vec b_1 + j \vec b_2 + k \vec b_3$.
+}
+\end{question}
+
+We define the reciprocal lattice in $k$-space by $\vec a_i \cdot \vec b_j = 2\pi\delta_{i,j}$ and
+$$\vec k_{i,j,k} = i \vec b_1 + j \vec b_2 + k \vec b_3.$$
+Defining Brillouin zones is still possible now, but considerably more difficult.
+Define the first Brillouin zone as the region closer to $\vec k_{0,0,0} = 0$ than to any other $\vec k_{i,j,k}$.
+For example, for a hexagonal lattice in 2D, the first Brillouin zone is a hexagon:
+\begin{center}
+\begin{tikzpicture}
+\foreach \x in {-1,...,1}
+	\foreach \y in {-1,...,1}
+		\filldraw (\x+0.5*\y,0.866*\y) circle (2pt);
+
+\filldraw [pattern=north west lines] (0.5,0.2887) -- (0,0.5774) -- (-0.5,0.2887) -- (-0.5,-0.2887) -- (0,-0.5774) -- (0.5,-0.2887) -- (0.5,0.2887);
+\end{tikzpicture}
+\end{center}
+
+\begin{question}
+(optional) Find an expression for $\vec b_i$ in terms of $\vec a_i$, i.e.\ solve
+$$\vec a_i \cdot \vec b_j = 2\pi \delta_{i,j}.$$
+\hint{Geometrically, what does this say about the relationship between $\vec b_1$ and $\vec a_2, \vec a_3$? What is another way of expressing the same result algebraically?}
+\solution{
+$\vec b_1$ is orthogonal to $\vec a_2$ and $\vec a_3$.
+Hence $\vec b_1 = \alpha~\vec a_2 \times \vec a_3$ with some real number $\alpha$.
+To find $\alpha$ use
+$$\vec a_1 \cdot \vec b_1 = \alpha~\vec a_1 \cdot (\vec a_2 \times \vec a_3) \stackrel{!}{=} 2\pi.$$
+Hence
+$$\vec b_1 = 2 \pi \frac{\vec a_2 \times \vec a_3}{\vec a_1 \cdot (\vec a_2 \times \vec a_3)}.$$
+The other two expressions can be found by substituting $1 \to 2 \to 3 \to 1$.
+}
+\end{question}
+
+We can also include time as a separate dimension now.
+For a function $f(\vec r, t)$ we define the Fourier transform as
+$$\hat f(\vec k, \omega) = \int f(\vec r, t) e^{\im \vec k \cdot \vec r - \im \omega t} \D{^3 \vec r} \D{t}.$$
+Note the minus sign in front of $\im \omega t$.
+While it's essentially arbitrary, there are good physical reasons for adding it.
+In particular, in the theory of relativity, $\vec k \cdot \vec r - \omega t$ is a ``Lorentz-invariant'', meaning it has the same value in all frames of references.
+
 \subsection{Regularisation}
 We already met regularisation when calculating the integral $\int e^{\im \omega t} \D{t}$.
 The same technique can also be used to give meaning to otherwise meaningless Fourier transforms.
