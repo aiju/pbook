@@ -546,8 +546,8 @@ The other two expressions can be found by substituting $1 \to 2 \to 3 \to 1$.
 
 We can also include time as a separate dimension now.
 For a function $f(\vec r, t)$ we define the Fourier transform as
-$$\hat f(\vec k, \omega) = \int f(\vec r, t) e^{\im \vec k \cdot \vec r - \im \omega t} \D{^3 \vec r} \D{t}.$$
-Note the minus sign in front of $\im \omega t$.
+$$\hat f(\vec k, \omega) = \int f(\vec r, t) e^{-\im \vec k \cdot \vec r + \im \omega t} \D{^3 \vec r} \D{t}.$$
+Note the extra minus sign in front of $\im \omega t$.
 While it's essentially arbitrary, there are good physical reasons for adding it.
 In particular, in the theory of relativity, $\vec k \cdot \vec r - \omega t$ is a ``Lorentz-invariant'', meaning it has the same value in all frames of references.
 
