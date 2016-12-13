@@ -521,11 +521,11 @@ Define the first Brillouin zone as the region closer to $\vec k_{0,0,0} = 0$ tha
 For example, for a hexagonal lattice in 2D, the first Brillouin zone is a hexagon:
 \begin{center}
 \begin{tikzpicture}
+\filldraw [fill=green!20!white,draw=black] (0.5,0.2887) -- (0,0.5774) -- (-0.5,0.2887) -- (-0.5,-0.2887) -- (0,-0.5774) -- (0.5,-0.2887) -- (0.5,0.2887);
+
 \foreach \x in {-1,...,1}
 	\foreach \y in {-1,...,1}
 		\filldraw (\x+0.5*\y,0.866*\y) circle (2pt);
-
-\filldraw [pattern=north west lines] (0.5,0.2887) -- (0,0.5774) -- (-0.5,0.2887) -- (-0.5,-0.2887) -- (0,-0.5774) -- (0.5,-0.2887) -- (0.5,0.2887);
 \end{tikzpicture}
 \end{center}
 
