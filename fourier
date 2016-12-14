@@ -325,8 +325,8 @@ $$f(t) = \sum_{n=-\infty}^{\infty} f_n e^{2 \pi \im n T}$$
 
 \begin{question}
 Calculate the Fourier series of (all periodic with period $T$)\\
-(a) a square wave, i.e.\ $f(t) = -1$ for $-T/2<t<0$ and $f(t)=1$ for $0<t<T/2$.\\
-(b) a sawtooth wave, i.e.\ $f(t) = 2t/T$ for $-T/2<t<T/2$.\\
+(a) a square wave, i.e.\ $f(t) = -1$ for $-T/2 < t < 0$ and $f(t)=1$ for $0 < t < T/2$.\\
+(b) a sawtooth wave, i.e.\ $f(t) = 2t/T$ for $-T/2 < t < T/2$.\\
 \result{(a) $f_n = 2\im/(\pi n)$, if $n$ is odd, and 0 otherwise.\\
 (b) $f_n = \im (-1)^n/(\pi n)$, if $n \ne 0$, and $f_0 = 0$.}
 \solution{
