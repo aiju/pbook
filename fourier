@@ -789,13 +789,13 @@ Your answer should not include any dependence on $f(t)$.
 You may find the Cauchy-Schwartz inequality useful:
 $$\left|\int f(t) g^*(t) \D{t}\right|^2 \le \int |f(t)|^2 \D{t} \int |g(t)|^2 \D{t}.$$
 \hint{Remember the rules for Fourier transforms of derivatives and Parseval's theorem.}
-\hint{Also use $|x|^2 = (\operatorname{Re} x)^2 + (\operatorname{Im} x)^2$.}
+\hint{Also use $|x|^2 = (\Re x)^2 + (\Im x)^2$.}
 \result{$1/2$.}
 \solution{
 Remember that the Fourier transform of $f'(t)$ is $\im \omega f(\omega)$ and hence, from Parseval's theorem,
 $$\int |f'(t)|^2 \D{t} = \int \omega^2 |f(\omega)|^2 \frac{\D{\omega}}{2\pi}.$$
-Further, using Cauchy-Schwartz and $|x|^2 = (\operatorname{Re} x)^2 + (\operatorname{Im} x)^2 \ge \left(\operatorname{Re} x\right)^2$,
-$$\int t^2 |f(t)|^2 \D{t} \int |f'(t)|^2 \D{t} \ge \left|\int t f(t) f'^*(t) \D{t}\right|^2 \ge \left(\operatorname{Re} \int t f(t) f'^*(t) \D{t}\right)^2$$
+Further, using Cauchy-Schwartz and $|x|^2 = (\Re x)^2 + (\Im x)^2 \ge \left(\Re x\right)^2$,
+$$\int t^2 |f(t)|^2 \D{t} \int |f'(t)|^2 \D{t} \ge \left|\int t f(t) f'^*(t) \D{t}\right|^2 \ge \left(\Re \int t f(t) f'^*(t) \D{t}\right)^2$$
 $$= \left(\frac{1}{2} \left(\int t f(t) f'^*(t) \D{t} + \int t f^*(t) f'(t) \D{t}\right)\right)^2 = \frac{1}{4} \left(\int t \pfrac{}{t} |f(t)|^2\right)^2 = \frac{1}{4} \left(\int |f(t)|^2 \D{t}\right)^2,$$
 where we integrated by parts in the last step.
 Now Parseval's theorem implies the result is equal to

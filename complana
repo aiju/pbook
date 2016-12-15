@@ -282,8 +282,8 @@ The idea is to stop at some limit $\pm a$ and to then close the contour in eithe
 
 \begin{center}
 \begin{tikzpicture}
-\draw [->] (-4,0) -- (4,0) node[right] {$\operatorname{Re} z$};
-\draw [->] (0,0) -- (0,4) node[right] {$\operatorname{Im} z$};
+\draw [->] (-4,0) -- (4,0) node[right] {$\Re z$};
+\draw [->] (0,0) -- (0,4) node[right] {$\Im z$};
 \draw [thick] (-3,0) -- (3,0);
 \draw [thick,->] (3,0) arc (0:90:3);
 \draw [thick] (0,3) arc(90:180:3);
@@ -402,8 +402,8 @@ $$\sum_{n=-\infty}^\infty \frac{1}{n^2 + \varepsilon^2} = \oint_\gamma \frac{1}{
 for a contour that encircles all the poles on the real axis (but not the poles at $\pm \im \varepsilon$).
 \begin{center}
 \begin{tikzpicture}
-\draw [->] (-3.5,0) -- (3.5,0) node[right] {$\operatorname{Re} z$};
-\draw [->] (0,-2) -- (0,2) node[right] {$\operatorname{Im} z$};
+\draw [->] (-3.5,0) -- (3.5,0) node[right] {$\Re z$};
+\draw [->] (0,-2) -- (0,2) node[right] {$\Im z$};
 \draw [thick,-<] (-3.5,0.5) -- (-0.5,0.5);
 \draw [thick] (-0.5,0.5) -- (3.5,0.5);
 \draw [thick,-<] (3.5,-0.5) -- (-0.5,-0.5);
