@@ -551,6 +551,25 @@ Note the extra minus sign in front of $\im \omega t$.
 While it's essentially arbitrary, there are good physical reasons for adding it.
 In particular, in the theory of relativity, $\vec k \cdot \vec r - \omega t$ is a ``Lorentz-invariant'', meaning it has the same value in all frames of references.
 
+\begin{question}
+Use the Fourier transform to solve the 3D wave equation
+$$\frac{1}{c^2} \pfrac{^2 \psi}{t^2} = \nabla^2 \psi$$
+with real $\psi$.
+Your answer should be an integral expression for $\psi$ in terms of arbitrary $k$-space function(s).
+\solution{
+Fourier transforming the equation gives
+$$\left(\frac{\omega^2}{c^2} - k^2\right) \hat \psi = 0.$$
+Hence $\hat \psi = 0$ unless $\omega = \pm c k$.
+We can thus write
+$$\hat \psi(\omega,\vec k) = f(\vec k) 2\pi\delta(\omega - c k) + g(k) 2\pi \delta(\omega + c k).$$
+To ensure that $\psi$ is real, we must have $\hat \psi^*(\omega,k) = \hat \psi(-\omega,-\vec k)$, i.e.\
+$$\hat \psi(-\omega,-\vec k) = f(-\vec k) 2\pi\delta(-\omega - c k) + g(-\vec k) 2\pi \delta(-\omega + c k) = \hat \psi^*(\omega, \vec k).$$
+Hence $g(\vec k) = f^*(-\vec k)$.
+The resulting equation for $\psi$ is
+$$\psi = \int (f(\vec k) e^{\im (\vec k \cdot \vec r - k c t)} + f^*(\vec k) e^{-\im (\vec k \cdot \vec r - k c t)}) \frac{\D{^3 \vec k}}{(2\pi)^3}.$$
+}
+\end{question}
+
 \subsection{Regularisation}
 We already met regularisation when calculating the integral $\int e^{\im \omega t} \D{t}$.
 The same technique can also be used to give meaning to otherwise meaningless Fourier transforms.
@@ -752,3 +771,80 @@ Why does it fail?
 $$\hat h = \mathcal{P} \frac{1}{-m\omega^2 + k} - \im \pi \delta(-m \omega^2 + k).$$
 }
 \end{question}
+
+\subsection{The uncertainty principle}
+You showed earlier that
+$$\mathcal{F}\left(\frac{e^{-t^2/(2 \sigma^2)}}{\sqrt{2\pi \sigma^2}}\right) = e^{-\omega^2 \sigma^2/2}.$$
+Note that the left-hand side is a Gaussian of standard deviation $\sigma$ and the right hand side is one of standard deviation $1/\sigma$.
+This is a general property of Fourier transforms:
+Functions narrow in $t$-domain are wide in $\omega$-domain and vice versa.
+To show this in general it's most useful to consider $|f|^2$ as a probability distribution and to first consider a special case.
+\begin{question}
+We can define the ``spread'' of $f(t)$ around $t=0$ using the standard deviation
+$$\sigma_t = \sqrt{\frac{\int t^2 |f(t)|^2 \D{t}}{\int |f(t)|^2 \D{t}}}$$
+Find a lower bound on the product of standard deviations in $t$ and $\omega$, i.e.
+$$\sigma_t \sigma_\omega = \sqrt{\frac{\int t^2 |f(t)|^2 \D{t} \int \omega^2 |\hat f(\omega)|^2 \frac{\D{\omega}}{2\pi}}{\int |f(t)|^2 \D{t} \int |\hat f(\omega)|^2 \frac{\D{\omega}}{2\pi}}}.$$
+Your answer should not include any dependence on $f(t)$.
+
+You may find the Cauchy-Schwartz inequality useful:
+$$\left|\int f(t) g^*(t) \D{t}\right|^2 \le \int |f(t)|^2 \D{t} \int |g(t)|^2 \D{t}.$$
+\hint{Remember the rules for Fourier transforms of derivatives and Parseval's theorem.}
+\hint{Also use $|x|^2 = (\operatorname{Re} x)^2 + (\operatorname{Im} x)^2$.}
+\result{$1/2$.}
+\solution{
+Remember that the Fourier transform of $f'(t)$ is $\im \omega f(\omega)$ and hence, from Parseval's theorem,
+$$\int |f'(t)|^2 \D{t} = \int \omega^2 |f(\omega)|^2 \frac{\D{\omega}}{2\pi}.$$
+Further, using Cauchy-Schwartz and $|x|^2 = (\operatorname{Re} x)^2 + (\operatorname{Im} x)^2 \ge \left(\operatorname{Re} x\right)^2$,
+$$\int t^2 |f(t)|^2 \D{t} \int |f'(t)|^2 \D{t} \ge \left|\int t f(t) f'^*(t) \D{t}\right|^2 \ge \left(\operatorname{Re} \int t f(t) f'^*(t) \D{t}\right)^2$$
+$$= \left(\frac{1}{2} \left(\int t f(t) f'^*(t) \D{t} + \int t f^*(t) f'(t) \D{t}\right)\right)^2 = \frac{1}{4} \left(\int t \pfrac{}{t} |f(t)|^2\right)^2 = \frac{1}{4} \left(\int |f(t)|^2 \D{t}\right)^2,$$
+where we integrated by parts in the last step.
+Now Parseval's theorem implies the result is equal to
+$$= \frac{1}{4} \int |f(t)|^2 \D{t} \int |\hat f(\omega)|^2 \frac{\D{\omega}}{2\pi}.$$
+Combining the equations gives the result $1/2$.
+}
+\end{question}
+
+\begin{question}
+Extend the result from the last question by defining
+$$\sigma_t = \sqrt{\frac{\int (t-t_0)^2 |f(t)|^2 \D{t}}{\int |f(t)|^2 \D{t}}},$$
+and similarly for $\omega$.
+Find again a lower bound for $\sigma_t \sigma_\omega$ (note that $t_0$ and $\omega_0$ are arbitrary).
+\hint{Find a function $g(t)$ that has the property that $|g|(t)|$ is $|f(t)|$ shifted by $t_0$ and the same for $|\hat g(\omega)|$.}
+\solution{
+Apply the previous result to
+$$g(t) = f(t-t_0)~e^{\im \omega_0 t}.$$
+Note that $|g(t)| = |f(t-t_0)|$,
+$$\hat g(\omega) = \int f(t-t_0)e^{\im \omega_0 t} e^{-\im \omega t}\D{t} = e^{-\im(\omega - \omega_0) t_0} \int f(t)e^{-\im (\omega - \omega_0) t} \D{t} = e^{-\im (\omega - \omega_0) t_0} \hat g(\omega - \omega_0)$$
+and $|\hat g(\omega)| = |\hat f(\omega - \omega_0)|$.
+}
+\end{question}
+
+\begin{question}
+(optional)
+To see why this works for all $t_0$, define
+$$\mu_t = \frac{\int t |f(t)|^2 \D{t}}{\int |f(t)|^2 \D{t}}$$
+and relate $\sigma_t = \sigma_t(t_0)$ to $\sigma_t(\mu_t)$ (the latter is the definition of the usual standard deviation).
+\result{$(\sigma_t(t_0))^2 = (\sigma_t(\mu_t))^2 + (\mu_t - t_0)^2.$}
+\solution{
+Write $t - t_0 = (t - \mu_t) + (\mu_t - t_0)$ and get
+$$\int (t-t_0)^2 |f(t)|^2 \D{t} = \int (t - \mu_t)^2 |f(t)|^2 \D{t} - 2 \int (t - \mu_t) |f(t)|^2 \D{t} \int (\mu_t - t_0) |f(t)|^2 + \int (\mu_t - t_0)^2 |f(t)|^2 \D{t}.$$
+Note that the middle term vanishes by definition of $\mu_t$ and hence, after dividing by $\int |f(t)|^2 \D{t}$,
+$$(\sigma_t(t_0))^2 = (\sigma_t(\mu_t))^2 + (\mu_t - t_0)^2.$$
+}
+\end{question}
+
+The result for $\sigma_t \sigma_\omega$ is often christened the (Fourier transform) uncertainty principle, after the (momentum-energy) uncertainty principle in quantum mechanics that states that momentum and position uncertainty are related by
+$$\sigma_x \sigma_p \ge \frac{\hbar}{2}.$$
+The similarity is no coincidence.
+
+\begin{question}
+A pulse of visible light is 1~fs in duration.
+Approximately how uncertain is its wavelength $\lambda$?
+\solution{
+If we assume it's close to the limit set by the uncertainty principle, then
+$$\sigma_{\nu} = \sigma_\omega/(2\pi) = 1/(4\pi \sigma_t).$$
+To find the uncertainty in wavelength use
+$$\sigma_\lambda = \left|\pfrac{\lambda}{\nu}\right| \sigma_\nu = \frac{c \sigma_\nu}{\nu^2} = \frac{\lambda^2}{4\pi c \sigma_t} \approx 10\,{\rm nm}.$$
+}
+\end{question}
+
