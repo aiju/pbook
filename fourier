@@ -638,6 +638,21 @@ In the last term we can replace $\hat f(\omega)$ with $\hat f(0) = \int f(\tau) 
 }
 \end{question}
 
+\begin{question}
+Find the Fourier transform of $V(\vec r) = 1/r = 1/|\vec r|$ in three dimensions.
+\hint{Use spherical polar coordinates $r, \theta, \phi$ with volume element $r^2\,\D{r}\,\D{(\cos \theta)}\,\D{\phi}$.}
+\hint{Add a $e^{-\varepsilon r}$ regulariser.}
+\result{$-4\pi/k^2$.}
+\solution{
+$$\int \frac{e^{-\im \vec k \cdot \vec r-\varepsilon r}}{r} \D{^3 \vec r} = 2\pi \int_0^\infty \D{r} \int_1^{-1} \D{(\cos \theta)}~e^{-\im k r \cos \theta-\varepsilon r} r = 2\pi \int_0^\infty \D{r}~r e^{-\varepsilon r} \left[\frac{e^{-\im k r \cos \theta}}{-\im k r}\right]_{\cos \theta=1}^{\cos \theta=-1}$$
+$$= \frac{2\pi}{-\im k} \int_0^\infty \D{r}~e^{-\varepsilon r} (e^{\im k r} - e^{-\im k r}) = \frac{2\pi}{-\im k} \left(\frac{1}{-\im k + \varepsilon} - \frac{1}{\im k + \varepsilon}\right) = -\frac{4\pi}{k^2 + \varepsilon^2}.$$
+We have seen in this chapter that we should be careful taking limits $\varepsilon \to 0$.
+However $\int \D{k}/(k^2+\varepsilon^2)$ blows up in the limit $\varepsilon \to 0$ -- just like $\int \D{k}/k^2$ and so we can safely replace the answer with $-4\pi/k^2$.
+
+We can also see it from the second last expression: The $\pi \im \delta(k)$ terms from our previous expansion for $1/(k-\im \varepsilon)$ exactly cancel.
+}
+\end{question}
+
 \subsection{Linear response theory}
 Often we are in a situation where a system $\mathcal{S}$ will take an input $f(t)$ and produce a response $g(t) = \mathcal{S}[f(t)]$.
 For instance, $f(t)$ might be the input to an electronic amplifier and $g(t)$ is its output, or $f(t)$ might be the force applied to a spring and $g(t)$ is its displacement.
