@@ -544,8 +544,6 @@ where $q = \sum_i q_i \ket{i} \bra{i}$.
 }
 \end{question}
 
-Note that this is identical to the ``measured value'' that we defined in the photon case!
-
 \begin{question}
 Measurable quantities are usually real.
 Assuming that all the $q_i$ are real, show that $q$ from the last question is \emph{Hermitian}, i.e.\ $q = q^\dagger$.
@@ -741,7 +739,7 @@ $$\int \ket{x} \bra{x} \D{x} = 1.$$
 
 \begin{question}
 Derive the normalisation condition for the discrete $\ket{i}$ and the continuous $\ket{x}$ states, i.e.\ find an equation for $\braket{j}{i}$ and $\braket{x}{y}$.
-\hint{Apply $\ket{y}$ to the normalisation condition.}
+\hint{Apply $\ket{j}$ / $\ket{y}$ to the completeness relation.}
 \solution{
 In the discrete case we have
 $$\sum_{i=1}^\infty \ket{i} \braket{i}{j} = \ket{j},$$
