@@ -157,13 +157,13 @@ The question is now, can we distinguish LCP/RCP states in some other way?
 \begin{question}
 1. What mathematical expression corresponds to the amount of intensity in the LCP/RCP states?\\
 2. Can you find a series of operations that will effect the measurement?\\
-3. What about the sum of LCP and RCP intensity?
+3. What about the sum of the intensities in the LCP and RCP states?
 \solution{
 1. $|\braket{\rm LCP}{J}|^2$ and $|\braket{\rm RCP}{J}|^2$.
 2. The trick is to convert it to linear light using a quarter-wave plate. After applying the matrix
 $$\begin{pmatrix}1 & 0\\0 & \im\end{pmatrix}$$
 we get $(1, \pm 1)/\sqrt{2}$, which can be distinguished by measuring in the $\pm \pi/4$ directions.\\
-3. $(1,\pm \im)/\sqrt{2}$ form an orthonormal set and so the intensities add to $\langle J\rangle$.
+3. $(1,\pm \im)/\sqrt{2}$ form an orthonormal set and so the intensities add to $\braket{J}{J}$.
 }
 \end{question}
 
@@ -179,92 +179,100 @@ and hence $\phi = \arcsin (I_L - (a^2 + b^2)/2)/(ab)$.
 }
 \end{question}
 
-So far we have always measured the intensity in some state (some Jones vector).
-We now want to generalise the notion and we want to ``measure a matrix''.
-
-\begin{question}
-Write the expression $|\langle K|J\rangle|^2$ in terms of a matrix and $|J\rangle$.
-\hint{Remember $|a|^2 = a a^* = a a^\dagger$.}
-\result{$\bra{J} M \ket{J}$, where $M=\ket{K} \bra{K}$.}
-\end{question}
-
-\begin{question}
-(optional)
-Show that an arbitrary matrix $M$ can be written as a sum of terms of the form $\alpha \ket{K} \bra{K}$.
-\solution{
-Suppose that $M = \left(\begin{smallmatrix}M_1 & M_2\\M_3 & M_4\end{smallmatrix}\right)$.
-Note that
-$$\ket{\rm LCP} \bra{\rm LCP} = \frac{1}{2} \begin{pmatrix}1 & \im\\-\im & 1\end{pmatrix},\quad \ket{\pi/4} \bra{\pi/4} = \frac{1}{2} \begin{pmatrix}1 & 1\\1 & 1\end{pmatrix},$$
-and hence
-$$(M_2 + M_3) \ket{\pi/4} \bra{\pi/4} + (M_2 - M_3) (-\im) \ket{\rm LCP} \bra{\rm LCP} = \begin{pmatrix}M_2 (1 - \im) + M_3 (1 + \im) & M_2\\M_3 & M_2 (1 - \im) + M_3 (1 + \im)\end{pmatrix}.$$
-We can now easily fix the diagonal elements to find that
-$$M = (M_2 + M_3) \ket{\pi/4} \bra{\pi/4} + (M_2 - M_3) (-\im) \ket{\rm LCP} \bra{\rm LCP}$$
-$$+ (M_1 - M_2 (1 - \im) - M_3 (1 + \im)) \ket{\rm H} \bra{\rm H} + (M_4 - M_2 (1 - \im) - M_3 (1+\im)) \ket{\rm V} \bra{\rm V}.$$
-}
-\end{question}
-
-\begin{question}
-Define the ``measured value'' $\mathcal{M}(M)$ for a matrix $M$ in a state $|J\rangle$, both as a mathematical expression and as a procedure to determine its value in practice.
-Since total intensity is arbitrary, define it so that it is independent of $\braket{J}{J}$.
-\result{$\bra{J} M \ket{J} / \braket{J}{J}$.}
-\solution{The previous question showed that we can write $M = \sum \alpha_i \ket{i} \bra{i}$.
-We can define the measured value of $M$ now as follows.
-Measure the intensity for each $\ket{i}$.
-Multiply the result of each by $\alpha_i$ and sum them to get a final value $v$.
-Divide that value by $\braket{J}{J}$ to remove the dependence on total intensity.
-The mathematical expression for this value is
-$$v = \sum_i \alpha_i |\braket{i}{J}|^2 = \sum_i \alpha_i \bra{J} \ket{i} \bra{i} \ket{J} = \bra{J} M \ket{J}.$$
-and hence the measured value is $\bra{J} M \ket{J}/\braket{J}{J}.$
-}
-\end{question}
-
-I admit, this notion of a measured value of a matrix is rather esoteric and artificial, but we will soon find this notion to be very useful when developing quantum theory.
-As bizarre as it is, always remember that we can define it precisely in terms of physical measurements.
-
-\begin{question}
-Find the measured value of a rotation matrix $R_\phi$ for the states $\ket{\theta}$, $\ket{\rm LCP}$ and $\ket{\rm RCP}$.
-\solution{
-Note that all three states are ``normalised'' ($\braket{J}{J} = 1$).
-We know that
-$$R_\phi \ket{\theta} = \ket{\theta+\phi}, \quad R_\phi \ket{\rm LCP} = e^{-\im \phi} \ket{\rm LCP}, \quad R_\phi \ket{\rm RCP} = e^{\im \phi}$$
-and hence the measured values are $\cos \phi$, $e^{-\im \phi}$ and $e^{\im \phi}$, respectively.
-}
-\end{question}
-
-\begin{question}
-1. How do the measured values of $M$ and $M^\dagger$ relate?\\
-2. Under what condition are the measured values of $M$ always real?
-\solution{
-1. They are complex conjugate, as follows from
-$$\left(\sum \alpha_i \ket{i} \bra{i}\right)^\dagger = \sum {\alpha_i}^* \ket{i} \bra{i}.$$
-2. $M = M^\dagger$.
-}
-\end{question}
+%So far we have always measured the intensity in some state (some Jones vector).
+%We now want to generalise the notion and we want to ``measure a matrix''.
+%
+%\begin{question}
+%Write the expression $|\braket{K}{J}|^2$ in terms of a matrix and $\ket{J}$.
+%\hint{Remember $|a|^2 = a a^* = a a^\dagger$.}
+%\result{$\bra{J} M \ket{J}$, where $M=\ket{K} \bra{K}$.}
+%\end{question}
+%
+%\begin{question}
+%(optional)
+%Show that an arbitrary matrix $M$ can be written as a sum of terms of the form $\alpha \ket{K} \bra{K}$.
+%\solution{
+%Suppose that $M = \left(\begin{smallmatrix}M_1 & M_2\\M_3 & M_4\end{smallmatrix}\right)$.
+%Note that
+%$$\ket{\rm LCP} \bra{\rm LCP} = \frac{1}{2} \begin{pmatrix}1 & \im\\-\im & 1\end{pmatrix},\quad \ket{\pi/4} \bra{\pi/4} = \frac{1}{2} \begin{pmatrix}1 & 1\\1 & 1\end{pmatrix},$$
+%and hence
+%$$(M_2 + M_3) \ket{\pi/4} \bra{\pi/4} + (M_2 - M_3) (-\im) \ket{\rm LCP} \bra{\rm LCP} = \begin{pmatrix}M_2 (1 - \im) + M_3 (1 + \im) & M_2\\M_3 & M_2 (1 - \im) + M_3 (1 + \im)\end{pmatrix}.$$
+%We can now easily fix the diagonal elements to find that
+%$$M = (M_2 + M_3) \ket{\pi/4} \bra{\pi/4} + (M_2 - M_3) (-\im) \ket{\rm LCP} \bra{\rm LCP}$$
+%$$+ (M_1 - M_2 (1 - \im) - M_3 (1 + \im)) \ket{\rm H} \bra{\rm H} + (M_4 - M_2 (1 - \im) - M_3 (1+\im)) \ket{\rm V} \bra{\rm V}.$$
+%}
+%\end{question}
+%
+%%\begin{question}
+%%Define the ``measured value'' $\mathcal{M}(M)$ for a matrix $M$ in a state $\ket{J}$, both as a mathematical expression and as a procedure to determine its value in practice.
+%%We want $\mathcal{M}(\ket{K} \bra{K}) \braket{J}{J}$ to be the intensity in state $\ket{K}$.
+%%Since total intensity is arbitrary, define it so that it is independent of $\braket{J}{J}$.
+%%\result{$\bra{J} M \ket{J} / \braket{J}{J}$.}
+%%\solution{The previous question showed that we can write $M = \sum \alpha_i \ket{i} \bra{i}$.
+%%We can define the measured value of $M$ now as follows.
+%%Measure the intensity for each $\ket{i}$.
+%%Multiply the result of each by $\alpha_i$ and sum them to get a final value $v$.
+%%Divide that value by $\braket{J}{J}$ to remove the dependence on total intensity.
+%%The mathematical expression for this value is
+%%$$v = \sum_i \alpha_i |\braket{i}{J}|^2 = \sum_i \alpha_i \bra{J} \ket{i} \bra{i} \ket{J} = \bra{J} M \ket{J}.$$
+%%and hence the measured value is $\bra{J} M \ket{J}/\braket{J}{J}.$
+%%}
+%%\end{question}
+%%
+%%I admit, this notion of a measured value of a matrix is rather esoteric and artificial, but we will soon find this notion to be very useful when developing quantum theory.
+%%As bizarre as it is, always remember that we can define it precisely in terms of physical measurements.
+%%
+%%\begin{question}
+%%Find the measured value of a rotation matrix $R_\phi$ for the states $\ket{\theta}$, $\ket{\rm LCP}$ and $\ket{\rm RCP}$.
+%%\solution{
+%%Note that all three states are ``normalised'' ($\braket{J}{J} = 1$).
+%%We know that
+%%$$R_\phi \ket{\theta} = \ket{\theta+\phi}, \quad R_\phi \ket{\rm LCP} = e^{-\im \phi} \ket{\rm LCP}, \quad R_\phi \ket{\rm RCP} = e^{\im \phi}$$
+%%and hence the measured values are $\cos \phi$, $e^{-\im \phi}$ and $e^{\im \phi}$, respectively.
+%%}
+%%\end{question}
+%%
+%%\begin{question}
+%%1. How do the measured values of $M$ and $M^\dagger$ relate?\\
+%%2. Under what condition are the measured values of $M$ always real?
+%%\solution{
+%%1. They are complex conjugate, as follows from
+%%$$\left(\sum \alpha_i \ket{i} \bra{i}\right)^\dagger = \sum {\alpha_i}^* \ket{i} \bra{i}.$$
+%%2. $M = M^\dagger$.
+%%}
+%%\end{question}
 
 \subsection{Unpolarisation of light}
-The formalism from the last section can explain polarised light, but most everyday light is (at least to some extent) unpolarised.
-Unpolarised light has the property that measuring the intensity in \emph{any} normalised state $\ket{K}$ gives the same answer.
-
+So far we have only considered light from a single source.
+We found that we could always ignore overall phase factors since all physical quantities were of the form $|\braket{a}{b}|^2$.
+If we have light from two sources we expect (from the linearity of Maxwell's equation) that the result can be described by a new vector $\ket{c} = \ket{a} + \ket{b}$.
 \begin{question}
-We saw earlier that the intensity of $\ket{\rm LCP}$ in any $\ket{\theta}$ state is $1/2$. What then is the difference between $\ket{\rm LCP}$ and unpolarised light?
+Replace $\ket{a}$ and $\ket{b}$ by phase shifted versions $e^{\im \alpha} \ket{a}$ and $e^{\im \beta} \ket{b}$.
+Find an expression for the total intensity $\braket{c}{c}$ and show that it depends on the relative phase $\alpha - \beta$.
 \solution{
-Unpolarised light has the same intensity in \emph{both} LCP and RCP states, but $\ket{\rm LCP}$ obviously does not.
+$$\braket{c}{c} = \left(e^{-\im \alpha} \bra{a} + e^{-\im \beta} \bra{b}\right)\left(e^{\im \alpha} \ket{a} + e^{\im \beta} \ket{b}\right)$$
+$$= \braket{a}{a} + \braket{b}{b} + e^{\im (\alpha - \beta)} \braket{b}{a} + e^{\im (\beta - \alpha)} \braket{a}{b}$$
+$$= \braket{a}{a} + \braket{b}{b} + 2 \Re(e^{\im (\alpha - \beta)} \braket{b}{a})$$
 }
 \end{question}
 
+We thus have to be very careful to determine the relative phase before adding the Jones vectors.
+In particular, if the two light sources are independent, the relative phase will most likely be random and change with time.
+The two sources are then said to be \emph{mutually incoherent}.
+We should thus average all predictions for measurements over all possible phase differences.
+
 \begin{question}
-Show that unpolarised light (of non-zero intensity) cannot be described by \emph{any} ket $\ket{J}$.
-\solution{
-Write $\ket{J} = \alpha \ket{K} + \beta \ket{L}$ for two orthonormal states $\ket{K}$ and $\ket{L}$ and define $\ket{H} = -\beta \ket{K} + \alpha \ket{L}$.
-If $\ket{J}$ is unpolarised, then $\braket{H}{J} = \braket{J}{J} \ne 0$.
-But $\braket{H}{J} = -\beta \alpha + \beta\alpha = 0$.
-Hence $\ket{J}$ cannot be unpolarised.
-}
+Perform the averaging for $\braket{c}{c}$.
+\result{$\braket{a}{a} + \braket{b}{b}$.}
 \end{question}
 
-One trick that correctly describes unpolarised light is to use the ket $\ket{u_\delta} = (1, e^{\im \delta})/\sqrt{2}$ with \emph{random} $\delta$.
-This corresponds to elliptically polarised light of random ``circliness'' ($\delta=0,\pi$ is linearly polarised, $\delta=\pm\pi/2$ is circularly polarised).
-Note that when we measure the intensity in any ket $\ket{K}$, $\ket{K}$ must be independent of $\delta$ and we must average over all values of $\delta$ in the end.
+Note that we have to be very careful here: We must not average the vector.
+After all, $\ket{a} + e^{\im \delta} \ket{b}$ would average to $\ket{a}$!
+In fact, it is impossible in general to describe the resulting light by a single Jones vector, as can be seen from considering \emph{unpolarised light}.
+Unpolarised light is the result of combining light of two orthogonal polarisations (e.g.\ horizontal and vertical) incoherently.
+From earlier we see that we can write this as, e.g.\
+$$\ket{u_\delta} = \frac{1}{\sqrt{2}} \left(\ket{\rm H} + e^{\im \delta} \ket{\rm V}\right),$$
+with the caveat that all results have to be averaged over $\delta$ (the $1/\sqrt{2}$ factor normalises the intensity $\braket{u_\delta}{u_\delta} = 1$).
 
 \begin{question}
 Show that the intensity of $\ket{u_\delta}$ in any normalised ket $\ket{K}$ is $1/2$.
@@ -275,15 +283,37 @@ after averaging the $\cos \delta$ disappears and we're left with $1/2$.
 \end{question}
 
 \begin{question}
+We saw earlier that the intensity of $\ket{\rm LCP}$ in any $\ket{\theta}$ state is $1/2$. What then is the difference between $\ket{\rm LCP}$ and unpolarised light?
+\solution{
+Unpolarised light has the same intensity in \emph{both} LCP and RCP states, but $\ket{\rm LCP}$ obviously does not.
+}
+\end{question}
+
+\begin{question}
+Show that unpolarised light (of non-zero intensity) cannot be described by \emph{any} single ket $\ket{J}$ (with no dependence on $\delta$).
+\solution{
+Write $\ket{J} = \alpha \ket{K} + \beta \ket{L}$ for two orthonormal states $\ket{K}$ and $\ket{L}$ and define $\ket{H} = -\beta \ket{K} + \alpha \ket{L}$.
+If $\ket{J}$ is unpolarised, then $\braket{H}{J} = \braket{J}{J} \ne 0$.
+But $\braket{H}{J} = -\beta \alpha + \beta\alpha = 0$.
+Hence $\ket{J}$ cannot be unpolarised.
+}
+\end{question}
+
+\begin{question}
 What is the effect of (a) a linear polariser, (b) a quarter-wave plate and (c) a rotation on unpolarised light?\\
 \solution{(a) $\ket{\theta} \braket{\theta}{u_\delta} = (\cos \theta + e^{\im \delta} \sin \theta)/\sqrt{2}~\ket{\theta}$.
 Note that $\left|\cos \theta + e^{\im \delta} \sin \theta\right| = \cos^2 \theta + \sin^2 \theta + 2 \cos \delta \cos \theta \sin \theta = 1 + \cos \delta \sin(2\theta)$.
 We thus get linearly polarised light with an average intensity of $1/2$.\\
 (b) $(1, \im e^{\im \delta})/\sqrt{2}$ is also unpolarised light, since we can redefine $\delta \to \delta - \pi/2$.\\
 (c) Intuitively, the result is still unpolarised light. Mathematically it's a bit trickier since
-$$R_\theta |u_\delta\rangle = (\cos \theta + \sin \theta e^{\im \delta}, -\sin \theta + \cos \theta e^{\im \delta}).$$
+$$R_\theta \ket{u_\delta} = \frac{1}{\sqrt{2}} (\cos \theta + \sin \theta e^{\im \delta}, -\sin \theta + \cos \theta e^{\im \delta}).$$
 It is not at all obvious that the result is unpolarised.
-If you are feeling very keen, you can go back to the defining property and take dot products with arbitrary vectors to show that the answer is $1/2$ after averaging.
+We can calculate the intensity in an arbitrary $\ket{K}$ state as
+$$|\bra{K} R_\theta \ket{u_\delta}|^2 = \frac{1}{2} \left|K_1 (\cos \theta + \sin \theta e^{\im \delta}) + K_2 (-\sin \theta + \cos \theta e^{\im \delta})\right|^2.$$
+$$= \frac{1}{2} \left(|K_1|^2 |\cos \theta + \sin \theta e^{\im \delta}|^2 + |K_2|^2 |-\sin \theta + \cos \theta e^{\im \delta}|^2 + 2 \Re(K_1^* K_2 (\cos \theta + \sin \theta e^{-\im \delta}) (-\sin \theta + \cos \theta e^{\im \delta}))\right)$$
+$$= \frac{1}{2} |K_1|^2 (1 + 2 \cos \theta \sin \theta \cos \delta) + \frac{1}{2} |K_2|^2 (1 - 2 \cos \theta \sin \theta \cos \delta) + \Re(K_1^* K_2 (\cos^2 \theta e^{\im \delta} - \sin^2 \theta e^{-\im \delta}))$$
+which averages to
+$$= \frac{1}{2} (|K_1|^2 + |K_2|^2) = \frac{1}{2}.$$
 }
 \end{question}
 
@@ -343,15 +373,330 @@ $$\varrho = \mathcal{A}\left(\ket{J} \bra{J}\right) \to \mathcal{A}\left(M \ket{
 \begin{question}
 Now using $\varrho$: What is the effect on the density matrix of originally unpolarised light that passed through (a) a linear polariser, (b) a quarter-wave plate and (c) a rotation?
 \solution{
-Note that in all cases $\rho = 1/2$ and so $M^\dagger \rho M = M^\dagger M / 2$.\\
+Note that in all cases $\varrho = 1/2$ and so $M^\dagger \varrho M = M^\dagger M / 2$.\\
 (a) $\frac{1}{2} \ket{\theta} \bra{\theta} \ket{\theta} \bra{\theta} = \frac{1}{2} \ket{\theta} \bra{\theta}$.\\
 (b) $\frac{1}{2} \begin{pmatrix}1 & 0\\0 & \im (-\im)\end{pmatrix} = \frac{1}{2}$.\\
 (c) $\frac{1}{2} R_{-\theta} R_\theta = \frac{1}{2}$.
 }
 \end{question}
 
+%\begin{question}
+%The trace $\tr(M)$ is defined to be linear in $M$ and to obey $\tr(\ket{A} \bra{B}) = \braket{B}{A}$.
+%Show that $\tr(\ket{A} \bra{B} C) = \bra{B} C \ket{A}$ and $\tr(C D) = \tr(D C)$ for two matrices $C$ and $D$.
+%\hint{Remember that $M = \sum_i \alpha_i \ket{i} \bra{i}$.}
+%\solution{
+%Write $C = \sum_i \gamma_i \ket{i} \bra{i}$ and note that
+%$$\tr(\ket{A} \bra{B} C) = \sum_i \gamma_i \tr(\ket{A} \bra{B} \ket{i} \bra{i}) = \sum_i \gamma_i \braket{B}{i} \tr(\ket{A} \bra{i}) = \sum_i \gamma_i \braket{B}{i} \braket{i}{A} = \bra{B} C \ket{A}.$$
+%With $D = \sum_j \delta_j \ket{j} \bra{j}$ we have
+%$$\tr(CD) = \sum_{i,j} \gamma_i \delta_j \tr(\ket{i} \braket{i}{j} \bra{j}) = \sum_{i,j} \gamma_i \delta_j \tr(\ket{j} \bra{i}) \tr(\ket{i} \bra{j}),$$
+%the result is symmetric in $i$ and $j$ and so equal to $\tr(DC)$.
+%}
+%\end{question}
+
+%\begin{question}
+%Find an expression for the measured value of a matrix $M$ in a mixed state $\varrho$.
+%Express the result using the trace.
+%\hint{Remember the definition of measured value in terms of physical measurements.}
+%\solution{
+%Write $M = \sum_i \alpha_i \ket{i} \bra{i}$.
+%The measured value is defined as
+%$$\mathcal{M} = \frac{1}{I_0} \sum_i \alpha_i \times \mbox{intensity in the $\ket{i}$ state},$$
+%where $I_0$ is the total intensity.
+%For a mixed state we have the intensity in the $\ket{i}$ state as $\bra{i} \varrho \ket{i}$ 
+%$$\frac{1}{I_0} \sum_i \alpha_i \bra{i} \varrho \ket{i} = \frac{1}{I_0} \sum_i \alpha_i \tr(\ket{i} \bra{i} \varrho) = \frac{1}{I_0} \tr\left(\left(\sum_i \alpha_i \ket{i} \bra{i}\right) \varrho\right) = \frac{\tr(\varrho M)}{I_0}.$$
+%To find $I_0$ note that we want the measured value of $1$ to be $1$ and so $I_0 = \tr(\varrho)$. Hence
+%$$\mathcal{M}(M) = \frac{\tr(\varrho M)}{\tr(\varrho)}.$$
+%}
+%\end{question}
+
 \begin{question}
 The trace $\tr(M)$ is defined to be linear in $M$ and to obey $\tr(\ket{A} \bra{B}) = \braket{B}{A}$.
+
+Show that\\
+1. $\tr(\varrho) \ge 0$,\\
+2. $\varrho = \varrho^\dagger$,\\
+3. $|\braket{A}{B}|^2 \le \braket{A}{A} \braket{B}{B},$\\
+4. $\tr(\varrho^2) \le (\tr(\varrho))^2$ (with equality for perfectly polarised light).
+\hint{3. Find a vector $\ket{C}$ so that $\ket{A} \bra{A} + \ket{C} \bra{C} = \braket{A}{A}$ (remember we are in 2D). Then manipulate that equation by applying bras and kets.}
+\solution{
+1. $\tr(\varrho) = \mathcal{A}(\tr(\ket{K_\delta}\bra{K_\delta})) = \mathcal{A}(\braket{K_\delta}{K_\delta}) \ge 0$, since $\braket{K_\delta}{K_\delta} \ge 0$.\\
+2. $\varrho^\dagger = \mathcal{A}((\ket {K_\delta} \bra{K_\delta})^\dagger) = \mathcal{A}(\ket{K_\delta} \bra{K_\delta}) = \varrho$.\\
+3. If $\ket{C}$ is orthogonal to $\ket{A}$ and $\braket{C}{C} = \braket{A}{A}$ then $\ket{A} \bra{A} + \ket{C} \bra{C} = \braket{A}{A}$ and
+$$\braket{A}{A} \braket{B}{B} = \bra{B} \braket{A}{A} \ket{B} = \braket{B}{A} \braket{A}{B} + \braket{B}{C} \braket{C}{B} \ge |\braket{B}{A}|^2.$$
+4. For perfectly polarised light write $\varrho = \ket{J} \bra{J}$, then
+$$\tr(\varrho^2) = \tr(\ket{J} \braket{J}{J} \bra{J}) = (\braket{J}{J})^2 = \tr(\varrho)^2.$$
+
+In the general case, we can introduce a second ``$\delta$'' called $\varepsilon$ and use it to write $\varrho^2$ using a single average over both variables as
+$$\varrho^2 = \mathcal{A}(\ket{K_\delta} \braket{K_\delta}{K_\varepsilon} \bra{K_\varepsilon}).$$
+It follows that
+$$\tr(\varrho^2) = \mathcal{A}(\tr(\ket{K_\delta} \braket{K_\delta}{K_\varepsilon} \bra{K_\varepsilon})) = \mathcal{A} (\braket{K_\varepsilon}{K_\delta} \braket{K_\delta}{K_\varepsilon}).$$
+Now we can use the result from 3.\ to show that
+$$\tr(\varrho^2) \le \mathcal{A}(\braket{K_\varepsilon}{K_\varepsilon}) \mathcal{A}(\braket{K_\delta}{K_\delta}) = (\tr(\varrho))^2$$
+(note that the average ``splits'' like that because each expression averages over a different variable).
+}
+\end{question}
+
+\begin{question}
+Show that $\varrho$ is measurable, i.e.\ can be uniquely determined by measurements.
+In particular, two states with different $\varrho$ can be distinguished.
+\solution{
+Remember that $\varrho = \varrho^\dagger$ and so $\varrho$ can be written as
+$$\begin{pmatrix}a & b + \im c\\b - \im c & d\end{pmatrix}.$$
+Measuring the intensity in $\ket{\rm H}$ and $\ket{\rm V}$ gives $a$ and $d$, respectively.
+The intensity in $\ket{\rm LCP}$ gives
+$$\bra{\rm LCP} \varrho \ket{\rm LCP} = \frac{1}{2} (1, \mp \im) \begin{pmatrix}a + (b \im - c)\\b - \im c + \im d\end{pmatrix} = \frac{1}{2} (a + (b\im - c) - \im (b - \im c + \im d)) = \frac{1}{2} (a + d) + c,$$
+whereas the intensity in $\ket{\pi/4}$ gives
+$$\bra{\pi/4} \varrho \ket{\pi/4} = \frac{1}{2} (1, 1) \begin{pmatrix}a + b + c \im\\b - \im c + d\end{pmatrix} = \frac{1}{2} (a + b + c \im + b - c \im + d) = \frac{1}{2} (a + d) + b.$$
+Hence
+$$a = \bra{\rm H} \varrho \ket{\rm H}, d = \bra{\rm V} \varrho \ket{\rm V},$$
+$$b = \bra{\pi/4} \varrho \ket{\pi/4} - \tr(\rho)/2,$$
+$$c = \bra{\rm LCP} \varrho \ket{\rm LCP} - \tr(\rho)/2.$$
+}
+\end{question}
+
+\subsection{From photons to quantum mechanics}
+We now know that light is not a classical wave and is, in fact, made of discrete excitations called photons, each carrying energy $\hbar \omega$ where $\hbar$ is the (reduced) Planck's constant (we will see later where this formula comes from).
+Reconciling this with our previous results is not easy.
+We might naively expect that photons come in two polarisations, say $\ket{\rm H}$ and $\ket{\rm V}$, and that light in an arbitrary state is really a mixture of both.
+What do we mean by mixture?
+The simplest would be that the polarisation of each photon is random with probability $\alpha$ to be $\ket{\rm H}$.
+However, this would imply that the density matrix is proportional to
+$$\begin{pmatrix}\alpha & 0\\0 & 1-\alpha\end{pmatrix},$$
+which means it cannot represent states such as $\ket{\theta}$ or $\ket{\rm LCP}$ correctly.
+
+While we could attempt to build more complex models, it is actually possible to prepare photons in arbitrary polarisation states, i.e.\ to prepare a stream of photons so that \emph{all of them} will pass through a filter for that state.
+This implies that the polarisation vector $\ket{J}$ is a \emph{property of the photon}.
+Previously $\braket{J}{J}$ had meaning as an intensity, but now the intensity is fixed and so it's now completely meaningless.
+Also, previously $0$ was a sensible, but boring, state (corresponding to no light, i.e.\ zero intensity).
+But we can't have a photon and no intensity and so zero is now no longer an actual state.
+
+Now suppose photons polarised in state $\ket{J}$ enters a filter for photons of state $\ket{K}$.
+We expect the intensity after the filter to be proportional to $|\braket{K}{J}|^2$.
+We can recover this result by assuming that each photon passes through the filter with probability proportional to $|\braket{K}{J}|^2$.
+\begin{question}
+Find the actual probability that the photon passes through the filter.
+\hint{What is the ratio of intensities?}
+\result{$|\braket{K}{J}|^2/\braket{J}{J}$.}
+\end{question}
+
+Note that photons leaving a filter for state $\ket{K}$ are in state $\ket{K}$.
+Thus, a second measurement will agree with the first one 100\% of the time.
+
+The idea behind quantum mechanics is now to assume that \emph{all} systems behave like this.
+Right now we can't justify such a bold leap but let's see where it leads us.
+Take an \emph{arbitrary system} and assume that it's described by a state vector $\ket{J}$.
+Since the system is most likely a lot more complicated the state vectors will have more dimensions than two (often infinitely many!).
+We assume that we can still form bra vectors $\bra{J}$, scalar products $\braket{K}{J}$ etc.
+We also assume that, just like photons, $\alpha \ket{J}$ (with $\alpha \ne 0$) is the same physical state as $\ket{J}$ and that $0$ is not a physical state.
+
+In the photon case we had the equation
+$$\ket{K} \bra{K} + \ket{L} \bra{L} = 1,$$
+for two orthonormal vectors $\ket{K}$ and $\ket{L}$.
+In the general case this generalises to
+$$\sum_i \ket{i} \bra{i} = 1.$$
+A set of states is called \emph{complete} if it satisfies this ``completeness relation''.
+An alternative term is \emph{basis}.
+This is a by no means trivial statement: It means that the set of state covers all the physics of the system.
+
+Measurement in quantum mechanics turns out to work just like it did in the photon case.
+In the photon case a measurement told us whether the photon was in state $\ket{K}$ or the orthogonal state $\ket{L}$.
+Additionally, it \emph{disturbed the state} and changed it to be in line with whichever state it told us it was.
+The simplest measurements in general quantum mechanics are very similar:
+A measurement for state $\ket{K}$ will tell us the system is in state $\ket{K}$ or whether it's orthogonal to $\ket{K}$ (we assume that $\braket{K}{K} = 1$).
+It will find the former with probability $|\braket{K}{J}|^2/\braket{J}{J}$.
+It will also change the state of the system to agree with the result it gave.
+
+As a simple example, consider an atom that can sit in one of $N$ sites in a material.
+Each site corresponds to a state $\ket{1}$, $\ket{2}$, \dots, $\ket{N}$.
+If the atom is in a general state $\ket{\psi}$ and we measure whether it's in $\ket{1}$, the answer will be ``yes'' with probability $|\braket{1}{\psi}|^2/\braket{\psi}{\psi}$.
+In that case, it will end up in site 1.
+If the answer is ``no'', it's now in a new state $\ket{\psi_1}$ which obeys $\braket{1}{\psi_1} = 0$ (i.e.\ it's orthogonal to $\ket{1}$).
+
+In the photon case this is really the most general type of measurement:
+The states are two dimensional and there is only one direction orthogonal to the first state.
+If the states are higher dimensional, we can imagine a more complex type of measurement that tells us whether the system is in state $\ket{1}$, $\ket{2}$, \dots, $\ket{n}$ or whether it's orthogonal to all of them.
+It will find each state with probability $|\braket{i}{\psi}|^2/\braket{\psi}{\psi}$.
+
+This idea of measurements giving random results and changing the state of the system is rather bizarre.
+We will later give it a more precise footing in terms of underlying physics.
+For now, think of measurements as coupling a quantum system with a large classical system.
+The classical system must end up in a definite state which needs to be consistent with the way the coupling is done.
+In our $N$ lattice site model the classical system could be a person operating a detector that finds the atom in one of the sites.
+If the atom is in some weird quantum state, like $(\ket{1} + 2 \ket{2} + 3 \ket{3})/\sqrt{13}$, to do the coupling we necessarily have to pick one of the three states.
+The simplest solution is a random choice.
+The fact that the system ends up in either $\ket{1}$, $\ket{2}$ or $\ket{3}$ is necessary to ensure that a second measurement will give the same result (if the atom hasn't moved).
+
+We now want to derive a formalism to describe measurements.
+Assume $n=N$, i.e.\ the measurement identifies one of the $\ket{i}$ states.
+Assign each site a number $q_i$.
+We can then say that our measurement ``measures a quantity $q$'' where each individual measurement will yield one of the $q_i$.
+\begin{question}
+Find an expression for the average value $\langle q \rangle$.
+Write the result as an equation in terms of a matrix $q$.
+Here the average is over many measurements of identically prepared states (an ``ensemble average'').
+\hint{To get the matrix remember that $|a|^2 = a a^*$ and $\braket{a}{b}^* = \braket{b}{a}$.}
+\solution{
+Using the standard formula for expectation value
+$$\langle q \rangle = \sum_i q_i \times \mbox{prob. of measuring $q_i$} = \sum q_i \frac{\left|\braket{i}{\psi}\right|^2}{\braket{\psi}{\psi}}.$$
+We can write this as
+$$\langle q \rangle = \frac{1}{\braket{\psi}{\psi}} \sum_i q_i \braket{\psi}{i} \braket{i}{\psi} = \frac{1}{\braket{\psi}{\psi}} \bra{\psi} \left(\sum_i q_i \ket{i} \bra{i}\right) \ket{\psi} = \frac{\bra{\psi}q\ket{\psi}}{\braket{\psi}{\psi}},$$
+where $q = \sum_i q_i \ket{i} \bra{i}$.
+}
+\end{question}
+
+Note that this is identical to the ``measured value'' that we defined in the photon case!
+
+\begin{question}
+Measurable quantities are usually real.
+Assuming that all the $q_i$ are real, show that $q$ from the last question is \emph{Hermitian}, i.e.\ $q = q^\dagger$.
+\solution{
+$$q^\dagger = \left(\sum_i q_i \ket{i} \bra{i}\right)^\dagger = \sum_i {q_i}^* \ket{i} \bra{i} = \sum_i q_i \ket{i} \bra{i} = q.$$
+}
+\end{question}
+
+Note that the vaguely defined ``quantity $q$'' is now precisely defined as an operator (in infinite dimensions ``matrices'' are usually called operators and this terminology is often applied universally in quantum mechanics).
+It turns out that this the most general type of measurement.
+We thus have the principle:
+ \emph{Any measurable quantity (an ``observable'') is associated with a Hermitian operator $q$ in the space of states. The expectation value of a measurement in state $\ket{\psi}$ is given by $\bra{\psi} q \ket{\psi} / \braket{\psi}{\psi}$.}
+
+\begin{question}
+Now assume that you determined an observable $q$ some other way but you have no idea what the $q_i$ or the $\ket{i}$ states are.
+Find an equation for them.
+\hint{What happens when you apply $q$ to an $\ket{i}$ state?}
+\solution{
+$$q \ket{i} = q_i \ket{i}$$
+$q_i$ is thus an \emph{eigenvalue} and $\ket{i}$ is the corresponding \emph{eigenvector} (also called \emph{eigenstate}).
+
+We can eliminate $\ket{i}$ in the finite dimensional case by writing $(q - q_i) \ket{i} = 0$ and then take determinants to get
+$$\det(q - q_i) = 0.$$
+This last equation is often called the characteristic equation.
+}
+\end{question}
+
+Hence an addendum to our principle: \emph{Each individual measurement results in an eigenvalue $q_i$ of $q$, with probability $|\braket{q_i}{\psi}|^2$, and leaving the state as an eigenvector of $q$.}
+Note that the last step is identical to applying the operator $\ket{i} \bra{i}$.
+
+\begin{question}
+If $q_i$ and $q_j$ are identical (``degenerate''), are $\ket{i}$ and $\ket{j}$ uniquely determined from $q$?
+\solution{No, take, e.g., the rotated states
+$$\ket{a} = \cos \theta \ket{i} + \sin \theta \ket{j}, \qquad \ket{b} = -\sin \theta \ket{i} + \cos \theta \ket{j}.$$
+Since
+$$q_i (\ket{a} \bra{a} + \ket{b} \bra{b}) = q_i (\ket{i} \bra{i} + \ket{j} \bra{j})$$
+we can replace $\ket{i}$ and $\ket{j}$ by $\ket{a}$ and $\ket{b}$ and still get the same operator $q$.
+}
+\end{question}
+
+This leads to a slight correction to the principle if multiple $q_i$ are identical: We project not with $\ket{i} \bra{i}$ but with $\ket{i} \bra{i} + \ket{j} \bra{j} + \dots$.
+Note that this entire construction would blow up if it were not for the following theorem.
+
+\begin{question}
+Given that $q$ is a Hermitian operator, show that for two eigenvalues $q_i$, $q_j$, the eigenvectors are either orthogonal or can be chosen to be orthogonal.
+\hint{Consider $q_i = q_j$ and $q_i \ne q_j$ separately. In the latter case remember that you can apply bra vectors and ${}^\dagger$ to equations.}
+\solution{
+We know that
+$$q \ket{i} = q_i \ket{i}, \quad q \ket{j} = q_j \ket{j},$$
+and if we apply $\bra{j}$ to the first and $\bra{i}$ to the second equation we get
+$$\bra{j} q \ket{i} = q_i \braket{j}{i}, \qquad \bra{i} q \ket{j} = q_j \braket{i}{j},$$
+hence
+$$q_i \braket{j}{i} = (q_j \braket{i}{j})^* = q_j \braket{j}{i},$$
+or
+$$(q_i - q_j) \braket{j}{i} = 0.$$
+Hence $\braket{j}{i} = 0$, if $q_i \ne q_j$.
+
+If $q_i = q_j$ then we just saw that we can replace $\ket{i}$ and $\ket{j}$.
+Replace $\ket{j}$ with $\ket{j} - \braket{i}{j} \ket{i}$, which is orthogonal to $\ket{i}$ (we assume $\braket{i}{i} = 1$).
+}
+\end{question}
+
+\begin{question}
+Assume that we are in $N$ dimensions.
+Define $\ket{1} = (1,0,0,\dots)$, $\ket{2} = (0,1,0,0,\dots)$, \dots, $\ket{N} = (0, 0, \dots, 1)$.
+Note that this is a basis.
+Given a matrix
+$$M = \begin{pmatrix}M_{11} & M_{12} & M_{13} & \dots\\M_{21} & M_{22} & M_{23} & \dots\\M_{31} & M_{32} & M_{33} & \dots\\\vdots & \vdots & \vdots & \ddots\end{pmatrix}$$
+write $M$ in terms of bra and ket vectors.
+
+If you determined a matrix $M$ to have coefficients $M'_{i,j}$ in terms of another basis $\ket{i'}$, can you express $M_{i,j}$ in terms of $M'_{i,j}$?
+If you use the $M'_{i,j}$ with the original $\ket{i}$ vectors you can define another matrix $M'$. Relate $M$ and $M'$ via a matrix equation.
+\hint{Remember that you can insert the completeness relation $\sum \ket{i} \bra{i} = 1$ into expressions.}
+\solution{
+Applying $M$ to $\ket{i}$ gives the $i$-th column
+$M \ket{i} = \sum_j M_{j,i} \ket{j}$
+Hence
+$$M = \sum_i M \ket{i} \bra{i} = \sum_{i,j} M_{j,i} \ket{j} \bra{i}.$$
+
+Now given
+$M = \sum_{i,j} M'_{j,i} \ket{j'} \bra{i'}$
+we can apply $\sum \ket{k}\bra{k} = 1$ to both sides to get
+$$M = \sum_{i,j,k,\ell} M'_{j,i} \braket{k}{j'} \braket{i'}{\ell} \ket{k} \bra{\ell},$$
+by comparing with our earlier expression
+$$M_{k,\ell} = \sum_{i,j} M'_{j,i} \braket{k}{j'} \braket{i'}{\ell}.$$
+
+If $M' = \sum_{i,j} M'_{j,i} \ket{j} \bra{i}$
+then
+$$M = \sum_{i,j} \ket{j'} \bra{j} M' \ket{i} \bra{i'} = U M' U^\dagger,$$
+where $U = \sum_i \ket{i'} \bra{i}$.
+}
+\end{question}
+
+\subsection{Classical and quantum probability}
+We assumed that photons have a polarisation \emph{vector} $\ket{J}$, but we showed earlier that the most general polarisation state of light is a \emph{density matrix} $\varrho$.
+We already hinted how this works out, in our analysis of the naive two-polarisation-state photon model.
+A density matrix is the result of a random sequence of photons.
+What do we mean by random?
+Here, we used the classical definition of randomness, which reflects \emph{imperfect knowledge}.
+We can roll a dice and get a ``random'' number even though the number rolled is a perfectly determistic function of the dice's position and momentum when it was thrown!
+However this function is so complicated and we know so little about the position and momentum that the result \emph{appears} random.
+
+This is very different from the quantum world.
+We can know with 100\% certainty that the state of the photon is $\ket{\rm LCP}$.
+There are no further degrees of freedom so we know everything there is to know about the system.
+Yet we cannot predict whether the photon will pass through a linear polarisation filter -- we can only calculate the probability.
+This is the essence of \emph{quantum probability}.
+
+In reality we often don't even know the state $\ket{\psi}$.
+That is, we have a situation with \emph{both classical and quantum probability}.
+We have a probability distribution for the state $\ket{\psi}$ -- reflecting incomplete knowledge -- \emph{and} we have the fundamental quantum probability that comes with every measurement.
+\begin{question}
+We know the system is in either $\ket{\psi}$ or $\ket{\phi}$ and both occur with equal chance.
+Assuming that $\braket{\psi}{\psi} = \braket{\phi}{\phi} = 1$, find an expression for $\langle q \rangle$.
+(we assume that both states are normalised).
+Show that the ``quantum superposition'' state $(\ket{\psi} + \ket{\phi})/\sqrt{2}$ gives a different answer.
+\solution{
+For the classical mixture of two states we have
+$$\langle q \rangle = \frac{1}{2} \bra{\psi} q \ket{\psi} + \frac{1}{2} \bra{\phi} q \ket{\phi}$$
+For the quantum superposition state
+$$\langle q \rangle = \frac{1}{2} \bra{\psi} q \ket{\psi} + \frac{1}{2} \bra{\phi} q \ket{\phi} + \operatorname{Re} \bra{\phi} q \ket{\psi}.$$
+}
+\end{question}
+
+Note that in the quantum superposition state there is an additional ``interference'' term involving both states.
+The presence of interference is another fundamental difference between classical and quantum probability.
+As a result, classical mixing is irreversible -- states only become more and more impure as you mix them.
+Quantum ``mixing'' (superposition) is reversible. Given the two superposition states $(\ket{A} \pm \ket{B})/\sqrt{2}$ you can recover $\ket{A}$ and $\ket{B}$ (note the parallels to unpolarised light and LCP/RCP states).
+
+It is this scenario of both classical and quantum probability that density matrices appear in.
+A system in an unknown quantum state, also called a mixed or impure state, is described by a density matrix $\varrho$.
+$\varrho$ is defined just as it is for photons
+$$\varrho = \mathcal{A}(\ket{K_\delta} \bra{K_\delta}).$$
+Note that $\varrho$ can also be defined for a ``pure'' state $\ket{K}$, for which we just have $\varrho = \ket{K} \bra{K}$.
+
+\begin{question}
+Assume that the system is in one of the (normalised) states $\ket{K_1}$, $\ket{K_2}$, \dots with probability $P_1$, $P_2$, \dots respectively.
+Find an expression for $\varrho$.
+\solution{
+The average can be expressed using the standard expectation value formula
+$$\varrho = \sum_i P_i \ket{K_i} \bra{K_i}.$$
+}
+\end{question}
+
+Note that just like $\ket{K_i}$, $\varrho$ need not be normalised.
+Just like light, $\varrho$ obeys\\
+1. $\tr(\varrho) \ge 0$.\\
+2. $\varrho = \varrho^\dagger$.\\
+3. $\tr(\varrho^2) \le \tr(\varrho)^2$ (with equality for a pure state).
+
+\begin{question}
 Show that $\tr(\ket{A} \bra{B} C) = \bra{B} C \ket{A}$ and $\tr(C D) = \tr(D C)$ for two matrices $C$ and $D$.
 \hint{Remember that $M = \sum_i \alpha_i \ket{i} \bra{i}$.}
 \solution{
@@ -364,39 +709,371 @@ the result is symmetric in $i$ and $j$ and so equal to $\tr(DC)$.
 \end{question}
 
 \begin{question}
-Find an expression for the measured value of a matrix $M$ in a mixed state $\varrho$.
-Express the result using the trace.
-\hint{Remember the definition of measured value in terms of physical measurements.}
+Find an expression for the expectation value of an observable $q$ in a mixed state $\varrho$.
 \solution{
-Write $M = \sum_i \alpha_i \ket{i} \bra{i}$.
-The measured value is defined as
-$$\mathcal{M} = \frac{1}{I_0} \sum_i \alpha_i \times \mbox{intensity in the $\ket{i}$ state},$$
-where $I_0$ is the total intensity.
-For a mixed state we have the intensity in the $\ket{i}$ state as $\bra{i} \varrho \ket{i}$ 
-$$\frac{1}{I_0} \sum_i \alpha_i \bra{i} \varrho \ket{i} = \frac{1}{I_0} \sum_i \alpha_i \tr(\ket{i} \bra{i} \varrho) = \frac{1}{I_0} \tr\left(\left(\sum_i \alpha_i \ket{i} \bra{i}\right) \varrho\right) = \frac{\tr(\rho M)}{I_0}.$$
-To find $I_0$ note that we want the measured value of $1$ to be $1$ and so $I_0 = \tr(\rho)$. Hence
-$$\mathcal{M}(M) = \frac{\tr(\rho M)}{\tr(\rho)}.$$
+To find $\langle q \rangle$ we perform first the quantum average $\bra{K_\delta} q \ket{K_\delta}$ and then the classical average $\mathcal{A}$.
+To do this we need to introduce a normalisation factor $\alpha$.
+We get
+$$\langle q\rangle = \alpha \mathcal{A}(\bra{K_\delta} q \ket{K_\delta}) = \alpha \mathcal{A}(\tr(q \ket{K_\delta} \bra{K_\delta})) = \alpha \tr(q \mathcal{A}(\ket{K_\delta} \bra{K_\delta})) = \alpha \tr(q \rho).$$
+To find $\alpha$ note that $\langle 1 \rangle = \alpha \tr(\rho)$, but it should be 1, and so $\alpha = 1/\tr(\rho)$ and hence
+$$\langle q \rangle = \frac{\tr(\rho q)}{\tr(\rho)}.$$
+}
+\end{question}
+
+\subsection{Infinite dimensions}
+So far we have worked in finite dimensions.
+We can also generalise all concepts so far to infinite dimensions.
+
+In infinite dimensions we have to explicitly assume that all observables have a ``complete set of eigenstates'', i.e.\ that the eigenstates obey
+$$\sum_i \ket{i} \bra{i} = 1.$$
+This additional axiom can be proved in the finite dimensional case.
+Note that even in finite dimension it's not true for all non-Hermitian operators, for instance it's not true for
+$$\begin{pmatrix}1 & 0\\1 & 1\end{pmatrix}.$$
+
+With infinite dimensions there are two fundamental possibilities (which are not mutually exclusive).
+We can have either discrete states or continuous states.
+An example for discrete states would be an atom in one of infinitely many sites $\ket{1}$, $\ket{2}$, $\ket{3}$, \dots
+An example of continuous states would be an atom in a 1D universe -- we now have a state $\ket{x}$ for every real number $x$.
+In the discrete case we simply use infinite sums, e.g. the completeness relation is\
+$$\sum_{i=1}^\infty \ket{i} \bra{i} = 1.$$
+In the continuous case we have to use integrals and we get a completeness relation
+$$\int \ket{x} \bra{x} \D{x} = 1.$$
+
+\begin{question}
+Derive the normalisation condition for the discrete $\ket{i}$ and the continuous $\ket{x}$ states, i.e.\ find an equation for $\braket{j}{i}$ and $\braket{x}{y}$.
+\hint{Apply $\ket{y}$ to the normalisation condition.}
+\solution{
+In the discrete case we have
+$$\sum_{i=1}^\infty \ket{i} \braket{i}{j} = \ket{j},$$
+which implies
+$$\braket{i}{j} = \delta_{i,j}.$$
+
+In the continuous case we have
+$$\int \ket{x} \braket{x}{y} \D{x} = \ket{y}$$
+This equation is solved by the $\delta$-function
+$$\braket{x}{y} = \delta(x - y).$$
+}
+\end{question}
+
+By virtue of the completeness relation we can expand an arbitrary state $\ket{\psi}$ in terms of $\ket{x}$, i.e.\
+$$\ket{\psi} = \int \ket{x} \braket{x}{\psi} \D{x}.$$
+We can then define the \emph{wavefunction}
+$$\psi(x) = \braket{x}{\psi}.$$
+
+\begin{question}
+Find an expression for $\braket{\phi}{\psi}$ in terms of wavefunctions.
+In particular express the normalisation condition $\braket{\psi}{\psi} = 1$ in terms of $\psi(x)$.
+\hint{Use the completeness relation.}
+\solution{
+Insert the completeness relation between $\bra{\phi}$ and $\ket{\psi}$ to get
+$$\braket{\phi}{\psi} = \int \braket{\phi}{x} \braket{x}{y} \braket{y}{\psi} \D{x} \D{y} = \int \phi^*(x) \delta(x - y) \psi(y) \D{x} \D{y} = \int \phi^*(x) \psi(x) \D{x}.$$
+The normalisation condition is obtained by setting $\phi=\psi$, i.e.\
+$$\int |\psi(x)|^2 \D{x} = 1.$$
 }
 \end{question}
 
 \begin{question}
-Show that\\
-1. $\tr(\varrho) \ge 0$,\\
-2. $\varrho = \varrho^\dagger$,\\
-3. $|\braket{A}{B}|^2 \le \braket{A}{A} \braket{B}{B},$\\
-4. $\tr(\varrho^2) \le (\tr(\varrho))^2$ (with equality for polarised light).
-\hint{3. Find a vector $\ket{C}$ so that $\ket{A} \bra{A} + \ket{C} \bra{C} = \braket{A}{A}$ (remember we are in 2D). Then manipulate that equation by applying bras and kets.}
+(a) Given an operator $q$, write $\ket{\phi} = q \ket{\psi}$ in terms of wavefunctions and a ``matrix'' $q(x,y)$.\\
+(b) Define a position operator by $q \ket{x} = x \ket{x}$ and find $q(x,y)$.\\
+(c) Find an expression for the expectation value of an operator and apply it to the position operator.
 \solution{
-1. $\tr(\varrho) = \mathcal{A}(\tr(\ket{K_\delta}\bra{K_\delta})) = \mathcal{A}(\braket{K_\delta}{K_\delta}) \ge 0$, since $\braket{K_\delta}{K_\delta} \ge 0$.\\
-2. $\varrho^\dagger = \mathcal{A}((\ket {K_\delta} \bra{K_\delta})^\dagger) = \mathcal{A}(\ket{K_\delta} \bra{K_\delta}) = \varrho$.\\
-3. If $\ket{C}$ is orthogonal to $\ket{A}$ and $\braket{C}{C} = \braket{A}{A}$ then $\ket{A} \bra{A} + \ket{C} \bra{C} = \braket{A}{A}$ and
-$$\braket{A}{A} \braket{B}{B} = \bra{B} \braket{A}{A} \ket{B} = \braket{B}{A} \braket{A}{B} + \braket{B}{C} \braket{C}{B} \ge |\braket{B}{A}|^2.$$
-4. We can introduce a second ``$\delta$'' called $\varepsilon$ and use it to write $\varrho^2$ using a single average over both variables as
-$$\varrho^2 = \mathcal{A}(\ket{K_\delta} \braket{K_\delta}{K_\varepsilon} \bra{K_\varepsilon}).$$
-It follows that
-$$\tr(\varrho^2) = \mathcal{A}(\tr(\ket{K_\delta} \braket{K_\delta}{K_\varepsilon} \bra{K_\varepsilon})) = \mathcal{A} (\braket{K_\varepsilon}{K_\delta} \braket{K_\delta}{K_\varepsilon}).$$
-Now we can use the result from 3.\ to show that
-$$\tr(\rho^2) \le \mathcal{A}(\braket{K_\varepsilon}{K_\varepsilon}) \mathcal{A}(\braket{K_\delta}{K_\delta}) = (\tr(\rho))^2$$
-(note that the average ``splits'' like that because each expression averages over a different variable).
+Using the completeness relation
+$$\braket{x}{\phi} = \int \bra{x} q \ket{y} \braket{y}{\psi} \D{y}.$$
+Hence if $q(x,y) = \bra{x} q \ket{y}$ then
+$$\phi(x) = \int q(x,y) \psi(y) \D{y}.$$
+(b) 
+$$q(x,y) = \bra{y} q \ket{x} = x \braket{y}{x} = x\,\delta(y - x).$$
+(c)
+The expectation value is
+$$\bra{\psi} q \ket{\psi} = \int \psi^*(x) q(x,y) \psi(y) \D{x} \D{y}$$
+For the position operator we have
+$$\bra{\psi} q \ket{\psi} = \int x |\psi(x)|^2 \D{x}.$$
+}
+\end{question}
+
+\begin{question}
+Find the eigenvalues and eigenstates of the position operator $\ket{x}$.
+\solution{
+Since $q \ket{x} = x \ket{x}$ for every $x$ we conclude that every real number $x$ is an eigenvalue and that $\ket{x}$ is the corresponding eigenstate.
+}
+\end{question}
+
+In finite dimensions we can always normalise a state $\ket{\psi}$, i.e.\ we can redefine it so that $\braket{\psi}{\psi} = 1$ using
+$$\ket{\psi} \to \frac{\ket{\psi}}{\sqrt{\braket{\psi}{\psi}}}.$$
+In infinite dimension some states are not normalisable since $\braket{\psi}{\psi}$ is infinite.
+For instance, we just showed earlier that $\braket{x}{x} = \delta(0)$.
+This generally implies that the state is unphysical.
+For instance, we will later see that the $\ket{x}$ state has infinite kinetic energy.
+Such unphysical state are often still useful, either as approximations of physical states or as mathematical constructs.
+Note that states that depend continuously on a parameter can be described by a relationship such as $\braket{x}{y} = \delta(x - y)$ which can be considered a normalisation condition.
+
+\subsection{Symmetry}
+So far we found ways to describe systems and observables in general terms but we had little physical content (except for photons).
+To ameliorate this situation we need a way to identify -- and relate -- observables.
+For instance, for the particle in the one-dimensional space, we identified a position operator $q$, but to do physics we also need a momentum operator $p$, an energy operator $H$, etc.
+Additionally, we need a way to include time in our scheme.
+It turns out we can solve both these problems with just one additional principle.
+
+To understand this principle we need to understand the profound effect that symmetry has on physical systems.
+A complete discussion of the effect of symmetry requires Lagrangian mechanics, but there are a few simple cases we can discuss without.
+\begin{question}
+Consider a classical 1D particle in a potential $V(t,x)$
+$$m \ddot x = -\pfrac{V}{x}.$$
+(a) Show that if the system is symmetric with respect to spatial displacements, i.e.\ $V(t, x+\delta x) = V(t, x)$, then momentum $p$ is conserved (i.e.\ does not change with time).\\
+(b) Show that if the system is symmetric with respect to temporal displacements, i.e.\ $V(t+\delta t, x) = V(t, x)$, then energy $H$ is conserved.
+\hint{(b) Calculate $\D{H}/\D{t}$.}
+\solution{
+(a) If $V(t, x+\delta x) = V(t,x)$, then $V$ is independent of $x$ and $\partial V/\partial x = 0$ and hence
+$$\dot p = m \ddot = 0.$$
+(b) Note that $H = m \dot x^2/2 + V$ and hence by the chain rule
+$$\Dfrac{H}{t} = m \ddot x \dot x + \pfrac{V}{x} \dot x + \pfrac{V}{t} = \pfrac{V}{t}$$
+by applying the equation of motion.
+Hence if $\partial V/\partial t = 0$, then $H$ is constant.
+}
+\end{question}
+
+\begin{question}
+(optional)
+Generalise the results from the last question to $n$ particles as follows.
+Given a potential $V(t, x_1, x_2, \dots, x_n)$ the equation of motion is
+$$m_i \ddot x_i = - \pfrac{V}{x_i}.$$
+Show that \\
+(a) if $V(t, x_1 + \delta x, x_2 + \delta x, \dots, x_n + \delta x) = V(t, x_1, \dots, x_n)$, then total momentum $P$ is conserved,\\
+(b) if $\partial V/\partial t = 0$, then total energy $H$ is conserved.
+\solution{
+(a) Taking derivatives with respect to $\delta x$ and setting $\delta x = 0$ gives
+$$0 = \sum_i \pfrac{V}{x_i} = \sum_i (-m_i \ddot x_i) = -\Dfrac{}{t} \sum_i m_i \dot x_i = -\Dfrac{P}{t}.$$
+(b)
+Now $H = \sum_i m_i \dot x_i^2/2 + V$ and hence
+$$\Dfrac{H}{t} = \sum_i m_i \ddot x_i \dot x_i + \sum_i \pfrac{V}{x_i} \dot x_i + \pfrac{V}{t} = \sum_i \dot x_i \left(m_i \ddot x_i + \pfrac{V}{x_i}\right) + \pfrac{V}{t} = \pfrac{V}{t}$$
+and $H$ is again conserved if $\partial V/\partial t = 0$.
+}
+\end{question}
+
+To apply these ideas to quantum systems we start by defining an operator $T_\varepsilon$ that maps state to transformed states.
+$T_\varepsilon$ depends on a real number $\varepsilon$, i.e.\ we are dealing with \emph{continuous symmetries} (mirror symmetry is an example of a symmetry that's not continuous).
+For instance, spatial displacement corresponds to an operator
+$$T_\varepsilon \ket{x} = \ket{x + \varepsilon}.$$
+We assume that in general $T_0 = 1$.
+
+\begin{question}
+We want $T_\varepsilon$ to preserve scalar products, i.e.\ if $\ket{x} \to \ket{x'}$ and $\ket{y} \to \ket{y'}$ then
+$$\braket{x}{y} = \braket{x'}{y'}$$
+(we say that $T_\varepsilon$ must be \emph{unitary}).
+Find an equation that $T_\varepsilon$ must obey.
+\solution{
+$\ket{y'} = T_\varepsilon \ket{y}$ implies that $\bra{y'} = \bra{y} {T_\varepsilon}^\dagger$.
+Hence
+$\braket{y'}{x'} = \bra{y} {T_\varepsilon}^\dagger T_\varepsilon \ket{x}$, which only works for all states if
+$${T_\varepsilon}^\dagger T_\varepsilon = 1.$$
+}
+\end{question}
+
+We can define a ``derivative'' in $\varepsilon$ via the limit
+$$G = \lim_{\varepsilon \to 0} \frac{T_\varepsilon - 1}{\varepsilon}.$$
+The resulting operator $G$ is called the \emph{generator} of the transformation.
+We can then write transformations for $\varepsilon \approx 0$ as
+$$T_\varepsilon = 1 + \varepsilon G + O(\varepsilon^2).$$
+
+\begin{question}
+What does $T_\varepsilon$ being unitary imply about $G$?
+\solution{
+$$(1 + \varepsilon G)^\dagger (1 + \varepsilon G) = 1 + \varepsilon (G + G^\dagger) + O(\varepsilon^2) = 1$$
+and hence $G = -G^\dagger$, i.e.\ $G$ is \emph{anti-Hermitian}.
+}
+\end{question}
+
+We can now express the principle we alluded to earlier.
+It states that \emph{if a continuous symmetry in the classical system conserves $Q$, then the quantum operator $Q$ is related to the generator of the transformation via the equation $Q = \im \hbar G$.}
+Here $\hbar$ is a constant of nature called the reduced Planck's constant.
+We can consider the principle the definition of $\hbar$.
+
+\begin{question}
+Why do we need $\im$ in $Q = \im \hbar G$?
+\solution{
+$\im$ ensures that $Q$ is Hermitian, since $(\im G)\dagger = \im^* G^\dagger = (-\im) (-G) = \im G$.
+}
+\end{question}
+
+To apply the principle we need to precisely identify which classical conserved quantity is associated with a symmetry.
+Note that the simple approach from above identifies it, at best, only up to a constant factor, since if $Q$ is conserved, so is $\alpha Q$ for any constant $\alpha$.
+Using Lagrangian mechanics one can give the following, more, precise definition:
+If a transformation parametrised by $\varepsilon$ is such that $L=T-V$ (where $T$ is kinetic and $V$ is potential energy) is invariant under the transformation, then
+$$Q = \sum_i \pfrac{L}{\dot x_i} \Dfrac{x_i}{\varepsilon}$$
+is the corresponding conserved quantity.
+
+\begin{question}
+(optional) Show that $\hbar$ has units of energy $\times$ time.
+\solution{
+$T_\varepsilon$ is dimensionless and $G$ has units of $1/\varepsilon$.
+$Q$ has units of
+$$\frac{{\rm energy}}{{\rm length/time}} \frac{\rm length}{\varepsilon} = \frac{{\rm energy} \times {\rm time}}{\varepsilon}$$
+Since $G=\im \hbar Q$ we have $\hbar$ having units of ${\rm energy} \times {\rm time}$.
+}
+\end{question}
+
+\begin{question}
+(optional) Another result from Lagrangian mechanics is the \emph{Euler-Lagrange equation}
+$$\Dfrac{}{t} \pfrac{L}{\dot x_i} = \pfrac{L}{x_i}.$$
+Use this equation to show that $Q$ as defined above is conserved.
+Note that $L$ is a function of $t$, $x_i$ and $\dot x_i$.
+\hint{Show that $\D{Q}/\D{t} = \D{L}/\D{\varepsilon}$.}
+\solution{
+$$\Dfrac{Q}{t} = \sum_i \left(\left(\Dfrac{}{t} \pfrac{L}{\dot x_i}\right) \Dfrac{x_i}{\varepsilon} + \pfrac{L}{\dot x_i} \Dfrac{\dot x_i}{\varepsilon}\right) = \sum_i \left(\pfrac{L}{x_i} \Dfrac{x_i}{\varepsilon} + \pfrac{L}{\dot x_i} \Dfrac{\dot x_i}{\varepsilon}\right)$$
+Using the chain rule this is equal to $\D{L}/\D{\varepsilon}$, which is zero since $L$ is invariant under the transformation.
+}
+\end{question}
+
+\begin{question}
+Apply the principle to show that the momentum operator is $p = -\im \hbar\,\D{}/\D{x}$ (in one dimension).
+\hint{Use an appropriate symmetry transformation with $p$ as the classical conserved quantity. Calculate $\bra{x} G \ket{\psi}$ for a state $\ket{\psi}$ and express the result in terms of $\psi(x)$.}
+\solution{
+Consider spatial displacements $x \to x+\varepsilon$.
+We have $\D{x}/\D{\varepsilon} = 1$ and so
+$$Q = \pfrac{(T - V)}{\dot x} = \pfrac{}{\dot x} \frac{1}{2} m \dot x^2 = m \dot x$$
+as expected.
+
+In the quantum realm we have $T_\varepsilon \ket{x} = \ket{x+\varepsilon}$.
+Since $T_\varepsilon$ is unitary we have $T_{-\varepsilon} = {T_\varepsilon}^{-1} = {T_\varepsilon}^\dagger$ and so $T_{-\varepsilon} \ket{x} = \ket{x-\varepsilon}$ implies $\bra{x} T_\varepsilon = \bra{x-\varepsilon}$ and
+$$\bra{x} T_\varepsilon \ket{\psi} = \braket{x-\varepsilon}{\psi} = \psi(x - \varepsilon).$$
+We then have
+$$\bra{x} G \ket{\psi} = \lim_{\varepsilon \to 0} \frac{\bra{x} T_\varepsilon \ket{\psi} - \braket{x}{\psi}}{\varepsilon} = \lim_{\varepsilon \to 0} \frac{\psi(x-\varepsilon) - \psi(x)}{\varepsilon} = -\psi'(x)$$
+and hence $G = -\D{}/\D{x}$.
+Applying the symmetry principle then gives $p=Q=-\im \hbar\,\D{}/\D{x}$.
+}
+\end{question}
+
+\begin{question}
+Find the eigenvalues and eigenstates of the momentum operator.
+\solution{
+We can write the eigenstate equation as $\bra{x} p \ket{\psi} = P \braket{x}{\psi}$, which implies
+$$-\im \hbar \psi'(x) = P \psi(x).$$
+Hence
+$$\Dfrac{}{x} \ln \psi(x) = \im P/\hbar$$
+and $\psi(x) = e^{\im P x/\hbar}$ is an eigenstate of eigenvalue $P$.
+Since this works for every $P$, all real numbers are eigenvalues.
+}
+\end{question}
+
+Note that momentum eigenstates cannot be normalised, just like position eigenstates.
+
+You may be familiar with the fact that matrices in general don't commute, i.e.\ $AB\ne BA$.
+The same is true for operators, in particular position and momentum operators don't commute!
+To manipulate expressions with non-commuting objects it's useful to define the \emph{commutator}
+$$[A,B] = AB - BA.$$
+
+To make manipulations of expression a bit less tedious we will be sloppy with notation and equivocate between $\ket{\psi}$ and $\psi(x)$ and write, e.g., $T \psi(x)$ instead of $\bra{x} T \ket{\psi}$.
+The effect of the position operator $q$ can then be written $q \psi(x) = x \psi(x)$.
+Note that we have to be very careful in expressions with $\D{}/\D{x}$.
+$\Dfrac{}{x} q$ is a sequence of operators that is equivalent to neither $0$ or $1$, as can be seen from applying it to $\psi(x)$ to get
+$$\Dfrac{}{x} \left(q \psi(x)\right) = \Dfrac{}{x} \left(x \psi(x)\right).$$
+To be sure you don't get confused, apply a state $\psi(x)$ on the right hand side before simplifying expressions.
+
+\begin{question}
+Calculate the commutator $[q,p]$ of the position and momentum operators.
+\result{$\im \hbar$.}
+\solution{
+$$[q,p] \psi(x) = (-\im \hbar) \left(x \Dfrac{}{x} \psi(x) - \Dfrac{}{x} x \psi(x)\right) = (-\im \hbar) \left(x \Dfrac{}{x} \psi(x) - \psi(x) - x \Dfrac{}{x} \psi(x)\right) = \im \hbar \psi(x)$$
+and hence $[x,p] = \im \hbar$.
+}
+\end{question}
+
+This seemingly trivial calculation is a profound result, as can be seen from the following.
+
+\begin{question}
+Show that no state can be an eigenstate of both $q$ and $p$.
+Hence in every state either position or momentum (or both!) are not perfectly defined, i.e.\ a measurement can give one of multiple values.
+\solution{
+If $q \ket{\psi} = q_0 \ket{\psi}$ and $p \ket{\psi} = p_0 \ket{\psi}$ then
+$$[q,p] \ket{\psi} = (q p - p q) \ket{\psi} = (q_0 p_0 - p_0 q_0) \ket{\psi} = 0,$$
+in contradiction with $[q,p] \psi(x)=\im \hbar \psi(x)$.
+}
+\end{question}
+
+This is a hint towards the uncertainty principle, which is often (somewhat incorrectly) stated as that you can't measure both position and momentum to perfect accuracy.
+We see from the derivation that the more correct expression is that it is impossible to even have a state that has both well-defined position and momentum to begin with!
+We can define the ``spread'' of an observable in a state using the standard deviation:
+$$\sigma_A = \sqrt{\langle (A - \langle A \rangle)^2\rangle}.$$
+We now want to derive a bound on $\sigma_A \sigma_B$ but we need an intermediate result first.
+
+\begin{question}
+(Cauchy-Schwartz inequality)
+Show that for any states $\ket{\psi}$ and $\ket{\phi}$ we have the inequality
+$$|\braket{\psi}{\phi}|^2 \le \braket{\psi}{\psi} \braket{\phi}{\phi}.$$
+\hint{Consider the operator $P = \ket{\phi} \bra{\phi}$. What are its eigenvalues?}
+\solution{
+The operator $P = \ket{\phi} \bra{\phi}$ has eigenvalues 0 and $\braket{\phi}{\phi}$.
+The expectation value of $P$ is an average of the two and hence
+$$0 \le \langle P \rangle \le \braket{\phi}{\phi}.$$
+The expectation value in state $\psi$ is given by
+$$\langle P \rangle = \frac{\bra{\psi} P \ket{\psi}}{\braket{\psi}{\psi}}$$
+Hence
+$$\frac{\braket{\psi}{\phi} \braket{\phi}{\psi}}{\braket{\psi}{\psi}} \le \braket{\phi}{\phi}.$$
+}
+\end{question}
+
+\begin{question}
+(Heisenberg uncertainty principle)
+Find a lower bound on $\sigma_A \sigma_B$ for two Hermitian operators $A$ and $B$.
+\hint{Define new operators that have zero mean (i.e.\ $\langle a \rangle = 0$) and evaluate $(\sigma_A \sigma_B)^2$.}
+\hint{Use Cauchy-Schwartz and remember that $|x|^2 = (\Re x)^2 + (\Im x)^2$.}
+\result{$|\langle [A,B] \rangle/2|.$}
+\solution{
+Define $a = A - \langle A \rangle$ and $b = B - \langle B \rangle$.
+$${\sigma_A}^2 {\sigma_B}^2 = \langle a^2 \rangle \langle b^2 \rangle = \bra{\psi} a~a \ket{\psi} \bra{\psi} b~b \ket{\psi} \ge |\bra{\psi} a b \ket{\psi}|^2$$
+$$\ge (\Im \bra{\psi} a b \ket{\psi})^2 = \frac{1}{4} |\bra{\psi} a b\ket{\psi} - (\bra{\psi} a b \ket{\psi})^*|^2 = \frac{1}{4} |\bra{\psi} (a b - b a) \ket{\psi}|^2 = \frac{1}{4} |\langle [a,b]\rangle|^2.$$
+Note that $[a,b] = [A,B]$ and hence
+$$\sigma_A \sigma_B \ge \left|\frac{\langle [A,B]\rangle}{2}\right|.$$
+}
+\end{question}
+
+In particular, setting $a=q$ and $b=p$ we get the famous momentum-position uncertainty principle
+$$\sigma_q \sigma_p \ge \frac{\hbar}{2}.$$
+The similarity with the Fourier uncertainty principle $\sigma_t \sigma_\omega \ge 1/2$ is no coincidence since $q$ and $p$ are actually related by a Fourier transform!
+\begin{question}
+Express the ``momentum wavefunction'' $\phi(q) = \braket{p}{\psi}$ (where $\ket{p}$ is a momentum eigenstate of eigenvalue $p$) in terms of $\psi(x)$ and vice versa.
+\solution{
+The answer depends on the normalisation chosen for $\ket{p}$.
+We choose $\braket{x}{p} = e^{\im p x/\hbar}$.
+Then
+$$\int \braket{x}{p} \braket{p}{y} \D{p} = \int e^{\im p (x-y)/\hbar}\D{p} = 2\pi \hbar\delta(x-y)$$
+which we can state as a completeness relation
+$$\int \ket{p} \bra{p} \frac{\D{p}}{2\pi \hbar} = 1.$$
+
+We can now show that
+$$\phi(p) = \braket{p}{\psi} = \int \braket{p}{x} \braket{x}{\psi} \D{x} = \int e^{-\im p x/\hbar} \psi(x) \D{x},$$
+$$\psi(x) = \braket{x}{\psi} = \int \braket{x}{p} \braket{p}{\psi} \frac{\D{p}}{2\pi\hbar} = \int e^{\im p x/\hbar} \phi(p) \frac{\D{p}}{2\pi\hbar}.$$
+}
+\end{question}
+
+The following properties of the commutator are very useful and worth remembering:
+\begin{question}
+Show that\\
+1. $[A,BC]=[A,B]C+B[A,C]$ and $[AB,C] = [A,C]B+A[B,C],\\
+2. $[f(q),p]=\im \hbar f'(q)$,\\
+3. $[q, f(p)]=\im \hbar f'(p)$.
+
+If you're unhappy with functions of operators, think of them as power series $f(q) = a_0 + a_1 q + a_2 q^2 + \dots$.
+\solution{
+1.
+$$[A,BC]=ABC-BCA = ABC-BAC+BAC-BCA = [A,B]C + B[A,C]$$
+$$[AB,C]=ABC-CAB = ACB-CAB+ABC-ACB = [A,C]B+A[B,C]$$
+
+2.
+Writing
+$$f(q) = a_0 + a_1 q + a_2 q^2 + a_3 q^3 + \dots$$
+implies that $f(q) \psi(x) = f(x) \psi(x)$.
+Hence
+$$[f(q),p] \psi(x) = (-\im \hbar) \left(f(x) \Dfrac{}{x} \psi(x) - \Dfrac{}{x} f(x) \psi(x)\right) = \im \hbar f'(x) \psi(x)$$
+which implies $[f(q),p] = \im \hbar f'(q)$.
+
+3.
+$$f(p) = a_0 + a_1 p + a_2 p^2 + a_3 p^3 + \dots$$
+It's easiest to show this using
+$$[q,p^n] = [q,p p^{n-1}] = [q,p] p^{n-1} + p [q,p^{n-1}] = \im \hbar p^{n-1} + p [q,p^{n-1}],$$
+after applying the relation $n$ times we get
+$$[q,p^n] = \im \hbar n p^{n-1} + p [q,1] = \im \hbar n p^{n-1}.$$
+Hence
+$$[q,f(p)] = \im \hbar (a_1 + 2 a_2 p + 3 a_3 p^2 + \dots) = \im \hbar f'(p).$$
 }
 \end{question}
