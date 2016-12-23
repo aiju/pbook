@@ -719,8 +719,8 @@ $$\langle q \rangle = \frac{\tr(\rho q)}{\tr(\rho)}.$$
 \end{question}
 
 \subsection{Infinite dimensions}
-So far we have worked in finite dimensions.
-We can also generalise all concepts so far to infinite dimensions.
+So far we have worked with finite dimensional states -- i.e.\ with a finite number of basis states.
+We can also generalise all concepts so far to infinite dimensional state space.
 
 In infinite dimensions we have to explicitly assume that all observables have a ``complete set of eigenstates'', i.e.\ that the eigenstates obey
 $$\sum_i \ket{i} \bra{i} = 1.$$
@@ -881,6 +881,22 @@ and hence $G = -G^\dagger$, i.e.\ $G$ is \emph{anti-Hermitian}.
 }
 \end{question}
 
+\begin{question}
+(optional)
+If $T_a T_b = T_{a+b}$ we can actually recover $T_\varepsilon$ from $G$ for arbitrary $\varepsilon$.
+Find an equation to do so.
+\result{$T_\varepsilon = \exp(\varepsilon G).$}
+\hint{Find an expression for the derivative $\D{T_\varepsilon}/\D{\varepsilon}$ for arbitrary $\varepsilon$.}
+\solution{
+$$\Dfrac{T_\varepsilon}{\varepsilon} = \lim_{\delta \to 0} \frac{T_{\varepsilon+\delta} - T_\varepsilon}{\delta} = T_\varepsilon \lim_{\delta \to 0} \frac{T_\delta - 1}{\delta} = T_\varepsilon G$$
+This is a differential equation with the solution $T_\varepsilon = \exp(\varepsilon G)$.
+One way to show this is to integrate to get
+$$T_\varepsilon = 1 + \int_0^\varepsilon T_\delta G \D{\delta}$$
+and to then substitute this equation into itself repeatedly to find a power series in $G$,
+$$T_\varepsilon = 1 + G \varepsilon + \frac{1}{2!} G^2 \varepsilon^2 + \dots = \exp(G).$$
+}
+\end{question}
+
 We can now express the principle we alluded to earlier.
 It states that \emph{if a continuous symmetry in the classical system conserves $Q$, then the quantum operator $Q$ is related to the generator of the transformation via the equation $Q = \im \hbar G$.}
 Here $\hbar$ is a constant of nature called the reduced Planck's constant.
@@ -898,7 +914,10 @@ Note that the simple approach from above identifies it, at best, only up to a co
 Using Lagrangian mechanics one can give the following, more, precise definition:
 If a transformation parametrised by $\varepsilon$ is such that $L=T-V$ (where $T$ is kinetic and $V$ is potential energy) is invariant under the transformation, then
 $$Q = \sum_i \pfrac{L}{\dot x_i} \Dfrac{x_i}{\varepsilon}$$
-is the corresponding conserved quantity.
+is the corresponding conserved quantity (more generally, if a symmetry does not leave $L$ invariant but rather changes $L$ to $L + \D{\Lambda}/\D{t}$ then the quantity has an extra $-\D{\Lambda}/\D{\varepsilon}$).
+
+Of course, the principle still has a problem: we can only apply it to symmetric systems!
+We will usually work around by assuming that the operator for the quantity remains unchanged even when the system is not symmetric (even though it no longer corresponds to a classical conserved quantity).
 
 \begin{question}
 (optional) Show that $\hbar$ has units of energy $\times$ time.
@@ -913,7 +932,7 @@ Since $G=\im \hbar Q$ we have $\hbar$ having units of ${\rm energy} \times {\rm 
 \begin{question}
 (optional) Another result from Lagrangian mechanics is the \emph{Euler-Lagrange equation}
 $$\Dfrac{}{t} \pfrac{L}{\dot x_i} = \pfrac{L}{x_i}.$$
-Use this equation to show that $Q$ as defined above is conserved.
+Use this equation to show that $Q$ as defined above is conserved in classical mechanics.
 Note that $L$ is a function of $t$, $x_i$ and $\dot x_i$.
 \hint{Show that $\D{Q}/\D{t} = \D{L}/\D{\varepsilon}$.}
 \solution{
@@ -1047,7 +1066,7 @@ $$\psi(x) = \braket{x}{\psi} = \int \braket{x}{p} \braket{p}{\psi} \frac{\D{p}}{
 The following properties of the commutator are very useful and worth remembering:
 \begin{question}
 Show that\\
-1. $[A,BC]=[A,B]C+B[A,C]$ and $[AB,C] = [A,C]B+A[B,C],\\
+1. $[A,BC]=[A,B]C+B[A,C]$ and $[AB,C] = [A,C]B+A[B,C]$,\\
 2. $[f(q),p]=\im \hbar f'(q)$,\\
 3. $[q, f(p)]=\im \hbar f'(p)$.
 
@@ -1073,5 +1092,466 @@ after applying the relation $n$ times we get
 $$[q,p^n] = \im \hbar n p^{n-1} + p [q,1] = \im \hbar n p^{n-1}.$$
 Hence
 $$[q,f(p)] = \im \hbar (a_1 + 2 a_2 p + 3 a_3 p^2 + \dots) = \im \hbar f'(p).$$
+}
+\end{question}
+
+\subsection{Time}
+We now want to introduce time.
+We will do this by adding time dependence to our states: $\ket{\psi}$ becomes $\ket{\psi(t)}$.
+We define a time translation (also called time evolution) operator $U(t)$ by
+$$U(\varepsilon) \ket{\psi(t)} = \ket{\psi(t+\varepsilon)}.$$
+Since $U(0)$ we can again define the generator $G$ just like before.
+\begin{question}
+Show that the generator $G$ is $\pfrac{}{t}$.
+\hint{Apply $G$ to a state $\ket{\psi}$.}
+\solution{
+$$G \ket{\psi(t)} = \lim_{\varepsilon \to 0} \frac{\ket{\psi(t+\varepsilon)} - \ket{\psi(t)}}{\varepsilon} = \pfrac{}{t} \ket{\psi(t)}.$$
+}
+\end{question}
+\begin{question}
+(optional)
+Using the earlier formula, show that, for the classical one dimensional particle in a potential $V(x)$, time translation corresponds to total energy $H$.
+\hint{Note that $L$ is \emph{not} invariant but rather changes to $L+\D{\Lambda}/\D{t}$.}
+\solution{
+The formula for one dimension is
+$$Q = \pfrac{L}{\dot x} \Dfrac{x}{\varepsilon} - \Dfrac{\Lambda}{\varepsilon}.$$
+Note that $\D{x}/\D{\varepsilon} = \dot x$ and $L \to L + \D{L}/\D{t}~\varepsilon$, hence $\Lambda = L$.
+This gives
+$$Q = m \dot x^2 - L = \frac{1}{2} m \dot x^2 + V.$$
+This is just the formula for total energy $H$.
+}
+\end{question}
+
+We can now apply our principle $Q=\im \hbar G$ to find the \emph{time-dependent Schr\"odinger equation}
+$$H \ket{\psi(t)} = \im \hbar \pfrac{}{t} \ket{\psi(t)}.$$
+Here $H$ is an operator called \emph{Hamiltonian} that evaluates to the total energy\footnote{There are actually some situation where this analysis fails and the Hamiltonian is not equal to the total energy. In this case one has to derive it from Hamiltonian mechanics. We will not encounter this problem.}.
+
+\begin{question}
+Show that if $\ket{\psi}$ is an eigenstate of $H$ the time evolution is particularly simple.
+\solution{
+If $H \ket{\psi} = E \ket{\psi}$ then the equation is
+$$E \ket{\psi(t)} = \im \hbar \pfrac{}{t} \ket{\psi(t)}$$
+with the solution 
+$$\ket{\psi(t)} = \ket{\psi(0)} e^{-\im E t/\hbar}.$$
+}
+\end{question}
+
+Note that this result means that the state remains unchanged except for a phase factor.
+We thus call the eigenstates of $H$ \emph{stationary states}.
+
+Since we assume that the eigenstates of an observable (such as $H$) form a complete set, we can expand \emph{any} state in terms of stationary state and find the time evolution this way.
+
+The equation for stationary states
+$$H \ket{\psi} = E \ket{\psi}$$
+is often called the \emph{time-independent Schr\"odinger equation}.
+
+To get an expression for $H$ in terms of other operators, we need to determine what the physics of our system is.
+For instance for a 1D particle in a potential $V(x)$ we know that classically
+$$H = \frac{p^2}{2m} + V(x).$$
+We can transfer this directly into quantum mechanics by replacing $p$ with the operator $p=-\im \hbar~\D{}/\D{x}$.
+In general they may be some operator ordering ambiguity (e.g.\ should $pq$ in a classical Hamiltonian by replaced by $pq$ or $qp$?).
+In that case there may be no unique quantum system corresponding to the classical system and it's ultimately up to experiment to distinguish the two.
+
+\begin{question}
+Write the two Schr\"odinger equations in this case in terms of the wavefunction $\psi(x,t)$.
+\solution{
+The time-independent Schr\"odinger equation is
+$$-\frac{\hbar^2}{2m} \Dfrac{^2}{x^2} \psi(x) + (V(x) - E) \psi(x) = 0.$$
+The time-dependent Schr\"odinger equation is
+$$-\frac{\hbar^2}{2m} \pfrac{^2}{x^2} \psi(t,x) + V(x) \psi(t,x) = \im \hbar \pfrac{}{t} \psi(t,x).$$
+}
+\end{question}
+
+When working with wavefunctions it's important to remember that we want physical states.
+This usually means that they must be normalisable, i.e.\ that $\braket{\psi}{\psi}$ is finite.
+We already saw that we sometimes make exceptions for this. States such as $\ket{x}$ and $\ket{p}$ are useful because they let us expand physical states in terms of them.
+They can also be approximated arbitrarily well by physical states.
+However if you find a stationary state where $\psi(x)$ grows exponentially as $x \to \infty$, feel free to discard it -- it's so different from a physical state it's not relevant.
+
+\begin{question}
+Show that the eigenstates for a free particle ($V(x) = 0$) are just momentum eigenstates and that the time evolution corresponds to the propagation of waves.
+Find equations for the wavevector $k$, the frequency $\omega$, the propagation speed $c_p$.
+\solution{
+$H = p^2/(2m)$ depends only on one operator, viz. $p$, and so has the same eigenstates as $p$.
+A $p$ eigenstate is
+$$\psi(x) = e^{\im P x/\hbar}.$$
+The time evolution is thus just
+$$\psi(x) = e^{\im (P x-E t)/\hbar},$$
+with $E=P^2/2m$.
+This is just the equation for a plane wave.
+Comparing with $e^{\im (k x - \omega t)}$ we conclude that
+$$P=\hbar k\quad\mbox{(de-Broglie relation),}$$
+$$E=\hbar \omega \quad\mbox{(Planck-Einstein relation),}$$
+$$c_p = \frac{\omega}{k} = \frac{E}{P} = \frac{P}{2m}.$$
+Note that this is just 1/2 of the classical speed $v = P/m$.
+}
+\end{question}
+
+Note that we thus naturally find that particles can actually act like waves!
+This ``wave-particle duality'', while very bizarre classically, has actually been observed with electrons and even with larger objects such as ``buckyballs'' (sphere-shaped $\rm C_{60}$ molecules).
+(How do you observe wave behaviour? By double-slit experiments of course!)
+% TODO: Add reference.
+
+However, we found that the wave propagation velocity was \emph{not} equal to the classical propagation speed.
+This is a bit puzzling but we shouldn't be too surprised because momentum eigenstates are not physical states.
+$|\psi|^2$ is a constant and so the particle is actually \emph{completely delocalised}.
+To construct real physical states we need to construct ``wavepackets'', by multiplying the waves with a localised function, such as a Gaussian, to arrive at
+$$\psi(x,0) = e^{-x^2/(2\sigma^2)} e^{\im p_0 x/\hbar}.$$
+This wavepacket consists of many plane wave states, each moves at the ``phase velocity'' $\omega/k = E/p = v/2$.
+The packet's overall shape on the other hand moves with $\D{\omega}/\D{k} = \D{E}/\D{p} = v$, in agreement with classical mechanics.
+This speed is called the ``group velocity'' and it's the speed that energy and information travel through waves.
+The two following questions prove this for quantum mechanical waves, first (tediously but precisely) for Gaussian wavepackets and then (approximately) for arbitrary wavepackets.
+
+\begin{question}
+(optional, requires Fourier transform, tedious)
+We want to find the time evolution of a Gaussian wavepacket
+$$\psi(x,0) = e^{-x^2/(4\sigma^2)} e^{\im p_0 x/\hbar}.$$
+Find the Fourier transform $\phi(p,0)$ and the time evolution $\phi(p, t)$.
+Calculate $\psi(x,t)$ and find an expression for $|\psi(x,t)|^2$.
+Interpret the result physically.
+\hint{To interpret the result, remember the position-momentum uncertainty relation.}
+\result{
+$$\psi(x,t) \propto \exp\left(-\frac{(x - p_0 t/m)^2}{2(\sigma^4 + t^2 \hbar^2/(4m^2\sigma^2))}\right)$$
+}
+\solution{
+We will drop overall normalisation factors throughout the derivation.
+For $\phi(p,0)$ we find that
+$$\phi(p,0) = e^{-\sigma^2 (p-p_0)^2/\hbar^2}$$
+$\phi(p,t)$ has an extra $e^{-\im Et/\hbar}$ factor, i.e.\
+$$\phi(p,t) = \exp\left(-\frac{\sigma^2 (p - p_0)^2}{\hbar^2} - \frac{\im p^2 t}{2m\hbar}\right) = \exp\left(-\left(\frac{\sigma^2}{\hbar^2} + \frac{\im t}{2m\hbar}\right) p^2 + \frac{2 \sigma^2 p p_0}{\hbar^2}  - \frac{\sigma^2 p_0^2}{\hbar^2}\right)$$
+We showed earlier that
+$$\int e^{\im \omega p - \varepsilon p^2} \D{p} = \sqrt{\frac{\pi}{\varepsilon}} e^{-\omega^2/(4 \varepsilon)}.$$
+The inverse Fourier transform now corresponds to $\varepsilon = \sigma^2/\hbar^2 + \im t/(2m\hbar)$ and $\omega = x/\hbar - 2 \im \sigma^2 p_0/\hbar^2$.
+The result is
+$$\psi(x,t) = \exp\left(-\frac{\left(\frac{x}{\hbar} - \frac{2\im \sigma^2 p_0}{\hbar^2}\right)^2}{4\left(\frac{\sigma^2}{\hbar^2} + \frac{\im t}{2m\hbar}\right)}\right) = \exp\left(-\frac{(\hbar x - 2 \im \sigma^2 p_0)^2}{4 \hbar^2 (\sigma^2 + \im t \hbar/(2m))}\right).$$
+The absolute value is
+$$|\psi(x,t)|^2 = \exp\left(-\Re \frac{(\hbar x - 2 \im \sigma^2 p_0)^2}{\hbar^2 (\sigma^2 + \im t \hbar/m)}\right) = \exp\left(-\frac{\Re (x\hbar - 2\im \sigma^2 p_0)^2 (\sigma^2 - \im t \hbar/(2m))}{\hbar^2 (\sigma^4 + t^2 \hbar^2/m^2)}\right).$$
+$$=\exp\left(-\frac{\sigma^2 x^2 \hbar^2 - 4\sigma^6 p_0^2 - x t \hbar^2 \sigma^2/m}{2\hbar^2(\sigma^4 + t^2 \hbar^2/(2m^2))}\right) = \exp\left(-\frac{(x - p_0 t/m)^2}{2(\sigma^4 + t^2 \hbar^2/(4m^2\sigma^2))} + \mbox{const}\right).$$
+Note that the result is a Gaussian with a centre moving at the classical velocity $v = p_0/m$.
+The spread of the Gaussian increases according to
+$$\sigma(t)^2 = \sigma(0)^2 + \left(\frac{t \hbar}{2m \sigma}\right)^2.$$
+To interpret this, remember that the uncertainty principle implies that that the initial momentum is uncertain by $\sigma_p = \hbar/(2\sigma)$.
+This contributes $\sigma_p t/m$ to the uncertainty in the final position.
+Since the two contributions are independent they add in quadrature to give the result.
+}
+\end{question}
+
+\begin{question}
+(optional, requires Fourier transform)
+Consider an arbitrary wavepacket $\psi(x,t)$.
+We assume it has a well-defined momentum, i.e.\ $\phi(p,t)$ is approximately zero unless $p \approx p_0$.
+Write down the time evolution of $\phi(p,t)$ and expand the term in the exponential around $p-p_0$ to first order.
+Use this to show that $\psi(x,t)$ moves at $p_0/m$.
+\solution{
+$$\phi(p,t) = \phi(p, 0) e^{-\im p^2 t/(2m \hbar)} = \phi(p, 0) e^{-\im p_0^2 t/(2m\hbar) - \im (p - p_0) p_0 t/(m \hbar) + O((p-p_0)^2)}$$
+$$= \phi(p, 0) e^{-\im p p_0 t/(m \hbar)} e^{\im p_0^2 t/(2m\hbar)} + O((p-p_0)^2)$$
+The inverse Fourier transform of the first two terms is the convolution of $\psi(x,0)$ with $\delta(x - p_0 t/m).$
+We thus get
+$$\psi(x,t) = \psi(x - p_0 t/m, 0) e^{\im p_0^2 t/(2m\hbar)},$$
+i.e.\ the particle moves with velocity $p_0 t/m$.
+}
+\end{question}
+
+\begin{question}
+(optional)
+Special relativity does not, in general, play well with the basic ideas of quantum mechanics discussed so far.
+However it turns out that one can still talk about plane wave wavefunctions of the form $e^{\im (P x - E t)/\hbar}$ with the energy replaced using the relativistic expression $E^2 = p^2 c^2 + m^2 c^4$.
+Find the phase and group velocity in this case.
+You may find the formula $p = m v/\sqrt{1-v^2/c^2}$ useful.
+\solution{
+The phase velocity is
+$$\frac{E}{p} = \sqrt{\frac{m^2 c^4 (1 - v^2/c^2) + m v^2 c^2}{m^2 v^2}} = \frac{c^2}{v}.$$
+Note that since $v < c$, the phase velocity is \emph{always faster than the speed of light}.
+The group velocity is
+$$\Dfrac{E}{p} = \frac{p c^2}{\sqrt{p^2 c^2 + m^2 c^4}} = \frac{p}{E} c^2 = v.$$
+}
+\end{question}
+
+Before we move on to some specific examples of simple quantum 1D systems, there are some general theorems we can prove about time evolution.
+
+\begin{question}
+Find an equation for the time derivative of the expectation value
+$$\Dfrac{}{t} \langle Q(t) \rangle,$$
+where the state evolves according to the Schr\"odinger equation.
+
+Apply your result to the position operator and to the momentum operator for a particle moving in a potential $V(x)$ in one dimension.
+\solution{
+$$\Dfrac{}{t} \langle Q(t) \rangle = \pfrac{\bra{\psi}}{t} Q(t) \ket{\psi} + \bra{\psi} \pfrac{Q(t)}{t} \ket{\psi} + \bra{\psi} Q(t) \pfrac{\ket{\psi}}{t}$$
+$$= - \bra{\psi} \frac{H}{\im \hbar} Q(t) \ket{\psi} + \bra{\psi} Q(t) \im \hbar \frac{H}{\im \hbar} \ket{\psi} + \left\langle \pfrac{Q}{t}\right\rangle$$
+$$= \frac{1}{\im \hbar} \left\langle [Q(t), H]\right\rangle + \left\langle \pfrac{Q}{t}\right\rangle.$$
+
+For the position operator we have
+$$[q, H] = \im \hbar \pfrac{H}{p}$$
+by an earlier theorem.
+For $H=p^2/(2m) + V$ we get $[q,H] = \im \hbar p/m$ and so
+$$\Dfrac{}{t} \langle q(t) \rangle = \frac{\langle p \rangle}{m}$$
+(which agrees with both classical mechanics and our earlier wave calculations).
+
+For the momentum operator we have
+$$[p, H] = -\im \hbar \pfrac{H}{q} = -V'(q)$$
+and hence
+$$\Dfrac{}{t} \langle p(t) \rangle = -\langle V'(q)\rangle,$$
+which is very similar to Newton's second law.
+}
+\end{question}
+
+\begin{question}
+What does the last question imply about conserved quantities?
+In particular, show that operators corresponding to symmetry operations and the generators of symmetries are conserved.
+\hint{For the second part: What do you get when you apply a symmetry transformation to a stationary state?}
+\solution{
+A quantity is conserved if $\D{\langle Q\rangle}/\D{t} = 0$.
+If $Q$ itself does not depend on time this implies that $[Q,H] = 0$, i.e.\ $Q$ commutes with the Hamiltonian.
+
+If $\ket{\psi}$ is a stationary state, then, if the system is truly symmetric, $T \ket{\psi}$ has to be a stationary state, too (not necessarily a different one).
+They also need to have the same energy, i.e.\
+$$H \ket{\psi} = E \ket{\psi}, \qquad H T \ket{\psi} = E T \ket{\psi}.$$
+Applying $T$ to the first equation gives $T H \ket{\psi} = E T \ket{\psi} = H T \ket{\psi}$.
+Hence $[T,H]\ket{\psi} = 0$ for stationary states.
+But \emph{any} state can be expanded in stationary states and so $[T,H] = 0$.
+
+For a generator $G$ we have
+$$[G,H] = \lim_{\varepsilon \to 0} \frac{1}{\varepsilon} [T_\varepsilon-1,H] = \lim_{\varepsilon \to 0} \frac{1}{\varepsilon} [T_\varepsilon,H] = 0.$$
+
+}
+\end{question}
+
+(There is a slight subtlety in terminology: An operator can be conserved without being an observable!)
+
+\begin{question}
+Assume that $A$ and $B$ commute and that $\ket{a}$ is a nondegenerate eigenstate of $A$, i.e.\ that $\ket{a}$ is the only eigenstate of eigenvalue $a$.
+Show that it's an eigenstate of $B$.
+\hint{Show that $B \ket{a}$ is an eigenstate of $A$ of eigenvalue $a$.}
+\solution{
+$$A B \ket{a} = B A \ket{a} = a B \ket{a}.$$
+This means $B \ket{a}$ is an eigenstate of $A$ of eigenvalue $a$.
+Since $\ket{a}$ is assumed non-degenerate, $B \ket{a} = b \ket{a}$ for some $b$.
+}
+\end{question}
+
+\begin{question}
+(optional)
+Show that if (and only if) two observables $A$ and $B$ commute, they permit a simultaneous basis of eigenstates, i.e.\ there is a basis where each state is an eigenstate of both operators.
+\hint{To prove ``if'', show that $\bra{a'} B \ket{a} = 0$ if $\ket{a}$ and $\ket{a'}$ are $A$ eigenstates of different eigenvalue.}
+\solution{
+``Only if'': If there is a simultaneous basis of eigenstates, then for every eigenstate $A \ket{\psi} = a \ket{\psi}, B \ket{\psi} = b \ket{\psi},$
+hence $AB \ket{\psi} = ab \ket{\psi} = B A \ket{\psi}$.
+Since the $\ket{\psi}$ states form a basis, we can expand any state in them and $A$ and $B$ commute for all states.
+
+``If'': Take a basis of eigenstates of $A$ with $A \ket{a} = a \ket{a}$.
+Do the following for all the different eigenvalues $a$.
+You can use the same argument as in the last question to show that $B \ket{a}$ is an eigenstate of $A$ of eigenvalue $a$.
+Since $\braket{a}{a'} = 0$ if $a \ne a'$, this means that we can expand $B \ket{a}$ in eigenstates of eigenvalue $a$.
+By doing this for all eigenstates $\ket{a}$ of that eigenvalue we get a matrix $\bra{a'} B \ket{a}$.
+We can find eigenvectors of this matrix, i.e.\ vectors $\ket{ab}$ that obey $B \ket{ab} = b \ket{ab}$.
+But since we worked entirely with vectors that obey $A \ket{a} = a \ket{a}$ we also have $A \ket{ab} = a \ket{ab}$.
+}
+\end{question}
+
+This result is important (even though the proof is not).
+In particular, we can use it to show the following.
+
+\begin{question}
+Show that we can label energy eigenstates with the eigenvalues of symmetry operations.
+As an example, apply it to a system which obeys $V(x) = V(-x)$.
+\solution{
+$H$ commutes with $T$ and so $T$ and $H$ have a simultaneous eigenbasis.
+Hence we can find a basis of energy eigenstates where each eigenstate is an eigenstate of $T$ with an eigenvalue.
+
+For the example use the operator $P$ that maps $x$ to $-x$.
+The system is invariant under it and so $P$ commutes with $H$.
+Hence we can choose all energy eigenstates to be eigenvalues of $P$.
+To find the eigenvalues of $P$ note that $P^2 = 1$ and therefore the eigenvalues are $\pm 1$.
+We can thus form a basis of eigenstates, all either even or odd.
+
+This is sometimes stated as ``all eigenstates are either even or odd'', which is only true for non-degenerate eigenstates.
+If $\psi_1$ is even, $\psi_2$ is odd and both have the same energy, then $\psi_1 + \psi_2$ is neither even nor odd, but is still an energy eigenstate.
+}
+\end{question}
+
+One final thing.
+Rememember that we can interpret $|\psi|^2$ as a probability density $\rho$.
+There is a useful equation for the time evolution of this probability density.
+
+\begin{question}
+Use the time-dependent Schr\"odinger equation to find an expression for $\partial{\rho}/\partial{t}$ with $\rho = |\psi|^2$.
+Your result should be of the form
+$$\pfrac{\rho}{t} + \pfrac{J}{x} = 0.$$
+Integrate this equation from $a$ to $b$ to interpret the result physically.
+What's the meaning of $J$?
+\solution{
+$$\pfrac{\psi^* \psi}{t} = \pfrac{\psi^*}{t} \psi + \psi^* \pfrac{\psi}{t} = \frac{1}{\im \hbar} \frac{\hbar^2}{2m} \pfrac{^2 \psi^*}{x^2} \psi - \frac{1}{\im \hbar} V \psi^* \psi - \frac{1}{\hbar} \frac{\hbar^2}{2m} \psi^* \pfrac{\psi}{x^2} + \frac{1}{\im \hbar} V \psi^* \psi$$
+$$= \pfrac{}{x} \frac{-\im \hbar}{2m} \left(\pfrac{\psi^*}{x} \psi - \psi^* \pfrac{\psi}{x}\right)$$
+Hence
+$$J = \frac{-\im \hbar}{2m} \left(\psi^* \pfrac{\psi}{x} - \psi \pfrac{\psi^*}{x}\right).$$
+Integrating the equation gives us
+$$\pfrac{}{t} \int_a^b \rho \D{t} = J(a) - J(b),$$
+i.e.\ the amount of probability density in a region changes at rate $J(a) - J(b)$.
+We can then interpret $J$ as a ``probability current''.
+}
+\end{question}
+
+\begin{question}
+Find $J$ for a momentum eigenstate $\ket{p}$.
+Normalise the state so that $\rho = \rho_0$.
+\solution{
+Use $\psi(x) = \sqrt{\rho_0} e^{\im p x/\hbar}$.
+$$J = \frac{-\im \hbar}{2m} \left(\sqrt{\rho_0} e^{-\im p x/\hbar} \sqrt{\rho_0} \frac{\im p}{\hbar} e^{\im p x/\hbar} - \sqrt{\rho_0} e^{\im p x/\hbar} \sqrt{\rho_0} \frac{-\im p}{\hbar} e^{\im k x}\right) = \rho_0 \frac{p}{m},$$
+i.e.\ the current is just density times velocity (just like in fluid mechanics!).
+}
+\end{question}
+
+\subsection{Stationary states}
+We now want to study the time-independent Schr\"odinger equation
+$$-\frac{\hbar^2}{2m} \pfrac{^2 \psi}{x^2} + (V - E) \psi = 0$$
+for different potentials $V$.
+The simplest potential we can actually solve is the ``particle in a box'' with $V(x) = 0$ for $0<x<a$ and $V(x) \to \infty$ otherwise.
+\begin{question}
+Find the stationary states (and their energies) for the particle in a box.
+\solution{Note that we need $\psi(x) = 0$ in the region $V(x) \to \infty$.
+Note that we need $\psi(x) = 0$ in the region $V(x) \to \infty$.
+Within the ``box'' we have $(-\hbar^2/(2m))\psi''(x) = E \psi(x)$ which is solved by
+$$\psi_n(x) = \sin\left(\frac{\pi n x}{a}\right)$$
+with integer $n \ge 1$ and energy
+$$E_n = \frac{\hbar^2 \pi^2 n^2}{ a^2}.$$
+}
+\end{question}
+
+Note that even though $V$ was highly discontinuous, $\psi$ was continuous. This is a general feature of $\psi$.
+\begin{question}
+(a) We expect physical states to have finite kinetic energy $\langle p^2/(2m)\rangle$.
+Show that this implies that $\psi$ cannot be discontinuous.\\
+(b) Show that for a stationary state $\psi'(x)$ can only be discontinuous where $V(x)$ is infinite.
+\hint{(a) Put the discontinuity near 0 and write $\psi$ of the form $a + \Theta(x) b$ where $\Theta(x)$ is the Heaviside step function.}
+\solution{
+(a) Note that
+$$\bra{\psi} \frac{p^2}{2m} \ket{\psi} \propto \left(\pfrac{}{x} \bra{\psi}\right) \left(\pfrac{}{x} \ket{\psi}\right) = \int (\psi'(x))^2 \D{x}.$$
+If $\psi$ was discontinuous around 0 we could write, near 0, $\psi(x) = a + \Theta(x) b$. Hence $\psi'(x) = \delta(x) b$.
+Then the kinetic energy has a contribution
+$$\int b^2 \delta^2(x) \D{x} = b^2 \delta(0),$$
+which is infinite unless $b = 0$.
+
+(b)
+The Schr\"odinger equation has a term proportional to $\psi''$.
+If $\psi'$ was discontinuous at 0, this term would contribute a term proportional to $\delta(x)$.
+We already know that $\psi$ must be continuous and hence $\psi(0)$ must be finite.
+For the left-hand side to equal zero, there must then be term infinite near zero in $V(x)$ to cancel the $\delta(x)$.
+}
+\end{question}
+
+The second solvable potential is kind of an inverse situation -- an infinitely narrow well $V(x) = \alpha \delta(x)$ ($\alpha$ is real but can have either sign).
+
+\begin{question}
+Find the stationary states for the $\delta$-function potential.
+Make sure to consider both positive and negative energy states.
+\hint{Write down a general solution. Note that $\psi$ is discontinuous and you need to treat two regions separately.}
+\hint{Integrate from $-\varepsilon$ to $\varepsilon$ for small $\varepsilon$ to get rid of the $\delta$.}
+\result{
+For $E>0$ there are two independent states for each value of $E$. For $E < 0$ there is one localised state at $E=-m\alpha^2/(2\hbar^2)$ if $\alpha < 0$.
+}
+\solution{
+In this case
+$$-\frac{\hbar^2}{2m} \psi''(x) + (\alpha \delta(x) - E) \psi(x) = 0.$$
+Since $V(x)$ is infinite near zero $\psi(x)$ can be discontinuous at $x=0$.
+For $x \ne 0$ we again have plane waves and we can write
+$$\psi(x) = \left\{\begin{matrix}a e^{\im k x} + b e^{-\im k x} & x < 0\\c e^{\im k x} + d e^{-\im k x} & x > 0\end{matrix}\right.$$
+with $\hbar^2 k^2/(2m) = E$ and $a+b=c+d$.
+To solve the equation we can integrate around 0 to get
+$$-\frac{\hbar^2}{2m} (\psi'(+\varepsilon) - \psi'(-\varepsilon)) + \alpha \psi(0) + O(\varepsilon) = 0.$$
+In the limit $\varepsilon \to 0$ this gives
+$$-\frac{\im E}{k} (c - d - a + b) + \alpha (a + b) = 0.$$
+We thus have two equations for four parameters.
+We can solve for $b$ and $c$ to get
+$$b = \frac{2E d-\im k\alpha a}{2E+\im k\alpha}, \qquad c = \frac{-\im k \alpha d + 2 E a}{2E+\im k\alpha}.$$
+For every energy $E>0$ there are then two basis states -- similar to how we have left and right going states for a free particle, which we can mix to get more complex states.
+In particular we can form physical wavepacket states by mixing states of similar energies.
+
+For energies $E<0$ things get more interesting.
+To make a normalisable state we cannot allow states that grow exponentially.
+If we choose $k/\im$ to be positive, then $a=0$ and $d=0$.
+The above solutions now seem to imply that $b=c=0$, meaning there is no solution.
+There is however one ``loophole'': the denominator is zero if $2E=-\im k \alpha = |k| \alpha$.
+This works only if $\alpha < 0$ and 
+$$E = -\frac{m \alpha^2}{2\hbar^2}.$$
+We can write the wavefunction as
+$$\psi(x) = e^{-m \alpha |x|/\hbar^2}.$$
+}
+\end{question}
+
+The last question showed the first glimpse of a general pattern.
+Note that $V(x)$ was finite as $x \to \pm \infty$, in particular it approached $V_0 = 0$.
+Potentials that obey this condition show a dichotomy of states: There are \emph{bound} states ($E < V_0$) and \emph{scattering} states ($E > V_0$) (the lowest energy bound state is usually called the ``ground state'', the one above it the ``first excited state'' etc.).
+
+\begin{question}
+Assume that $V(x) \to 0$ at infinity.
+Show that\\
+1. bound states are localised, i.e.\ $\psi$ approaches zero at infinity, whereas scattering states approach plane wave states,\\
+2. if $V(x)$ has a lower bound $V_{\rm min}$, then the energy of the ground state is $\ge V_{\rm min}$,\\
+3. (optional) bound states are discrete in energy, whereas scattering states are continuous,\\
+4. (optional) if $V(x)$ is finite except for some number of poles (e.g.\ $V(x)=-1/|x|$), the ground state energy is still bounded from below.\\
+(Only qualitative arguments are expected for the last two).
+\hint{3. Think a bit intuitively about what parameters determine $\psi$ for a given potential and what needs to happen to get a physical state. What does the set of valid parameters look like in the $n$-dimensional parameter space?}
+\hint{4. Remember the uncertainty principle.}
+\solution{
+1. We can neglect $V$ for large $|x|$. Then the Schr\"odinger equation is simply the free equation
+$$-\frac{\hbar^2}{2m} \psi'' = E \psi.$$
+If $E<0$ this implies $\psi$ grows or falls exponentially.
+A physical state can't grow exponentially, hence it must fall.
+For $E>0$ the solution is a plane wave.
+
+2. Write $H=T+V$. $\langle T \rangle \ge 0$ and so $\langle H \rangle \ge \langle V \rangle$.
+If $V \ge V_{\rm min}$, then (if $\psi$ is normalised)
+$$\langle V \rangle = \int V(x) |\psi|^2 \D{x} \ge V_{\rm min} \int |\psi|^2 \D{x} = V_{\rm min}.$$
+Hence $\langle H \rangle \ge V_{\rm min}$.
+
+3. The Schr\"odinger equation has one parameter $E$ and is a second order equation.
+We thus have three parameters to vary, $E$, $\psi(0)$ and $\psi'(0)$.
+For $E < 0$ we showed in 1.\ that the wavefunction must fall exponentially at infinity, which implies two conditions (one for $+\infty$ and another for $-\infty$).
+We can also normalise states, which implies another condition.
+With three conditions for three unknowns, the best we can hope for is a set of points in the solution space.
+Hence the energies are discrete.
+For $E > 0$ the wavefunction is largely arbitrary at infinity.
+No matter what we set $\psi(0)$ and $\psi'(0)$ to we will get a valid state at infinity.
+Hence we have a continuous set of states.
+
+4.
+To get very low potential energy we would have to confine the wavefunction very narrowly near the poles.
+But that implies, by the uncertainty principle, that $\sigma_p$ is very high.
+Since $\langle T \rangle = \hbar^2/(2m) \langle p^2 \rangle = \hbar^2 {\sigma_p}^2/(2m)$ this implies the kinetic energy is very high, which cancels out the negative potential energy.
+}
+\end{question}
+
+\begin{question}
+(optional)
+Assume again that $V(x) \to 0$ at infinity.
+We are interested in scattering states.
+Write $\psi(x)$ at infinity in terms of ingoing and outgoing waves and show that, for fixed energy $E$, there is a matrix relationship
+$$\begin{pmatrix}a_{L-}\\a_{R-}\end{pmatrix} = S \begin{pmatrix}a_{L+}\\a_{R+}\end{pmatrix},$$
+where $a_{L-}$ is the outgoing coefficient on the left (at $x \to -\infty$) etc.
+Show that $S$ is unitary.
+$S$ is (unimaginatively) called the $S$-matrix.
+Find $S$ for the $\delta$-function potential.
+Can you see, in this special case, any way that $S$ tells you something about the bound state?
+
+\hint{To show that $S$ is unitary use the probability current $J$.}
+\solution{
+Write
+$$\psi(x) = \left\{\begin{matrix} a_{L-} e^{-\im k x} + a_{L+} e^{\im k x} & x \to -\infty\\a_{R-} e^{\im k x} + a_{R+} e^{-\im k x} & x \to \infty\end{matrix}\right.$$
+Since a solution to $\psi$ is uniquely determined by the values $\psi(0)$ and $\psi'(0)$, there must be two equations relating the four coefficients.
+Since the wavefunction is linear in $\psi$, these equations are linear, too, and we can hence solve them to find a matrix $S$.
+
+If $J$ is the probability current, then
+$$\Dfrac{\rho}{t} + \Dfrac{J}{x} = 0.$$
+But we have a stationary state and so the first term is zero, hence $J = \mbox{const}$.
+Calculating $J$ at $-\infty$ and $+\infty$ gives 
+$$|a_{L+}|^2 - |a_{L-}|^2 = |a_{R-}|^2 - |a_{R+}|^2$$
+or
+$$|a_{L+}|^2 + |a_{R+}|^2 = |a_{L-}|^2 + |a_{L-}|^2,$$
+which means that $S$ conserves the lengths of vectors, hence it must be unitary.
+
+For the $\delta$ potential we have
+$$S = \frac{1}{2 E + \im k \alpha} \begin{pmatrix}-\im k \alpha & 2E\\2E & -\im k \alpha\end{pmatrix}.$$
+Note that $S$ has a pole for the bound state $k=-\im m \alpha/\hbar^2$.
+This is to be expected -- $k$ has to be imaginary and either the ingoing or outgoing waves must be zero, while the other set is non-zero.
 }
 \end{question}
