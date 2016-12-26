@@ -26,7 +26,7 @@ Note that in matrix notation $\ket{J}$ is a column vector, whereas $\bra{J}$ is 
 We can thus form scalar products
 $$\braket{J}{K} = \bra{J} \ket{K} = {J_1}^* K_1 + {J_2}^* K_2,$$
 where two adjacent bars can be merged into one.
-The operation of converting a ket into a bra is given the symbol ${}^\dagger$.
+The operation of converting a ket into a bra is given the symbol ${}^\dagger$ and called \emph{Hermitian conjugation}.
 In matrix notation it's equivalent to transposing, followed by complex conjugation.
 From
 $$(\braket{J}{K})^\dagger = \braket{K}{J} = (\ket{K})^\dagger (\bra{J})^\dagger$$
@@ -552,27 +552,61 @@ $$q^\dagger = \left(\sum_i q_i \ket{i} \bra{i}\right)^\dagger = \sum_i {q_i}^* \
 }
 \end{question}
 
-Note that the vaguely defined ``quantity $q$'' is now precisely defined as an operator (in infinite dimensions ``matrices'' are usually called operators and this terminology is often applied universally in quantum mechanics).
-It turns out that this the most general type of measurement.
+Note that the vaguely defined ``quantity $q$'' is now precisely defined as an operator.
+An ``operator'' generalises the concept of a matrix to an arbitrary, possible infinite, number of dimensions.
+An operator is formally defined as a mapping from vectors $\ket{i}$ to other vectors $q \ket{i}$.
+We will always demand operators to be linear, which means $q (\alpha \ket{i} + \beta \ket{j}) = \alpha (q \ket{i}) + \beta (q \ket{j})$.
+Take good note of the fact that operators can operate on bars as well as kets, mapping $\bra{i}$ to $\bra{i} q$.
+Taking the conjugate of this equation we have
+$$(\bra{i} q)^\dagger = q^\dagger \ket{i}.$$
+The operator $q^\dagger$ thus describes the operation of $q$ on bra-vectors.
+An expression such as $\bra{i} q \ket{j}$ is deliberately ambiguous -- it can mean either $(\bra{i} q) \ket{j}$ or $\bra{i} (q \ket{j})$.
+The two are guaranteed to give the same result.
+
+It turns out that this is the most general type of measurement.
 We thus have the principle:
- \emph{Any measurable quantity (an ``observable'') is associated with a Hermitian operator $q$ in the space of states. The expectation value of a measurement in state $\ket{\psi}$ is given by $\bra{\psi} q \ket{\psi} / \braket{\psi}{\psi}$.}
+ \emph{Any measurable quantity (an ``observable'') is associated with a Hermitian operator $q$ in the space of states. The expectation value (written as $\langle q \rangle$) of a measurement in state $\ket{\psi}$ is given by $\bra{\psi} q \ket{\psi} / \braket{\psi}{\psi}$.}
+
+The $q_i$ and $\ket{i}$ are particularly important -- each individual measurement produces one of the $q_i$ and leave the state in the corresponding $\ket{i}$ state.
+Note that in terms of $q$ we have the equation
+$$q \ket{i} = q_i \ket{i}$$
+(remember, $q$ is an operator whereas $q_i$ is a number).
+We can use this to define the $q_i$ and $\ket{i}$ in terms of $q$ as a solution of this equation (excluding the trivial solution $\ket{i} = 0$).
+For an arbitrary operator $q$ the solutions $q_i$ for this equation are called \emph{eigenvalues}.
+They are in general complex numbers.
+The corresponding $\ket{i}$ are called \emph{eigenvectors} (also called \emph{eigenstates} in quantum mechanics).
+The process of obtaining the eigenvalues and eigenvectors is often called \emph{diagonalisation} (for reasons that will be obvious later).
+
+We can now formulate an addendum to the principle: \emph{Each individual measurement results in an eigenvalue $q_i$ of $q$, with probability $|\braket{q_i}{\psi}|^2$, and leaving the state as an eigenvector of $q$.}
+Note that the last step is identical to applying the operator $\ket{i} \bra{i}$.
 
 \begin{question}
-Now assume that you determined an observable $q$ some other way but you have no idea what the $q_i$ or the $\ket{i}$ states are.
-Find an equation for them.
-\hint{What happens when you apply $q$ to an $\ket{i}$ state?}
+$q$ is an operator with eigenvalues $q_i$ and eigenvectors $\ket{i}$.
+Show that\\
+(a) $\bra{i} q^\dagger = \bra{i} {q_i}^*$ (note that $\bra{i} q \ne \bra{i} q_i$ in general),\\
+(b) if $q$ is Hermitian ($q = q^\dagger$), $q_i$ must be real,\\
+(c) if $q$ is anti-Hermitian ($q = -q^\dagger$), $q_i$ must be imaginary,\\
+(d) $q^n \ket{i} = {q_i}^n \ket{i}$,\\
+(e) if $\langle q \rangle \ge c$ (for some real number $c$) always, then all $q_i \ge c$.
 \solution{
-$$q \ket{i} = q_i \ket{i}$$
-$q_i$ is thus an \emph{eigenvalue} and $\ket{i}$ is the corresponding \emph{eigenvector} (also called \emph{eigenstate}).
-
-We can eliminate $\ket{i}$ in the finite dimensional case by writing $(q - q_i) \ket{i} = 0$ and then take determinants to get
-$$\det(q - q_i) = 0.$$
-This last equation is often called the characteristic equation.
+(a) Take the Hermitian conjugate of $q \ket{i} = q_i \ket{i}$.\\
+(b) (c)
+$${q_i}^* \braket{i}{i} = \bra{i} q^\dagger \ket{i} = \pm \bra{i} q \ket{i} = \pm q_i \braket{i}{i}$$
+and hence ${q_i}^* = \pm q_i$, which implies $q_i$ is real/imaginary.\\
+(d) Apply $q$ to $q \ket{i} = q_i \ket{i}$ repeatedly.\\
+(e) Apply $\langle q \rangle \ge c$ to $\ket{i}$ to get
+$$q_i = \frac{\bra{i} q \ket{i}}{\braket{i}{i}} \ge c.$$
 }
 \end{question}
 
-Hence an addendum to our principle: \emph{Each individual measurement results in an eigenvalue $q_i$ of $q$, with probability $|\braket{q_i}{\psi}|^2$, and leaving the state as an eigenvector of $q$.}
-Note that the last step is identical to applying the operator $\ket{i} \bra{i}$.
+\begin{question}
+(optional)
+For finite dimensional $q$ use the determinant to eliminate $\ket{i}$ from $q \ket{i} = q_i \ket{i}$.
+\solution{
+$(q - q_i) \ket{i} = 0$ is a matrix equation that can only be solved for non-zero $\ket{i}$ if
+$$\det(q - q_i) = 0.$$
+}
+\end{question}
 
 \begin{question}
 If $q_i$ and $q_j$ are identical (``degenerate''), are $\ket{i}$ and $\ket{j}$ uniquely determined from $q$?
@@ -584,7 +618,7 @@ we can replace $\ket{i}$ and $\ket{j}$ by $\ket{a}$ and $\ket{b}$ and still get 
 }
 \end{question}
 
-This leads to a slight correction to the principle if multiple $q_i$ are identical: We project not with $\ket{i} \bra{i}$ but with $\ket{i} \bra{i} + \ket{j} \bra{j} + \dots$.
+This leads to a slight correction to the principle if $q_i = q_j = \dots$: We project not with $\ket{i} \bra{i}$ but with $\ket{i} \bra{i} + \ket{j} \bra{j} + \dots$
 Note that this entire construction would blow up if it were not for the following theorem.
 
 \begin{question}
@@ -637,13 +671,23 @@ where $U = \sum_i \ket{i'} \bra{i}$.
 }
 \end{question}
 
+\begin{question}
+In the last question take $\ket{i'}$ to be the eigenvectors with eigenvalues $\lambda_i$ (assume that they form a basis).
+Show that $M'$ is diagonal, i.e.\ ${M'}_{ij}$ is zero if $i \ne j$.
+\solution{
+We can substitute $M = \sum_{i,j} {M'}_{j,i} \ket{j'} \bra{i'}$ in $\bra{j'} M \ket{i'}$ to find
+$${M'}_{j,i} = \bra{j'} M \ket{i'} = \bra{j'} \lambda_j \ket{i'} = \lambda_j \braket{j'}{i'}.$$
+This is zero if $j \ne i$ (and equal to $\lambda_j$ otherwise).
+}
+\end{question}
+
 \subsection{Classical and quantum probability}
 We assumed that photons have a polarisation \emph{vector} $\ket{J}$, but we showed earlier that the most general polarisation state of light is a \emph{density matrix} $\varrho$.
 We already hinted how this works out, in our analysis of the naive two-polarisation-state photon model.
 A density matrix is the result of a random sequence of photons.
 What do we mean by random?
 Here, we used the classical definition of randomness, which reflects \emph{imperfect knowledge}.
-We can roll a dice and get a ``random'' number even though the number rolled is a perfectly determistic function of the dice's position and momentum when it was thrown!
+We can roll a die and get a ``random'' number even though the number rolled is a perfectly determistic function of the die's position and momentum when it was thrown!
 However this function is so complicated and we know so little about the position and momentum that the result \emph{appears} random.
 
 This is very different from the quantum world.
@@ -822,7 +866,7 @@ $$m \ddot x = -\pfrac{V}{x}.$$
 \hint{(b) Calculate $\D{H}/\D{t}$.}
 \solution{
 (a) If $V(t, x+\delta x) = V(t,x)$, then $V$ is independent of $x$ and $\partial V/\partial x = 0$ and hence
-$$\dot p = m \ddot = 0.$$
+$$\dot p = m \ddot x = 0.$$
 (b) Note that $H = m \dot x^2/2 + V$ and hence by the chain rule
 $$\Dfrac{H}{t} = m \ddot x \dot x + \pfrac{V}{x} \dot x + \pfrac{V}{t} = \pfrac{V}{t}$$
 by applying the equation of motion.
@@ -917,7 +961,7 @@ $$Q = \sum_i \pfrac{L}{\dot x_i} \Dfrac{x_i}{\varepsilon}$$
 is the corresponding conserved quantity (more generally, if a symmetry does not leave $L$ invariant but rather changes $L$ to $L + \D{\Lambda}/\D{t}$ then the quantity has an extra $-\D{\Lambda}/\D{\varepsilon}$).
 
 Of course, the principle still has a problem: we can only apply it to symmetric systems!
-We will usually work around by assuming that the operator for the quantity remains unchanged even when the system is not symmetric (even though it no longer corresponds to a classical conserved quantity).
+We will usually work around that by assuming that the operator for the quantity remains unchanged even when the system is not symmetric (even though it no longer corresponds to a classical conserved quantity).
 
 \begin{question}
 (optional) Show that $\hbar$ has units of energy $\times$ time.
@@ -1100,7 +1144,7 @@ We now want to introduce time.
 We will do this by adding time dependence to our states: $\ket{\psi}$ becomes $\ket{\psi(t)}$.
 We define a time translation (also called time evolution) operator $U(t)$ by
 $$U(\varepsilon) \ket{\psi(t)} = \ket{\psi(t+\varepsilon)}.$$
-Since $U(0)$ we can again define the generator $G$ just like before.
+Since $U(0) = 1$ we can again define the generator $G$ just like before.
 \begin{question}
 Show that the generator $G$ is $\pfrac{}{t}$.
 \hint{Apply $G$ to a state $\ket{\psi}$.}
@@ -1387,7 +1431,8 @@ $$J = \frac{-\im \hbar}{2m} \left(\psi^* \pfrac{\psi}{x} - \psi \pfrac{\psi^*}{x
 Integrating the equation gives us
 $$\pfrac{}{t} \int_a^b \rho \D{t} = J(a) - J(b),$$
 i.e.\ the amount of probability density in a region changes at rate $J(a) - J(b)$.
-We can then interpret $J$ as a ``probability current''.
+$\rho$ is then a conserved quantity (we have the same equation for charge density in electrodynamics or mass density in fluid mechanics).
+We can interpret $J$ as a ``probability current''.
 }
 \end{question}
 
@@ -1444,7 +1489,7 @@ The second solvable potential is kind of an inverse situation -- an infinitely n
 \begin{question}
 Find the stationary states for the $\delta$-function potential.
 Make sure to consider both positive and negative energy states.
-\hint{Write down a general solution. Note that $\psi$ is discontinuous and you need to treat two regions separately.}
+\hint{Write down a general solution. Note that $\psi'$ is discontinuous and you need to treat two regions separately.}
 \hint{Integrate from $-\varepsilon$ to $\varepsilon$ for small $\varepsilon$ to get rid of the $\delta$.}
 \result{
 For $E>0$ there are two independent states for each value of $E$. For $E < 0$ there is one localised state at $E=-m\alpha^2/(2\hbar^2)$ if $\alpha < 0$.
@@ -1452,7 +1497,7 @@ For $E>0$ there are two independent states for each value of $E$. For $E < 0$ th
 \solution{
 In this case
 $$-\frac{\hbar^2}{2m} \psi''(x) + (\alpha \delta(x) - E) \psi(x) = 0.$$
-Since $V(x)$ is infinite near zero $\psi(x)$ can be discontinuous at $x=0$.
+Since $V(x)$ is infinite near zero $\psi'(x)$ can be discontinuous at $x=0$ ($\psi(x)$ is still continuous).
 For $x \ne 0$ we again have plane waves and we can write
 $$\psi(x) = \left\{\begin{matrix}a e^{\im k x} + b e^{-\im k x} & x < 0\\c e^{\im k x} + d e^{-\im k x} & x > 0\end{matrix}\right.$$
 with $\hbar^2 k^2/(2m) = E$ and $a+b=c+d$.
@@ -1465,6 +1510,8 @@ We can solve for $b$ and $c$ to get
 $$b = \frac{2E d-\im k\alpha a}{2E+\im k\alpha}, \qquad c = \frac{-\im k \alpha d + 2 E a}{2E+\im k\alpha}.$$
 For every energy $E>0$ there are then two basis states -- similar to how we have left and right going states for a free particle, which we can mix to get more complex states.
 In particular we can form physical wavepacket states by mixing states of similar energies.
+
+If $d=0$ we have a wave incoming from the left that is both reflected and transmitted (similar to light at an interface), with reflection coefficient $r = -\im k \alpha/(2E+\im k \alpha)$ and transmission coefficient $t = 2E/(2E+\im k \alpha)$.
 
 For energies $E<0$ things get more interesting.
 To make a normalisable state we cannot allow states that grow exponentially.
@@ -1487,11 +1534,14 @@ Assume that $V(x) \to 0$ at infinity.
 Show that\\
 1. bound states are localised, i.e.\ $\psi$ approaches zero at infinity, whereas scattering states approach plane wave states,\\
 2. if $V(x)$ has a lower bound $V_{\rm min}$, then the energy of the ground state is $\ge V_{\rm min}$,\\
-3. (optional) bound states are discrete in energy, whereas scattering states are continuous,\\
-4. (optional) if $V(x)$ is finite except for some number of poles (e.g.\ $V(x)=-1/|x|$), the ground state energy is still bounded from below.\\
-(Only qualitative arguments are expected for the last two).
-\hint{3. Think a bit intuitively about what parameters determine $\psi$ for a given potential and what needs to happen to get a physical state. What does the set of valid parameters look like in the $n$-dimensional parameter space?}
-\hint{4. Remember the uncertainty principle.}
+3. all the bound states can be chosen to be real ($V(x)$ is real).\\
+(optional) Also make qualitative arguments to argue that\\
+4. bound states are discrete in energy, whereas scattering states are continuous,\\
+5. if $V(x)$ is finite except for some number of poles (e.g.\ $V(x)=-1/|x|$), the ground state energy is still bounded from below,\\
+6. if $V(x)$ has no poles, the ground state has no nodes ($x$ for which $\psi(x)=0$) and the $n$-th excited state has more nodes than the states below it.\\
+\hint{4. Think a bit intuitively about what parameters determine $\psi$ for a given potential and what needs to happen to get a physical state. What does the set of valid parameters look like in the $n$-dimensional parameter space?}
+\hint{5. Remember the uncertainty principle.}
+\hint{6. Think about the effect of nodes on the kinetic energy.}
 \solution{
 1. We can neglect $V$ for large $|x|$. Then the Schr\"odinger equation is simply the free equation
 $$-\frac{\hbar^2}{2m} \psi'' = E \psi.$$
@@ -1504,7 +1554,10 @@ If $V \ge V_{\rm min}$, then (if $\psi$ is normalised)
 $$\langle V \rangle = \int V(x) |\psi|^2 \D{x} \ge V_{\rm min} \int |\psi|^2 \D{x} = V_{\rm min}.$$
 Hence $\langle H \rangle \ge V_{\rm min}$.
 
-3. The Schr\"odinger equation has one parameter $E$ and is a second order equation.
+3. Take an arbitrary bound state $\psi$. Taking the complex conjugate of the Schr\"odinger equation shows that $\psi^*$ is a solution of the same energy. If $\psi = \psi^*$ then $\psi$ is real and we are done.
+Otherwise $(\psi + \psi^*)/2$ and $(\psi - \psi^*)/(2\im)$ are both real, non-zero and linear combinations of bound states of the same energy, hence they are bound states themselves and can replace $\psi$ and $\psi^*$.
+
+4. The Schr\"odinger equation has one parameter $E$ and is a second order equation.
 We thus have three parameters to vary, $E$, $\psi(0)$ and $\psi'(0)$.
 For $E < 0$ we showed in 1.\ that the wavefunction must fall exponentially at infinity, which implies two conditions (one for $+\infty$ and another for $-\infty$).
 We can also normalise states, which implies another condition.
@@ -1514,10 +1567,20 @@ For $E > 0$ the wavefunction is largely arbitrary at infinity.
 No matter what we set $\psi(0)$ and $\psi'(0)$ to we will get a valid state at infinity.
 Hence we have a continuous set of states.
 
-4.
+5.
 To get very low potential energy we would have to confine the wavefunction very narrowly near the poles.
 But that implies, by the uncertainty principle, that $\sigma_p$ is very high.
 Since $\langle T \rangle = \hbar^2/(2m) \langle p^2 \rangle = \hbar^2 {\sigma_p}^2/(2m)$ this implies the kinetic energy is very high, which cancels out the negative potential energy.
+
+6.
+The Schr\"odinger equation implies that $\psi'' = 0$ if $\psi = 0$.
+Hence $\psi'$ is extremal at a node.
+Because $\psi \to 0$ at $\pm \infty$, this means $|\psi'|^2$ is maximal at a node.
+Thus, each node contributes a ``peak'' to the kinetic energy integral $\int |\psi'|^2 \D{x}$.
+A state with more nodes then has more kinetic energy.
+In particular we can take the ground state and ``excise'' any nodes by flipping one half and smoothing the cusp at the node.
+This new state has basically unchanged potential energy, since that is $\int V(x) |\psi|^2 \D{x}$ but lower kinetic energy because there no longer is a maximum of $|\psi'|^2$.
+We have then a state of lower energy, which is impossible (you might think that there is a catch in the argument since the new state might not be a stationary state, but see the variational principle below).
 }
 \end{question}
 
@@ -1553,5 +1616,823 @@ For the $\delta$ potential we have
 $$S = \frac{1}{2 E + \im k \alpha} \begin{pmatrix}-\im k \alpha & 2E\\2E & -\im k \alpha\end{pmatrix}.$$
 Note that $S$ has a pole for the bound state $k=-\im m \alpha/\hbar^2$.
 This is to be expected -- $k$ has to be imaginary and either the ingoing or outgoing waves must be zero, while the other set is non-zero.
+}
+\end{question}
+
+\begin{question}
+(Variational method)
+Show that the energy expectation value $\langle H \rangle$ for \emph{any} state (not necessarily an energy eigenstate) is $\ge$ than the energy of the ground state $E_0$.
+We can then approximate the ground state by using a trial wavefunction with parameters and minimising $\langle H \rangle$.
+\solution{
+We can expand $\ket{\psi}$ (assumed to be normalised) in energy eigenstates $\ket{n}$ to get
+$$\langle H \rangle = \sum_n E_n \left|\braket{\psi}{n}\right|^2 \ge E_0 \sum_n \left|\braket{\psi}{n}\right|^2 = E_0.$$
+}
+\end{question}
+
+\begin{question}
+(optional)
+Find a way to apply the variational method to discover the excited states.
+\hint{Define a new Hamiltonian $H'$ as a function of $H$ such that the ground state of $H'$ is an excited state of $H$.}
+\solution{
+Apply the method to find the ground state of $H' = (H - \lambda)^2$.
+If $\lambda$ is close to the energy of an excited state of $H$, $H'$ will have the state as its ground state.
+}
+\end{question}
+
+\begin{question}
+Consider the potential
+$$V(x) = \left\{\begin{matrix}V_0 & x > 0\\0 & x < 0\end{matrix}\right.$$
+Find the reflection and transmission coefficients for an incoming wave from the left.
+Are there any bound (i.e.\ localised) states?
+\hint{Solve the Schr\"odinger equation in each region separately and apply the condition that $\psi$ and $\psi'$ must be continuous.}
+\solution{
+Consider $E>0$.
+The particle is free in either region ($V_0$ just shifts the energy) and we get
+$$\psi(x) = \left\{\begin{matrix}
+e^{\im k x} + r e^{-\im k x} & x < 0\\
+t e^{\im k' x} & x > 0
+\end{matrix}\right.$$
+with $\hbar^2 k^2/(2m) = E$ and $\hbar^2 k'^2/(2m) = E+V_0$.
+We need $\psi$ and $\psi'$ to be continuous and we then get equations
+$$1 + r = t,\qquad k (1 - r) = k' t.$$
+Hence
+$$r = \frac{k - k'}{k + k'},\qquad t = \frac{2k}{k+k'}.$$
+
+We can't form a bound state, which would have to be exponentially decaying in either region.
+But there is no way to match two exponential decays without a ``cusp'' at the interface, hence $\psi'$ would be discontinuous.
+}
+\end{question}
+
+Note that in the last question the transmission coefficient was non-zero when $0 < E < V_0$, leading to an exponentially decaying wavefunction for $x>0$.
+Classically, the particle would be forbidden from entering here, but quantum mechanically there is a non-zero chance that the particle is found in this forbidden region.
+This effect is called \emph{quantum tunneling} and it's crucial to many phenomena that seem classically impossible, such as $\alpha$ decay.
+It's even used technologically in flash memory and tunnel diodes.
+
+\begin{question}
+(optional)
+Consider the potential (called the finite potential well)
+$$V(x) = \left\{\begin{matrix}V_0 & -L \le x \le L\\0 & \mbox{otherwise}\end{matrix}\right.$$
+Find an equation for the energy of the bound states (note that it can't be solved algebraically).\\
+(optional) Show that there is always at least one bound state.
+\hint{Solve for even and odd states separately.}
+\solution{
+We need $V_0 \le E \le 0$ to get bound states, which can be chosen to be either even or odd.
+To get an even state we need
+$$\psi(x) = \left\{\begin{matrix}
+a e^{k x} & x \le -L\\
+b \cos(k' x) & -L \le x \le L\\
+a e^{-k x} & x \ge L
+\end{matrix}\right.$$
+with $\hbar^2 k^2/(2m) = -E$ and $\hbar^2 k'^2/(2m) = E - V_0$.
+From the continuity conditions we get
+$$a e^{k L} = b \cos(k' L),\qquad -k a e^{k L} = -k' b \sin(k' L).$$
+Dividing the two we get $k = k' \tan(k' L),$
+which is shorthand for
+$$\sqrt{-E} = \sqrt{E - V_0} \tan(\sqrt{2 m (E - V_0)} L/\hbar).$$
+
+The odd case proceeds in the same way to give $k = -k' \cot(k' L),$ or
+$$\sqrt{-E} = -\sqrt{E - V_0} \cot(\sqrt{2 m (E - V_0)} L/\hbar).$$
+
+We know that the ground state has no nodes, hence it must be even.
+The equation for that case can be rewritten as
+$$\sqrt{\frac{-E}{E - V_0}} - \tan(\sqrt{2m (E - V_0)} L/\hbar) = 0.$$
+For $E\to V_0$ the left-hand side goes to $+\infty$.
+For $E=0$ it reads $-\tan(\sqrt{2m (E-V_0)} L/\hbar)$.
+If the $\tan$ has no pole between $V_0 < E < 0$, then $\tan(\sqrt{2m(-V_0)} L/\hbar) > 0$ and the left-hand side is negative at $E=0$ -- hence it must cross through zero and there must be a solution.
+If $\tan$ does have a pole then between $E=V_0$ and the first pole the function continuously goes from $+\infty$ to $-\infty$ -- and must pass through zero somewhere inbetween.
+}
+\end{question}
+
+\begin{question}
+(optional)
+Use the result from the last question to show that every continuous potential $V$ that goes to 0 at $\pm \infty$ and that is negative somewhere must admit a bound state (this is only true in one dimension).
+\hint{Take a bound state for an appropriate finite potential well and put an upper bound on $\langle T+V \rangle$ for that state.}
+\solution{
+Since $V$ is continuous and negative somewhere, there must be a region $[x_0-\varepsilon,x_0+\varepsilon]$ for which $E < V_0$ for some negative $V_0$.
+Define
+$$V_1(x) = \left\{\begin{matrix}V_0 & x_0-\varepsilon < x < x_0 + \varepsilon\\0 & \mbox{otherwise}\end{matrix}\right.;$$
+by the last question it must have a bound state $\ket{\psi}$ (which we can normalise) of energy $E_0 < 0$.
+Now note that $V_1(x) \ge V(x)$ everywhere and hence
+$$\bra{\psi} H \ket{\psi} = \bra{\psi} T \ket{\psi} + \int V(x) |\psi(x)|^2 \D{x} \le \bra{\psi} T \ket{\psi} + \int V_1(x) |\psi(x)|^2 \D{x} = E_0 < 0.$$
+This implies at least one eigenvalue of $H$ is less than 0, which implies that there is at least one bound state.
+}
+\end{question}
+
+\subsection{The harmonic oscillator}
+Of particular importance is the potential $V(x) = \frac{1}{2} m \omega^2 x^2$, known as the \emph{harmonic oscillator}.
+\begin{question}
+Find the classical solutions.
+\solution{
+The equations of motion are
+$$m \ddot x = -m \omega^2 x,$$
+with the solution
+$$x = a \cos(\omega t) + b \sin(\omega t).$$
+}
+\end{question}
+
+We could now plunge in and solve the Schr\"odinger equation for the stationary states
+$$-\frac{\hbar^2}{2m} \psi''(x) + \left(\frac{1}{2} m \omega^2 x^2 - E\right) \psi(x) = 0$$
+directly, but it's quite tedious and there is a much more elegant way due to Dirac.
+On a most basic level, the insight is to reduce the complex ``back-and-forth'' motion of the real $x$ and $p$ to circular motion in the complex plane.
+
+\begin{question}
+Note that the classical solutions in \emph{phase space} $(x,p) = (x, m \dot x)$ are just ellipses.
+Define a dimensionless complex quantity $a = \alpha x + \beta p$ (with $\alpha > 0$) so that $a$ rotates clockwise in the complex plane.
+Show that the magnitude $|a|^2$ is proportional to the total energy and define $a$ to get the simplest possible proportionality constant.
+
+(Even though this problem is entirely classical, you need to use $\hbar$ to make $a$ dimensionless).
+\result{$a = \sqrt{m \omega/(2\hbar)} (x + \im p/(m\omega))$.}
+\solution{
+Circular motion in the complex plane means $\dot a = -\im \omega a$.
+Calculate
+$$\dot a = \alpha \dot x + \beta \dot p = \frac{1}{m} \alpha p - \beta m \omega^2 x \stackrel{!}{=} -\im \omega (\alpha x + \beta p).$$
+Comparing the coefficient of $x$ we see that $\beta = \im \alpha/(m \omega)$.
+To get a dimensionless result $\alpha$ needs to be units of inverse length.
+$\hbar$ has units $\rm kg \cdot m^2/s$, $\omega$ has units $\rm 1/s$ and $m$ has units $\rm kg$.
+Hence we need $\alpha \propto \sqrt{m \omega/\hbar}$ which leads to
+$$a = \gamma \sqrt{\frac{m \omega}{\hbar}} \left(x + \frac{\im p}{m \omega}\right)$$
+(where $\gamma$ is dimensionless).
+This leads to
+$$|a|^2 = \gamma^2 \frac{m \omega x^2}{\hbar} + \gamma^2 \frac{p^2}{m \omega} = 2\gamma^2 \hbar \omega \left(\frac{p^2}{2m} + \frac{1}{2} m \omega^2 x^2\right).$$
+The simplest proportionality constant is $\hbar \omega$ which means $\gamma=1/\sqrt{2}$ and thus
+$$a = \sqrt{\frac{m \omega}{2 \hbar}} \left(x + \frac{\im p}{m \omega}\right).$$
+}
+\end{question}
+
+\begin{question}
+Now on to the quantum problem.
+$x$ and $p$ are now operators and $a$ can be made a (non-Hermitian!) operator by substituting the $x$ and $p$ operators in the equation you derived for $a$.
+Evaluate $[a,a^\dagger]$ and write $H = p^2/(2m) + m \omega^2 x^2/2$ in terms of $a$ and $a^\dagger$ (be very mindful that $[x,p] \ne 0!$).
+\hint{To write down $H$, evaluate an equivalent to $|a|^2$.}
+\result{$[a,a^\dagger] = 1$ and $H = \hbar \omega (a^\dagger a + 1/2)$.}
+\solution{
+$$[a,a^\dagger] = \frac{m \omega}{2\hbar} \left[x + \frac{\im p}{m \omega}, x - \frac{\im p}{m \omega}\right] = \frac{m \omega}{2\hbar} \frac{-\im}{m \omega} ([x,p] - [p,x]) = \frac{m \omega}{2\hbar} \frac{\im}{m \omega} 2\im \hbar = 1$$
+In the classical case we had $H = \hbar \omega a a^*$.
+Trying $\hbar \omega a^\dagger a$ we find
+$$\hbar \omega a^\dagger a = \hbar \omega \frac{m \omega}{2\hbar} \left(x- \frac{\im p}{m \omega}\right) \left(x + \frac{\im p}{m \omega}\right) = \frac{m \omega^2}{2} \left(x^2 + \frac{p}{m^2 \omega^2} + \frac{\im}{m \omega} [x,p]\right) = H - \frac{1}{2} \hbar \omega.$$
+Hence
+$$H = \hbar \omega a^\dagger a + \frac{1}{2} \hbar \omega.$$
+}
+\end{question}
+
+\begin{question}
+Show that there is a (up to a phase factor) unique normalised state $\ket{0}$ obeying $a \ket{0} = 0$ and determine its wavefunction.
+Is it a stationary state? If so, what is its energy?
+\hint{Replace $p$ with $-\im \hbar\;\partial/\partial x$ and solve the resulting differential equation.}
+\result{$\psi(x) = (m \omega/(\pi \hbar))^{1/4} \exp(-m \omega x^2/(2\hbar))$ and energy $\hbar \omega/2$.}
+\solution{
+$a \psi = 0$ implies
+$$x \psi(x) + \frac{\hbar \psi'(x)}{m \omega} = 0,$$
+which can be rearranged to $\pfrac{}{x} \ln \psi(x) = - m \omega x/\hbar$.
+The (normalised) solution to this is a Gaussian
+$$\psi(x) = \left(\frac{m \omega}{\pi \hbar}\right)^{1/4} \exp\left(-\frac{m \omega x^2}{2 \hbar}\right).$$
+
+Applying $H$ to this state results in
+$$H \ket{0} = \hbar \omega a^\dagger a \ket{0} + \frac{1}{2} \hbar \omega \ket{0} = \frac{1}{2} \hbar \omega \ket{0},$$
+hence $\ket{0}$ is a stationary state of energy $\hbar \omega/2$.
+}
+\end{question}
+
+\begin{question}
+Show that $\bra{\psi} a^\dagger a \ket{\psi}$ is positive for any (normalised) state $\psi$.
+What does this imply about the eigenvalues of $H$ and about $\ket{0}$?
+\hint{Use $\braket{\phi}{\phi} \ge 0$ for any state $\ket{\phi}$.}
+\solution{
+Define $\ket{\phi} = a \ket{\psi}$.
+Then $0 \le \braket{\phi}{\phi} = \bra{\psi} a^\dagger a \ket{\psi}$.
+Since $H = \hbar \omega a^\dagger a + \hbar \omega/2$ this means that all eigenvalues are $\ge \hbar \omega/2$.
+Since $\ket{0}$ has energy $\hbar \omega/2$ this implies it's the ground state.
+}
+\end{question}
+
+\begin{question}
+Show that if $\ket{\psi}$ is a stationary state of energy $E$, then $a \ket{\psi}$ and $a^\dagger \ket{\psi}$ are as well and find their energy (you can, optionally, show that $a^\dagger \ket{\psi}$ is non-zero for any physical state).
+Use this insight to find an expression for the $n$-th stationary state $\ket{n}$ and its energy.
+What is the effect of the $a^\dagger a$ operator on $\ket{n}$?
+Normalise $\ket{n}$.
+\hint{Use $[a,a^\dagger] = 1$ to derive an expression for $[H,a]$ and remember that $\ket{0}$ is the ground state.}
+\hint{To normalise $\ket{n}$ evaluate $\bra{n} a a^\dagger \ket{n}$.}
+\solution{
+$$[H,a] = \hbar \omega [a a^\dagger, a] = \hbar \omega a [a^\dagger, a] = -\hbar \omega$$
+and hence
+$$H a \ket{\psi} = a H \ket{\psi} + [H,a] \ket{\psi} = (E - \hbar \omega) a \ket{\psi}.$$
+Similarly
+$$H a^\dagger \ket{\psi} = (E + \hbar \omega) a \ket{\psi}.$$
+$a$ then decreases the energy by $\hbar \omega$ and $a^\dagger$ increases it by the same amount.
+
+We can find $\ket{n}$ by starting from $\ket{0}$ and applying $a^\dagger$ $n$ times.
+The energy is then $(n+1/2)\hbar \omega$.
+$a^\dagger a = (H - 1/2)/(\hbar \omega)$ and so $a^\dagger a \ket{n} = n \ket{n}$.
+To normalise the state write $\alpha_n \ket{n} = a^\dagger \ket{n-1}$ and note that
+$$|\alpha_n|^2 \braket{n}{n} = \bra{n-1} a a^\dagger \ket{n-1} = \bra{n-1} (a^\dagger a + 1) \ket{n-1} = n \braket{n-1}{n-1}.$$
+Hence the states will be normalised if we define $\ket{n} = n^{-1/2}~a^\dagger \ket{n-1}.$
+By applying this relation repeatedly we can show that
+$$\ket{n} = \frac{1}{\sqrt{n!}} (a^\dagger)^n \ket{0}.$$
+
+Remember the relations
+$$a \ket{n} = \sqrt{n} \ket{n-1},$$
+$$a^\dagger \ket{n} = \sqrt{n+1} \ket{n+1};$$
+they are very useful.
+They also make it obvious why $a$ and $a^\dagger$ are called the ``lowering'' and ``raising'' operator, respectively.
+Collectively they are known as ``ladder operators''.
+}
+\end{question}
+
+\begin{question}
+(optional)
+Show that if $\ket{\psi}$ is a stationary state, then $a^n \ket{\psi}$ must be 0 for some integer $n$.
+Hence argue that the previously found $\ket{n}$ states exhaust all the stationary states of the oscillator.
+\hint{What is the energy of $a^n \ket{\psi}$?}
+\solution{
+$a^n \ket{\psi}$ is either zero or a stationary state of energy $E - n \hbar \omega$.
+Since all stationary states have energies larger than $\hbar \omega/2$, the latter can't possibly be true for all $n$ and hence it must be 0 for at least one $n$.
+If $a^{n-1} \ket{\psi} \ne 0$ but $a^n \psi = 0$, then $a (a^{n-1} \ket{\psi}) = 0$ which means that $a^{n-1} \ket{psi} \propto \ket{0}$.
+Applying $(a^\dagger)^{n-1}$ one can now show that $\ket{\psi} \propto (a^\dagger)^n \ket{0} \propto \ket{n}$.
+}
+\end{question}
+
+\begin{question}
+(optional, Rodrigues' formula)
+Derive an expression for the wavefunction $\psi_n(x)$ of $\ket{n}$.
+It should be of the form
+$$\psi_n(x) = f(x) \Dfrac{^n}{x^n} g(x),$$
+where $f(x)$ and $g(x)$ are simple functions with no $(\D{}/\D{x})^n$ operators in them.
+\hint{Calculate $a^\dagger (h(x) e^{m \omega x/(2\hbar)})$ for some generic function $h(x)$ (note that the exponent has a $+$ sign).}
+\solution{
+You can show that
+$$\left(x - \frac{\hbar}{m \omega} \Dfrac{}{x}\right) h(x) e^{m \omega x^2/(2 \hbar)} = -e^{m \omega x^2/(2\hbar)} \frac{\hbar}{m \omega} \Dfrac{}{x} h(x).$$
+We can thus ``pull out'' $e^{m\omega x^2/(2\hbar)}$ from $a^\dagger$ if we drop the $x$ term.
+Hence $(a^\dagger)^n \ket{0}/\sqrt{n!}$ can be written as
+$$\psi_n(x) = \frac{(-1)^n}{\sqrt{n! \sqrt{\pi} 2^n}} \left(\frac{m \omega}{\hbar}\right)^{1/4-n/2} \exp\left(\frac{m \omega x^2}{2\hbar}\right) \left(\Dfrac{}{x}\right)^n \exp\left(-\frac{m \omega x^2}{\hbar}\right).$$
+}
+\end{question}
+
+\begin{question}
+Write $x$ and $p$ in terms of $a$ and $a^\dagger$.
+Show that $\langle x \rangle = \langle p \rangle = 0$ and find $\langle x^2 \rangle$ and $\langle p^2 \rangle$ for $\ket{n}$.
+Verify the uncertainty principle.
+
+The ``virial theorem'' in classical mechanics states that $2 T = \beta V$ for a potential $V(x) \propto x^\beta$.
+Verify that it holds for the quantum harmonic oscillator for a stationary state (taking expectation values of both sides).
+\solution{
+Inverting the definitions of $a$ and $a^\dagger$ gives
+$$x = \sqrt{\frac{\hbar}{2m \omega}} \left(a + a^\dagger\right), \qquad p = -\im \sqrt{\frac{m \omega \hbar}{2}} \left(a - a^\dagger\right).$$
+We know that
+$$\bra{n} a \ket{n} = \sqrt{n} \braket{n}{n-1}$$
+and so $\langle a \rangle = 0$ (similarly, $\langle a^\dagger \rangle = 0$).
+Since $\langle x \rangle$ and $\langle p \rangle$ are just linear combinations of these two, they must also be zero.
+The squared equivalents can be found from
+$$\langle x^2 \rangle = \frac{\hbar}{2m \omega} \left\langle a^2 + a a^\dagger + a^\dagger a + (a^\dagger)^2 \right\rangle = \frac{\hbar}{2m \omega} (\langle a^\dagger a + 1\rangle + \langle a^\dagger a \rangle) = \frac{\hbar}{2m \omega} (2n + 1)$$
+$$\langle p^2 \rangle = -\frac{m \omega \hbar}{2} \left\langle a^2 - a a^\dagger - a^\dagger a + (a^\dagger)^2 \right\rangle = \frac{\hbar m \omega}{2} (2n + 1)$$
+Hence
+$$\sigma_x \sigma_p = \sqrt{\langle x^2 \rangle} \sqrt{\langle p^2 \rangle} = \frac{\hbar}{2} (2n+1) \ge \frac{\hbar}{2}.$$
+Note that only the ground state has minimum uncertainty.
+
+The virial theorem just simplifies to $\langle T \rangle = \langle V \rangle$, or
+$$\frac{\langle p^2 \rangle}{2m} = \frac{1}{2} m \omega^2 \langle x^2 \rangle,$$
+substituting the previous results gives $(\hbar \omega/4) (2n+1)$ on both sides.
+}
+\end{question}
+
+\subsection{Combining systems and measurements}
+There is a fun interpretation of the harmonic oscillator and the ladder operators.
+We say that $a^\dagger$ and $a$ create particles of energy $\hbar \omega$!
+This may seem a bit strange -- no doubt partly because these are in fact the most boring particles possible, since they have absolutely no degrees of freedom (the state $\ket{n}$ with $n$ particles is a \emph{unique} state after all).
+Nonetheless, we will later see that, in a nutshell, this is how \emph{all} particles work (using the framework of second quantisation).
+
+We can make things a little bit more interesting by coupling two oscillators, in the hope that particles can then ``travel'' from one oscillator to the other.
+But first, we need to represent the combination of two oscillators as a single quantum system!
+Intuitively, we expect that there are now states described by \emph{two} numbers, corresponding to the number of the particles in each oscillator.
+Hence we can write the stationary states as $\ket{n,m}$.
+Writing the ladder operators for the first oscillator as $a,a^\dagger$ and as $b,b^\dagger$ for the second oscillator we expect
+$$a \ket{n,m} = \sqrt{n} \ket{n-1,m}, \qquad b \ket{n,m} = \sqrt{m} \ket{n,m-1}.$$
+This shows a general feature of combined systems: We write the state as $\ket{\psi_a} \ket{\psi_b}$ (this notation is called a ``tensor product'') and the operators that originally belonged to system $a$ act only on the $\ket{\psi_a}$ part of the state and the operator that originally belonged to system $b$ act only on the $\ket{\psi_b}$ part of the state.
+Mathematically,
+$$a (\ket{\psi_a} \ket{\psi_b}) = (a \ket{\psi_a}) \ket{\psi_b}, \qquad b (\ket{\psi_a} \ket{\psi_b}) = \ket{\psi_a} (b \ket{\psi_b}).$$
+
+The tensor product notation is a bit strange at first (note that is not commutative, since $\ket{\psi_b} \ket{\psi_a}$ has the $a$ system in $\ket{\psi_b}$ and the $b$ system in $\ket{\psi_a}$; the order is reversed for a bra state, so that $\ket{\psi_a} \ket{\psi_b}$ corresponds to $\bra{\psi_b} \bra{\psi_a}$).
+But it turns it has even stranger physical implications!
+We are still in a linear space and so we can form states such as
+$$\ket{\psi_a} \ket{\psi_b} + \ket{\phi_a} \ket{\phi_b}$$
+that cannot be written as a tensor product of $a$ and $b$ states (they are called ``entangled'' states).
+If we act on this with the operator $\ket{\psi_a} \bra{\psi_a}$ (corresponding to a measurement finding the $a$ system in the $\ket{\psi_a}$ state) we get
+$$\ket{\psi_a} \ket{\psi_b}.$$
+The $b$ system is now in the $\ket{\psi_b}$ state.
+This may not seem particularly disturbing, but consider that we have included \emph{no explicit interaction between $a$ and $b$} and that this works \emph{regardless of how much distance is between the two systems}.
+It works even if the $a$ system is on earth and the $b$ system is near Alpha Centauri and it does so instantly!
+Einstein termed this effect ``spooky action at a distance''.
+
+Before you get too freaked out by this, it may be comforting to know that there is no way transmit information solely by this mechanism.
+Whoever is left at Alpha Centauri still has to measure the $b$ system and they will find it in state $\psi_b$ -- which would have happened with 50\% chance even if we didn't do anything on earth.
+Further, to create the real-life entangled state in the first place requires interacting the systems (which implies an explicit interaction and won't work faster than the speed of light).
+
+We can now do a fascinating thought experiment to shed light on the nature of quantum measurement.
+This will involve the often mentioned (and widely misunderstood) ``Schr\"odinger's cat''.
+A particularly cruel experimentalist has put a cat in a box with a vial of poison, which is released by a mechanism triggered by some quantum process (such as radioactive decay).
+The usual interpretation is that this puts the cat in a state $\ket{\rm alive} + \ket{\rm dead}$, which is mystical and offers fertile ground for baseless philosophical ramblings.
+Further, it is stated, the state only collapses once the conscious observer opens the box, hence consciousness is mystical and unphysical.
+Reality is less glamorous.
+No matter how much care the experimenter takes he will couple the box with his laboratory, and in particular his brain.
+We should thus be thinking of this as a combined system.
+The naive interpretation corresponds to a state
+$$(\ket{\rm alive} + \ket{\rm dead}) \ket{\mbox{experimentalist confused}}.$$
+Opening the box then somehow resolves this into a state such as $\ket{\rm alive} \ket{\mbox{experimentalist happy}}$ or $\ket{\rm dead} \ket{\mbox{experimentalist sad}}.$
+But the inadvertent coupling enforces that the cat state is consistent with the experimentalist state even before he opens the box, hence the true state is
+$$\ket{\rm alive} \ket{\mbox{experimentalist will be happy}} + \ket{\rm dead} \ket{\mbox{experimentalist will be sad}}.$$
+Now, there are ``interpretations'' of quantum mechanics that assign meaning to this combination.
+For our purposes it's really only important to realise that it doesn't really matter since \emph{from the experimentalist's point of view}, his local ``universe'' has a cat that is either dead or alive, not in a weird superposition state (in the ``multiverse'' interpretation this is made most explicit by stating that each branch of the wavefunction corresponds to a separate universe, all of which exists in parallel).
+
+We can extend this idea to arbitrary measurements.
+Measuring an observable $q$ involves an operator
+$$\sum_i \ket{i} \ket{\mbox{exp.\ records $q_i$}} \bra{\mbox{exp.\ clueless}} \bra{i}.$$
+Here the ``exp.'' states include not just the experimentalist and his brain but the entire laboratory and whatever else happens to interact with it.
+Measuring a superposition such as $(\ket{1} + 2 \ket{2})/\sqrt{5}$ then leads to a state
+$$\ket{\psi} = \frac{1}{\sqrt{5}} \ket{1} \ket{\mbox{exp.\ records $q_1$}} + \frac{2}{\sqrt{5}} \ket{2} \ket{\mbox{exp.\ records $q_2$}}.$$
+
+Now, this is a pure state (it completely specifies the state of the universe).
+It corresponds to a density matrix $\varrho = \ket{\psi} \bra{\psi}$.
+Suppose we only care about the experimentalist state.
+We can then define a new density matrix $\varrho'$ that reflects our ``ignorance'' (indifference).
+Mathematically this is done by a ``partial trace''.
+Recall that the trace converts $\ket{i} \bra{j}$ to $\braket{j}{i}$.
+The partial trace does this only for the state corresponding to one part of the system, i.e.\ $\tr_S(\ket{i} \bra{j}) = \braket{j}{i}$ but $\tr_S$ has no effect on $\ket{\mbox{exp.\ records $q_i$}} \bra{\mbox{exp. records $q_i$}}$.
+We can then calculate
+$$\tr_S(\ket{\psi} \bra{\psi}) = \frac{1}{5} \ket{\mbox{exp.\ records $q_1$}} \bra{\mbox{exp.\ records $q_1$}} + \frac{4}{5} \ket{\mbox{exp.\ records $q_2$}} \bra{\mbox{exp.\ records $q_2$}}.$$
+This means there is a $1/5$ chance that the experimenter recorded $q_1$ -- exactly the same result that we postulated earlier, but now there is nothing special about the ``measurement''.
+
+There is an alternative scenario that works very similarly.
+Suppose the experimenter carefully prepared the state $(\ket{1}+2 \ket{2})/\sqrt{5}$.
+Now, some coupling he couldn't shield, let's say it's a stray $\alpha$-particle, entangles the system with the particle to produce a state
+$$\ket{\psi} = \frac{1}{\sqrt{5}} \ket{1} \ket{\alpha_1} + \frac{2}{\sqrt{5}} \ket{2} \ket{\alpha_2}.$$
+Now in this case the experimenter only cares about the state of the system -- he isn't even aware of the $\alpha$-particle.
+We should thus use the partial trace to remove it from $\psi$ to get the state that the experimenter cares about.
+Note that now we remove the \emph{other} part of the state.
+We get
+$$\tr_\alpha(\ket{\psi} \bra{\psi}) = \frac{1}{5} \ket{1} \bra{1} + \frac{4}{5} \ket{2} \bra{2}.$$
+Effectively, the $\alpha$-particle has converted the pure state to an impure state.
+This is called \emph{decoherence}.
+
+Let's now return to our original problem -- coupling oscillators.
+We can now identify our states $\ket{m,n}$ as just tensor products $\ket{m} \ket{n}$.
+Operators such as $a$ and $b$ operate on either half of the tensor product.
+Two operators that operate on different parts of the state obviously commute.
+If there is no coupling, the total energy is just $H_a + H_b$, i.e.
+$$\frac{{p_a}^2}{2m} + \frac{1}{2} m \omega^2 {x_a}^2 + \frac{{p_b}^2}{2m} + \frac{1}{2} m \omega^2 {x_b}^2 = \hbar \omega (a^\dagger a + b^\dagger b + 1).$$
+Note that this Hamiltonian commutes with the number operators $N_a = a^\dagger a$ and $N_b = b^\dagger b$, hence they are conserved.
+The total number $N = N_a + N_b$ is also conserved.
+Of course to get an interesting theory we need to add an explicit coupling term.
+Generally speaking, systems with coupling are usually no longer solvable (even if they are, it's rarely easy).
+We can, however, get an idea of the effect of the interaction by studying which conserved quantities are still conserved. 
+
+\begin{question}
+Show that\\
+1. the Hamiltonian with an extra term $\lambda (a b^\dagger + a^\dagger b)$ no longer conserves $N_a$ and $N_b$, but conserves $N$.\\
+2. $\lambda x_a x_b$ does not conserve $N_a$, $N_b$ or $N$.
+
+\hint{Remember the commutation relations
+$$[a,a^\dagger] = 1, [b, b^\dagger] = 1,$$
+and all other commutators (e.g.\ $[a,b]$) are zero (but of course $[a^\dagger, a]$ counts as $-[a,a^\dagger]$). Also remember that $[A,BC]=[A,B]C+B[A,C]$.}
+
+\solution{
+1. We already know that the ``free'' Hamiltonian conserves all three so we only need to look at the new terms.
+Calculate
+$$[a b^\dagger, a^\dagger a] = [a, a^\dagger] a b^\dagger = a b^\dagger, \qquad [a b^\dagger, b^\dagger b] = a b^\dagger [b^\dagger, b] = -a b^\dagger,$$
+$$[b a^\dagger, a^\dagger a] = b a^\dagger [a^\dagger, a] = -b a^\dagger, \qquad [b a^\dagger, b^\dagger b] = [b, b^\dagger] b a^\dagger = b a^\dagger.$$
+From this we can read off $[a b^\dagger + b a^\dagger, N_{a,b}] \ne 0$ but $[a b^\dagger + b a^\dagger, N] = 0$.
+
+2. We have $\lambda x_a x_b \propto a b + a^\dagger b + b^\dagger a + a^\dagger b^\dagger$.
+Again calculate
+$$[a b, a^\dagger a] = [a, a^\dagger] a b = a b, \qquad [a b, b^\dagger b] = a [b, b^\dagger] b = a b,$$
+$$[a^\dagger b^\dagger, a^\dagger a] = a^\dagger [a^\dagger, a] b^\dagger = -a^\dagger b^\dagger, \qquad [a^\dagger b^\dagger, b^\dagger b] = a^\dagger b^\dagger [b^\dagger, b] = -a^\dagger b^\dagger.$$
+Since the contributions don't cancel, neither $N_a$, $N_b$ nor $N_c$ is conserved.
+}
+\end{question}
+
+In this case the system is actually simple enough that we can solve it in a simple case by just plugging straight into the Schr\"odinger equation.
+
+\begin{question}
+Add $\lambda \hbar (a b^\dagger + a^\dagger b)$ to $H$.
+We now want to calculate the time evolution of the state $\ket{1,0}$.
+Start by calculating $H \ket{1,0}$ and $H \ket{0,1}$.
+Use the time-dependent Schr\"odinger equation to determine differential equations for the time evolution of $\ket{\psi(t)} = \alpha(t) \ket{1,0} + \beta(t) \ket{0,1}$.
+Solve them, e.g.\ by a trial solution $\alpha(t) = \alpha_1 e^{\im \omega_1 t} + \alpha_2 e^{\im \omega_2 t}$ and $\beta(t) = \beta_1 e^{\im \omega_1 t} + \beta_2 e^{\im \omega_2 t}$.
+Find $\ket{\psi(t)}$ for the initial conditions $\alpha(0) = 1$ and $\beta(0) = 0$.
+\hint{To solve the equations, take derivatives of one of them and substitute in the other.}
+\result{$\ket{\psi(t)} = e^{-2\im\omega t} \left(\cos(\lambda t) \ket{1,0} - \im \sin(\lambda t) \ket{0,1}\right).$}
+\solution{
+$$H \ket{1,0} = 2\hbar \omega \ket{1,0} + \hbar \lambda \ket{0,1}$$
+$$H \ket{0,1} = 2\hbar \omega \ket{0,1} + \hbar \lambda \ket{1,0}$$
+Now the time-dependent Schr\"odinger equation is
+$$H \ket{\psi} = \im \hbar \pfrac{\ket{\psi}}{t}$$
+Hence
+$$\alpha'(t) \ket{1,0} + \beta'(t) \ket{0,1} = -2\im \omega (\alpha(t) \ket{1,0} + \beta(t) \ket{0,1}) - \im \lambda (\alpha(t) \ket{0,1} + \beta(t) \ket{1,0})$$
+which we can separate into
+$$\alpha'(t) = -2\im \omega \alpha(t) - \im \lambda \beta(t), \qquad \beta'(t) = -2\im \omega \beta(t) - \im \lambda \alpha(t).$$
+Inserting the trial solutions and separating the different exponentials gives
+$$\im \omega_1 \alpha_1 = -2 \im \omega \alpha_1 - \im \lambda \beta_1, \qquad \im \omega_2 \alpha_2 = -2\im \omega \alpha_2 - \im \lambda \beta_2,$$
+$$\im \omega_1 \beta_1 = -2 \im \omega \beta_1 - \im \lambda \alpha_1, \qquad \im \omega_2 \beta_2 = -2\im \omega \beta_2 - \im \lambda \alpha_2.$$
+You can either solve these equation manually, or you can notice that if you set $\alpha_1 = \beta_1$ you get $\omega_1 = -2\omega - \lambda$.
+To get an independent second solution you can try $\alpha_2 = -\beta_2$ to find $\omega_2 = -2\omega + \lambda$.
+
+The initial conditions now correspond to $\alpha_1 + \alpha_2 = 1$ and $\alpha_1 - \alpha_2 = 0$, which leads to
+$$\ket{\psi(t)} = e^{-2\im\omega t} \left(\cos(\lambda t) \ket{1,0} - \im \sin(\lambda t) \ket{0,1}\right).$$
+}
+\end{question}
+
+We can interpret the result from the last question:
+Now the particle is constantly moving back and forth between both oscillators.
+We have successfully created the second most boring type of particle!
+It can now do $a \to b$ and $b \to a$ processes.
+You can read this directly off the Hamiltonian, actually.
+$b^\dagger a$ means ``destroy an $a$ and create a $b$ particle'' -- hence $a \to b$.
+
+We can also solve $x_a x_b$ type terms, but it's not as straightforward, since now $H \ket{1,0}$ will create $\ket{1,1}$ terms which will create $\ket{2,0}$ terms and so on (try it!).
+
+Our naive interpretation doesn't seem to make a lot of sense here.
+$ab$ would be a process destroying an $a$ and a $b$ -- which would violate conservation of energy.
+
+\begin{question}
+(optional)
+Rewrite the Hamiltonian
+$$H = \frac{{p_a}^2 + {p_b}^2}{2m} + \frac{1}{2} m \omega^2 (x_a^2 + x_b^2) + m \lambda^2 x_a x_b$$
+using new variables $y_a$ and $y_b$ (linear combinations of $x_a$ and $x_b$), picking coefficients so that there is no $q_a q_b$ cross term.
+We now need to change the momenta $p_a$ and $p_b$ to new variables $q_a$ and $q_b$ as well, since we desire the same commutation relations as before, i.e.\
+$$[y_a, q_a] = \im \hbar, \quad [y_b, q_b] = \im \hbar, \quad [y_a, q_b] = 0, \quad [y_b, q_a] = 0.$$
+Find a suitable definition for $q_a$ and $q_b$.
+
+Calculate the energy of the ground state and expand in $\lambda$ to second lowest order.
+Find an expression for the wavefunction of the ground state $\ket{\Omega}$ in terms of $x_a$ and $x_b$.
+Expand in $\lambda$ to find $\braket{1,1}{\Omega}$ to lowest order.
+Show by qualitative arguments that $\braket{n,n}{\Omega}$ is non-zero for all $n$.
+\hint{To find the $\braket{1,1}{\Omega}$ contribution write $x_a$ and $x_b$ in terms of $a$ and $b$.}
+\result{$\braket{1,1}{\Omega} = -\lambda^2/(4 \omega^2) + O(\lambda^4).$}
+\solution{
+Use $y_a = (x_a + x_b)/\sqrt{2}$ and $y_b = (x_a - x_b)/\sqrt{2}$ to get
+$$H = \frac{{p_a}^2 + {p_b}^2}{2m} + \frac{1}{2} m \omega^2 (y_a^2 + y_b^2) + \frac{1}{2} m \lambda^2 (y_a^2 - y_b^2).$$
+To transform $p_a$ and $p_b$ use $q_a = (p_a + p_b)/\sqrt{2}$ and $q_b = (p_a - p_b)/\sqrt{2}$ to get
+$$H = \frac{{q_a}^2 + {q_b}^2}{2m} + \frac{1}{2} m \omega^2 (y_a^2 + y_b^2) + \frac{1}{2} m \lambda^2 (y_a^2 - y_b^2).$$
+This is now two independent oscillators at frequencies $\sqrt{\omega^2 \pm \lambda^2}$.
+The ground state energy is
+$$\frac{1}{2} \hbar \left(\sqrt{\omega^2 + \lambda^2} + \sqrt{\omega^2 - \lambda^2}\right) = \frac{1}{2} \hbar \left(2\omega - \frac{\lambda^4}{4 \omega^3} + O(\lambda^8)\right).$$
+The ground state wavefunction is just
+$$\psi(q_a, q_b) = \sqrt{\frac{m (\omega^4 - \lambda^4)^{1/4}}{\pi \hbar}}\exp\left(-\frac{m (\sqrt{\omega^2 + \lambda^2}~{q_a}^2 + \sqrt{\omega^2 - \lambda^2}~{q_b}^2)}{2\hbar}\right),$$
+which we can translate into $x_a$ and $x_b$ by substituting in their definitions, arriving at
+$$\psi(x_a, x_b) = \sqrt{\frac{m (\omega^4 - \lambda^4)^{1/4}}{\pi \hbar}}\exp\left(-\frac{m (\sqrt{\omega^2 + \lambda^2}~(x_a + x_b)^2 + \sqrt{\omega^2 - \lambda^2}~(x_a - x_b)^2)}{4\hbar}\right).$$
+Expanding in $\lambda$ we get the previous ground state for $\lambda=0$ and a contribution proportional to $\lambda^2$, from expanding $\sqrt{\omega^2\pm\lambda^2} = \omega (1 \pm \lambda^2/(2\omega^2))$, i.e.\
+$$\psi(x_a, x_b) = \left(1-\frac{m\lambda^2 x_a x_b}{2\omega \hbar} + O(\lambda^4)\right) \psi_0(x_a, x_b).$$
+The trick is now to write $x_a = \sqrt{\frac{\hbar}{2m \omega}} (a + a^\dagger)$ and the same for $x_b$.
+The $a$ will vanish when applied to the vacuum and hence
+$$\ket{\Omega} = \left(1 - \frac{\hbar}{2m \omega} \frac{m \lambda^2}{2\omega \hbar} a^\dagger b^\dagger + O(\lambda^4)\right) \ket{0,0}.$$
+From this we can read off
+$$\braket{1,1}{\Omega} = -\frac{\lambda^2}{4 \omega^2} + O(\lambda^4).$$
+
+Carrying this process further would lead to higher order terms, proportional to $(a^\dagger b^\dagger)^n$, and hence all the $\ket{n,n}$ states contribute.
+}
+\end{question}
+
+We have only looked at the ground state but we can already see that things are complicated\dots at least in terms of $a$ and $b$.
+The presence of $\ket{1,1}$ in the ground state suggests that the process ``$\mbox{nothing} \to a + b$'' predicted by the naive rules \emph{does} occur.
+This is puzzling -- shouldn't energy by conserved?
+We will later see in perturbation theory that we can form processes such as ``$\mbox{nothing} \to a + b \to \mbox{nothing}$'' with unphysical (``virtual'') intermediate states.
+One way to look at this is to argue that energy is like frequency and so it's not well defined for a short-lived state and hence we can temporarily violate conservation of energy (``time-energy uncertainty principle'').
+
+\begin{question}
+(optional)
+Another thing we can do is to build $c$ and $d$ operators in terms of the $y$ and $q$ variables.
+Write down their definition and find an expression for $H$.
+Find an expression for $c^\dagger$ in terms of $a$ and $b$ operators and expand $c^\dagger \ket{\Omega}$ in $a,b$ states to order $\lambda^2$.
+\solution{
+Defining
+$$c = \sqrt{\frac{m \sqrt{\omega^2 + \lambda^2}}{2\hbar}} \left(y_a + \frac{\im q_a}{m \sqrt{\omega^2 + \lambda^2}}\right),$$
+$$d = \sqrt{\frac{m \sqrt{\omega^2 - \lambda^2}}{2\hbar}} \left(y_b + \frac{\im q_b}{m \sqrt{\omega^2 - \lambda^2}}\right)$$
+we get
+$$H = \hbar \sqrt{\omega^2 + \lambda^2}~c^\dagger c + \hbar \sqrt{\omega^2 - \lambda^2}~d^\dagger d + \mbox{const}.$$
+
+To find $c^\dagger$ start with
+$$x_a = \sqrt{\frac{\hbar}{2m\omega}} (a + a^\dagger),\quad x_b = \sqrt{\frac{\hbar}{2m\omega}} (b + b^\dagger),$$
+$$p_a = -\im \sqrt{\frac{\hbar m \omega}{2}} (a - a^\dagger), \quad p_b = -\im \sqrt{\frac{\hbar m \omega}{2}} (b - b^\dagger)$$
+and then substitute into the definition of $c^\dagger$, which evaluate to
+$$c^\dagger = \sqrt{\frac{\sqrt{\lambda^2 + \omega^2}}{8\omega}} \left(\left(1 + \frac{\omega}{\sqrt{\omega^2 + \lambda^2}}\right) (a^\dagger + b^\dagger) + \left(1 - \frac{\omega}{\sqrt{\omega^2 + \lambda^2}}\right) (a + b)\right).$$
+$c^\dagger \ket{\Omega}$ expands to
+$$c^\dagger \ket{\Omega} = \left(\frac{a^\dagger + b^\dagger}{\sqrt{2}} + \frac{\lambda^2}{4\omega^2} \frac{a + b}{\sqrt{2}} + O(\lambda^4)\right) \left(1 - \frac{\lambda^2}{4\omega^2} a^\dagger b^\dagger + O(\lambda^4)\right) \ket{0,0}$$
+$$= \frac{\ket{1,0} + \ket{0,1}}{\sqrt{2}} - \frac{\lambda^2}{4\omega^2} (\ket{1,2} + \ket{2,1}) + O(\lambda^4).$$
+}
+\end{question}
+
+The $c$ and $d$ operators now offer an alternative view of the system.
+In the $c$/$d$ world the two types of particles have energies $\hbar \sqrt{\omega^2\pm\lambda^2}$ and they don't interact.
+We saw earlier that the ground state is messy in terms of $a/b$.
+In $c/d$ terms it's the same empty state we're used to!
+We just calculated that the ``1 $c$ particle state'' $c^\dagger \ket{\Omega}$ is also messy in $a$/$b$ terms.
+One way to look at this is to say that $c$ is a ``dressed excitation'' composed of some combination of $a$ and $b$ particles.
+Another term is ``quasiparticle'' -- which is of course a bit silly here, since $a$ and $b$ are artificial constructs as well.
+
+\subsection{Baby steps in quantum electrodynamics}
+(This section is optional and requires the Fourier transform)
+
+We started with photons and now we can finally see where photons come from.
+To do so we need to quantise the electromagnetic field.
+The total energy is
+$$H = \int \frac{1}{2} \varepsilon_0 (E^2 + c^2 B^2) \D{^3 \vec x}.$$
+This looks very much like an infinite set of harmonic oscillators!
+The problem is that $\vec E$ and $\vec B$ are not independent variables, they are constrained and coupled through the Maxwell equations
+$$\nabla \cdot \vec E = 0, \quad \nabla \cdot \vec B = 0, \quad \nabla \times \vec E = -\pfrac{\vec B}{t}, \quad \nabla \times \vec B = \frac{1}{c^2} \pfrac{\vec E}{t}.$$
+The trick is to take the Fourier transform to get rid of the spatial coupling.
+
+\begin{question}
+Write the equations in terms of the Fourier transforms $\tilde E(\vec k, t)$ and $\tilde B(\vec k, t)$ (these are still vectors).
+Use two orthonormal polarisation vectors $\vec n_1(\vec k)$ and $\vec n_2(\vec k)$ to define vector components $\tilde E_i(\vec k, t)$ and $\tilde B_i(\vec k, t)$ such that they follow the time evolution of the simple harmonic oscillator
+$$\dot x = \frac{p}{m}, \quad \dot p = -m \omega^2 x,$$
+with $\tilde E_i$ corresponding to $x$ and $\tilde B_i$ corresponding to $p$ (you will need to impose suitable conditions on $\vec n_i(\vec k)$).
+Find the energy in terms of $\tilde E_i$ and $\tilde B_i$.
+\solution{
+$$\vec k \cdot \tilde E = 0, \quad \vec k \cdot \tilde B = 0,\quad \im \vec k \times \tilde E = -\pfrac{\tilde B}{t}, \quad \im \vec k \times \tilde B = \frac{1}{c^2} \pfrac{\tilde E}{t}.$$
+If we demand that $\vec k \cdot \vec n_i = 0$ and $(\vec k / k) \times \vec n_1 = \vec n_2$ then we can define
+$$\tilde E = \tilde E_1 \vec n_1 + \tilde E_2 \vec n_2,$$
+$$\tilde B = \im(\tilde B_1 \vec n_2 - \tilde B_2 \vec n_1).$$
+With these definitions the third and fourth Maxwell equations become
+$$\tilde E_1 \im k \vec n_2 - \tilde E_2 \im k \vec n_1 = -\pfrac{\tilde B_1}{t} \im \vec n_2 + \pfrac{\tilde B_1}{t} \im \vec n_1,$$
+$$\tilde B_1 k \vec n_1 + \tilde B_2 k \vec n_2 = \frac{1}{c^2} \pfrac{\tilde E_1}{t} \vec n_1 + \frac{1}{c^2} \pfrac{\tilde E_2}{t} \vec n_2;$$
+thus
+$$\pfrac{\tilde E_i}{t} = c^2 k \tilde B_i,\quad \pfrac{\tilde B_i}{t} = -k \tilde E_i.$$
+The energy can be found from Parseval's theorem as
+$$H = \int \frac{1}{2} \varepsilon_0 (|\tilde E|^2 + c^2 |\tilde B|^2) \frac{\D{^3 \vec k}}{(2\pi)^3} = \int \frac{1}{2} \varepsilon_0 \sum_i (|\tilde E_i|^2 + c^2 |\tilde B_i|^2) \frac{\D{^3 \vec k}}{(2\pi)^3}$$
+}
+\end{question}
+
+\begin{question}
+The Fourier transform is actually suboptimal here because of the integral over $\vec k$ -- it'd be nicer if it was a sum.
+Show that demanding that $\vec E$ and $\vec B$ are periodic in all three coordinates with period $L$ (say we live in a cubic universe with the ends connected) we can write the energy (redefined to be the energy inside one cube) as
+$$H = V \sum_{\vec k,i} \frac{1}{2} \varepsilon_0 (|\tilde E_i|^2 + c^2 |\tilde B_i|^2),$$
+where the sum is over all allowed $\vec k$ and we have redefined $\tilde E$ etc. using a Fourier series.
+\solution{
+Periodicity in the three coordinates implies that $\vec k$ must be $(i, j, k)~2\pi/L$ for integers $i,j,k$.
+The Fourier series corresponds to
+$$\tilde E = \frac{1}{V} \int \vec E(\vec x, t)~e^{\im \vec k \cdot \vec x} \D{^3 \vec x}.$$
+$E^2$ now evaluates to
+$$E^2 = \int_V \D{^3 \vec x} \sum_{\vec k, \vec k', i} \tilde E(\vec k) \tilde E(\vec k') e^{\im (\vec k + \vec k') \cdot \vec x}  = \sum_{\vec k, \vec k', i} \tilde E(\vec k) \tilde E(\vec k') V \delta_{\vec k, -\vec k'}  = V \sum_{\vec k, i} |\tilde E(\vec k)|^2$$
+using the identity
+$$\int_V \D{^3 \vec x}~e^{\im \vec k \cdot \vec x} = V \delta_{\vec k, 0}.$$
+}
+\end{question}
+
+\begin{question}
+$\tilde E_i$ and $\tilde B_i$ look very promising now but they still can't be used to construct a quantum theory in analogy with the harmonic oscillator.
+There are two problems.
+The first is that they are complex.
+We can fix it by remembering that $\tilde E(\vec k) = -\tilde E^*(-\vec k)$.
+For each $(\vec k, -\vec k)$ pair we can then arbitrarily assign the real part to one of them and the imaginary part to the other (all we need for this is a suitable function $f(\vec k)$ which satisfies $f^2 = 1$ and $f(\vec k) f(-\vec k) = -1$).
+
+The second problem is as follows. The harmonic oscillator had $[x,p]=1$.
+You previously showed that this implies
+$$\pfrac{\langle x \rangle}{t} = \left\langle \pfrac{H}{p}\right\rangle, \qquad
+\pfrac{\langle p \rangle}{t} = -\left\langle \pfrac{H}{q}\right\rangle.$$
+Since this holds for expectation values it implies a relation of the classical variables
+$$\dot x = \pfrac{H}{p}, \qquad \dot p = -\pfrac{H}{q}$$
+(these equations are called \emph{Hamilton's equations}).
+
+Ensure that your definition of $\tilde E_i$ and $\tilde B_i$ obeys these equations.
+You may need to add a constant factor to both of them.
+Find $\vec E$, $\vec B$ and $H$ in terms of the new definitions.
+\solution{
+If $\til
+$$\tilde E = \sqrt{\frac{k}{V \varepsilon_0}} (\tilde E_1 \vec n_1 + \tilde E_2 \vec n_2),\quad \tilde B = \sqrt{\frac{k}{V \varepsilon_0}} \im (\tilde B_1 \vec n_2 - \tilde B_2 \vec n_1)$$
+
+The definition from the last solution doesn't work because
+$$\pfrac{H}{\tilde E_i} = V \varepsilon_0 \tilde E_i \ne k \tilde E_i = -\pfrac{\tilde B_i}{t}, \quad \pfrac{H}{\tilde B_i} = V \varepsilon_0 c^2 \tilde B_i \ne c^2 k \tilde B_i = \pfrac{\tilde E_i}{t}.$$
+We can fix it by adding a factor $\sqrt{k/(V\varepsilon_0)}$ to both of them, i.e.\ to define
+$$\tilde E = \sqrt{\frac{k}{V \varepsilon_0}} (\tilde E_1 \vec n_1 + \tilde E_2 \vec n_2),\quad \tilde B = \sqrt{\frac{k}{V \varepsilon_0}} \im (\tilde B_1 \vec n_2 - \tilde B_2 \vec n_1)$$
+(which still have to split into real and imaginary parts).
+The real part contributes $\cos(\vec k \cdot \vec x)$ and the imaginary part contributes $\sin(\vec k \cdot \vec x)$.
+Note that $\Re(\sqrt{-1}\,z) = -\Im z$ and so we can use $\Re(\sqrt{f(\vec k)} e^{-\im \vec k \cdot \vec x})$ to pick the right one. 
+We can write $\vec E$ and $\vec B$ concisely as
+$$\vec E = \sqrt{\frac{2k}{V \varepsilon_0}} \Re \sum_{\vec k, i} \sqrt{f(\vec k)} \tilde E_i(\vec k) \vec n_i(\vec k) e^{-\im \vec k \cdot \vec x},$$
+$$\vec B = -\sqrt{\frac{2k}{V \varepsilon_0}} \Im \sum_{\vec k, i} \sqrt{f(\vec k)} \tilde B_i(\vec k) \frac{\vec k}{k} \times \vec n_i(\vec k) e^{-\im \vec k \cdot \vec x}.$$
+Note that we need an extra $\sqrt{2}$
+$H$ is now
+$$H = \sum_{\vec k,i} \frac{1}{2} k ({\tilde E_i}^2 + c^2 {\tilde B_i}^2).$$
+}
+\end{question}
+
+We can now take the system into the quantum realm.
+We convert $\tilde E_i$ and $\tilde B_i$ into operators obeying
+$$[\tilde E_i(\vec k), \tilde B_j(\vec k')] = \im \hbar \delta_{i,j} \delta_{\vec k, \vec k'}.$$
+Now $\vec E$ and $\vec B$ become operators as well -- they are \emph{quantum fields}.
+Note that, in our current formalism (the ``Schr\"odinger picture''), the time dependence is moved into the states $\ket{\psi(t)}$, hence $\vec E = \vec E(\vec r)$ and $\vec B = \vec B(\vec r)$.
+
+\begin{question}
+Compare $H$ with the harmonic oscillator Hamiltonian
+$$H = \frac{p^2}{2m} + \frac{1}{2} m \omega^2 x^2$$
+and write down the appropriate $a_i(\vec k)$ operator.
+Express the Hamiltonian in terms of $a_i$ and $a_i^\dagger$, dropping the constant zero-point energy.
+\solution{
+We have
+$$H = \sum_{\vec k,i} \left(\frac{1}{2} k c^2 {\tilde B_i}^2 + \frac{1}{2} k {\tilde E_i}^2\right).$$
+Comparing with the harmonic oscillator we see that $m = 1/(k c^2)$ and $\omega = ck$.
+Substituting in our definition of previous definition of $a$
+$$a_i = \sqrt{\frac{1}{2\hbar c}} \left(\tilde E_i + \im c \tilde B_i\right).$$
+The Hamiltonian is now
+$$H = \sum_{\vec k, i} \hbar \omega a_i^\dagger a_i.$$
+}
+\end{question}
+
+Note that just like before $[a_i, a_i^\dagger] = 1$.
+Operators with different $i$ or $\vec k$ commute, hence
+$$[a_i(\vec k), a_j^\dagger(\vec k')] = \delta_{i,j} \delta_{\vec k, \vec k'}.$$
+We can now identify the \emph{ground state} $\ket{0}$ by the condition $a_i(\vec k) \ket{0} = 0$ for all $i$ and $\vec k$.
+We can construct states such as $a_i^\dagger(\vec k) \ket{0}$ that contain quantised excitations, i.e.\ \emph{photons}.
+
+\begin{question}
+Find the energy of a photon of wavevector $\vec k$.
+\solution{We know from the harmonic oscillator that $a_i^\dagger a_i$ is the number operator.
+Adding a photon to a state increases the number of photons with that $\vec k$, $i$ combination by one, hence it increases the energy by $\hbar \omega$, which is just the energy of one photon.}
+\end{question}
+
+Since we have solved the harmonic oscillator, we have now solved the free electromagnetic field as well!
+
+\begin{question}
+What operator creates a photon of wavevector $\vec k$ and Jones vector $\ket{J} = (J_1, J_2)$ (using the axes $\vec n_1(\vec k)$ and $\vec n_2(\vec k)$)?
+\solution{$a_1^\dagger(\vec k) J_1 + a_2^\dagger(\vec k) J_2$.}
+\end{question}
+
+\begin{question}
+Write down the stationary states and their energies.
+\solution{
+The stationary states are just
+$$a_{i_1}^\dagger(\vec k_1) a_{i_2}^\dagger(\vec k_2) \dots a_{i_n}^\dagger(\vec k_n) \ket{0}$$
+for some $i_1, i_2, \dots, i_n$ and $\vec k_1, \dots, \vec k_n$.
+The energy is just
+$$E = \sum_i \hbar c k_i.$$
+}
+\end{question}
+
+\begin{question}
+Show that the expectation values $\langle \vec E \rangle$ and $\langle \vec B \rangle$ obey Maxwell's equation.
+\solution{
+By construction we have
+$$\pfrac{\langle \tilde E_i\rangle}{t} = c^2 k \langle \tilde B_i \rangle,\quad \pfrac{\langle \tilde B_i\rangle}{t} = -k \langle \tilde E_i \rangle.$$
+We can actually conclude from this directly that Maxwell's equations are satisfied -- by construction.
+We can also explicitly calculate
+$$\nabla \cdot \langle \vec E \rangle = \sqrt{\frac{k}{V \epsilon_0}} \Re \sum_{\vec k, i} \sqrt{f(\vec k)} \langle \tilde E_i(\vec k)\rangle (-\im \vec k) \cdot \vec n_i(\vec k) e^{-\im \vec k \cdot \vec x} = 0,$$
+$$\nabla \cdot \langle \vec B \rangle = -\sqrt{\frac{k}{V \epsilon_0}} \Im \sum_{\vec k, i} \sqrt{f(\vec k)} \langle\tilde B_i(\vec k)\rangle (-\im \vec k) \cdot \vec n_i(\vec k) e^{-\im \vec k \cdot \vec x} = 0,$$
+$$\nabla \times \langle \vec E \rangle = \sqrt{\frac{k}{V \epsilon_0}} \Im \sum_{\vec k, i} \sqrt{f(\vec k)} \langle\tilde E_i(\vec k)\rangle \vec k \times \vec n_i(\vec k) e^{-\im \vec k \cdot \vec x} = -\pfrac{}{t} \langle \vec B \rangle,$$
+$$\nabla \times \langle \vec B\rangle = -\sqrt{\frac{k}{V \varepsilon_0}} \Re \sum_{\vec k, i} \sqrt{f(\vec k)} \langle \tilde B_i(\vec k) \rangle \vec n_i(\vec k) e^{-\im \vec k \cdot \vec x} = c^2 \pfrac{}{t} \langle \vec E \rangle.$$
+}
+\end{question}
+
+\begin{question}
+Write $\tilde E_i$ and $\vec E$ in terms of $a_i$ and $a_i^\dagger$.
+Show that, for the ground state, $\langle \vec E \rangle = 0$ and $\langle E^2 \rangle$ is infinite (can you imagine why?).
+Show that $\langle \vec E \rangle = 0$ for any single photon state.
+\solution{
+$$\tilde E_i = \sqrt{\frac{\hbar c}{2}} (a_i + a_i^\dagger)$$
+$$\vec E = \sqrt{\frac{\hbar c k}{2 V \varepsilon_0}} \Re \sum_{\vec k, i} \sqrt{f(\vec k)} (a_i + a_i^\dagger) \vec n_i(\vec k) e^{-\im \vec k \cdot \vec x}$$
+We can see straight away that $\bra{0} \vec E \ket{0}$ must be zero ($a_i$ acting on $\ket{0}$ produces 0, ditto for $a_i^\dagger$ acting on $\bra{0}$).
+$\varepsilon_0 \langle E^2 \rangle$ is just the zero-point energy per unit volume, which is $\hbar \omega/(2V)$ per mode.
+Since there are modes with arbitrarily high $\omega$, the result is infinite.
+This is a sign that our theory should break down at high $\omega$ (which corresponds to short length scales, using $\lambda = 2\pi c/\omega$).
+For the single photon states $\vec E$ is zero because $a_i$ and $a_i^\dagger$ produce the vacuum or a two photon state, which have zero overlap with the one photon state; hence $\langle a_i + a_i^\dagger \rangle = 0$.
+}
+\end{question}
+
+The one photon states are then particularly bizarre states, since $\langle \vec E \rangle = 0$!
+
+\begin{question}
+Find $\langle \vec E(t) \rangle$ for a state $\ket{\psi(t)}$ obeying $a_i(\vec k) \ket{\psi(0)} = \alpha \ket{\psi(0)}$ for one particular $i$ and $\vec k$ (and no photons with any other $i$ or $\vec k$).
+You can set $f(\vec k) = 1$ and assume $\alpha$ is real.
+
+Find the expected number of photons in this state.
+\hint{To find the time evolution, use the formula $e^{\im H t/\hbar} a e^{-\im Ht/\hbar} = a + [H,a] + [H,[H,a]]/2! + [H,[H,[H,a]]]/3! + \dots$}
+\solution{
+To find the time evolution we can use
+$$e^{\im H t/\hbar} a e^{-\im H t/\hbar} = a + [\im H t/\hbar,a] + [\im H t/\hbar,[\im H t/\hbar,a]]/2 + \dots = e^{-\im \omega t} a$$
+From this it folllows
+$$a \ket{\psi(t)} = a e^{-\im H t/\hbar} \ket{\psi(0)} = e^{-\im \omega t} e^{-\im H t/\hbar} a \ket{\psi(0)} = e^{-\im \omega t} \alpha \ket{\psi(t)}.$$
+Hence $\ket{\psi(t)}$ remains an eigenstate, but the eigenvalue $\alpha$ rotates through the complex plane with angular frequency $\omega$.
+Since $\bra{\psi} a_i^\dagger = \bra{\psi} \alpha^*$ we have
+$$\langle a_i + a_i^\dagger \rangle = \bra{\psi} (a_i + a_i^\dagger) \ket{\psi} = 2 \Re (\alpha e^{-\im \omega t}) = 2 \alpha \cos(\omega t).$$
+Hence
+$$\langle \vec E \rangle = \sqrt{\frac{2 \hbar c k}{V \varepsilon_0}} \alpha \vec n_i(\vec k) \cos(\vec k \cdot \vec x) \cos(\omega t),$$
+a standing wave.
+
+The expected number of photons is
+$$\langle a_i^\dagger a_i \rangle = \bra{\psi} \alpha^* \alpha \ket{\psi} = |\alpha|^2.$$
+}
+\end{question}
+
+We see that it is the eigenstates of $a$, not $H$, that corresponds most closely to typical the classical states.
+These states are called \emph{coherent states}.
+
+\begin{question}
+(optional) Continuing from the last question, calculate the energy using
+$$\int_V \frac{1}{2} \varepsilon_0 \left(\langle \vec E\rangle^2  + c^2 \langle \vec B\rangle^2\right) \D{^3 \vec x}.$$
+\solution{
+We can use one of the Maxwell equations to calculate
+$$\langle \vec B\rangle = \int \D{t} \nabla \times \langle \vec E\rangle = \sqrt{\frac{2 \hbar c k}{V \varepsilon_0}} \alpha \frac{\vec k}{\omega} \times\vec n_i(\vec k) \sin(\vec k \cdot \vec x) \sin(\omega t).$$
+Hence
+$$\frac{1}{2} \varepsilon_0 \left(\langle \vec E\rangle^2 + c^2 \langle \vec B\rangle^2\right) = \frac{\hbar c k \alpha^2}{V} (\cos^2(\vec k \cdot \vec x) \cos^2(\omega t) + \sin^2(\vec k \cdot \vec x) \sin^2(\omega t)).$$
+$\cos^2$ and $\sin^2$ average to $1/2$ and so the integral over all space is $\hbar \omega \alpha^2/2$.
+}
+\end{question}
+
+Planck originally proposed the $E=\hbar \omega$ relation to explain his blackbody radiation formula, which we can now formally derive.
+To derive this formula we will start with a slightly strange scenario:
+A box (which should really have reflecting walls but we will use periodic boundary conditions instead) at temperature $T$.
+The energy in the box at a given frequency $\omega$ is then given by
+$$\mbox{energy per oscillator} \times \mbox{number of oscillators at $\omega$}.$$
+
+\begin{question}
+In thermal equilibrium states are occupied with probability proportional to $\exp(-E/(k_B T))$ (Boltzmann distribution).
+Find a formula for the average energy of a single harmonic oscillator of frequency $\omega$ at temperature $T$.
+\hint{You may find the geometric sum formula $1+q+q^2+\dots = 1/(1-q)$ useful.}
+\hint{You may also want to take derivatives of geometric sum formula.}
+\result{$\langle E \rangle = \hbar \omega / (e^{\hbar \omega/(k_B T)} - 1).$}
+\solution{
+The states have energy $0, \hbar \omega, 2 \hbar \omega, \dots$ (the zero-point energy has no effect here).
+To normalise the probabilities we need to calculate
+$$Z = \sum_n e^{-E_n/(k_B T)} = \sum_n e^{-n \hbar \omega/(k_B T)} = \sum_n \left(e^{-\hbar \omega/(k_B T)}\right)^n = \frac{1}{1 - e^{-\hbar \omega/(k_B T)}}.$$
+We want to evaluate
+$$\langle E \rangle = \sum_n \frac{n \hbar \omega e^{-n \hbar \omega/(k_B T)}}{Z}.$$
+The quick way to evaluate this is to realise that it's just
+$$\langle E \rangle = \frac{1}{Z} \pfrac{Z}{\beta}$$
+with $\beta=1/(k_B T)$, which works out as
+$$\langle E \rangle = \frac{1}{Z} \frac{\hbar \omega e^{-\hbar \omega/(k_B T)}}{(1 - e^{-\hbar \omega/(k_B T)})^2} = \frac{\hbar \omega}{e^{\hbar \omega/(k_B T)} - 1}.$$
+}
+\end{question}
+
+\begin{question}
+Now to evaluate the ``number of oscillators'' bit.
+Calculate the number of $\vec k$ values with frequencies in the range $\omega$ to $\omega+\D{\omega}$.
+Assume that $\omega$ is much greater than the spacing of $\vec k$ values $2\pi/L$.
+From this, calculate the number of oscillators (electromagnetic field modes) in that energy range.
+\result{The number of oscillators is $\omega^2 \D{\omega} V/(\pi^2 c^3).$}
+\solution{
+The appropriate values of $\vec k$ form a spherical shell in $\vec k$-space.
+It has radius $\omega/c$ and thickness $\D{\omega}/c$.
+Hence its volume is
+$$4 \pi (\omega/c)^2 \D{\omega}/c.$$
+The allowed $\vec k$ values are distributed over cubes of volume $(2\pi)^3/V$, hence the number of allowed $\vec k$ values is
+$$\frac{\omega^2 \D{\omega} V}{2 \pi^2 c^3}.$$
+
+There are two oscillators per $\vec k$ value (two polarisations), hence the final result is
+$$\frac{\omega^2 \D{\omega} V}{\pi^2 c^3}.$$
+}
+\end{question}
+
+\begin{question}
+Calculate the energy per unit volume $u(\omega) \D{\omega}$ of the electromagnetic field with frequencies between $\omega$ and $\omega+\D{\omega}$ in the box at temperature $T$.
+
+To apply the result to a black body (a body that absorbs 100\% of the incident radiation), place the black body in thermal equilibrium with the field.
+Relate the power incident on the body with the power radiated to find the power $p(\omega) \D{\omega} \D{A}$ radiated by an area $\D{A}$ of the black body at temperature $T$ at frequencies between $\omega$ and $\omega+\D{\omega}$.
+\hint{For the second part, how fast does electromagnetic energy move? Calculate the energy incident on the area within time $\D{t}$. Don't forget that it might move at an angle to the surface -- you'll need to integrate over all solid angles $\D{\Omega} = 2\pi \D{(\cos \theta)}$.}
+\result{$p(\omega) = \hbar \omega^3/(2\pi^2 c^2 (e^{\hbar \omega/(k_B T)} - 1)).$}
+\solution{
+Multiplying the two previous results and dividing by $V$ gives the answer as
+$$u(\omega) = \frac{\hbar \omega^3}{\pi^2 c^3} \frac{1}{e^{\hbar \omega/(k_B T)} - 1}.$$
+
+For the black body case, remember that in equilibrium we must have
+$$\mbox{power incident} = \mbox{power radiated}.$$
+Hence we want to calculate the energy incident in a time $\D{t}$.
+If $\theta$ is the angle to the surface, the speed relative to it is just $c \cos \theta$.
+At an angle $\theta$ the amount of energy incident is then $c \cos \theta \D{A} \D{t} u$.
+Now we need to average $\cos \theta$.
+Only radiation moving towards the body counts and hence we only integrate from $\theta=0$ to $\theta=\pi/2$.
+The average is
+$$\frac{1}{4\pi} \int_0^1 \cos(\theta) 2\pi \D{(\cos(\theta))} = \frac{1}{4}$$
+(a quicker way to see this is to realise that the normal component is uniformly distributed between $-1$ and 1).
+Hence the answer we want (after dividing $\D{A}$ and $\D{\omega}$) is just $c u/4$, i.e.\
+$$p(\omega) = \frac{\hbar \omega^3}{4 \pi^2 c^2} \frac{1}{e^{\hbar \omega/(k_B T)} - 1}.$$
+}
+\end{question}
+
+\begin{question}
+(optional)
+Calculate the total power radiated per unit area (over all frequencies) for a black body at temperature $T$.
+\hint{You may find the formula $\sum 1/n^4 = \pi^4/90$ (that you may have derived in the complex analysis section) useful.}
+\hint{Expand $1/(e^{\hbar \omega/(k_B T)} - 1)$ in a power series in $e^{-\hbar \omega/(k_B T)}$.}
+\solution{
+Define $\beta = k_B T$.
+$$\int_0^\infty \frac{\omega^3 \D{\omega}}{e^{\beta \hbar \omega} - 1} = \int_0^\infty \D{\omega} \omega^3 e^{-\beta \hbar \omega} \sum_{n=0}^\infty (e^{-\beta \hbar \omega})^n = \sum_{n=1}^\infty \int_0^\infty \omega^3 e^{-\beta \hbar \omega} \D{\omega}$$
+$$= -\sum_{n=1}^\infty \frac{1}{n^3 \hbar^3} \pfrac{^3}{\beta^3} \int_0^\infty e^{-n \beta \hbar \omega} \D{\omega} = \frac{6}{\hbar^4 \beta^4} \sum_{n=1}^\infty \frac{1}{n^4} = \frac{\pi^4}{15 \hbar^4 \beta^4}$$
+(using $\sum 1/n^4 = \pi^4/90$ in the last step).
+Hence the total power radiated is
+$$\int_0^\infty p(\omega) \D{\omega} = \frac{\pi^2 k_B^4}{60 \hbar^3 c^2} T^4.$$
+}
+\end{question}
+
+\subsection{Particles in three dimensions}
+The basics of 3D space are now a straightforward extension of previous ideas.
+\begin{question}
+Show that we can define three momentum operators which we can write in vector form as $\vec p = -\im \hbar \nabla$.
+Find the 3D time-independent Schr\"odinger equation.
+\solution{
+We now have more symmetry to play with: Translations in the $y$ and $z$ directions.
+This leads to three generators $G_x = -\partial/\partial x$, $G_y = -\partial/\partial y$, $G_z=-\partial/\partial z$.
+We can define $\vec G = (G_x, G_y, G_z) = -\nabla$.
+Classically, we can show that the conserved quantities are just the components of momentum $p_x$, $p_y$, $p_z$.
+Hence by our symmetry principle we can define $\vec p = -\im \hbar \nabla$.
+
+We have $H = \frac{p^2}{2m} + V$ as before, which leads to
+$$-\frac{\hbar^2}{2m} \nabla^2 \psi + (V - E) \psi = 0.$$
 }
 \end{question}
