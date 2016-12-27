@@ -1894,14 +1894,16 @@ substituting the previous results gives $(\hbar \omega/4) (2n+1)$ on both sides.
 }
 \end{question}
 
-\subsection{Combining systems and measurements}
 There is a fun interpretation of the harmonic oscillator and the ladder operators.
 We say that $a^\dagger$ and $a$ create particles of energy $\hbar \omega$!
 This may seem a bit strange -- no doubt partly because these are in fact the most boring particles possible, since they have absolutely no degrees of freedom (the state $\ket{n}$ with $n$ particles is a \emph{unique} state after all).
 Nonetheless, we will later see that, in a nutshell, this is how \emph{all} particles work (using the framework of second quantisation).
 
 We can make things a little bit more interesting by coupling two oscillators, in the hope that particles can then ``travel'' from one oscillator to the other.
-But first, we need to represent the combination of two oscillators as a single quantum system!
+But first, we need to study how to represent the combination of two oscillators as a single quantum system!
+
+\subsection{Combining systems and measurements}
+Consider a system of \emph{two} oscillators.
 Intuitively, we expect that there are now states described by \emph{two} numbers, corresponding to the number of the particles in each oscillator.
 Hence we can write the stationary states as $\ket{n,m}$.
 Writing the ladder operators for the first oscillator as $a,a^\dagger$ and as $b,b^\dagger$ for the second oscillator we expect
@@ -1929,10 +1931,10 @@ Further, to create the real-life entangled state in the first place requires int
 We can now do a fascinating thought experiment to shed light on the nature of quantum measurement.
 This will involve the often mentioned (and widely misunderstood) ``Schr\"odinger's cat''.
 A particularly cruel experimentalist has put a cat in a box with a vial of poison, which is released by a mechanism triggered by some quantum process (such as radioactive decay).
-The usual interpretation is that this puts the cat in a state $\ket{\rm alive} + \ket{\rm dead}$, which is mystical and offers fertile ground for baseless philosophical ramblings.
-Further, it is stated, the state only collapses once the conscious observer opens the box, hence consciousness is mystical and unphysical.
+The usual interpretation in popular science is that this puts the cat in a state $\ket{\rm alive} + \ket{\rm dead}$, which is mystical and confusing.
+Further, it is stated, the state only collapses once the conscious observer opens the box, which implies consciousness is somehow distinct from other physical processes.
 Reality is less glamorous.
-No matter how much care the experimenter takes he will couple the box with his laboratory, and in particular his brain.
+No matter how much care the experimenter takes he will couple the cat and the box with his laboratory, and in particular his brain.
 We should thus be thinking of this as a combined system.
 The naive interpretation corresponds to a state
 $$(\ket{\rm alive} + \ket{\rm dead}) \ket{\mbox{experimentalist confused}}.$$
@@ -1941,6 +1943,8 @@ But the inadvertent coupling enforces that the cat state is consistent with the 
 $$\ket{\rm alive} \ket{\mbox{experimentalist will be happy}} + \ket{\rm dead} \ket{\mbox{experimentalist will be sad}}.$$
 Now, there are ``interpretations'' of quantum mechanics that assign meaning to this combination.
 For our purposes it's really only important to realise that it doesn't really matter since \emph{from the experimentalist's point of view}, his local ``universe'' has a cat that is either dead or alive, not in a weird superposition state (in the ``multiverse'' interpretation this is made most explicit by stating that each branch of the wavefunction corresponds to a separate universe, all of which exists in parallel).
+
+(As a historical sidenote, Schr\"odinger actually introduced the cat experiment to expose the inconsistencies of the ``Copenhagen interpretation'', which involves the ``collapse of the wavefunction'' due to a conscious observer.)
 
 We can extend this idea to arbitrary measurements.
 Measuring an observable $q$ involves an operator
@@ -1972,6 +1976,7 @@ $$\tr_\alpha(\ket{\psi} \bra{\psi}) = \frac{1}{5} \ket{1} \bra{1} + \frac{4}{5} 
 Effectively, the $\alpha$-particle has converted the pure state to an impure state.
 This is called \emph{decoherence}.
 
+\subsection{Coupled oscillators}
 Let's now return to our original problem -- coupling oscillators.
 We can now identify our states $\ket{m,n}$ as just tensor products $\ket{m} \ket{n}$.
 Operators such as $a$ and $b$ operate on either half of the tensor product.
@@ -2141,17 +2146,17 @@ The trick is to take the Fourier transform to get rid of the spatial coupling.
 
 \begin{question}
 Write the equations in terms of the Fourier transforms $\tilde E(\vec k, t)$ and $\tilde B(\vec k, t)$ (these are still vectors).
-Use two orthonormal polarisation vectors $\vec n_1(\vec k)$ and $\vec n_2(\vec k)$ to define vector components $\tilde E_i(\vec k, t)$ and $\tilde B_i(\vec k, t)$ such that they follow the time evolution of the simple harmonic oscillator
+Use two orthonormal polarisation vectors $\vec n_1(\vec k)$ and $\vec n_2(\vec k)$ (obeying $\vec n_i(-\vec k) = \vec n_i(\vec k)$) to define vector components $\tilde E_i(\vec k, t)$ and $\tilde B_i(\vec k, t)$ such that they follow the time evolution of the simple harmonic oscillator
 $$\dot x = \frac{p}{m}, \quad \dot p = -m \omega^2 x,$$
 with $\tilde E_i$ corresponding to $x$ and $\tilde B_i$ corresponding to $p$ (you will need to impose suitable conditions on $\vec n_i(\vec k)$).
 Find the energy in terms of $\tilde E_i$ and $\tilde B_i$.
 \solution{
 $$\vec k \cdot \tilde E = 0, \quad \vec k \cdot \tilde B = 0,\quad \im \vec k \times \tilde E = -\pfrac{\tilde B}{t}, \quad \im \vec k \times \tilde B = \frac{1}{c^2} \pfrac{\tilde E}{t}.$$
-If we demand that $\vec k \cdot \vec n_i = 0$ and $(\vec k / k) \times \vec n_1 = \vec n_2$ then we can define
+If we demand that $\vec k \cdot \vec n_i = 0$ then we can define
 $$\tilde E = \tilde E_1 \vec n_1 + \tilde E_2 \vec n_2,$$
-$$\tilde B = \im(\tilde B_1 \vec n_2 - \tilde B_2 \vec n_1).$$
+$$\tilde B = \frac{\im \vec k}{k} \times (\tilde B_1 \vec n_1 + \tilde B_1 \vec n_2).$$
 With these definitions the third and fourth Maxwell equations become
-$$\tilde E_1 \im k \vec n_2 - \tilde E_2 \im k \vec n_1 = -\pfrac{\tilde B_1}{t} \im \vec n_2 + \pfrac{\tilde B_1}{t} \im \vec n_1,$$
+$$\im \vec k \times (\tilde E_1 \vec n_1 + \tilde E_2 \vec n_1) = \frac{-\im \vec k}{k} \times \left(\pfrac{\tilde B_1}{t} \vec n_1 + \pfrac{\tilde B_1}{t} \vec n_2\right),$$
 $$\tilde B_1 k \vec n_1 + \tilde B_2 k \vec n_2 = \frac{1}{c^2} \pfrac{\tilde E_1}{t} \vec n_1 + \frac{1}{c^2} \pfrac{\tilde E_2}{t} \vec n_2;$$
 thus
 $$\pfrac{\tilde E_i}{t} = c^2 k \tilde B_i,\quad \pfrac{\tilde B_i}{t} = -k \tilde E_i.$$
@@ -2178,12 +2183,7 @@ $$\int_V \D{^3 \vec x}~e^{\im \vec k \cdot \vec x} = V \delta_{\vec k, 0}.$$
 
 \begin{question}
 $\tilde E_i$ and $\tilde B_i$ look very promising now but they still can't be used to construct a quantum theory in analogy with the harmonic oscillator.
-There are two problems.
-The first is that they are complex.
-We can fix it by remembering that $\tilde E(\vec k) = -\tilde E^*(-\vec k)$.
-For each $(\vec k, -\vec k)$ pair we can then arbitrarily assign the real part to one of them and the imaginary part to the other (all we need for this is a suitable function $f(\vec k)$ which satisfies $f^2 = 1$ and $f(\vec k) f(-\vec k) = -1$).
-
-The second problem is as follows. The harmonic oscillator had $[x,p]=1$.
+The harmonic oscillator had $[x,p]=\im \hbar$.
 You previously showed that this implies
 $$\pfrac{\langle x \rangle}{t} = \left\langle \pfrac{H}{p}\right\rangle, \qquad
 \pfrac{\langle p \rangle}{t} = -\left\langle \pfrac{H}{q}\right\rangle.$$
@@ -2191,56 +2191,67 @@ Since this holds for expectation values it implies a relation of the classical v
 $$\dot x = \pfrac{H}{p}, \qquad \dot p = -\pfrac{H}{q}$$
 (these equations are called \emph{Hamilton's equations}).
 
-Ensure that your definition of $\tilde E_i$ and $\tilde B_i$ obeys these equations.
-You may need to add a constant factor to both of them.
-Find $\vec E$, $\vec B$ and $H$ in terms of the new definitions.
-\solution{
-If $\til
-$$\tilde E = \sqrt{\frac{k}{V \varepsilon_0}} (\tilde E_1 \vec n_1 + \tilde E_2 \vec n_2),\quad \tilde B = \sqrt{\frac{k}{V \varepsilon_0}} \im (\tilde B_1 \vec n_2 - \tilde B_2 \vec n_1)$$
+Show that with the Hamiltonian
+$$H = \sum_{\vec k, i} \frac{1}{2} \varepsilon_0 (\tilde E_i^* \tilde E_i + \tilde B_i^* \tilde B_i)$$
+and the variables $\tilde E_i$ and $\tilde B_i$ (taking the place of $x$ and $p$, respectively) these equations do not lead to the equations of motion
+$$\pfrac{\tilde E_i}{t} = c^2 k \tilde B_i,\quad \pfrac{\tilde B_i}{t} = -k \tilde E_i$$
+(they are not ``canonical variables'').
+Show that $\tilde E_i$ and $\tilde B_i^*$ work with an extra constant factor.
+Redefine them appropriately and find $\vec E$, $\vec B$ and $H$ in terms of the new definitions.
 
-The definition from the last solution doesn't work because
-$$\pfrac{H}{\tilde E_i} = V \varepsilon_0 \tilde E_i \ne k \tilde E_i = -\pfrac{\tilde B_i}{t}, \quad \pfrac{H}{\tilde B_i} = V \varepsilon_0 c^2 \tilde B_i \ne c^2 k \tilde B_i = \pfrac{\tilde E_i}{t}.$$
-We can fix it by adding a factor $\sqrt{k/(V\varepsilon_0)}$ to both of them, i.e.\ to define
-$$\tilde E = \sqrt{\frac{k}{V \varepsilon_0}} (\tilde E_1 \vec n_1 + \tilde E_2 \vec n_2),\quad \tilde B = \sqrt{\frac{k}{V \varepsilon_0}} \im (\tilde B_1 \vec n_2 - \tilde B_2 \vec n_1)$$
-(which still have to split into real and imaginary parts).
-The real part contributes $\cos(\vec k \cdot \vec x)$ and the imaginary part contributes $\sin(\vec k \cdot \vec x)$.
-Note that $\Re(\sqrt{-1}\,z) = -\Im z$ and so we can use $\Re(\sqrt{f(\vec k)} e^{-\im \vec k \cdot \vec x})$ to pick the right one. 
-We can write $\vec E$ and $\vec B$ concisely as
-$$\vec E = \sqrt{\frac{2k}{V \varepsilon_0}} \Re \sum_{\vec k, i} \sqrt{f(\vec k)} \tilde E_i(\vec k) \vec n_i(\vec k) e^{-\im \vec k \cdot \vec x},$$
-$$\vec B = -\sqrt{\frac{2k}{V \varepsilon_0}} \Im \sum_{\vec k, i} \sqrt{f(\vec k)} \tilde B_i(\vec k) \frac{\vec k}{k} \times \vec n_i(\vec k) e^{-\im \vec k \cdot \vec x}.$$
-Note that we need an extra $\sqrt{2}$
+(Take care when calculating $\partial H/\partial \tilde E_i(\vec k)$ -- remember that $\tilde E_i^*(-\vec k) = \tilde E_i(\vec k)$.)
+\solution{
+$\tilde E_i$ and $\tilde B_i$ don't work because of
+$$\pfrac{H}{\tilde E_i} = V \varepsilon_0 \tilde E_i^* \ne k \tilde E_i = -\pfrac{\tilde B_i}{t}, \quad \pfrac{H}{\tilde B_i} = V \varepsilon_0 c^2 \tilde B_i^* \ne c^2 k \tilde B_i = \pfrac{\tilde E_i}{t}.$$
+We can fix it by using $\tilde E_i$ and $\tilde B_i^*$ instead and by adding a factor $\sqrt{k/(V\varepsilon_0)}$ to both of them, i.e.\ to define
+$$\tilde E = \sqrt{\frac{k}{V \varepsilon_0}} (\tilde E_1 \vec n_1 + \tilde E_2 \vec n_2),\quad \tilde B = \sqrt{\frac{k}{V \varepsilon_0}} \frac{\im \vec k}{k} \times (\tilde B_1 \vec n_1 + \tilde B_2 \vec n_2).$$
+We can write $\vec E$ and $\vec B$ as
+$$\vec E = \sum_{\vec k, i} \sqrt{\frac{k}{V \varepsilon_0}} \tilde E_i(\vec k) \vec n_i(\vec k) e^{\im \vec k \cdot \vec x},$$
+$$\vec B = \sum_{\vec k, i} \sqrt{\frac{k}{V \varepsilon_0}} \tilde B_i(\vec k) \frac{\im \vec k}{k} \times \vec n_i(\vec k) e^{\im \vec k \cdot \vec x}.$$
 $H$ is now
-$$H = \sum_{\vec k,i} \frac{1}{2} k ({\tilde E_i}^2 + c^2 {\tilde B_i}^2).$$
+$$H = \sum_{\vec k,i} \frac{1}{2} k ({\tilde E_i^*} \tilde E_i + c^2 \tilde B_i^* \tilde B_i).$$
 }
 \end{question}
 
 We can now take the system into the quantum realm.
-We convert $\tilde E_i$ and $\tilde B_i$ into operators obeying
-$$[\tilde E_i(\vec k), \tilde B_j(\vec k')] = \im \hbar \delta_{i,j} \delta_{\vec k, \vec k'}.$$
+We convert $\tilde E_i$ and $\tilde B_i^*$ into operators obeying
+$$[\tilde E_i(\vec k), \tilde B_j^\dagger(\vec k')] = \im \hbar \delta_{i,j} \delta_{\vec k, \vec k'},\quad [\tilde E_i(\vec k), \tilde E_j(\vec k')] = 0, \quad [\tilde B_i(\vec k), \tilde B_j(\vec k')] = 0.$$
+Never forget that the $\vec E$ and $\vec B$ fields are real -- which means that in Fourier space $\tilde E_i(-\vec k) = \tilde E_i^\dagger(\vec k)$ and $\tilde B_i(-\vec k) = \tilde B_i^\dagger(\vec k)$!
+Things are a bit scary because we have an oscillator with complex variables, but it mostly leads to extra $^\dagger$ appearing in places.
+
 Now $\vec E$ and $\vec B$ become operators as well -- they are \emph{quantum fields}.
 Note that, in our current formalism (the ``Schr\"odinger picture''), the time dependence is moved into the states $\ket{\psi(t)}$, hence $\vec E = \vec E(\vec r)$ and $\vec B = \vec B(\vec r)$.
 
 \begin{question}
-Compare $H$ with the harmonic oscillator Hamiltonian
-$$H = \frac{p^2}{2m} + \frac{1}{2} m \omega^2 x^2$$
-and write down the appropriate $a_i(\vec k)$ operator.
-Express the Hamiltonian in terms of $a_i$ and $a_i^\dagger$, dropping the constant zero-point energy.
+Remember we solved the normal harmonic oscillator by defining a complex quantity $a$ which classically followed $\dot a = -\im \omega a$ (for some $\omega > 0$) and quantum mechanically obeyed the commutation relations $[a,a^\dagger] = 1$.
+Define $a_i(\vec k)$ to get these properties, with the additional constraint that operators of different $i$ or $\vec k$ should commute.
+Express the Hamiltonian in terms of $a_i$ and $a_i^\dagger$, dropping the constant zero-point energy (which is actually infinite summing over all $\vec k$).
 \solution{
-We have
-$$H = \sum_{\vec k,i} \left(\frac{1}{2} k c^2 {\tilde B_i}^2 + \frac{1}{2} k {\tilde E_i}^2\right).$$
-Comparing with the harmonic oscillator we see that $m = 1/(k c^2)$ and $\omega = ck$.
-Substituting in our definition of previous definition of $a$
-$$a_i = \sqrt{\frac{1}{2\hbar c}} \left(\tilde E_i + \im c \tilde B_i\right).$$
-The Hamiltonian is now
-$$H = \sum_{\vec k, i} \hbar \omega a_i^\dagger a_i.$$
+The simplest thing to try is
+$$a_i(\vec k) = \alpha \tilde E_i(\vec k) + \beta \tilde B_i(\vec k).$$
+This leads to
+$$[a_i(\vec k), a_i(\vec k')] = \alpha \beta [\tilde E_i(\vec k), \tilde B_i^\dagger(\vec k')] + \alpha \beta [\tilde B_i(\vec k), \tilde E_i^\dagger(\vec k')] = 0$$
+($[A,B]^\dagger = [B^\dagger, A^\dagger]$ and hence $[\tilde B_i, \tilde E_i^\dagger] = -[\tilde E_i, \tilde B_i^\dagger]$).
+We also find
+$$[a_i(\vec k), a_i^\dagger(\vec k')] = \alpha \beta^* [\tilde E_i(\vec k), \tilde B_i^\dagger(\vec k')] + \alpha^* \beta [\tilde B_i, \tilde E_i^\dagger(\vec k')] = \alpha \beta^* \im \hbar - \alpha^* \beta \im \hbar = 2 \Im(\alpha^* \beta) \hbar.$$
+The classical time evolution is
+$$\dot a_i = \alpha c^2 k \tilde B_i - \beta k \tilde E_i = -\im \omega (\alpha \tilde E_i + \beta \tilde B_i).$$
+This implies $\beta k = \im \omega \alpha$ and $\alpha c^2 k = -\im\omega \beta$.
+Since we want $\omega > 0$ the only solution is $\omega = c k$ and $\beta = \im c \alpha$.
+If we pick $\alpha>0$ the earlier condition gives $\alpha^2=1/(2\hbar c)$ and thus
+$$a_i(\vec k) = \sqrt{\frac{1}{2 \hbar c}} \left(\tilde E_i(\vec k) + \im c \tilde B_i(\vec k)\right),\quad a_i^\dagger(\vec k) = \sqrt{\frac{1}{2 \hbar c}} \left(\tilde E_i^\dagger(\vec k) - \im c \tilde B_i^\dagger(\vec k)\right).$$
+To find the Hamiltonian calculate
+$$a_i^\dagger a_i = \frac{1}{2 \hbar c} \left(\tilde E_i^\dagger - \im c \tilde B_i^\dagger\right) \left(\tilde E_i + \im c \tilde B_i\right) = \frac{1}{2\hbar c} \left(\tilde E_i \tilde E_i^\dagger - \im c \tilde B_i^\dagger E_i + \im c E_i^\dagger B_i + c^2 \tilde B_i \tilde B_i^*\right).$$
+Note that substituting $\vec k \to -\vec k$ gives
+$$a_i^\dagger(-\vec k) a_i(-\vec k) = \frac{1}{2\hbar c} \left(\tilde E_i(\vec k) \tilde E_i^\dagger(\vec k) - \im c \tilde B_i(\vec k) E_i^\dagger(\vec k) + \im c E_i(\vec k) B_i^\dagger(\vec k) + c^2 \tilde B_i(\vec k) \tilde B_i^*(\vec k)\right);$$
+adding the $\vec k$ and $-\vec k$ contributions will turn the two middle terms into commutators, which are constants.
+Hence
+$$H = \sum_{\vec k, i} \hbar \omega a_i^\dagger(\vec k) a_i(\vec k) + \mbox{const}.$$
 }
 \end{question}
 
-Note that just like before $[a_i, a_i^\dagger] = 1$.
-Operators with different $i$ or $\vec k$ commute, hence
-$$[a_i(\vec k), a_j^\dagger(\vec k')] = \delta_{i,j} \delta_{\vec k, \vec k'}.$$
 We can now identify the \emph{ground state} $\ket{0}$ by the condition $a_i(\vec k) \ket{0} = 0$ for all $i$ and $\vec k$.
-We can construct states such as $a_i^\dagger(\vec k) \ket{0}$ that contain quantised excitations, i.e.\ \emph{photons}.
+We can also construct states such as $a_i^\dagger(\vec k) \ket{0}$ that contain quantised excitations, i.e.\ \emph{photons}.
 
 \begin{question}
 Find the energy of a photon of wavevector $\vec k$.
@@ -2273,47 +2284,57 @@ By construction we have
 $$\pfrac{\langle \tilde E_i\rangle}{t} = c^2 k \langle \tilde B_i \rangle,\quad \pfrac{\langle \tilde B_i\rangle}{t} = -k \langle \tilde E_i \rangle.$$
 We can actually conclude from this directly that Maxwell's equations are satisfied -- by construction.
 We can also explicitly calculate
-$$\nabla \cdot \langle \vec E \rangle = \sqrt{\frac{k}{V \epsilon_0}} \Re \sum_{\vec k, i} \sqrt{f(\vec k)} \langle \tilde E_i(\vec k)\rangle (-\im \vec k) \cdot \vec n_i(\vec k) e^{-\im \vec k \cdot \vec x} = 0,$$
-$$\nabla \cdot \langle \vec B \rangle = -\sqrt{\frac{k}{V \epsilon_0}} \Im \sum_{\vec k, i} \sqrt{f(\vec k)} \langle\tilde B_i(\vec k)\rangle (-\im \vec k) \cdot \vec n_i(\vec k) e^{-\im \vec k \cdot \vec x} = 0,$$
-$$\nabla \times \langle \vec E \rangle = \sqrt{\frac{k}{V \epsilon_0}} \Im \sum_{\vec k, i} \sqrt{f(\vec k)} \langle\tilde E_i(\vec k)\rangle \vec k \times \vec n_i(\vec k) e^{-\im \vec k \cdot \vec x} = -\pfrac{}{t} \langle \vec B \rangle,$$
-$$\nabla \times \langle \vec B\rangle = -\sqrt{\frac{k}{V \varepsilon_0}} \Re \sum_{\vec k, i} \sqrt{f(\vec k)} \langle \tilde B_i(\vec k) \rangle \vec n_i(\vec k) e^{-\im \vec k \cdot \vec x} = c^2 \pfrac{}{t} \langle \vec E \rangle.$$
+$$\nabla \cdot \langle \vec E \rangle = \sum_{\vec k, i} \sqrt{\frac{k}{V \epsilon_0}} \langle \tilde E_i(\vec k)\rangle \im \vec k \cdot \vec n_i(\vec k) e^{\im \vec k \cdot \vec x} = 0,$$
+$$\nabla \cdot \langle \vec B \rangle = \sum_{\vec k, i} \im \sqrt{\frac{k}{V \epsilon_0}} \langle\tilde B_i(\vec k)\rangle \im \vec k \cdot \vec n_i(\vec k) e^{\im \vec k \cdot \vec x} = 0,$$
+$$\nabla \times \langle \vec E \rangle = \sum_{\vec k, i} \sqrt{\frac{k}{V \epsilon_0}} \langle\tilde E_i(\vec k)\rangle \im \vec k \times \vec n_i(\vec k) e^{\im \vec k \cdot \vec x} = -\pfrac{}{t} \langle \vec B \rangle,$$
+$$\nabla \times \langle \vec B\rangle = \sum_{\vec k, i} \sqrt{\frac{k}{V \varepsilon_0}} \langle \tilde B_i(\vec k) \rangle \vec n_i(\vec k) e^{\im \vec k \cdot \vec x} = c^2 \pfrac{}{t} \langle \vec E \rangle.$$
 }
 \end{question}
 
 \begin{question}
-Write $\tilde E_i$ and $\vec E$ in terms of $a_i$ and $a_i^\dagger$.
+Write $\tilde E_i$, $\tilde B_i$, $\vec E$ and $\vec B$ in terms of $a_i$ and $a_i^\dagger$.
 Show that, for the ground state, $\langle \vec E \rangle = 0$ and $\langle E^2 \rangle$ is infinite (can you imagine why?).
-Show that $\langle \vec E \rangle = 0$ for any single photon state.
+Show that $\langle \vec E \rangle = 0$ for any stationary state.
+\hint{You need to combine different $\vec k$ states.}
 \solution{
-$$\tilde E_i = \sqrt{\frac{\hbar c}{2}} (a_i + a_i^\dagger)$$
-$$\vec E = \sqrt{\frac{\hbar c k}{2 V \varepsilon_0}} \Re \sum_{\vec k, i} \sqrt{f(\vec k)} (a_i + a_i^\dagger) \vec n_i(\vec k) e^{-\im \vec k \cdot \vec x}$$
+$$\tilde E_i = \sqrt{\frac{\hbar c}{2}} (a_i(\vec k) + a_i^\dagger(-\vec k)), \quad \tilde B_i = -\im \sqrt{\frac{\hbar}{2 c}} (a_i(\vec k) - a_i^\dagger(-\vec k)),$$
+$$\vec E = \sum_{\vec k, i} \sqrt{\frac{\hbar c k}{2 V \varepsilon_0}} (a_i(\vec k) + a_i^\dagger(-\vec k)) \vec n_i(\vec k) e^{\im \vec k \cdot \vec x},$$
+$$\vec B = \sum_{\vec k, i} \sqrt{\frac{\hbar k}{2 c V \varepsilon_0}} (a_i(\vec k) - a_i^\dagger(-\vec k)) \frac{\vec k}{k} \times \vec n_i(\vec k) e^{\im \vec k \cdot \vec x}.$$
 We can see straight away that $\bra{0} \vec E \ket{0}$ must be zero ($a_i$ acting on $\ket{0}$ produces 0, ditto for $a_i^\dagger$ acting on $\bra{0}$).
 $\varepsilon_0 \langle E^2 \rangle$ is just the zero-point energy per unit volume, which is $\hbar \omega/(2V)$ per mode.
 Since there are modes with arbitrarily high $\omega$, the result is infinite.
 This is a sign that our theory should break down at high $\omega$ (which corresponds to short length scales, using $\lambda = 2\pi c/\omega$).
-For the single photon states $\vec E$ is zero because $a_i$ and $a_i^\dagger$ produce the vacuum or a two photon state, which have zero overlap with the one photon state; hence $\langle a_i + a_i^\dagger \rangle = 0$.
+
+For an arbitrary stationary state $\ket{\psi}$ the number of photons is well-defined.
+But the states $\vec a_i(\vec k) \ket{\psi}$ and $\vec a_i^\dagger(-\vec k) \ket{\psi}$ will have a different number of photons.
+Since the number operator is Hermitian, they must be orthogonal to $\ket{\psi}$ (being eigenstates of different eigenvalue).
+Hence $\bra{\psi} \vec E \ket{\psi} = 0$.
 }
 \end{question}
 
-The one photon states are then particularly bizarre states, since $\langle \vec E \rangle = 0$!
+The stationary states seem nice, with their well defined $\hbar \omega$ energy, but we actually just found that they are rather bizarre classically -- since $\langle \vec E \rangle = 0$.
+There are other states that aren't stationary states (so their energy is not well defined) but that will lead to more familiar forms for $\langle \vec E \rangle$.
 
 \begin{question}
-Find $\langle \vec E(t) \rangle$ for a state $\ket{\psi(t)}$ obeying $a_i(\vec k) \ket{\psi(0)} = \alpha \ket{\psi(0)}$ for one particular $i$ and $\vec k$ (and no photons with any other $i$ or $\vec k$).
-You can set $f(\vec k) = 1$ and assume $\alpha$ is real.
+Find $\langle \vec E(t) \rangle$ for a state $\ket{\psi(t)}$ obeying $a_j(\vec k_0) \ket{\psi(0)} = \alpha \ket{\psi(0)}$ for one particular $j$ and $\vec k_0$ (and no photons with any other $i$ or $\vec k$).
+You can assume $\alpha$ is real.
 
 Find the expected number of photons in this state.
-\hint{To find the time evolution, use the formula $e^{\im H t/\hbar} a e^{-\im Ht/\hbar} = a + [H,a] + [H,[H,a]]/2! + [H,[H,[H,a]]]/3! + \dots$}
+\hint{To find the time evolution, use the formula $e^{b} a e^{-b} = a + [b,a] + [b,[b,a]]/2! + [b,[b,[b,a]]]/3! + \dots$}
+\result{$\langle \vec E \rangle = \sqrt{2 \hbar c k_0/(V \varepsilon_0)} \vec n_j(\vec k_0) \alpha \cos(\vec k_0 \cdot \vec x - c k_0 t)$.}
 \solution{
 To find the time evolution we can use
-$$e^{\im H t/\hbar} a e^{-\im H t/\hbar} = a + [\im H t/\hbar,a] + [\im H t/\hbar,[\im H t/\hbar,a]]/2 + \dots = e^{-\im \omega t} a$$
+$$e^{\im H t/\hbar} a e^{-\im H t/\hbar} = a + [\im H t/\hbar,a] + [\im H t/\hbar,[\im H t/\hbar,a]]/2 + \dots = e^{-\im c k_0 t} a.$$
 From this it folllows
-$$a \ket{\psi(t)} = a e^{-\im H t/\hbar} \ket{\psi(0)} = e^{-\im \omega t} e^{-\im H t/\hbar} a \ket{\psi(0)} = e^{-\im \omega t} \alpha \ket{\psi(t)}.$$
-Hence $\ket{\psi(t)}$ remains an eigenstate, but the eigenvalue $\alpha$ rotates through the complex plane with angular frequency $\omega$.
-Since $\bra{\psi} a_i^\dagger = \bra{\psi} \alpha^*$ we have
-$$\langle a_i + a_i^\dagger \rangle = \bra{\psi} (a_i + a_i^\dagger) \ket{\psi} = 2 \Re (\alpha e^{-\im \omega t}) = 2 \alpha \cos(\omega t).$$
-Hence
-$$\langle \vec E \rangle = \sqrt{\frac{2 \hbar c k}{V \varepsilon_0}} \alpha \vec n_i(\vec k) \cos(\vec k \cdot \vec x) \cos(\omega t),$$
-a standing wave.
+$$a \ket{\psi(t)} = a e^{-\im H t/\hbar} \ket{\psi(0)} = e^{-\im c k_0 t} e^{-\im H t/\hbar} a \ket{\psi(0)} = e^{-\im c k_0 t} \alpha \ket{\psi(t)}.$$
+Hence $\ket{\psi(t)}$ remains an eigenstate, but the eigenvalue $\alpha$ rotates through the complex plane with angular frequency $c k_0$.
+
+To find $\langle \vec E \rangle$ use the expression
+$$\langle \vec E \rangle = \sum_{\vec k, i} \sqrt{\frac{\hbar c k}{2 V \varepsilon_0}} \langle a_i(\vec k) + a_i^\dagger(-\vec k)\rangle \vec n_i(\vec k) e^{\im \vec k \cdot \vec x}.$$
+Since $a_j(\vec k_0) \ket{\psi} = \alpha e^{-\im c k_0 t} \ket{\psi}$ and $\bra{\psi} a_j^\dagger(\vec k_0) = \alpha e^{\im c k_0 t} \bra{\psi}$, the expectation value is non-zero for $\vec k = \vec k_0$ and $\vec k = -\vec k_0$.
+This leads to
+$$\langle \vec E \rangle = \sqrt{\frac{\hbar c k_0}{2 V \varepsilon_0}} \vec n_j(\vec k_0) \left(\alpha e^{\im (\vec k_0 \cdot \vec x -c k_0 t)} + \alpha e^{-\im (\vec k_0 \cdot \vec x -c k_0 t)}\right) = \sqrt{\frac{2\hbar c k_0}{V \varepsilon_0}} \vec n_j(\vec k_0) \alpha \cos(\vec k_0 \cdot \vec x -c k_0 t),$$
+this is a travelling wave of wavevector $\vec k_0$!
 
 The expected number of photons is
 $$\langle a_i^\dagger a_i \rangle = \bra{\psi} \alpha^* \alpha \ket{\psi} = |\alpha|^2.$$
@@ -2326,12 +2347,14 @@ These states are called \emph{coherent states}.
 \begin{question}
 (optional) Continuing from the last question, calculate the energy using
 $$\int_V \frac{1}{2} \varepsilon_0 \left(\langle \vec E\rangle^2  + c^2 \langle \vec B\rangle^2\right) \D{^3 \vec x}.$$
+\result{$\hbar c k_0 \alpha^2$.}
 \solution{
 We can use one of the Maxwell equations to calculate
-$$\langle \vec B\rangle = \int \D{t} \nabla \times \langle \vec E\rangle = \sqrt{\frac{2 \hbar c k}{V \varepsilon_0}} \alpha \frac{\vec k}{\omega} \times\vec n_i(\vec k) \sin(\vec k \cdot \vec x) \sin(\omega t).$$
+$$\langle \vec B\rangle = \int \D{t}~\nabla \times \langle \vec E\rangle = -\sqrt{\frac{2 \hbar c k_0}{V \varepsilon_0}} \alpha \frac{\vec k_0}{c k_0} \times\vec n_j(\vec k_0) \cos(\vec k_0 \cdot \vec x - c k_0 t).$$
 Hence
-$$\frac{1}{2} \varepsilon_0 \left(\langle \vec E\rangle^2 + c^2 \langle \vec B\rangle^2\right) = \frac{\hbar c k \alpha^2}{V} (\cos^2(\vec k \cdot \vec x) \cos^2(\omega t) + \sin^2(\vec k \cdot \vec x) \sin^2(\omega t)).$$
-$\cos^2$ and $\sin^2$ average to $1/2$ and so the integral over all space is $\hbar \omega \alpha^2/2$.
+$$\frac{1}{2} \varepsilon_0 \left(\langle \vec E\rangle^2 + c^2 \langle \vec B\rangle^2\right) = \frac{2\hbar c k_0 \alpha^2}{V \varepsilon_0} \cos^2(\vec k_0 \cdot \vec x - c k_0 t).$$
+$\cos^2$ and $\sin^2$ average to $1/2$ and so the integral over all space is $\hbar c k_0 \alpha^2$.
+Since the number of photons is $\alpha^2$, this is exactly what we expect from $E=\hbar \omega$.
 }
 \end{question}
 
@@ -2385,7 +2408,7 @@ Calculate the energy per unit volume $u(\omega) \D{\omega}$ of the electromagnet
 To apply the result to a black body (a body that absorbs 100\% of the incident radiation), place the black body in thermal equilibrium with the field.
 Relate the power incident on the body with the power radiated to find the power $p(\omega) \D{\omega} \D{A}$ radiated by an area $\D{A}$ of the black body at temperature $T$ at frequencies between $\omega$ and $\omega+\D{\omega}$.
 \hint{For the second part, how fast does electromagnetic energy move? Calculate the energy incident on the area within time $\D{t}$. Don't forget that it might move at an angle to the surface -- you'll need to integrate over all solid angles $\D{\Omega} = 2\pi \D{(\cos \theta)}$.}
-\result{$p(\omega) = \hbar \omega^3/(2\pi^2 c^2 (e^{\hbar \omega/(k_B T)} - 1)).$}
+\result{$p(\omega) = \hbar \omega^3/(4\pi^2 c^2 (e^{\hbar \omega/(k_B T)} - 1)).$}
 \solution{
 Multiplying the two previous results and dividing by $V$ gives the answer as
 $$u(\omega) = \frac{\hbar \omega^3}{\pi^2 c^3} \frac{1}{e^{\hbar \omega/(k_B T)} - 1}.$$
@@ -2406,6 +2429,31 @@ $$p(\omega) = \frac{\hbar \omega^3}{4 \pi^2 c^2} \frac{1}{e^{\hbar \omega/(k_B T
 \end{question}
 
 \begin{question}
+(optional)\\
+1. (Rayleigh-Jeans law) Find an approximate expression for $p(\omega)$ at large $T/\omega$.\\
+2. (Wien approximation) Repeat for small $T/\omega$.\\
+3. (Wien's displacement law) Show that $p(\omega,T_1) = \alpha p(\gamma \omega, T_2)$ for appropriate $\alpha(T_1, T_2)$ and $\gamma(T_1, T_2)$. Use this result to find a simple expression for the coordinates $(\omega, p(\omega))$ of the maximum as a function of $T$ (with undetermined constants).
+\result{1. $\omega^2 k_B T/(4 \pi^2 c^2)$.\\
+2. $\hbar \omega^3/(4\pi^2 c^2)~e^{-\hbar \omega/(k_B T)}$.\\
+3. $\alpha=(T_1/T_2)^3$ and $\gamma=T_2/T_1$. The maximum is at $(b T, d T^3)$.}
+\solution{
+1. $e^{\hbar \omega/(k_B T)} = 1 + \hbar \omega/(k_B T) + O(\omega^2/T^2)$ and hence
+$$p(\omega) = \frac{\hbar \omega^3}{4\pi^2 c^2} \frac{k_B T}{\hbar \omega} + O(1) = \frac{\omega^2}{4\pi^2 c^2} k_B T + O(1).$$
+Note that (if we take out the $c/4$ factor from the black body) the result is just $k_B T$ per mode (as expected from equipartition).\\
+2.
+At large $\omega/T$ we have $e^{\hbar \omega/(k_B T)} \gg 1$ and hence
+$$p(\omega) \approx \frac{\hbar \omega^3}{4\pi^2 c^2} e^{-\hbar \omega/(k_B T)}.$$
+3. 
+$p(\omega,T_1) = \alpha p(\gamma \omega, T_2)$ leads to
+$$\frac{\hbar \omega^3}{4\pi^2 c^2} \frac{1}{e^{\hbar \omega/(k_B T_1)} - 1} = \alpha \gamma^3 \frac{\hbar \omega^3}{4\pi^2 c^2} \frac{1}{e^{\hbar \gamma \omega/(k_B T_2)} - 1}.$$
+To match up the exponents we need $\gamma = T_2/T_1$ and thus $\alpha = (T_1/T_2)^3$ and hence $p(\omega, T_1) = (T_1/T_2)^3 p((T_2/T_1) \omega, T_2)$.
+If the maximum is at $(\omega_0, p_0)$ at $T_1$, it shifts to $((T_2/T_1) \omega_0, (T_2/T_1)^3 p_0)$ at $T_2$, which we can simplify to $(\omega, p(\omega)) = (b T, d T^3)$ with two constants $b$ and $d$.
+Numerically one can evaluate
+$$b = 2.82 \frac{k_B}{\hbar}, \quad d = 0.036 \frac{k_B^3}{c^2 \hbar^2}.$$
+}
+\end{question}
+
+\begin{question}
 (optional)
 Calculate the total power radiated per unit area (over all frequencies) for a black body at temperature $T$.
 \hint{You may find the formula $\sum 1/n^4 = \pi^4/90$ (that you may have derived in the complex analysis section) useful.}
@@ -2417,6 +2465,7 @@ $$= -\sum_{n=1}^\infty \frac{1}{n^3 \hbar^3} \pfrac{^3}{\beta^3} \int_0^\infty e
 (using $\sum 1/n^4 = \pi^4/90$ in the last step).
 Hence the total power radiated is
 $$\int_0^\infty p(\omega) \D{\omega} = \frac{\pi^2 k_B^4}{60 \hbar^3 c^2} T^4.$$
+This is the \emph{Stefan-Boltzmann law} $P = \sigma T^4$.
 }
 \end{question}
 
