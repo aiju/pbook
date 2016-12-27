@@ -2469,19 +2469,19 @@ This is the \emph{Stefan-Boltzmann law} $P = \sigma T^4$.
 }
 \end{question}
 
-\subsection{Particles in three dimensions}
-The basics of 3D space are now a straightforward extension of previous ideas.
-\begin{question}
-Show that we can define three momentum operators which we can write in vector form as $\vec p = -\im \hbar \nabla$.
-Find the 3D time-independent Schr\"odinger equation.
-\solution{
-We now have more symmetry to play with: Translations in the $y$ and $z$ directions.
-This leads to three generators $G_x = -\partial/\partial x$, $G_y = -\partial/\partial y$, $G_z=-\partial/\partial z$.
-We can define $\vec G = (G_x, G_y, G_z) = -\nabla$.
-Classically, we can show that the conserved quantities are just the components of momentum $p_x$, $p_y$, $p_z$.
-Hence by our symmetry principle we can define $\vec p = -\im \hbar \nabla$.
-
-We have $H = \frac{p^2}{2m} + V$ as before, which leads to
-$$-\frac{\hbar^2}{2m} \nabla^2 \psi + (V - E) \psi = 0.$$
-}
-\end{question}
+%\subsection{Particles in three dimensions}
+%The basics of 3D space are now a straightforward extension of previous ideas.
+%\begin{question}
+%Show that we can define three momentum operators which we can write in vector form as $\vec p = -\im \hbar \nabla$.
+%Find the 3D time-independent Schr\"odinger equation.
+%\solution{
+%We now have more symmetry to play with: Translations in the $y$ and $z$ directions.
+%This leads to three generators $G_x = -\partial/\partial x$, $G_y = -\partial/\partial y$, $G_z=-\partial/\partial z$.
+%We can define $\vec G = (G_x, G_y, G_z) = -\nabla$.
+%Classically, we can show that the conserved quantities are just the components of momentum $p_x$, $p_y$, $p_z$.
+%Hence by our symmetry principle we can define $\vec p = -\im \hbar \nabla$.
+%
+%We have $H = \frac{p^2}{2m} + V$ as before, which leads to
+%$$-\frac{\hbar^2}{2m} \nabla^2 \psi + (V - E) \psi = 0.$$
+%}
+%\end{question}
