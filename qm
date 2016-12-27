@@ -1450,7 +1450,7 @@ i.e.\ the current is just density times velocity (just like in fluid mechanics!)
 We now want to study the time-independent Schr\"odinger equation
 $$-\frac{\hbar^2}{2m} \pfrac{^2 \psi}{x^2} + (V - E) \psi = 0$$
 for different potentials $V$.
-The simplest potential we can actually solve is the ``particle in a box'' with $V(x) = 0$ for $0<x<a$ and $V(x) \to \infty$ otherwise.
+The simplest potential we can actually solve is the ``particle in a box'' with $V(x) = 0$ for $0 < x < a$ and $V(x) \to \infty$ otherwise.
 \begin{question}
 Find the stationary states (and their energies) for the particle in a box.
 \solution{Note that we need $\psi(x) = 0$ in the region $V(x) \to \infty$.
@@ -2022,7 +2022,6 @@ Start by calculating $H \ket{1,0}$ and $H \ket{0,1}$.
 Use the time-dependent Schr\"odinger equation to determine differential equations for the time evolution of $\ket{\psi(t)} = \alpha(t) \ket{1,0} + \beta(t) \ket{0,1}$.
 Solve them, e.g.\ by a trial solution $\alpha(t) = \alpha_1 e^{\im \omega_1 t} + \alpha_2 e^{\im \omega_2 t}$ and $\beta(t) = \beta_1 e^{\im \omega_1 t} + \beta_2 e^{\im \omega_2 t}$.
 Find $\ket{\psi(t)}$ for the initial conditions $\alpha(0) = 1$ and $\beta(0) = 0$.
-\hint{To solve the equations, take derivatives of one of them and substitute in the other.}
 \result{$\ket{\psi(t)} = e^{-2\im\omega t} \left(\cos(\lambda t) \ket{1,0} - \im \sin(\lambda t) \ket{0,1}\right).$}
 \solution{
 $$H \ket{1,0} = 2\hbar \omega \ket{1,0} + \hbar \lambda \ket{0,1}$$
