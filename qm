@@ -2811,16 +2811,6 @@ $$Y_\ell^m(\theta, \phi) = \sqrt{\frac{(2\ell+1)(\ell-m)!}{4\pi(\ell+m)!}} e^{\i
 }
 \end{question}
 
-\begin{question}
-Show that $Y_\ell^m$ has parity $(-1)^\ell$, i.e.\ that
-$$P\ket{\ell,m} = (-1)^\ell \ket{\ell,m},$$
-where $P$ maps $(x,y,z)$ to $(-x,-y,-z)$.
-\hint{All you need for this question is the form $Y_\ell^m = e^{\im m \phi} P_\ell^m(\cos \theta)$.}
-\solution{
-Write 
-}
-\end{question}
-
 Now back to physics.
 Consider a particle moving in a spherically symmetrical potential $V(\vec r) = V(r)$.
 \begin{question}
