@@ -988,6 +988,7 @@ Using the chain rule this is equal to $\D{L}/\D{\varepsilon}$, which is zero sin
 \begin{question}
 Apply the principle to show that the momentum operator is $p = -\im \hbar\,\D{}/\D{x}$ (in one dimension).
 \hint{Use an appropriate symmetry transformation with $p$ as the classical conserved quantity. Calculate $\bra{x} G \ket{\psi}$ for a state $\ket{\psi}$ and express the result in terms of $\psi(x)$.}
+\hint{Also note that $\bra{x} T_\varepsilon = \bra{x-\varepsilon}$.}
 \solution{
 Consider spatial displacements $x \to x+\varepsilon$.
 We have $\D{x}/\D{\varepsilon} = 1$ and so
@@ -2459,7 +2460,7 @@ Calculate the total power radiated per unit area (over all frequencies) for a bl
 \hint{Expand $1/(e^{\hbar \omega/(k_B T)} - 1)$ in a power series in $e^{-\hbar \omega/(k_B T)}$.}
 \solution{
 Define $\beta = k_B T$.
-$$\int_0^\infty \frac{\omega^3 \D{\omega}}{e^{\beta \hbar \omega} - 1} = \int_0^\infty \D{\omega} \omega^3 e^{-\beta \hbar \omega} \sum_{n=0}^\infty (e^{-\beta \hbar \omega})^n = \sum_{n=1}^\infty \int_0^\infty \omega^3 e^{-\beta \hbar \omega} \D{\omega}$$
+$$\int_0^\infty \frac{\omega^3 \D{\omega}}{e^{\beta \hbar \omega} - 1} = \int_0^\infty \D{\omega} \omega^3 e^{-\beta \hbar \omega} \sum_{n=0}^\infty (e^{-\beta \hbar \omega})^n = \sum_{n=1}^\infty \int_0^\infty \omega^3 e^{-n \beta \hbar \omega} \D{\omega}$$
 $$= -\sum_{n=1}^\infty \frac{1}{n^3 \hbar^3} \pfrac{^3}{\beta^3} \int_0^\infty e^{-n \beta \hbar \omega} \D{\omega} = \frac{6}{\hbar^4 \beta^4} \sum_{n=1}^\infty \frac{1}{n^4} = \frac{\pi^4}{15 \hbar^4 \beta^4}$$
 (using $\sum 1/n^4 = \pi^4/90$ in the last step).
 Hence the total power radiated is
@@ -2468,19 +2469,437 @@ This is the \emph{Stefan-Boltzmann law} $P = \sigma T^4$.
 }
 \end{question}
 
-%\subsection{Particles in three dimensions}
-%The basics of 3D space are now a straightforward extension of previous ideas.
-%\begin{question}
-%Show that we can define three momentum operators which we can write in vector form as $\vec p = -\im \hbar \nabla$.
-%Find the 3D time-independent Schr\"odinger equation.
-%\solution{
-%We now have more symmetry to play with: Translations in the $y$ and $z$ directions.
-%This leads to three generators $G_x = -\partial/\partial x$, $G_y = -\partial/\partial y$, $G_z=-\partial/\partial z$.
-%We can define $\vec G = (G_x, G_y, G_z) = -\nabla$.
-%Classically, we can show that the conserved quantities are just the components of momentum $p_x$, $p_y$, $p_z$.
-%Hence by our symmetry principle we can define $\vec p = -\im \hbar \nabla$.
-%
-%We have $H = \frac{p^2}{2m} + V$ as before, which leads to
-%$$-\frac{\hbar^2}{2m} \nabla^2 \psi + (V - E) \psi = 0.$$
-%}
-%\end{question}
+\subsection{Particles in three dimensions and angular momentum}
+Consider a particle moving in three dimensions.
+We can treat it as three combined 1D particles.
+Rather than basis states $\ket{x}$ we now have basis states $\ket{x} \ket{y} \ket{z}$ which we can write as $\ket{\vec r}$ with a vector $\vec r = (x, y, z)$.
+In 1D we had $\ket{\psi}$ as a linear combination of $\ket{x}$, i.e.\
+$$\ket{\psi} = \int \psi(x)\ket{x}\D{x},$$
+whereas in 3D we have
+$$\ket{\psi} = \int \psi(x,y,z) \ket{x}\ket{y}\ket{z} \D{x}\,\D{y}\,\D{z} = \int \psi(\vec r) \ket{\vec r} \D{^3 \vec r}.$$
+
+Each ``1D particle'' has a momentum operator, which means we have three momentum operators $p_x$, $p_y$, $p_z$ (which we could also derive directly from symmetry, using displacements in the $x$, $y$ and $z$ directions).
+We can write this as a single ``vector operator'' $\vec p = (p_x, p_y, p_z)$.
+This notation is a bit mindboggling: We have a 3D vector where each component is an operator, which acts on the infinite dimensional state vector!
+We can similarly define a position operator $\vec r = (x,y,z)$.
+
+Remember that we combining systems the operators corresponding to different systems permute, which means here $[x, y] = 0$, $[x, p_y] = 0$, etc.
+We also preserve the commutation rules of operators within one system, hence $[x, p_x] = \im \hbar$.
+We can write concisely
+$$[r_i, r_j] = 0, \quad [p_i, p_j] = 0, \quad [r_i, p_j] = \im \hbar \delta_{i,j}.$$
+
+\begin{question}
+Write $\vec p$ as a differential operator and write down the time-independent Schr\"odinger equation for a particle moving in a 3D potential $V(\vec r)$.
+\solution{
+$$\vec p = -\im \hbar \nabla$$
+$$-\frac{\hbar^2}{2m} \nabla^2 \psi(\vec r) + (V(\vec r) - E) \psi(\vec r) = 0$$
+}
+\end{question}
+
+Things get more interesting now since we have a new symmetry to play with: rotations.
+
+\begin{question}
+Write down the equation for a rotation by $\theta$ around the $z$ axis, in the form
+$$T_\theta \ket{x,y,z} = \ket{R_x(x,y,z,\theta), R_y(x,y,z,\theta), R_z(x,y,z,\theta)}.$$
+Note that we use definitions such that rotating by $+\pi/2$ transforms $\ket{x,0,0}$ into $\ket{0,y,0}$.
+Find the generator of rotation around $z$ and use it to find the operator $L_z$ corresponding to the $z$ component of angular momentum.
+Write down $L_x$ and $L_y$.
+
+Rewrite your answer using $\vec r$ and $\vec p$ operators.
+\hint{Look back at how we derived $p$.}
+\hint{To find $L_x$ and $L_y$ you can just permute $x \to y \to z \to x$.}
+\solution{
+$$R_x(x,y,z,\theta) = \cos \theta~x - \sin \theta~y,\quad R_y(x,y,z,\theta) = \sin \theta~x + \cos \theta~x,\quad R_z(x,y,z,\theta) = z.$$
+To find the generator write
+$$\bra{\vec r} T_\theta \ket{\psi} = \bra{\vec R(\vec r,-\theta)} \ket{\psi} = \psi(\vec R(\vec r, -\theta))$$
+and hence
+$$\bra{\vec r} G \ket{\psi} = \lim_{\theta \to 0} \frac{\psi(R(\vec r, -\theta)) - \psi(\vec r)}{\theta}.$$
+For small $\theta$ we can expand
+$$R_x(x,y,z,-\theta) = x + \theta y + O(\theta^2), \quad R_y(x,y,z,\theta) = y - \theta x + O(\theta^2), \quad R_z(x,y,z,\theta) = z$$
+and thus
+$$\psi(\vec R(\vec r, -\theta)) = \psi(\vec r) + \pfrac{\psi}{x} \theta y - \pfrac{\psi}{y} \theta x + O(\theta^2)$$
+The effect of the generator is then
+$$\bra{x,y,z} G \ket{\psi} = y \pfrac{\psi}{x} - x \pfrac{\psi}{y},$$
+which implies we can write $G = y~\partial/\partial x - x~\partial/\partial y$.
+Using our symmetry principle we then have
+$$L_z = \im \hbar \left(y \pfrac{}{x} - x \pfrac{}{y}\right).$$
+We can now permute $x \to y \to z \to x$ to write down
+$$L_x = \im \hbar \left(z \pfrac{}{y} - y \pfrac{}{z}\right),\quad L_y = \im \hbar \left(x \pfrac{}{z} - z \pfrac{}{x}\right).$$
+Since $\vec p = -\im \hbar \nabla$ we can write
+$$L_x = y p_z - z p_y, \quad L_y = z p_x - x p_z, \quad L_z = x p_y - y p_x.$$
+In vector notation $\vec L = \vec r \times \vec p$.
+}
+\end{question}
+
+$\vec L$ turns out to be a unusual quantity.
+First something relatively harmless that you may have seen in the old Bohr model of the atom.
+
+\begin{question}
+Using an earlier result we can write an arbitrary rotation around $z$ as an operator $e^{-\im L_z \theta/\hbar}$.
+Show that $L_z$ is \emph{quantised}, i.e.\ that its eigenvalues are multiples of some quantity.
+\hint{What happens when $\theta=2\pi$?}
+\solution{
+$\psi(\vec r)$ is an ordinary function and must return to itself after a rotation by $2\pi$.
+Hence
+$$e^{-2\pi \im L_z/\hbar} \ket{\psi} = \ket{\psi}.$$
+If $\psi$ is an eigenvector of eigenvalue $\lambda$ this implies the eigenvalue obeys $e^{-2\pi \im \lambda/\hbar} = 1$, which means $\lambda$ is a multiple of $\hbar$.
+}
+\end{question}
+
+\begin{question}
+Find the commutator $[L_i, L_j]$.
+Express your answer using the \emph{Levi-Civita tensor} $\varepsilon_{ijk}$ defined to be perfectly antisymmetric (i.e.\ change sign when two indices are switched) and to obey $\varepsilon_{123} = 1$.
+\solution{
+Start with
+$$[L_x, L_y] = [y p_z - z p_y, z p_x - x p_z] = y [p_z, z] p_x - x [z, p_z] p_y = \im \hbar (x p_y - y  p_x) = \im \hbar L_z.$$
+Note that switching $x$ and $y$ changes sign, whereas rotating $x \to y \to z \to x$ leaves the sign unchanged.
+Hence
+$$[L_i, L_j] = \im \hbar \varepsilon_{ijk} L_k$$
+(where $k$ is implicitly summed over).
+}
+\end{question}
+
+Note that $[L_x, L_y] \ne 0$ implies that $L_x$ and $L_y$ can't be measured simultaneously!
+
+\begin{question}
+Define $L^2 = {L_x}^2 + {L_y}^2 + {L_z}^2$.
+Find $[L^2, L_i]$.
+\solution{
+You can either do this writing the commutator out in terms out $L_x$, $L_y$, $L_z$ or by writing
+$$[L_j L_j, L_i] = 2 L_j [L_j, L_i] = 2 \im \hbar L_j \varepsilon_{jik} L_k.$$
+Since $\varepsilon_{jik} = -\varepsilon_{kij}$ the result is equal to $= -2\im\hbar \varepsilon_{kij} L_k L_j$.
+Now $k$ and $j$ are just summation indices and so can be swapped, hence the result must be 0.
+}
+\end{question}
+
+We can thus use the pair $(L^2, L_z)$ to label angular momentum eigenstates (we can use any of the axes, $z$ is the conventional choice).
+To find the eigenvalues we can do tricks similar to what we did with the harmonic oscillator.
+We write $\ket{\ell,m}$ for the simultaneous eigenstate of $(L^2, L_z)$.
+$m$ is just the eigenvalue of $L_z/\hbar$ (which we showed is an integer earlier).
+$\ell$ is related a function of the eigenvalue of $L^2$ (which we will determine later).
+
+\begin{question}
+Find a linear combination $L_+$ of the $L_x, L_y, L_z$ operators such that
+$$L_+ \ket{\ell,m} \propto \ket{\ell, m+1}, \quad L_- \ket{\ell,m} \propto \ket{\ell, m-1},$$
+where $L_- = L_+^\dagger$ (these relations still allow an overall factor. Fix it by setting the $L_x$ coefficient to 1).
+
+Calculate $[L_+, L_-]$.
+\hint{Calculate $[L_z, L_+] \ket{\ell,m}$.}
+\solution{
+Note that any operator based on $L_x$, $L_y$, $L_z$ must leave $\ell$ alone (they all commute with $L^2$).
+$L_z$ would contribute a $m \hbar \ket{\ell, m}$ component, hence it's not part of $L_+$.
+We want
+$$[L_z, L_+] \ket{\ell,m} = L_z L_+ \ket{\ell,m} - L_+ L_z \ket{\ell,m}= \hbar L_+ \ket{\ell,m}$$
+and similarly $[L_z, L_-] = -\hbar L_-$ (these relations are direct equivalents of the harmonic oscillator $[H, a^\dagger] = \hbar \omega a^\dagger$ and $[H, a] = -\hbar \omega a$).
+Writing $L_+ = L_x + \beta L_y$ we have
+$$[L_z, L_+] = [L_z, L_x] + \beta [L_z, L_y] = \im \hbar L_y - \im \hbar \beta L_x \stackrel{!}{=} \hbar L_x + \hbar \beta L_y,$$
+$$[L_z, L_-] = [L_z, L_x] + \beta^* [L_z, L_y] = \im \hbar L_y - \im \hbar \beta^* L_x \stackrel{!}{=} -\hbar L_x - \hbar \beta^* L_y.$$
+Comparing coefficients of $L_x$ and $L_y$ we have $\beta = \im$ and hence
+$$L_+ = L_x + \im L_y.$$
+
+Using this definition
+$$[L_+, L_-] = [L_x + \im L_y, L_x - \im L_y] = \im [L_y, L_x] - \im [L_x, L_y] = -2\hbar L_z.$$
+}
+\end{question}
+
+\begin{question}
+Show that there is a solution to $L_+ \ket{\ell, m} = 0$ for every value of $\ell$.
+Now \emph{define} $\ell$ by demanding that $L_+ \ket{\ell, \ell} = 0$ (i.e.\ $\ell$ is the maximum value of $m$).
+Express $L^2$ in terms of $L_+$, $L_-$ and $L_z$ to find the eigenvalue of $L^2$.
+\hint{What does $\langle L^2 \rangle = \langle L_x^2 \rangle + \langle L_y^2 \rangle + \langle L_z^2 \rangle$ imply about the eigenvalues of $L_z^2$ for a fixed value of $L^2$?}
+\hint{For the last part, use $\ket{\ell,\ell}$ and the commutator $[L_+, L_-]$.}
+\result{$\hbar^2 \ell(\ell+1).$}
+\solution{
+We have $\langle L_i^2 \rangle \ge 0$ and so
+$$\langle L_z^2 \rangle = \langle L^2 \rangle - \langle L_x^2 \rangle - \langle L_y^2 \rangle \le \langle L^2 \rangle,$$
+hence $m^2 \hbar^2$ must be smaller than the eigenvalue of $L^2$.
+Thus it can't be infinite and $L_+ \ket{\ell,m}$ must terminate for some $m$.
+We can write $L_x = (L_+ + L_-)/2$ and $L_y = -\im (L_+ - L_-)/2$ and so 
+$$L^2 = (L_+ + L_-)^2 - (L_+ - L_-)^2 + L_z^2 = \frac{1}{2} (L_+ L_- + L_- L_+) + L_z^2.$$
+Since $[L_+, L_-] = -2\hbar L_z$ we can rewrite this as
+$$L^2 = L_- L_+ + \hbar L_z + L_z^2.$$
+Since $L_+ \ket{\ell,\ell} = 0$ this implies
+$$L^2 \ket{\ell,\ell} = (\ell \hbar^2 + \ell^2 \hbar^2) \ket{\ell,\ell} = \hbar^2 \ell(\ell+1) \ket{\ell,\ell}.$$
+}
+\end{question}
+
+\begin{question}
+Normalise all the $\ket{\ell,m}$ states and find the proportionality factors in
+$$L_+ \ket{\ell,m} \propto \ket{\ell,m+1},\quad L_- \ket{\ell,m} \propto \ket{\ell,m-1}.$$
+Find the minimum value of $m$.
+\hint{Write $\bra{\ell,m} L_- L_+ \ket{\ell,m}$ and use $L^2 \ket{\ell,m} = \hbar^2 \ell (\ell+1) \ket{\ell,m}$.}
+\result{
+$L_+ \ket{\ell,m} = \hbar \sqrt{\ell(\ell+1) - m (m+1)} \ket{\ell,m+1}$,\\
+$L_- \ket{\ell,m} = \hbar \sqrt{\ell(\ell+1) - m (m-1)} \ket{\ell,m-1}.$
+}
+\solution{
+$$\bra{\ell,m} L_- L_+ \ket{\ell,m} = \bra{\ell,m} (L^2 - {L_z}^2 - \hbar L_z) \ket{\ell,m} = \hbar^2 \ell (\ell+1) - \hbar^2 m (m+1)$$
+and hence
+$$L_+ \ket{\ell,m} = \hbar \sqrt{\ell(\ell+1) - m (m+1)} \ket{\ell,m+1}$$
+(note that this gives zero for $m=\ell$).
+To find $L_- \ket{\ell,m}$ we can now use
+$$\bra{\ell,m} L_+ L_- \ket{\ell,m} = \bra{\ell,m} (L_- L_+ + 2 \hbar L_z) \ket{\ell,m} = \hbar^2 (\ell(\ell+1) - m(m-1)),$$
+thus
+$$L_- \ket{\ell,m} = \hbar \sqrt{\ell(\ell+1) - m (m-1)} \ket{\ell,m-1}.$$
+This gives zero for $m=-\ell$, which must be the minimum value (this result is also expected since we can just turn the system upside down to invert the value of $L_z$).
+
+}
+\end{question}
+
+Note that with the exception of our proof that $m$ must be an integer we have used \emph{only} the commutation relations.
+The results are thus valid for \emph{any} three operators satisfying $[J_i, J_j] = \im \hbar \varepsilon_{ijk} J_k$.
+
+\begin{question}
+Let $J_i$ be such an operator, with no further restrictions.
+Write eigenstates as $\ket{j,m}$ with $J^2 \ket{j,m} = \hbar^2 j(j+1) \ket{j,m}$ and $J_z \ket{j,m} = \hbar m \ket{j,m}$.
+Use our previously derived results to show that $m$ (and thus $j$) must be either integer or half-integer (e.g.\ $1/2$, $3/2$, etc.).
+\hint{How does $J_-$ affect $m$? Can you use $J_-$ to get from maximum $m$ to minimum $m$?}
+\solution{
+$J_- J_- J_- \dots \ket{j,j}$ has to give 0 for some number of $J_-$, hence
+$$J_- \ket{j,j-n} = 0.$$
+But we also know that
+$$J_- \ket{j,j-n} = \hbar \sqrt{j(j+1) - (j-n)(j-n-1)} \ket{j,j-n-1}.$$
+We know that this gives 0 for $j-n=-j$, hence $n = 2j$.
+But $n$ must be an integer and hence $j$ is either integer of half-integer.
+}
+\end{question}
+
+Going back to $L$ we can actually find the eigenstates as wavefunctions (usually called spherical harmonics).
+Finding the actual functional form is rather tedious.
+The next few questions go through the derivation but feel free to skip them.
+The important thing to remember is that the spherical harmonics $Y_\ell^m(\theta, \phi)$ are defined as normalised eigenstates of $J^2$ and $J_z$.
+When needed, you can usually look up the exact functional form for some specific value of $\ell$ and $m$.
+
+\begin{question}
+(optional)
+Use spherical polar coordinates $(r,\theta,\phi)$ defined by $(x,y,z) = (r\sin \theta \cos \phi, r \sin \theta \sin \phi, r \cos \phi)$.
+Find expressions for $L_x$, $L_y$, $L_z$ and $L^2$ using the differential operators $\partial/\partial r$, $\partial/\partial \theta$ and $\partial/\partial \phi$.
+\hint{You can find $L_i$ from their definition as the generators of rotations. To find $L^2$ you may find the expression
+$$\nabla^2 = \frac{1}{r^2} \pfrac{}{r} r^2 \pfrac{}{r} + \frac{1}{r^2 \sin \theta} \pfrac{}{\theta} \sin \theta \pfrac{}{\theta} + \frac{1}{r^2 \sin^2 \theta} \pfrac{}{\phi}.$$
+useful.}
+\result{
+$L_z = -\im \hbar \pfrac{}{\theta},$
+$$L^2 = -\hbar^2 \left(\frac{1}{\sin \theta} \pfrac{}{\theta} \sin \theta \pfrac{}{\theta} + \frac{1}{\sin^2 \theta} \pfrac{}{\phi}\right).$$
+}
+\solution{
+Finding $L_x$, $L_y$ and $L_z$ is easiest from their definition as the generator of rotations.
+Rotating $\varepsilon$ around $z$ in polar coordinates just means $\phi \to \phi + \varepsilon$.
+Hence
+$$L_z = -\im \hbar \pfrac{}{\phi}.$$
+An infinitesimal rotation $\varepsilon$ around $x$ corresponds to $(x,y,z) \to (x,y-\varepsilon z, z+\varepsilon y)$.
+On spherical polars the effect is to go to
+$$(r \sin \theta \cos \phi, r \sin \theta \sin \phi - \varepsilon r \cos \theta, r \cos \theta + \varepsilon r \sin \theta \sin \phi)$$
+We can reproduce the change in $z$ by going $\theta \to \theta - \varepsilon \sin \phi$.
+This changes $x$ by $-\varepsilon r \cos \theta \sin \phi \cos \phi$, which we can cancel by doing $\phi \to \phi - \varepsilon \cot \theta \cos \phi$.
+Hence
+$$L_x = \im \hbar \left(\sin \phi \pfrac{}{\theta} + \cot \theta \cos \phi \pfrac{}{\phi}\right).$$
+We can obtain the expression for $L_y$ by substituting $\phi \to \phi - \pi/2$, which gives
+$$L_y = \im \hbar \left(-\cos \phi \pfrac{}{\theta} + \cot \theta \sin \phi \pfrac{}{\phi}\right).$$
+To find $L^2 = -\hbar^2 (\vec r \times \nabla)^2$ one way is to realise that the equation for an infinitesimal length element is $\D{s}^2 = \D{r}^2 + (r \D{\theta})^2 + (r \sin \theta \D{\phi})^2$
+and we can hence regard $\partial/\partial r$, $(1/r)\,\partial/\partial \theta$ and $(1/(r\sin\theta))\,\partial/\partial \phi$ as components of a vector $\nabla$.
+The length of the vector $\vec r \times \nabla$ then corresponds to just the length of the angular portion of $r \nabla$, i.e.\ once squared we get
+$$(\vec r \times \nabla)^2 = -(\vec r \times \nabla)^\dagger (\vec r \times \nabla) = -\left(\left(\pfrac{}{\theta}\right)^\dagger \pfrac{}{\theta} + \left(\pfrac{}{\phi}\right)^\dagger \frac{1}{\sin^2 \theta} \pfrac{}{\phi}\right),$$
+where we have to be careful since $^\dagger \ne -$ for the spherical derivatives, as can be seen from
+$$\int \pfrac{\psi^*}{\theta} \psi~r^2 \sin \theta \D{r} \D{\theta} \D{\phi} = -\int \psi^* \pfrac{(\psi \sin \theta)}{r} r^2 \D{r} \D{\theta} \D{\phi}$$
+and so
+$$\left(\pfrac{}{\theta}\right)^\dagger = -\frac{1}{\sin \theta} \pfrac{}{\theta} \sin \theta, \quad \left(\pfrac{}{\phi}\right)^\dagger = -\pfrac{}{\phi}.$$
+Thus
+$$L^2 = -\hbar^2 \left(\frac{1}{\sin \theta} \pfrac{}{\theta} \sin \theta \pfrac{}{\theta} + \frac{1}{\sin^2 \theta} \pfrac{}{\phi}\right).$$
+}
+\end{question}
+
+\begin{question}
+(optional) Write $L^2 \ket{\psi} = \hbar^2 \ell(\ell+1) \ket{\psi}$ and $L_z \ket{\psi} = \hbar m \ket{\psi}$ as differential equations in $\psi(r,\theta,\phi)$.
+Make the substitution $\psi(r, \theta, \psi) = f(r) g_m(\phi) P^m_\ell(\cos \theta)$ (the $m$ in $P^m_\ell$ is just a label, not an exponent).
+Solve for $g_m(\phi)$ and write down a differential equation for $P^m_\ell(x)$ (the ``associated Legendre polynomial''; the name is common even though it's not a polynomial for odd $m$).
+\result{
+$$\Dfrac{}{x} \left((1-x^2) \Dfrac{P^m_\ell}{x}\right) + \left(\ell(\ell+1) - \frac{m^2}{1-x^2}\right) P^m_\ell(x) = 0.$$
+}
+\solution{
+The differential equations come out as
+$$\pfrac{\psi}{\phi} = \im \psi, \quad \frac{1}{\sin \theta} \pfrac{}{\theta} \sin \theta \pfrac{}{\theta} \psi + \frac{1}{\sin^2 \theta} \pfrac{^2}{\phi^2} \psi + \ell(\ell+1) \psi = 0.$$
+Making the substitution they separate into $\D{g_m}/\D{\phi} = \im m \phi$, which just means $g_m(\phi) = e^{\im m \phi}$ and
+$$\frac{1}{\sin \theta} \Dfrac{}{\theta} \sin \theta \Dfrac{}{\theta} P^m_\ell(\cos \theta) + \left(\ell(\ell+1) - \frac{m^2}{\sin^2 \theta}\right) P^m_\ell(\cos \theta) = 0.$$
+In terms of $x = \cos \theta$ we have
+$$\Dfrac{}{\theta} = \Dfrac{x}{\theta} \Dfrac{}{x} = -\sin \theta \Dfrac{}{x} = -\sqrt{1-x^2} \Dfrac{}{x}$$
+and thus
+$$\Dfrac{}{x} \left((1-x^2) \Dfrac{P^m_\ell}{x}\right) + \left(\ell(\ell+1) - \frac{m^2}{1-x^2}\right) P^m_\ell(x) = 0.$$
+}
+\end{question}
+
+\begin{question}
+(optional) We can now use the ladder operators $L_+$ and $L_-$ to go between diffferent $m$ states.
+Write down $L_+$ and apply it to $\psi$ to express $P^{m+1}_\ell$ in terms of $P^m_\ell$.
+Your answer should have the form $f(x,m) \Dfrac{}{x} (g(x,m) P^{m+1}_\ell(x))$.
+Repeat for $L_-$ (expressing $P^{m-1}_\ell$ in terms of $P^m_\ell$).
+Ignore overall normalisation factors.
+\result{ (Constant factors dropped)
+$$P_\ell^{m+1}(x) = (\sqrt{1 - x^2})^{m+1} \Dfrac{}{x} (\sqrt{1 - x^2})^{-m} P_\ell^{m}(x).$$
+$$P_\ell^{m-1}(x) = (\sqrt{1 - x^2})^{-m+1} \Dfrac{}{x} (\sqrt{1 - x^2})^{m} P_\ell^{m}(x).$$
+}
+\solution{
+$$L_+ = \im \hbar \left(-\im e^{\im \phi} \pfrac{}{\theta} + e^{\im \phi} \cot \theta \pfrac{}{\phi}\right)$$
+The effect on $\psi = f(r) e^{\im m \phi} P_\ell^m$ is
+$$L_+ \psi = \hbar f(r) e^{\im (m+1)\phi} \left(\Dfrac{P_\ell^m}{\theta} - m \cot \theta P_\ell^m\right)$$
+Hence we can write (dropping some overall factors)
+$$P_\ell^{m+1}(x) = \sqrt{1 - x^2} \Dfrac{P_\ell^m(x)}{x} + m \frac{x}{\sqrt{1 - x^2}} P_\ell^{m}(x).$$
+We can rewrite this as
+$$P_\ell^{m+1}(x) = (\sqrt{1 - x^2})^{m+1} \Dfrac{}{x} (\sqrt{1 - x^2})^{-m} P_\ell^{m}(x).$$
+In exactly the same way you can derive
+$$P_\ell^{m-1}(x) = (\sqrt{1 - x^2})^{-m+1} \Dfrac{}{x} (\sqrt{1 - x^2})^{m} P_\ell^{m}(x).$$
+}
+\end{question}
+
+\begin{question}
+(optional) Using the results from the previous question, determine $P^{-\ell}_\ell$ (up to an overall factor).
+From this, deduce a formula (containing differential operators) for $P_\ell^m$ for arbitrary $m$.
+\hint{What happens when you do $L_- \ket{\ell, -\ell}$?}
+\result{
+$$P_\ell^m(x) = (\sqrt{1 - x^2})^{m} \Dfrac{^{\ell+m}}{x^{\ell+m}} (1-x^2)^{\ell}$$
+}
+\solution{
+We know that $L_- P^\ell_\ell = 0$
+Hence
+$$(\sqrt{1 - x^2})^{\ell+1} \Dfrac{}{x} (\sqrt{1 - x^2})^{-\ell} P_\ell^{\ell}(x) = 0,$$
+which implies
+$$P_\ell^\ell(x) = (\sqrt{1-x^2})^{\ell}$$
+(setting the overall constant to 1).
+We can then find all the other $P_\ell^m$ by repeated application of
+$$P_\ell^{m+1}(x) = (\sqrt{1 - x^2})^{m+1} \Dfrac{}{x} (\sqrt{1 - x^2})^{-m} P_\ell^{m}(x).$$
+Applying the formula to $-\ell$, $-\ell+1$, \dots, $m-1$, the square root factors between differential operators disappear and we arrive at
+$$P_\ell^m(x) = (\sqrt{1 - x^2})^{m} \Dfrac{^{\ell+m}}{x^{\ell+m}} (1-x^2)^{\ell}$$
+(this formula is known as Rodrigues' formula; it's the same name as the one for the harmonic oscillator, though this one came first).
+}
+\end{question}
+
+\begin{question}
+(super optional, tricky) All that's left to do now is to specify an overall normalisation.
+We add a factor $(-1)^m c_\ell$ to the Rodrigues' formula from the previous question.
+Find $c_\ell$ so that $P^0_\ell(1) = 1$.
+Define $Y^m_\ell(\theta,\phi) = d_{\ell,m} e^{\im m \phi} P^m_\ell(\cos \theta)$ and find $d_{\ell,m} > 0$ so that
+$$\int |Y^m_\ell|^2 \sin^2 \theta \D{\theta} = 1.$$
+\hint{To find $c_\ell$ think about what happens when you do the differentiation in Rodrigues' formula and then set $x=1$.}
+\hint{To normalise $Y_\ell^m$ normalise it for $m=-\ell$ and then use the earlier formul\ae\ for $\ket{\ell,m+1}$ using ladder operators.}
+\hint{To get the integral for $m=-\ell$ integrate by parts repeatedly until you get back to $\ell=0$. Some useful formul\ae: $1 \cdot 3 \cdots (2\ell+1) = (2\ell+2)!/(2^{\ell+1} (\ell+1)!)$ and $2 \cdot 4 \cdot 6 \cdots 2\ell = 2^\ell \ell!$.}
+\result{
+$$P_\ell^m(x) = \frac{(-1)^{\ell+m}}{2^\ell \ell!} (\sqrt{1 - x^2})^{m} \Dfrac{^{\ell+m}}{x^{\ell+m}} (1-x^2)^{\ell}.$$
+$$Y_\ell^m(\theta, \phi) = \sqrt{\frac{(2\ell+1)(\ell-m)!}{4\pi(\ell+m)!}} e^{\im m \phi} P_\ell^m(\cos \theta).$$
+}
+\solution{
+If you differentiate $(1-x^2)^\ell$, you get $\ell (1-x^2)^{\ell-1} (-2x)$.
+If you now differentiate a second time, you get $\ell (\ell-1) (1-x)^{\ell-2} (-2x)^2 + \mbox{stuff}\times (1-x^2)^{\ell-1}$.
+Continuing this way $\ell$ times we get
+$$\ell! (-2x)^\ell + \mbox{terms with $(1-x^2)^i$ in them}.$$
+Setting $x=1$ makes all the secondary terms disappear.
+Hence if we set $c_\ell = (-1)^\ell/(2^\ell \ell!)$ we get $P^0_\ell(1) = 1$ as desired.
+To normalise $Y_\ell^m$ we start with $m=-\ell$.
+In that case we know that
+$$P_\ell^{-\ell} = \frac{1}{2^\ell \ell!} (1-x^2)^{\ell/2}$$
+and hence
+$$\int_0^\pi (P_\ell^{-\ell}(\cos \theta))^2 \sin \theta \D{\theta} = \int_{-1}^1 (P_\ell^{-\ell}(x))^2 \D{x} = \frac{1}{(2^\ell \ell!)^2} \int_{-1}^1 (1-x^2)^\ell \D{x}$$
+To find the integral integrate by parts to get
+$$\int_{-1}^1 (1-x^2)^\ell \D{x} = \int_{-1}^1 2\ell x^2 (1-x^2)^\ell \D{x} = 2 \ell \int_{-1}^1 (1-x^2)^{\ell-1} \D{x} - 2 \ell \int_{-1}^1 (1-x^2)^\ell \D{x}$$
+and hence
+$$\int_{-1}^1 (1-x^2)^\ell \D{x} = \frac{2 \ell}{2\ell+1} \int_{-1}^1 (1-x^2)^{\ell-1} \D{x} = 2 \frac{(2\ell)!!}{(2\ell+1)!!} = 2 \frac{2^\ell \ell!}{(2\ell+2)!/(2^{\ell+1} (\ell+1)!)},$$
+since the integral is 2 for $\ell=0$.
+Now, since we dropped the factors when deriving $P_\ell^m$, we know that the integral should get bigger by $\ell(\ell+1)-m(m+1) = (\ell - m)(\ell+m+1)$ every time we raise with $m$.
+The product of that from $m=-\ell$ to $m-1$ is $((2\ell)!/(\ell-m)!) (\ell+m)!$.
+Hence we get
+$$\int_{-1}^1 (P_\ell^{m}(x))^2 \D{x} = 2 \frac{1}{2^\ell \ell!} \frac{2^{\ell+1} (\ell+1)!}{(2\ell+2)!} \frac{(2\ell)! (\ell+m)!}{(\ell-m)!} = \frac{2}{2\ell+1} \frac{(\ell+m)!}{(\ell-m)!}.$$
+The $\phi$ integral just gives $2\pi$ and so the correctly normalised spherical harmonics are
+$$Y_\ell^m(\theta, \phi) = \sqrt{\frac{(2\ell+1)(\ell-m)!}{4\pi(\ell+m)!}} e^{\im m \phi} P_\ell^m(\cos \theta).$$
+}
+\end{question}
+
+\begin{question}
+Show that $Y_\ell^m$ has parity $(-1)^\ell$, i.e.\ that
+$$P\ket{\ell,m} = (-1)^\ell \ket{\ell,m},$$
+where $P$ maps $(x,y,z)$ to $(-x,-y,-z)$.
+\hint{All you need for this question is the form $Y_\ell^m = e^{\im m \phi} P_\ell^m(\cos \theta)$.}
+\solution{
+Write 
+}
+\end{question}
+
+Now back to physics.
+Consider a particle moving in a spherically symmetrical potential $V(\vec r) = V(r)$.
+\begin{question}
+Show that the stationary states can be written as $\ket{n,\ell,m}$ with the corresponding wavefunction $u_{n,\ell}(r) Y_\ell^m(\theta, \phi)$ and find a differential equation for $u(r)$.
+Can you interpret the extra $\ell$-dependent term?
+\hint{You may find the expression
+$$\nabla^2 = \frac{1}{r^2} \pfrac{}{r} r^2 \pfrac{}{r} - \frac{L^2}{\hbar^2 r^2}$$
+useful.
+}
+\hint{To interpret the extra term, write it in terms of $L$. Treating it as a classical potential, find the force and write it in terms of $m$, $v$ and $r$.}
+\solution{
+$H$ commutes with rotations and hence with $L_z$ and $L^2$.
+This means they are conserved quantities and we can label the eigenstates with them, i.e.\ we can demand
+$$L_z \ket{n,\ell,m} = m \hbar \ket{n,\ell,m},\quad L^2 \ket{n,\ell,m} = \ell(\ell+1) \hbar^2 \ket{n,\ell,m}.$$
+This means for fixed $r$ the wavefunction $\psi$ is proportional to spherical harmonic, i.e. $\psi = u_{n,\ell,m}(r) Y_\ell^m(\theta,\phi)$.
+The Schr\"odinger equation is
+$$-\frac{\hbar^2}{2\mu} \nabla^2 \psi + (V(r) - E) \psi = 0$$
+(writing $\mu$ for the mass, since $m$ is taken).
+Using the expansion
+$$\nabla^2 = \frac{1}{r^2} \pfrac{}{r} r^2 \pfrac{}{r} - \frac{L^2}{\hbar^2 r^2}$$
+we can write
+$$-\frac{\hbar^2}{2\mu} \frac{1}{r^2} \pfrac{}{r} r^2 \pfrac{}{r} u(r) + \frac{\hbar^2 \ell(\ell+1)}{2\mu r^2} u(r) + (V(r) - E) u(r) = 0.$$
+Note that there is no $m$ in this equation and hence neither $E$ nor $u(r)$ can depend on it.
+To interpret the $L^2$ term calculate the classical force $\D{V}/\D{r}$ to find $L^2/(\mu r^3) = \mu v^2/r$: the centrifugal force!
+}
+\end{question}
+
+\begin{question}
+Show that $Y_\ell^m$ has parity $(-1)^\ell$, i.e.\ that
+$$P\ket{\ell,m} = (-1)^\ell \ket{\ell,m},$$
+where $P$ maps $(x,y,z)$ to $(-x,-y,-z)$.
+\hint{All you need for this question is the form $Y_\ell^m \propto e^{\im m \phi} P_\ell^m(\cos \theta)$ and
+$$P_\ell^m(x) = (\sqrt{1 - x^2})^{m} \Dfrac{^{\ell+m}}{x^{\ell+m}} (1-x^2)^{\ell}.$$
+}
+\hint{It might also be useful to remember that derivatives flip the parity.}
+\solution{
+$P$ corresponds to $\phi \to \phi + \pi$ and $\theta \to \pi - \theta$,which corresponds to $x \to -x$.
+$(1-x^2)^\ell$ is an even function and so taking $\ell+m$ derivatives, $P_\ell^m(x)$ has parity $(-1)^{\ell+m}$.
+$e^{\im m \phi}$ has parity $(-1)^m$ and so $Y_\ell^m$ has parity $(-1)^\ell$.
+}
+\end{question}
+
+\begin{question}
+(optional)
+Show that the impure state
+$$\varrho = \sum_{m=-\ell}^\ell \ket{\ell,m} \bra{\ell,m},$$
+is invariant under rotations.
+Use the result to find an expression for
+$$\sum_{\ell=-m}^m Y_\ell^{m*}(\vec r\,') Y_\ell^m(\vec r),$$
+where $\vec r$ and $\vec r\,'$ are unit vectors.
+\hint{Remember that a transformation $U$ on a density matrix changes $\varrho$ to $U \varrho U^\dagger$. Use this result with infinitesimal rotations.}
+\hint{Also remember $L_+$ and $L_-$.}
+\hint{To do the second part, note that the rotational invariance means that you can rotate $\vec r\,'$ to an arbitrary direction (hopefully one that makes your life easier). You might find it useful to know that $P_\ell^m(1) = \delta_{m0}$. If you write your answer using vectors, you can argue that it will hold universally.}
+\result{
+$$\sum_{\ell=-m}^m Y_\ell^{m*}(\vec r\,') Y_\ell^m(\vec r) = \frac{2\ell+1}{4\pi} P_\ell^0(\vec r \cdot \vec r\,').$$
+}
+\solution{
+Under an infinitesimal rotation $\varrho$ changes to
+$$(1+\im \varepsilon L_i/\hbar) \varrho (1 - \im \varepsilon L_i/\hbar) = \varrho + \im \varepsilon [L_i, \varrho]/\hbar + O(\varepsilon^2).$$
+We thus need to show that $\varrho$ commutes with $L_i$.
+It obviously commutes with $L_z$, but we also have
+$$L_+ \varrho = \sum_{m=-\ell}^\ell L_+ \ket{\ell,m} \bra{\ell,m} = \hbar \sum_{m=-\ell}^{\ell-1} \sqrt{\ell(\ell+1)-m(m+1)} \ket{\ell,m+1} \bra{\ell,m}.$$
+Here we can shift $m \to m-1$ to arrive at
+$$= \hbar \sum_{m=1-\ell}^\ell \sqrt{\ell(\ell+1)-(m-1)} \ket{\ell,m} \bra{\ell,m-1} = \varrho L_+.$$
+Hence $L_+$ commutes with $\varrho$.
+Since $(L_- \varrho)^\dagger = \varrho L_+$, so does $L_-$, as well as the linear combinations $L_x$ and $L_y$.
+
+We can now take the expression
+$$\sum_{\ell=-m}^m Y_\ell^{m*}(\vec r\,') Y_\ell^m(\vec r)$$
+(which is just $\varrho$ expressed in terms of wavefunctions) and rotate it so that $\vec r\,'$ points in the $+z$ direction.
+For $m \ne 0$, $Y_\ell^m$ rotates in the complex plane as $\phi$ is increased.
+Hence at north pole ($\theta=0$), it must be 0, since $\phi$ is ill-defined there.
+For $m = 0$, by definition, $P_\ell^0 = 1$.
+We therefore have
+$$\sum_{\ell=-m}^m Y_\ell^{m*}(\vec r\,') Y_\ell^m(\vec r) \propto Y_\ell^0(\cos \theta, 0) \propto P_\ell^0(\cos \theta) = P_\ell^0(\vec r \cdot \vec r\,').$$
+Now the magic happens: since the left hand side is invariant under rotations and the right hand side is invariant under rotations and they are both equal in one coordinate system, \emph{the two must be equal in all coordinate systems}.
+Note that this is not true for the two expressions in the middle, which are not invariant under rotations.
+To find the overall normalisation substitute $\vec r=\vec r'$ and integrate $\vec r$ over the unit sphere. The right-hand side evaluates to $4\pi$ (since $P_\ell^0(1) = 1$) and the left-hand side evaluates to $2\ell+1$ (since we assume each $Y_\ell^m$ is normalised).
+This leads to
+$$\sum_{\ell=-m}^m Y_\ell^{m*}(\vec r\,') Y_\ell^m(\vec r) = \frac{2\ell+1}{4\pi} P_\ell^0(\vec r \cdot \vec r\,').$$
+}
+\end{question}
