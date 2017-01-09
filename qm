@@ -1312,6 +1312,25 @@ $$\Dfrac{E}{p} = \frac{p c^2}{\sqrt{p^2 c^2 + m^2 c^4}} = \frac{p}{E} c^2 = v.$$
 }
 \end{question}
 
+\begin{question}
+(optional)
+A free particle has an initial momentum-space wavefunction $\phi_0(p)$.
+Show that for very large times the position-space wavefunction $\psi(x)$ is proportional to $\phi_0(\alpha x)$ for some $\alpha = \alpha(t)$.
+\hint{Integrals of the form $\int f(x) e^{\im \theta(x)} \D{x}$ with highly variable $\theta(x)$ can be approximated by the method of stationary phase: only the points where $\D{\theta}/\D{x} = 0$ contribute to the integral.}
+\solution{
+We again have
+$$\phi(p,t) = \phi_0(p) e^{-\im p^2 t/(2m \hbar)}.$$
+The position-space wavefunction is given by
+$$\psi(x,t) = \int \phi_0(p) e^{-\im p^2 t/(2m \hbar) + \im p x/\hbar} \frac{\D{\vec p}}{2\pi\hbar}.$$
+For large $t$ the $p^2 t$ is highly oscillatory and so we can now approximate the integral by the method of stationary phase: 
+We assume that the fast oscillation cancel the integral everywhere, except when the phase is stationary (because, e.g., it goes through an extremum).
+Here this happens when $p t/(m) = x$ and so we conclude
+$$\psi(x,t) \sim \phi_0(x m/t).$$
+Note that this result makes a lot of intuitive sense -- at large $t$ a particle that originally had position $x_0$ and velocity $v_0$ will be found at position $v_0 t \gg x_0$.
+The equation for the densities -- in quantum mechanical notation $|\psi(x,t)|^2 \sim |\phi_0(xm/t)|^2$ -- thus holds for a cloud of classical non-interacting particles as well.
+}
+\end{question}
+
 Before we move on to some specific examples of simple quantum 1D systems, there are some general theorems we can prove about time evolution.
 
 \begin{question}
@@ -1738,7 +1757,7 @@ On a most basic level, the insight is to reduce the complex ``back-and-forth'' m
 
 \begin{question}
 Note that the classical solutions in \emph{phase space} $(x,p) = (x, m \dot x)$ are just ellipses.
-Define a dimensionless complex quantity $a = \alpha x + \beta p$ (with $\alpha > 0$) so that $a$ rotates clockwise in the complex plane.
+Define a dimensionless complex quantity $a = \alpha x + \beta p$ (with $\alpha > 0$) so that $a$ rotates clockwise in a circle in the complex plane.
 Show that the magnitude $|a|^2$ is proportional to the total energy and define $a$ to get the simplest possible proportionality constant.
 
 (Even though this problem is entirely classical, you need to use $\hbar$ to make $a$ dimensionless).
@@ -2184,12 +2203,13 @@ $$\int_V \D{^3 \vec x}~e^{\im \vec k \cdot \vec x} = V \delta_{\vec k, 0}.$$
 \begin{question}
 $\tilde E_i$ and $\tilde B_i$ look very promising now but they still can't be used to construct a quantum theory in analogy with the harmonic oscillator.
 The harmonic oscillator had $[x,p]=\im \hbar$.
-You previously showed that this implies
+We would like to similarly impose $[\tilde E_i, \tilde B_i] = \im \hbar$, but that would lead to an inconsistency:
+You previously showed that $[x,p]=\im \hbar$ implies
 $$\pfrac{\langle x \rangle}{t} = \left\langle \pfrac{H}{p}\right\rangle, \qquad
 \pfrac{\langle p \rangle}{t} = -\left\langle \pfrac{H}{q}\right\rangle.$$
-Since this holds for expectation values it implies a relation of the classical variables
+Since this holds for expectation values it suggests a relation of the classical variables
 $$\dot x = \pfrac{H}{p}, \qquad \dot p = -\pfrac{H}{q}$$
-(these equations are called \emph{Hamilton's equations}).
+(these equations also appear in classical Hamiltonian mechanics and are called \emph{Hamilton's equations}).
 
 Show that with the Hamiltonian
 $$H = \sum_{\vec k, i} \frac{1}{2} \varepsilon_0 (\tilde E_i^* \tilde E_i + \tilde B_i^* \tilde B_i)$$
@@ -2284,9 +2304,9 @@ By construction we have
 $$\pfrac{\langle \tilde E_i\rangle}{t} = c^2 k \langle \tilde B_i \rangle,\quad \pfrac{\langle \tilde B_i\rangle}{t} = -k \langle \tilde E_i \rangle.$$
 We can actually conclude from this directly that Maxwell's equations are satisfied -- by construction.
 We can also explicitly calculate
-$$\nabla \cdot \langle \vec E \rangle = \sum_{\vec k, i} \sqrt{\frac{k}{V \epsilon_0}} \langle \tilde E_i(\vec k)\rangle \im \vec k \cdot \vec n_i(\vec k) e^{\im \vec k \cdot \vec x} = 0,$$
-$$\nabla \cdot \langle \vec B \rangle = \sum_{\vec k, i} \im \sqrt{\frac{k}{V \epsilon_0}} \langle\tilde B_i(\vec k)\rangle \im \vec k \cdot \vec n_i(\vec k) e^{\im \vec k \cdot \vec x} = 0,$$
-$$\nabla \times \langle \vec E \rangle = \sum_{\vec k, i} \sqrt{\frac{k}{V \epsilon_0}} \langle\tilde E_i(\vec k)\rangle \im \vec k \times \vec n_i(\vec k) e^{\im \vec k \cdot \vec x} = -\pfrac{}{t} \langle \vec B \rangle,$$
+$$\nabla \cdot \langle \vec E \rangle = \sum_{\vec k, i} \sqrt{\frac{k}{V \varepsilon_0}} \langle \tilde E_i(\vec k)\rangle \im \vec k \cdot \vec n_i(\vec k) e^{\im \vec k \cdot \vec x} = 0,$$
+$$\nabla \cdot \langle \vec B \rangle = \sum_{\vec k, i} \im \sqrt{\frac{k}{V \varepsilon_0}} \langle\tilde B_i(\vec k)\rangle \im \vec k \cdot \vec n_i(\vec k) e^{\im \vec k \cdot \vec x} = 0,$$
+$$\nabla \times \langle \vec E \rangle = \sum_{\vec k, i} \sqrt{\frac{k}{V \varepsilon_0}} \langle\tilde E_i(\vec k)\rangle \im \vec k \times \vec n_i(\vec k) e^{\im \vec k \cdot \vec x} = -\pfrac{}{t} \langle \vec B \rangle,$$
 $$\nabla \times \langle \vec B\rangle = \sum_{\vec k, i} \sqrt{\frac{k}{V \varepsilon_0}} \langle \tilde B_i(\vec k) \rangle \vec n_i(\vec k) e^{\im \vec k \cdot \vec x} = c^2 \pfrac{}{t} \langle \vec E \rangle.$$
 }
 \end{question}
@@ -2341,7 +2361,7 @@ $$\langle a_i^\dagger a_i \rangle = \bra{\psi} \alpha^* \alpha \ket{\psi} = |\al
 }
 \end{question}
 
-We see that it is the eigenstates of $a$, not $H$, that corresponds most closely to typical the classical states.
+We see that it is the eigenstates of $a$, not $H$, that corresponds most closely to typical classical states.
 These states are called \emph{coherent states}.
 
 \begin{question}
@@ -2560,9 +2580,23 @@ $$[L_i, L_j] = \im \hbar \varepsilon_{ijk} L_k$$
 \end{question}
 
 Note that $[L_x, L_y] \ne 0$ implies that $L_x$ and $L_y$ can't be measured simultaneously!
-
+There is one exception:
 \begin{question}
 Define $L^2 = {L_x}^2 + {L_y}^2 + {L_z}^2$.
+Show that $\langle L^2 \rangle = 0$ implies that the state is an eigenstate of $L_x$, $L_y$ and $L_z$ with eigenvalue 0.
+Additionally, show that $\psi(\vec r)$ is spherically symmetrical.
+\solution{
+We know that
+$$0 = \langle L^2 \rangle = \langle {L_x}^2 \rangle + \langle {L_y}^2 \rangle + \langle {L_z}^2 \rangle.$$
+Since $\langle {L_i}^2 \rangle \ge 0$ this implies they must all be zero.
+But $\bra{\psi} L_i L_i \ket{\psi} = \braket{\phi}{\phi}$ for $\ket{\phi} = L_i \ket{\psi}$.
+Hence $\langle L_i \rangle = 0$ implies $0 = \ket{\phi} = L_i \ket{\phi}$.
+
+Since angular momentum is the generator of rotations, for a finite rotation we have $e^{-\im L_i \theta/\hbar} \ket{\psi} = \ket{\psi}$ and thus the state is spherically symmetrical.
+}
+\end{question}
+
+\begin{question}
 Find $[L^2, L_i]$.
 \solution{
 You can either do this writing the commutator out in terms out $L_x$, $L_y$, $L_z$ or by writing
@@ -2572,11 +2606,13 @@ Now $k$ and $j$ are just summation indices and so can be swapped, hence the resu
 }
 \end{question}
 
-We can thus use the pair $(L^2, L_z)$ to label angular momentum eigenstates (we can use any of the axes, $z$ is the conventional choice).
+We can thus use the pair $(L^2, L_z)$ to label angular momentum eigenstates (while we can use any direction, the $z$ axis is the conventional choice).
 To find the eigenvalues we can do tricks similar to what we did with the harmonic oscillator.
 We write $\ket{\ell,m}$ for the simultaneous eigenstate of $(L^2, L_z)$.
 $m$ is just the eigenvalue of $L_z/\hbar$ (which we showed is an integer earlier).
 $\ell$ is related a function of the eigenvalue of $L^2$ (which we will determine later).
+
+If the arbitrary direction creeps you out, remember that an arbitrary state is \emph{not} an eigenstate of $L_z$ -- we can however \emph{expand} any state in terms of $(L^2, L_z)$ eigenstates and we should get the same physics whichever axis we expand about (it's exactly analogous to choosing a coordinate system in 3D space -- different choices will lead to different coordinates but the underlying physics is unchanged).
 
 \begin{question}
 Find a linear combination $L_+$ of the $L_x, L_y, L_z$ operators such that
@@ -2643,6 +2679,29 @@ thus
 $$L_- \ket{\ell,m} = \hbar \sqrt{\ell(\ell+1) - m (m-1)} \ket{\ell,m-1}.$$
 This gives zero for $m=-\ell$, which must be the minimum value (this result is also expected since we can just turn the system upside down to invert the value of $L_z$).
 
+}
+\end{question}
+
+\begin{question}
+Suppose we only care about $\ell=1$.
+We then have a finite number of $L_z$ eigenstates and we can pretend they form a basis (mathematically we say that we operate in the ``subspace'' generated by the eigenstates).
+Write $L_z$, $L_+$, $L_-$, $L_x$ and $L_y$ in this basis and find the $L_x$ and $L_y$ eigenstates (order the eigenstates of $L_z$ from highest to lowest $m$).
+\hint{Remember that the columns of a matrix are just the results of applying the matrix to each basis vector.}
+\solution{
+We have three eigenstates $\ket{1,1}$, $\ket{1,0}$ and $\ket{1,-1}$.
+$L_z$ is trivial, it's just
+$$L_z = \hbar \begin{pmatrix}1 & 0 & 0\\0 & 0 & 0\\0 & 0 & -1\end{pmatrix}.$$
+$L_+$ can be found using the formula
+$$L_+ \ket{\ell,m} = \hbar \sqrt{\ell(\ell+1) - m (m+1)} \ket{\ell,m+1},$$
+which can be evaluated to give $L_+ \ket{1,1} = 0$, $L_+ \ket{1,0} = \hbar \sqrt{2} \ket{1,1}$ and $L_+ \ket{1,-1} = \hbar \sqrt{2} \ket{1,0}$.
+We thus have
+$$L_+ = \hbar \begin{pmatrix}0 & \sqrt{2} & 0\\0 & 0 & \sqrt{2}\\0 & 0 & 0\end{pmatrix}, \quad
+L_- = \hbar \begin{pmatrix}0 & 0 & 0\\\sqrt{2} & 0 & 0\\0 & \sqrt{2} & 0\end{pmatrix}.$$
+We also know that $L_x = (L_+ + L_-)/2$ and $L_y = (L_+ - L_-)/(2\im)$ and hence
+$$L_x = \frac{\hbar}{2} \begin{pmatrix}0 & \sqrt{2} & 0\\\sqrt{2} & 0 & \sqrt{2}\\0 & \sqrt{2} & 0\end{pmatrix}, \quad
+L_y = \frac{\im \hbar}{2} \begin{pmatrix}0 & -\sqrt{2} & 0\\\sqrt{2} & 0 & -\sqrt{2}\\0 & \sqrt{2} & 0\end{pmatrix}.$$
+The $L_x$ eigenstates are $(1, \sqrt{2}, 1)/2$, $(1,0,-1)/\sqrt{2}$ and $(1, -\sqrt{2}, 1)/2$.
+The $L_y$ eigenstates are $(1, \sqrt{2}, 1)/2$, $(1,0,-1)/\sqrt{2}$ and $(1, -\sqrt{2}, 1)/2$.
 }
 \end{question}
 
@@ -2755,14 +2814,15 @@ $$P_\ell^{m-1}(x) = (\sqrt{1 - x^2})^{-m+1} \Dfrac{}{x} (\sqrt{1 - x^2})^{m} P_\
 From this, deduce a formula (containing differential operators) for $P_\ell^m$ for arbitrary $m$.
 \hint{What happens when you do $L_- \ket{\ell, -\ell}$?}
 \result{
-$$P_\ell^m(x) = (\sqrt{1 - x^2})^{m} \Dfrac{^{\ell+m}}{x^{\ell+m}} (1-x^2)^{\ell}$$
+$$P_\ell^{-\ell}(x) = (\sqrt{1-x^2})^{\ell},$$
+$$P_\ell^m(x) = (\sqrt{1 - x^2})^{m} \Dfrac{^{\ell+m}}{x^{\ell+m}} (1-x^2)^{\ell}.$$
 }
 \solution{
 We know that $L_- P^\ell_\ell = 0$
 Hence
 $$(\sqrt{1 - x^2})^{\ell+1} \Dfrac{}{x} (\sqrt{1 - x^2})^{-\ell} P_\ell^{\ell}(x) = 0,$$
 which implies
-$$P_\ell^\ell(x) = (\sqrt{1-x^2})^{\ell}$$
+$$P_\ell^{-\ell}(x) = (\sqrt{1-x^2})^{\ell}$$
 (setting the overall constant to 1).
 We can then find all the other $P_\ell^m$ by repeated application of
 $$P_\ell^{m+1}(x) = (\sqrt{1 - x^2})^{m+1} \Dfrac{}{x} (\sqrt{1 - x^2})^{-m} P_\ell^{m}(x).$$
@@ -2833,6 +2893,7 @@ Using the expansion
 $$\nabla^2 = \frac{1}{r^2} \pfrac{}{r} r^2 \pfrac{}{r} - \frac{L^2}{\hbar^2 r^2}$$
 we can write
 $$-\frac{\hbar^2}{2\mu} \frac{1}{r^2} \pfrac{}{r} r^2 \pfrac{}{r} u(r) + \frac{\hbar^2 \ell(\ell+1)}{2\mu r^2} u(r) + (V(r) - E) u(r) = 0.$$
+This equation is called the \emph{radial equation}.
 Note that there is no $m$ in this equation and hence neither $E$ nor $u(r)$ can depend on it.
 To interpret the $L^2$ term calculate the classical force $\D{V}/\D{r}$ to find $L^2/(\mu r^3) = \mu v^2/r$: the centrifugal force!
 }
